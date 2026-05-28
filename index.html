@@ -36,42 +36,37 @@
             font-size: 0.95rem;
             line-height: 1.8;
             color: #888;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
-        /* 两个入口 */
-        .entries {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #bbb;
+            border-radius: 50%;
+            margin: 24px auto;
         }
-        .entry {
+
+        /* 文章链接 */
+        .article-link {
             display: block;
-            text-decoration: none;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 24px 32px;
             color: #333;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            min-width: 140px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
         }
-        .entry:hover {
-            border-color: #bbb;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+        .article-link:hover { color: #1a1a1a; }
+
+        /* 图片入口 */
+        .gate-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
+            display: block;
+            transition: opacity 0.2s;
         }
-        .entry-icon {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-        .entry-title {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-        .entry-desc {
-            font-size: 0.75rem;
-            color: #aaa;
-        }
+        .gate-img:hover { opacity: 0.85; }
 
         footer {
             margin-top: 48px;
@@ -79,8 +74,7 @@
             color: #aaa;
         }
         @media (max-width: 400px) {
-            .entries { flex-direction: column; gap: 12px; }
-            .entry { min-width: auto; }
+            .card { padding: 32px 16px; }
         }
     </style>
 </head>
@@ -92,19 +86,19 @@
         <h1>Tumanydays</h1>
         <p class="tagline">这里刚刚诞生。<br>就像一颗种子落在泥土里，<br>还没想好要长成什么样子。</p>
 
-        <!-- 两个入口 -->
-        <div class="entries">
-            <a class="entry" href="logs/">
-                <div class="entry-icon">📂</div>
-                <div class="entry-title">日志</div>
-                <div class="entry-desc">八个房间</div>
-            </a>
-            <a class="entry" href="images/">
-                <div class="entry-icon">📷</div>
-                <div class="entry-title">图片</div>
-                <div class="entry-desc">光影碎片</div>
-            </a>
-        </div>
+        <span class="dot"></span>
+
+        <!-- 文章入口 → 日志板块 -->
+        <a class="article-link" href="logs/观澜/笼中拳手与不飞编队的幽灵.html">
+            笼中拳手与不飞编队的幽灵：资本主义政府的自主性、美联储的独立性与历史的失忆症
+        </a>
+
+        <span class="dot"></span>
+
+        <!-- 图片入口 → 图片板块 -->
+        <a href="images/">
+            <img class="gate-img" src="images/cover.jpg" alt="进入图片板块">
+        </a>
 
         <footer>— 始于 2026.5.28 —</footer>
     </div>
