@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日志 — Tumanydays</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 48px;
+        }
+
+        /* ---------- 八个分类卡片 ---------- */
+        .categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .cat-card {
+            display: block;
+            text-decoration: none;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .cat-card:hover {
+            border-color: #ccc;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .cat-name {
+            font-size: 1.05rem;
+            color: #1a1a1a;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .cat-desc {
+            font-size: 0.78rem;
+            color: #999;
+            line-height: 1.6;
+        }
+        .cat-count {
+            font-size: 0.7rem;
+            color: #bbb;
+            margin-top: 6px;
+        }
+
+        /* 响应式：小屏变单列 */
+        @media (max-width: 500px) {
+            .categories { grid-template-columns: 1fr; }
+            .container { padding: 32px 16px 64px; }
+        }
+
+        footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        footer a {
+            color: #999;
+            text-decoration: none;
+        }
+        footer a:hover { color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 顶部返回 -->
+        <a class="back" href="../index.html">← Tumanydays</a>
+
+        <h1>日志</h1>
+        <p class="subtitle">八个房间，八种凝视世界的方式</p>
+
+        <!-- 八个分类 -->
+        <div class="categories">
+
+            <a class="cat-card" href="公学/">
+                <div class="cat-name">公学</div>
+                <div class="cat-desc">公共事务、备考与思辨</div>
+                <div class="cat-count">1 篇</div>
+            </a>
+
+            <a class="cat-card" href="医海拾贝/">
+                <div class="cat-name">医海拾贝</div>
+                <div class="cat-desc">医学常识与身体知识</div>
+                <div class="cat-count">2 篇</div>
+            </a>
+
+            <a class="cat-card" href="字渡/">
+                <div class="cat-name">字渡</div>
+                <div class="cat-desc">文学、翻译与语言之美</div>
+                <div class="cat-count">1 篇</div>
+            </a>
+
+            <a class="cat-card" href="月光/">
+                <div class="cat-name">月光</div>
+                <div class="cat-desc">音乐与深夜里的对话</div>
+                <div class="cat-count">1 篇</div>
+            </a>
+
+            <a class="cat-card" href="棱镜/">
+                <div class="cat-name">棱镜</div>
+                <div class="cat-desc">技术、AI 与思维工具</div>
+                <div class="cat-count">3 篇</div>
+            </a>
+
+            <a class="cat-card" href="浮光/">
+                <div class="cat-name">浮光</div>
+                <div class="cat-desc">日常碎片，掠过的光影</div>
+                <div class="cat-count">1 篇</div>
+            </a>
+
+            <a class="cat-card" href="知安/">
+                <div class="cat-name">知安</div>
+                <div class="cat-desc">生活安全与健康常识</div>
+                <div class="cat-count">2 篇</div>
+            </a>
+
+            <a class="cat-card" href="观澜/">
+                <div class="cat-name">观澜</div>
+                <div class="cat-desc">政治经济，深度观察</div>
+                <div class="cat-count">1 篇</div>
+            </a>
+
+        </div>
+
+        <footer>
+            <a href="../index.html">← 返回首页</a>
+        </footer>
+
+    </div>
+</body>
+</html>
