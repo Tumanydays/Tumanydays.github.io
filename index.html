@@ -21,11 +21,6 @@
             padding: 48px 32px;
             max-width: 520px;
         }
-        .cover-img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 32px;
-        }
         h1 {
             font-size: 2rem;
             font-weight: 400;
@@ -81,25 +76,83 @@
 </head>
 <body>
     <div class="card">
-      
+
         <h1>Tumanydays</h1>
         <p class="tagline">这里刚刚诞生。<br>就像一颗种子落在泥土里，<br>还没想好要长成什么样子。</p>
 
         <span class="dot"></span>
 
-        <!-- 文章入口 → 日志板块 -->
-        <a class="article-link" href="logs/观澜/笼中拳手与不飞编队的幽灵.html">
-            笼中拳手与不飞编队的幽灵：资本主义政府的自主性、美联储的独立性与历史的失忆症
-        </a>
+        <!-- 文章入口：由 JS 随机填充 -->
+        <a id="article-spot" class="article-link" href="#"></a>
 
         <span class="dot"></span>
 
-        <!-- 图片入口 → 图片板块 -->
-        <a href="images/">
-            <img class="gate-img" src="images/cover_web.jpg" alt="进入图片板块">
+        <!-- 图片入口：由 JS 随机填充 -->
+        <a id="image-spot" href="#">
+            <img id="image-spot-img" class="gate-img" src="" alt="">
         </a>
 
         <footer>— 始于 2026.5.28 —</footer>
     </div>
+
+    <!-- ========== 随机抽牌 ========== -->
+    <script>
+    // ── 第一步：建池子 ──
+    // 文章池：每篇文章写 { title: "标题", url: "链接" }
+    // 新增文章时照格式加一行就行
+    var articles = [
+        {
+            title: "笼中拳手与不飞编队的幽灵：资本主义政府的自主性、美联储的独立性与历史的失忆症",
+            url: "logs/观澜/笼中拳手与不飞编队的幽灵.html"
+        }
+        var articles = [
+        {
+            title: "两周与被掏空的停火_失效的威胁松动的框架与不再听命的秩序队的幽灵",
+            url: "logs/观澜/两周与被掏空的停火_失效的威胁松动的框架与不再听命的秩序.html"
+        }
+        // 将来加文章，在这里复制上面四行，改 title 和 url
+    ];
+
+    // 图片池：每张图片写 { src: "路径", caption: "一句话" }
+    // 新增图片时照格式加一行就行
+    var images = [
+        {
+            src: "images/cover.jpg",
+            caption: ""
+        }
+        var images = [
+        {
+            src: "images/var images = [
+        {
+            src: "images/IMG_4101.jpeg",
+            caption: ""
+        }",
+            caption: ""
+        }
+        // 将来加图片，在这里复制上面四行，改 src 和 caption
+    ];
+
+    // ── 第二步：抽牌 ──
+    // 从数组里随机挑一个
+    function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // ── 第三步：挂上去 ──
+    var article = pick(articles);
+    var image   = pick(images);
+
+    // 填文章
+    var a = document.getElementById("article-spot");
+    a.href = article.url;
+    a.textContent = article.title;
+
+    // 填图片
+    var imgA = document.getElementById("image-spot");
+    imgA.href = "images/";   // 点图片 → 进入图片板块
+    var img = document.getElementById("image-spot-img");
+    img.src = image.src;
+    img.alt = image.caption;
+    </script>
 </body>
 </html>
