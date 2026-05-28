@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片 — Tumanydays</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 48px;
+        }
+
+        /* ---------- 画廊 ---------- */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px 24px;
+        }
+        .photo-card {
+            text-align: center;
+        }
+        .photo-card img {
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* 响应式 */
+        @media (max-width: 500px) {
+            .gallery { grid-template-columns: 1fr; gap: 28px; }
+            .container { padding: 32px 16px 64px; }
+        }
+
+        footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        footer a { color: #999; text-decoration: none; }
+        footer a:hover { color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="../index.html">← Tumanydays</a>
+        <h1>图片</h1>
+        <p class="subtitle">一些停下来看了看的时刻</p>
+
+        <div class="gallery">
+            <!--
+                每张图片的格式：
+                <div class="photo-card">
+                    <img src="你的图片.jpg" alt="描述">
+                    <div class="caption">你想说的话</div>
+                </div>
+                照着这个模子往里加就行。
+            -->
+
+            <!-- 示例：等你有图片后，照上面格式替换 -->
+            <div class="photo-card">
+                <img src="e cover.jpg" alt="这儿真的有一张图片">
+                <div class="caption">这是这里的第一张图片，看着就很惆怅呵</div>
+            </div>
+
+        </div>
+
+        <footer>
+            <a href="../index.html">← 返回首页</a>
+        </footer>
+    </div>
+</body>
+</html>
