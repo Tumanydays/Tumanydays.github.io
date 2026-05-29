@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗笺 · 环 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", "Songti SC", serif;
+            background: #fafafa;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .back {
+            position: fixed; top: 24px; left: 24px;
+            font-size: 0.85rem; color: #999; text-decoration: none; z-index: 10;
+        }
+        .back:hover { color: #333; }
+
+        /* ── 环形舞台：整个页面是一个大圆 ── */
+        .stage {
+            position: relative;
+            width: 100vw; height: 100vh;
+            display: flex;
+            align-items: center; justify-content: center;
+        }
+
+        /* 中心提示 */
+        .hint {
+            position: absolute;
+            font-size: 0.75rem; color: #ccc; letter-spacing: 2px;
+            z-index: 5; text-align: center;
+        }
+
+        /* 每个词片 */
+        .frag {
+            position: absolute;
+            text-decoration: none;
+            color: #555;
+            white-space: nowrap;
+            letter-spacing: 1px;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .frag:hover {
+            color: #1a1a1a;
+            transform: scale(1.15);
+        }
+
+        /* 轻/重节奏 */
+        .frag.w1 { font-size: 0.7rem; color: #bbb; font-weight: 300; }
+        .frag.w2 { font-size: 0.85rem; color: #999; }
+        .frag.w3 { font-size: 1.0rem; color: #666; }
+        .frag.w4 { font-size: 1.15rem; color: #444; }
+        .frag.w5 { font-size: 1.3rem; color: #333; }
+
+        /* 响应式：小屏调小字号 */
+        @media (max-width: 600px) {
+            .frag.w1 { font-size: 0.6rem; }
+            .frag.w2 { font-size: 0.7rem; }
+            .frag.w3 { font-size: 0.8rem; }
+            .frag.w4 { font-size: 0.9rem; }
+            .frag.w5 { font-size: 1.0rem; }
+        }
+    </style>
+</head>
+<body>
+    <a class="back" href="index.html">← 诗笺</a>
+
+    <div class="stage" id="stage">
+        <div class="hint">触碰任何一句</div>
+    </div>
+
+    <script>
+    // ── 诗句片段池：{ text: "诗句", link: "index.html#p1", weight: "w3" } ──
+    // weight 从 w1(最轻) 到 w5(最重)，控制视觉节奏
+    var fragments = [
+        // 静夜思 → #p1
+        { text: "床前明月光",    link: "index.html#p1", weight: "w4" },
+        { text: "疑是地上霜",    link: "index.html#p1", weight: "w2" },
+        { text: "举头望明月",    link: "index.html#p1", weight: "w3" },
+        { text: "低头思故乡",    link: "index.html#p1", weight: "w5" },
+
+        // 春江花月夜 → #p2
+        { text: "春江潮水连海平",  link: "index.html#p2", weight: "w3" },
+        { text: "海上明月共潮生",  link: "index.html#p2", weight: "w5" },
+        { text: "滟滟随波千万里",  link: "index.html#p2", weight: "w1" },
+        { text: "何处春江无月明",  link: "index.html#p2", weight: "w4" },
+
+        // 饮酒 → #p3
+        { text: "结庐在人境",    link: "index.html#p3", weight: "w3" },
+        { text: "而无车马喧",    link: "index.html#p3", weight: "w1" },
+        { text: "问君何能尔",    link: "index.html#p3", weight: "w2" },
+        { text: "心远地自偏",    link: "index.html#p3", weight: "w4" },
+        { text: "采菊东篱下",    link: "index.html#p3", weight: "w5" },
+        { text: "悠然见南山",    link: "index.html#p3", weight: "w3" },
+
+        // 镜中 → #p4
+        { text: "只要想起",      link: "index.html#p4", weight: "w2" },
+        { text: "一生中后悔的事",  link: "index.html#p4", weight: "w4" },
+        { text: "梅花便落满了南山", link: "index.html#p4", weight: "w5" },
+    ];
+
+    // ── 把碎片排成环形 ──
+    var stage = document.getElementById("stage");
+    var cx = window.innerWidth / 2;
+    var cy = window.innerHeight / 2;
+
+    // 用 4 层同心圆，半径不同，每层分配碎片
+    var rings = [90, 150, 210, 280];  // 小屏会自动缩小
+    if (window.innerWidth < 600) {
+        rings = [60, 105, 150, 200];
+    }
+
+    // 把碎片打散到各层
+    var perRing = Math.ceil(fragments.length / rings.length);
+
+    fragments.forEach(function(f, i) {
+        var ringIdx = Math.floor(i / perRing);
+        if (ringIdx >= rings.length) ringIdx = rings.length - 1;
+        var r = rings[ringIdx];
+
+        // 每层碎片均匀分布，但加一点随机偏移，避免太机械
+        var countInRing = fragments.filter(function(_, j) {
+            var ri = Math.floor(j / perRing);
+            if (ri >= rings.length) ri = rings.length - 1;
+            return ri === ringIdx;
+        }).length;
+
+        var baseAngle = (i % countInRing) / countInRing * Math.PI * 2;
+        var jitter = (Math.random() - 0.5) * 0.2;  // 随机微偏
+        var angle = baseAngle + jitter;
+
+        // 内层稍微密集，外层稀疏
+        var spread = r * (0.9 + Math.random() * 0.2);
+
+        var x = cx + Math.cos(angle) * spread;
+        var y = cy + Math.sin(angle) * spread;
+
+        // 创建链接元素
+        var a = document.createElement("a");
+        a.className = "frag " + f.weight;
+        a.href = f.link;
+        a.textContent = f.text;
+        a.style.left = x + "px";
+        a.style.top  = y + "px";
+        a.style.transform = "translate(-50%, -50%)";
+        // 给一点微旋转，增加自然感
+        a.style.transform += " rotate(" + ((Math.random()-0.5)*10) + "deg)";
+
+        stage.appendChild(a);
+    });
+
+    // 窗口变化时重新居中
+    window.addEventListener("resize", function() {
+        location.reload();
+    });
+    </script>
+</body>
+</html>
