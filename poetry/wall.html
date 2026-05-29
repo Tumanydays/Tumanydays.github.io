@@ -74,35 +74,37 @@
         <div class="hint">触碰任何一句</div>
     </div>
 
+    <script src="poems.js"></script>
     <script>
-    // ── 诗句片段池：{ text: "诗句", link: "index.html#p1", weight: "w3" } ──
-    // weight 从 w1(最轻) 到 w5(最重)，控制视觉节奏
-    var fragments = [
-        // 静夜思 → #p1
-        { text: "床前明月光",    link: "index.html#p1", weight: "w4" },
-        { text: "疑是地上霜",    link: "index.html#p1", weight: "w2" },
-        { text: "举头望明月",    link: "index.html#p1", weight: "w3" },
-        { text: "低头思故乡",    link: "index.html#p1", weight: "w5" },
+    // ── 从诗词库自动生成环形碎片 ──
+    // 每首诗取第一句作为墙上的词片
+    var weights = ["w1","w2","w3","w4","w5","w3","w2","w4"];
+    var fragments = [];
 
-        // 春江花月夜 → #p2
-        { text: "春江潮水连海平",  link: "index.html#p2", weight: "w3" },
-        { text: "海上明月共潮生",  link: "index.html#p2", weight: "w5" },
-        { text: "滟滟随波千万里",  link: "index.html#p2", weight: "w1" },
-        { text: "何处春江无月明",  link: "index.html#p2", weight: "w4" },
+    poems.forEach(function(p, i) {
+        // 取第一句，如果太长就截断
+        var firstLine = p.lines[0].replace(/[，。、；：「」『』！？\s]/g, "");
+        if (firstLine.length > 7) firstLine = firstLine.slice(0, 7);
 
-        // 饮酒 → #p3
-        { text: "结庐在人境",    link: "index.html#p3", weight: "w3" },
-        { text: "而无车马喧",    link: "index.html#p3", weight: "w1" },
-        { text: "问君何能尔",    link: "index.html#p3", weight: "w2" },
-        { text: "心远地自偏",    link: "index.html#p3", weight: "w4" },
-        { text: "采菊东篱下",    link: "index.html#p3", weight: "w5" },
-        { text: "悠然见南山",    link: "index.html#p3", weight: "w3" },
+        fragments.push({
+            text: firstLine,
+            link: "index.html#" + p.id,
+            weight: weights[i % weights.length]
+        });
 
-        // 镜中 → #p4
-        { text: "只要想起",      link: "index.html#p4", weight: "w2" },
-        { text: "一生中后悔的事",  link: "index.html#p4", weight: "w4" },
-        { text: "梅花便落满了南山", link: "index.html#p4", weight: "w5" },
-    ];
+        // 如果诗有 2 行以上，再加一句关键的
+        if (p.lines.length >= 2 && firstLine.length > 2) {
+            var keyLine = p.lines[p.lines.length - 1].replace(/[，。、；：「」『』！？\s]/g, "");
+            if (keyLine.length > 7) keyLine = keyLine.slice(0, 7);
+            if (keyLine.length > 2) {
+                fragments.push({
+                    text: keyLine,
+                    link: "index.html#" + p.id,
+                    weight: weights[(i + 3) % weights.length]
+                });
+            }
+        }
+    });
 
     // ── 把碎片排成环形 ──
     var stage = document.getElementById("stage");
