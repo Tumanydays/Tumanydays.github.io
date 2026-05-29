@@ -55,12 +55,13 @@
             font-weight: 400;
         }
 
-        /* 诗句本身：大字、舒朗 */
+        /* 诗句本身：浅灰斜体，舒朗清瘦 */
         .poem-body {
-            font-size: 1.05rem;
-            color: #444;
-            line-height: 2.4;
+            font-size: 0.95rem;
+            color: #777;
+            line-height: 2.6;
             letter-spacing: 1px;
+            font-style: italic;
         }
 
         /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
@@ -79,9 +80,7 @@
         }
         .poem:last-child::after { display: none; }
 
-        /* ── 偶有诗句偏大或偏小，打破整齐感 ── */
-        .poem:nth-child(3n) .poem-body { font-size: 1.15rem; }
-        .poem:nth-child(5n) .poem-body { color: #555; font-style: italic; }
+        /* 统一节奏：浅灰斜体，不忽大忽小 */
 
         footer {
             margin-top: 72px;
