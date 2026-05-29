@@ -43,6 +43,20 @@
             margin: 24px auto;
         }
 
+        /* 诗句入口：轻盈，不抢眼 */
+        .verse-link {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+            transition: color 0.3s;
+        }
+        .verse-link:hover { color: #666; }
+
         /* 文章链接 */
         .article-link {
             display: block;
@@ -80,6 +94,9 @@
         <h1>Tumanydays</h1>
         <p class="tagline">这里刚刚诞生。<br>就像一颗种子落在泥土里，<br>还没想好要长成什么样子。</p>
 
+        <!-- 诗弦：由 JS 随机填充，点击 → 诗墙 -->
+        <a id="verse-spot" class="verse-link" href="poetry/"> </a>
+
         <span class="dot"></span>
 
         <!-- 文章入口：由 JS 随机填充 -->
@@ -116,6 +133,14 @@
         }
     ];
 
+    // 诗句池：每句写一个字符串。新增时在 ] 前面加一行 "诗句",
+    var verses = [
+        "采菊东篱下，悠然见南山",
+        "只要想起一生中后悔的事，梅花便落满了南山",
+        "春江潮水连海平，海上明月共潮生",
+        "结庐在人境，而无车马喧"
+    ];
+
     // ── 第二步：抽牌 ──
     function pick(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
@@ -124,6 +149,11 @@
     // ── 第三步：挂上去 ──
     var article = pick(articles);
     var image   = pick(images);
+    var verse   = pick(verses);
+
+    // 填诗句
+    var v = document.getElementById("verse-spot");
+    v.textContent = verse;
 
     // 填文章
     var a = document.getElementById("article-spot");

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗笺 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", "Songti SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 2.2;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 32px 80px;
+        }
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-bottom: 56px;
+        }
+
+        /* ---------- 诗墙核心：连绵的意识流 ---------- */
+        .poem {
+            margin-bottom: 52px;  /* 诗与诗之间有空隙，但不隔断 */
+            position: relative;
+        }
+        .poem:last-child { margin-bottom: 0; }
+
+        /* 诗题：轻，不喧宾夺主 */
+        .poem-title {
+            font-size: 0.75rem;
+            color: #bbb;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            font-weight: 400;
+        }
+
+        /* 诗句本身：大字、舒朗 */
+        .poem-body {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 2.4;
+            letter-spacing: 1px;
+        }
+
+        /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
+        .poem-body .light {
+            color: #aaa;
+        }
+
+        /* 分隔用极细线，像毛笔提起来时的飞白 */
+        .poem::after {
+            content: "";
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: #ddd;
+            margin-top: 52px;
+        }
+        .poem:last-child::after { display: none; }
+
+        /* ── 偶有诗句偏大或偏小，打破整齐感 ── */
+        .poem:nth-child(3n) .poem-body { font-size: 1.15rem; }
+        .poem:nth-child(5n) .poem-body { color: #555; font-style: italic; }
+
+        footer {
+            margin-top: 72px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        footer a { color: #999; text-decoration: none; }
+        footer a:hover { color: #333; }
+
+        @media (max-width: 500px) {
+            .container { padding: 32px 20px 64px; }
+            .poem-body { font-size: 0.95rem; line-height: 2.2; }
+            .poem { margin-bottom: 40px; }
+            .poem::after { margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="../index.html">← Tumanydays</a>
+        <h1>诗笺</h1>
+        <p class="subtitle">一些在别处看见的字、偶然记住的句子</p>
+
+        <!-- ═══════ 诗墙 ═══════ -->
+        <!-- 格式：复制一组 .poem，替换标题和诗句 -->
+        <!-- 每行 <p> 是一句，加 class="light" 让这行变轻 -->
+
+        <div class="poem">
+            <div class="poem-title">李白 · 静夜思</div>
+            <div class="poem-body">
+                <p>床前明月光，疑是地上霜。</p>
+                <p>举头望明月，低头思故乡。</p>
+            </div>
+        </div>
+
+        <div class="poem">
+            <div class="poem-title">张若虚 · 春江花月夜</div>
+            <div class="poem-body">
+                <p>春江潮水连海平，海上明月共潮生。</p>
+                <p>滟滟随波千万里，何处春江无月明。</p>
+            </div>
+        </div>
+
+        <div class="poem">
+            <div class="poem-title">陶渊明 · 饮酒</div>
+            <div class="poem-body">
+                <p>结庐在人境，而无车马喧。</p>
+                <p>问君何能尔，心远地自偏。</p>
+                <p>采菊东篱下，悠然见南山。</p>
+            </div>
+        </div>
+
+        <div class="poem">
+            <div class="poem-title">张枣 · 镜中</div>
+            <div class="poem-body">
+                <p>只要想起一生中后悔的事</p>
+                <p>梅花便落满了南山</p>
+            </div>
+        </div>
+
+        <!-- ═══════ 诗墙结束 ═══════ -->
+
+        <footer>
+            <a href="../index.html">← 返回首页</a>
+        </footer>
+    </div>
+</body>
+</html>
