@@ -34,21 +34,22 @@
             text-decoration: none;
             color: #555;
             white-space: nowrap;
-            letter-spacing: 1px;
-            transition: color 0.3s, transform 0.3s;
+            letter-spacing: inherit;
+            transition: color 0.3s, transform 0.3s, opacity 0.3s;
             cursor: pointer;
         }
         .frag:hover {
             color: #1a1a1a;
-            transform: scale(1.15);
+            transform: scale(1.25);
+            opacity: 1 !important;
         }
 
-        /* 轻/重节奏 */
-        .frag.w1 { font-size: 0.7rem; color: #bbb; font-weight: 300; }
-        .frag.w2 { font-size: 0.85rem; color: #999; }
-        .frag.w3 { font-size: 1.0rem; color: #666; }
-        .frag.w4 { font-size: 1.15rem; color: #444; }
-        .frag.w5 { font-size: 1.3rem; color: #333; }
+        /* 轻/重节奏：五维渐变 ── 字重·透明度·字间距同步变化 */
+        .frag.w1 { font-size: 0.7rem; color: #bbb; font-weight: 300; opacity: 0.50; letter-spacing: 2.5px; }
+        .frag.w2 { font-size: 0.85rem; color: #999; font-weight: 400; opacity: 0.63; letter-spacing: 2px; }
+        .frag.w3 { font-size: 1.0rem; color: #666; font-weight: 400; opacity: 0.76; letter-spacing: 1.5px; }
+        .frag.w4 { font-size: 1.15rem; color: #444; font-weight: 500; opacity: 0.88; letter-spacing: 1px; }
+        .frag.w5 { font-size: 1.3rem; color: #333; font-weight: 600; opacity: 1.0;  letter-spacing: 0.3px; }
 
         /* 响应式：小屏调小字号 */
         @media (max-width: 600px) {
