@@ -204,7 +204,7 @@
             canvas.parent('p5-bg');
             p.colorMode(p.HSB, 1);
             p.strokeWeight(0.4);
-            for (var i = 5; i < 12; i++) {
+            for (var i = 3; i < 11; i++) {
                 rads[i] = l / (2 * p.tan(p.PI / i));
             }
         };
@@ -216,14 +216,14 @@
             p.translate(p.width / 2, p.height / 2);
             var s = p.min(p.width, p.height) / 500;
             p.scale(s);
-            for (var i = 11; i > 4; i--) {
-                var b = p.map(i, 5, 12, 0.72, 0.92);
+            for (var i = 10; i > 2; i--) {
+                var b = p.map(i, 3, 11, 0.72, 0.92);
                 p.stroke(0, 0, b);
                 poly(i);
             }
-            for (var i = 5; i < 12; i++) {
+            for (var i = 3; i < 11; i++) {
                 p.fill(0, 0, 0.35);
-                dott(i, (12 - i) * t);
+                dott(i, (11 - i) * t);
             }
             p.pop();
         };
