@@ -119,11 +119,6 @@
 
         <span class="dot"></span>
 
-        <!-- 图片入口：由 JS 随机填充 -->
-        <a id="image-spot" href="#">
-            <img id="image-spot-img" class="gate-img" src="" alt="">
-        </a>
-
         <footer>— 始于 2026.5.28 —</footer>
     </div>
 
@@ -136,15 +131,6 @@
         {
             title: "笼中拳手与不飞编队的幽灵：资本主义政府的自主性、美联储的独立性与历史的失忆症",
             url: "logs/观澜/笼中拳手与不飞编队的幽灵.html"
-        }
-    ];
-
-    // 图片池：每张图片写 { src: "路径", caption: "一句话" }
-    // 新增图片时，在 ] 前面照格式加一组 { }
-    var images = [
-        {
-            src: "images/cover_web.jpg",
-            caption: ""
         }
     ];
 
@@ -171,7 +157,6 @@
 
     // ── 第三步：挂上去 ──
     var article = pick(articles);
-    var image   = pick(images);
     var verse   = pick(verses);
 
     // 填诗句
@@ -182,13 +167,6 @@
     var a = document.getElementById("article-spot");
     a.href = article.url;
     a.textContent = article.title;
-
-    // 填图片
-    var imgA = document.getElementById("image-spot");
-    imgA.href = "images/";
-    var img = document.getElementById("image-spot-img");
-    img.src = image.src;
-    img.alt = image.caption;
     </script>
 
     <script>
@@ -196,7 +174,7 @@
     // 极简灰调，Dave Whyte / beesandbombs.com 灵感
     var sketch = function(p) {
         var t, speed = 2e-5;
-        var l = 70;
+        var l = 80;
         var rads = [];
 
         p.setup = function() {
