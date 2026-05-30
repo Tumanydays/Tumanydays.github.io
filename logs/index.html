@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日志 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../images/icon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -13,7 +14,20 @@
             color: #333;
             line-height: 1.9;
         }
+
+        /* 背景几何动画 */
+        #p5-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 680px;
             margin: 0 auto;
             padding: 64px 24px 80px;
@@ -53,7 +67,7 @@
             border: 1px solid #e8e8e8;
             border-radius: 8px;
             padding: 20px;
-            background: #fff;
+            background: rgba(255,255,255,0.65);
             transition: border-color 0.2s, box-shadow 0.2s;
         }
         .cat-card:hover {
@@ -99,6 +113,7 @@
     </style>
 </head>
 <body>
+    <div id="p5-bg"></div>
     <div class="container">
 
         <!-- 顶部返回 -->
@@ -185,6 +200,63 @@
                 });
         });
     });
+    </script>
+
+    <script>
+    var sketch = function(p) {
+        var t, speed = 2e-5;
+        var l = 80;
+        var rads = [];
+        p.setup = function() {
+            var canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+            canvas.parent('p5-bg');
+            p.colorMode(p.HSB, 1);
+            p.strokeWeight(0.4);
+            for (var i = 3; i < 11; i++) {
+                rads[i] = l / (2 * p.tan(p.PI / i));
+            }
+        };
+        p.draw = function() {
+            t = speed * p.millis();
+            p.background(250 / 255);
+            p.push();
+            p.translate(p.width / 2, p.height / 2);
+            var s = p.min(p.width, p.height) / 500;
+            p.scale(s);
+            for (var i = 10; i > 2; i--) {
+                var b = p.map(i, 3, 11, 0.72, 0.92);
+                p.stroke(0, 0, b);
+                poly(i);
+            }
+            for (var i = 3; i < 11; i++) {
+                p.fill(0, 0, 0.35);
+                dott(i, (11 - i) * t);
+            }
+            p.pop();
+        };
+        p.windowResized = function() {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+        };
+        function poly(N) {
+            for (var i = 0; i < N; i++) {
+                p.push();
+                p.rotate(p.TWO_PI * i / N);
+                p.line(-l / 2, rads[N], l / 2, rads[N]);
+                p.pop();
+            }
+        }
+        function dott(N, q) {
+            q = (q + 0.5 / N) % 1;
+            var qq = (q * N) % 1;
+            var rot = Math.floor(q * N);
+            p.push();
+            p.rotate(p.TWO_PI * rot / N);
+            p.noStroke();
+            p.ellipse(p.lerp(l / 2, -l / 2, qq), rads[N], l * 0.1, l * 0.1);
+            p.pop();
+        }
+    };
+    new p5(sketch);
     </script>
 
 </body>
