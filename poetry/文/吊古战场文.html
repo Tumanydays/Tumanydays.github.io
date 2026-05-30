@@ -56,7 +56,7 @@
             line-height: 2;
         }
 
-        /* 段间分隔 */
+        /* 段间分隔：不占高度，圆点浮在间距中 */
         .section-break {
             display: block;
             text-align: center;
@@ -64,6 +64,9 @@
             font-size: 0.75rem;
             letter-spacing: 2px;
             user-select: none;
+            height: 0;
+            overflow: visible;
+            margin: 0;
         }
 
         /* 底部导航 */
