@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古旧铁轨与万国文字的车厢 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        /* 返回链接 */
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+
+        /* 标题区 */
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+
+        /* 引言 */
+        .intro {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+
+        /* 正文 */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: #333;
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: #444;
+        }
+
+        /* 引用 */
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+
+        /* 加粗强调 */
+        strong { color: #1a1a1a; font-weight: 600; }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+            color: #1a1a1a;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+            margin: 20px 0 28px;
+            color: #333;
+        }
+
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+
+        /* 代码表格（编码对照窄表格） */
+        .code-table {
+            font-size: 0.78rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+        }
+        .code-table th, .code-table td {
+            padding: 6px 8px;
+            text-align: center;
+        }
+        .code-table td:first-child {
+            text-align: right;
+            color: #888;
+        }
+
+        /* 分隔线 */
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+
+        /* 小圆点分隔符 */
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+
+        /* 导航 */
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: #333; }
+
+        /* 响应式：小屏幕 */
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            .code-table { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a class="back" href="../../../index.html">← Tumanydays</a>
+
+        <h1>古旧铁轨与万国文字的车厢：ASCII 与 UTF-8 编码的传承、困境与全球方案</h1>
+
+        <div class="meta">
+            <span>知白</span><span>2026年5月30日 &nbsp;·&nbsp; <a href="../../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+        </div>
+
+        <div class="intro">
+            <p>缘起：一次对话中聊到不同语言在计算机中存储方式的差异——为什么英文字母只占 1 字节而中文需要 3 字节？为什么同一个文件在不同系统上打开会变成乱码？触发了一场从 ASCII 到 UTF-8、从技术方案到全球文字困境的编码体系漫游。</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">对话跨度：不同语言存储差异的追问 → ASCII 编码的诞生与结构 → 非英语国家的编码困境 → Unicode 的调和方案 → UTF-8 变长编码的精妙设计 → UTF-16 与 BOM 战争 → 中文编码进化史 → 实际开发中的编码陷阱 → 字符编码与 token 的区分</p>
+        </div>
+
+        <!-- 关键词索引 -->
+        <h2>🔑 关键词索引</h2>
+        <table>
+            <tr><th>关键词</th><th>一句话说明</th></tr>
+            <tr><td><strong>ASCII</strong></td><td>1963 年诞生的 7 比特编码，128 个字符，覆盖英文字母、数字和标点——计算机世界的铁轨轨距</td></tr>
+            <tr><td><strong>7 比特与第 8 位</strong></td><td>ASCII 只用 7 bit，第 8 位早期用作奇偶校验——后来被各国用来扩展自己的字符，导致了编码混乱</td></tr>
+            <tr><td><strong>控制字符（0~31）</strong></td><td>不可打印的指令性字符——换行、回车、响铃、ESC——来自电报和终端的遗产</td></tr>
+            <tr><td><strong>⭐ 编码地狱</strong></td><td>同一字节在不同编码中对应不同字符——0xC4 在 GB2312 里是「你」，在 Latin-1 里是「Ä」——打开文件靠猜</td></tr>
+            <tr><td><strong>Unicode</strong></td><td>1987 年启动的全球统一字符表，给每个字符一个唯一的码点（U+XXXX），但只管编号不管存储</td></tr>
+            <tr><td><strong>⭐ UTF-8</strong></td><td>可变长编码方案（1~4 字节），向后完全兼容 ASCII，向前覆盖全球所有文字——Web 的事实标准</td></tr>
+            <tr><td><strong>自同步</strong></td><td>UTF-8 的精妙设计——任意字节位置都能判断是否为一个字符的起始，从数据中间切入也不会错乱</td></tr>
+            <tr><td><strong>BOM（Byte Order Mark）</strong></td><td>U+FEFF 放在文件开头标记字节序——UTF-16 必需，但被滥用进 UTF-8 后造成了 Shell 脚本灾难</td></tr>
+            <tr><td><strong>NFC 与 NFD</strong></td><td>同一个字符「é」可以编码为单个码点（NFC）或分解为「e+重音符」（NFD）——macOS 用 NFD，Linux 用 NFC，git 因此发疯</td></tr>
+            <tr><td><strong>拉丁扩展与 CJK</strong></td><td>UTF-8 中：ASCII 字符 1 字节，拉丁扩展（希腊文、西里尔文）2 字节，中日韩汉字 3 字节，表情符号 4 字节</td></tr>
+            <tr><td><strong>GB2312 → GBK → GB18030</strong></td><td>中国编码标准的三代演进：从 6763 个常用汉字到覆盖全部 Unicode 汉字——直至被 UTF-8 统一</td></tr>
+            <tr><td><strong>「Ã±」灾难</strong></td><td>最经典的编码 Bug：UTF-8 编码的 ñ（C3 B1）被 Latin-1 解码为 Ã（C3）和 ±（B1）——浏览器和服务端编码不一致的后果</td></tr>
+            <tr><td><strong>Emoji 的字节膨胀</strong></td><td>一个表情符号在 UTF-8 中占 4 字节，由 ZWJ 连接的多人物家庭表情可达 25 字节——「一条微博」的字数限制因此变得复杂</td></tr>
+            <tr><td><strong>chardet</strong></td><td>Mozilla 开发的编码探测库——在没有元数据时通过统计特征猜测文件编码，但不是 100% 准确的</td></tr>
+            <tr><td><strong>Percent-encoding</strong></td><td>URL 编码——非 ASCII 字节以 % 前缀加两位十六进制表示，浏览器的地址栏专用方案</td></tr>
+            <tr><td><strong>Base64</strong></td><td>将二进制数据映射到 64 个可打印 ASCII 字符的传输编码，邮件附件和 JWT 的标准方案</td></tr>
+            <tr><td><strong>Punycode</strong></td><td>中文域名的底层编码方案——「例子.测试」在 DNS 里是 xn--fsq.xn--0zwm56d</td></tr>
+            <tr><td><strong>Tokenization</strong></td><td>与字符编码不同的抽象层——LLM 将文本切分为语义单元的方式，中文字符通常被切得更碎</td></tr>
+        </table>
+
+        <span class="dot"></span>
+
+        <!-- 一 -->
+        <h2>一、七根轨道：ASCII 的诞生与它的边界</h2>
+
+        <h3>水母流星大人的触发之问</h3>
+        <blockquote><p>「为什么英文字母只占 1 个字节，中文汉字要占 3 个？同一个文件在 Windows 和 Mac 上打开为什么有时候会变成乱码？」</p></blockquote>
+        <p>如果计算机只能理解 0 和 1，那么「A」和「中」在它眼中是什么？为什么明明是同样的文字，存储方式却千差万别？这个问题的答案藏在两代编码方案的传承与断裂中。</p>
+
+        <h3>ASCII 的诞生：当计算机需要一张字母表</h3>
+        <p>1963 年，美国标准协会（后来的 ANSI）推出了 <strong>ASCII</strong>（American Standard Code for Information Interchange）。在此之前，每家计算机公司各用各的字符编码——IBM 用 EBCDIC，其他厂商各有各的标准——数据交换就是一场噩梦。ASCII 的目的很简单：让不同厂商的计算机，能读懂同一套字母表。</p>
+        <p>它的设计方案是 <strong>7 个比特（bit）</strong>，可以表示 2⁷ = <strong>128 个字符</strong>。为什么是 7 而不是 8？因为当时数据以 8 位字节传输，第 8 位被保留作为 <strong>奇偶校验位</strong>——一个检错机制。后来这个第 8 位被各国用来扩展自己的字符，正是后来「编码地狱」的根源。</p>
+
+        <h3>ASCII 字符全集（0~127）</h3>
+        <p>以下是从 NULL（0）到 DEL（127）的完整 ASCII 表，分为控制字符和可打印字符两大部分。</p>
+
+        <h4>控制字符区：0~31 + DEL（127）</h4>
+        <p>这些字符不可打印，来自电报和早期终端的操作指令。虽然今天普通用户很少直接接触它们，但它们深刻影响了现代计算机的底层。</p>
+        <table class="code-table">
+            <tr><th>十进制</th><th>十六进制</th><th>二进制</th><th>缩写</th><th>名称</th><th>说明</th></tr>
+            <tr><td>0</td><td>00</td><td>0000000</td><td>NUL</td><td>空字符</td><td>C 字符串结尾标记；数据流填充</td></tr>
+            <tr><td>1</td><td>01</td><td>0000001</td><td>SOH</td><td>标题开始</td><td>早期电报/消息的头部标记</td></tr>
+            <tr><td>2</td><td>02</td><td>0000010</td><td>STX</td><td>正文开始</td><td>SOH 之后的实际数据开始</td></tr>
+            <tr><td>3</td><td>03</td><td>0000011</td><td>ETX</td><td>正文结束</td><td>数据段结束标记</td></tr>
+            <tr><td>4</td><td>04</td><td>0000100</td><td>EOT</td><td>传输结束</td><td>整个传输会话终止</td></tr>
+            <tr><td>5</td><td>05</td><td>0000101</td><td>ENQ</td><td>询问</td><td>请求对方响应（如「还在吗？」）</td></tr>
+            <tr><td>6</td><td>06</td><td>0000110</td><td>ACK</td><td>确认</td><td>数据正确接收的肯定答复</td></tr>
+            <tr><td>7</td><td>07</td><td>0000111</td><td>BEL</td><td>响铃</td><td>触发终端发出声音——现代人早就听不到了</td></tr>
+            <tr><td>8</td><td>08</td><td>0001000</td><td>BS</td><td>退格</td><td>光标回退一格</td></tr>
+            <tr><td>9</td><td>09</td><td>0001001</td><td>TAB</td><td>水平制表符</td><td>跳至下一个制表位——表格对齐的功臣</td></tr>
+            <tr><td>10</td><td>0A</td><td>0001010</td><td>LF</td><td>换行</td><td>Unix/Linux 的行结束符；光标下移一行</td></tr>
+            <tr><td>11</td><td>0B</td><td>0001011</td><td>VT</td><td>垂直制表符</td><td>光标下移至下一个垂直制表位</td></tr>
+            <tr><td>12</td><td>0C</td><td>0001100</td><td>FF</td><td>换页</td><td>打印机弹出一页纸；终端清屏</td></tr>
+            <tr><td>13</td><td>0D</td><td>0001101</td><td>CR</td><td>回车</td><td>光标回到行首；Windows 用 CR+LF 作为换行符</td></tr>
+            <tr><td>14</td><td>0E</td><td>0001110</td><td>SO</td><td>移出</td><td>切换至另一字符集（如扩展图形）</td></tr>
+            <tr><td>15</td><td>0F</td><td>0001111</td><td>SI</td><td>移入</td><td>从 SO 切换回标准字符集</td></tr>
+            <tr><td>16~19</td><td>10~13</td><td>001xxxx</td><td>DLE~DC3</td><td>数据链路转义 / 设备控制 1~3</td><td>通信协议控制 / 外围设备开关</td></tr>
+            <tr><td>20</td><td>14</td><td>0010100</td><td>DC4</td><td>设备控制 4</td><td>外围设备控制（停止/断开）</td></tr>
+            <tr><td>21~23</td><td>15~17</td><td>0010101~0010111</td><td>NAK~ETB</td><td>否定确认 / 同步空闲 / 块传输结束</td><td>通信协议的控制信号</td></tr>
+            <tr><td>24</td><td>18</td><td>0011000</td><td>CAN</td><td>取消</td><td>忽略之前传输的数据</td></tr>
+            <tr><td>25</td><td>19</td><td>0011001</td><td>EM</td><td>介质结束</td><td>磁带/磁盘等物理介质用尽</td></tr>
+            <tr><td>26</td><td>1A</td><td>0011010</td><td>SUB</td><td>替换</td><td>替换有错误的字符；Ctrl+Z 作为 Windows 文本文件结束标记</td></tr>
+            <tr><td>27</td><td>1B</td><td>0011011</td><td>ESC</td><td>转义</td><td>引入后续字节的替代解释——Vim 中按 ESC 退出编辑模式</td></tr>
+            <tr><td>28~30</td><td>1C~1E</td><td>0011100~0011110</td><td>FS~RS</td><td>文件/分组/记录/单元分隔符</td><td>层级数据分隔体系</td></tr>
+            <tr><td>31</td><td>1F</td><td>0011111</td><td>US</td><td>单元分隔符</td><td>分隔体系的最小单元</td></tr>
+            <tr><td>127</td><td>7F</td><td>1111111</td><td>DEL</td><td>删除</td><td>纸带打孔时全部打穿=删除该字符</td></tr>
+        </table>
+
+        <h4>可打印字符区：32~126</h4>
+        <p>这是 ASCII 人人皆知的另一半——标准美式键盘能打出来的所有字符。一个经典细节：<strong>'A' 是 65（十进制），'a' 是 97，大小写之间正好差 32，也就是一个空格的数值。</strong> 这意味着大写锁定本质上就是第 5 比特位的翻转。</p>
+        <table class="code-table">
+            <tr><th>十进制</th><th>十六进制</th><th>二进制</th><th>字符</th><th>说明</th></tr>
+            <tr><td>32</td><td>20</td><td>0100000</td><td>（空格）</td><td>空格——文本中最常用的「字符」</td></tr>
+            <tr><td>33~38</td><td>21~26</td><td>0100001~0100110</td><td>! " # $ % &</td><td>标点符号组 1：感叹、引号、井号、美元、百分、和号</td></tr>
+            <tr><td>39~47</td><td>27~2F</td><td>0100111~0101111</td><td>' ( ) * + , - . /</td><td>标点符号组 2：单引、括号、星号、加号、逗号、减号、句点、斜杠</td></tr>
+            <tr><td>48~57</td><td>30~39</td><td>0110000~0111001</td><td>0 1 2 3 4 5 6 7 8 9</td><td><strong>数字</strong>——48 是 '0' 的起点，'9' 是 57</td></tr>
+            <tr><td>58~64</td><td>3A~40</td><td>0111010~1000000</td><td>: ; < = > ? @</td><td>标点符号组 3：冒号、分号、小于、等于、大于、问号、At 符号</td></tr>
+            <tr><td>65~90</td><td>41~5A</td><td>1000001~1011010</td><td>A B C D ... X Y Z</td><td><strong>大写英文字母</strong>——'A'=65，'Z'=90</td></tr>
+            <tr><td>91~96</td><td>5B~60</td><td>1011011~1100000</td><td>[ \ ] ^ _ `</td><td>标点符号组 4：方括号、反斜杠、闭方括号、脱字符、下划线、反引号</td></tr>
+            <tr><td>97~122</td><td>61~7A</td><td>1100001~1111010</td><td>a b c d ... x y z</td><td><strong>小写英文字母</strong>——'a'=97，'z'=122，恰好比大写多 32</td></tr>
+            <tr><td>123~126</td><td>7B~7E</td><td>1111011~1111110</td><td>{ | } ~</td><td>标点符号组 5：花括号、竖线、闭花括号、波浪号</td></tr>
+        </table>
+        <p>这是 ASCII 的全部——95 个可打印字符 + 33 个控制字符 + DEL。这就是 128 个位置能容纳的一切。对于 1960 年代的美国，这些够用了。但全世界远不止这些文字。</p>
+
+        <span class="dot"></span>
+
+        <!-- 二 -->
+        <h2>二、编码的巴别塔：ASCII 之外的世界怎么办</h2>
+
+        <h3>第 8 位的争夺与扩展 ASCII 的乱局</h3>
+        <p>当计算机走出英语世界，第一个问题就来了：ASCII 里没有 é、没有 ü、没有 ñ、没有中文、没有日文、没有阿拉伯文。怎么办？</p>
+        <p>最自然的做法是使用被空置的 <strong>第 8 位</strong>——把 ASCII 的 7 位扩展到 8 位，多出 128 个位置（128~255）。不同的国家、不同的组织，把这 128 个位置填上了各自需要的字符。</p>
+        <p>于是产生了数十种互不兼容的 <strong>扩展 ASCII</strong> 标准：</p>
+        <table>
+            <tr><th>编码</th><th>覆盖地区</th><th>说明</th></tr>
+            <tr><td><strong>Latin-1（ISO-8859-1）</strong></td><td>西欧</td><td>最成功的扩展 ASCII——覆盖法语 é、德语 ü、西班牙语 ñ 等；HTML 的默认编码之一</td></tr>
+            <tr><td><strong>Latin-2（ISO-8859-2）</strong></td><td>东欧</td><td>覆盖波兰语、捷克语、匈牙利语等中欧语言</td></tr>
+            <tr><td><strong>ISO-8859-5</strong></td><td>西里尔字母</td><td>俄语、乌克兰语等</td></tr>
+            <tr><td><strong>ISO-8859-7</strong></td><td>希腊语</td><td></td></tr>
+            <tr><td><strong>ISO-8859-8</strong></td><td>希伯来语</td><td></td></tr>
+            <tr><td><strong>Shift_JIS</strong></td><td>日本</td><td>日文编码——ASCII + 平假名/片假名 + 汉字（2 字节）</td></tr>
+            <tr><td><strong>EUC-KR</strong></td><td>韩国</td><td>韩文编码</td></tr>
+            <tr><td><strong>GB2312</strong></td><td>中国大陆</td><td>1980 年标准，6,763 个汉字 + 符号——解决了「有没有中文」的问题</td></tr>
+            <tr><td><strong>Big5（大五码）</strong></td><td>台湾/港澳</td><td>13,053 个汉字——和 GB2312 完全不兼容</td></tr>
+        </table>
+
+        <h3>编码地狱</h3>
+        <p>这就是所谓 <strong>ANSI 乱码</strong>问题——一个字节 0xC4：</p>
+        <blockquote><p>在 GB2312 里是「你」<br>在 Latin-1 里是「Ä」<br>在 Shift_JIS 中是某个日文字符的组成部分<br>在 Big5 里——可能根本不是一个合法字符</p></blockquote>
+        <p>你用错误的编码打开一个文件，屏幕上呈现的不是"你"而是"Ä"——不是因为数据损坏了，是因为<strong>解读数据的钥匙用错了</strong>。在那个年代，打开一个来自陌生国家的文本文件就像一场轮盘赌。浏览器需要同时尝试七八种编码，看看哪个渲染出来的汉字最多、乱码最少。</p>
+
+        <span class="dot"></span>
+
+        <!-- 三 -->
+        <h2>三、一份万国通用的字母表：Unicode 的调和方案</h2>
+
+        <h3>一个想法：给每个字符一个唯一的身份证号</h3>
+        <p>1987 年，几家大公司的工程师坐在一起，决定终结这场编码混战。方案非常直接：给全世界每一种文字的每一个字符分配一个<strong>全局唯一的编号</strong>。这个编号叫做 <strong>码点（code point）</strong>，写作 <code>U+XXXX</code>。</p>
+        <table>
+            <tr><th>字符</th><th>码点</th><th>所属区块</th></tr>
+            <tr><td>A</td><td>U+0041</td><td>基本拉丁字母（与 ASCII 完全一致）</td></tr>
+            <tr><td>中</td><td>U+4E2D</td><td>CJK 统一表意文字</td></tr>
+            <tr><td>é</td><td>U+00E9</td><td>拉丁补充-1</td></tr>
+            <tr><td>😊</td><td>U+1F60A</td><td>表情符号（Emoticons）</td></tr>
+            <tr><td>あ</td><td>U+3042</td><td>平假名</td></tr>
+            <tr><td>π</td><td>U+03C0</td><td>希腊字母</td></tr>
+            <tr><td>𝄞</td><td>U+1D11E</td><td>音乐符号（高音谱号）</td></tr>
+        </table>
+        <p>截至 2026 年，Unicode 已收录超过 <strong>15 万个字符</strong>，覆盖 168 种文字。但 Unicode 只是一个字符表——它只解决了「每个字符叫什么名字」，没有解决「怎么把它存成字节」。于是出现了几种不同的存储方案。</p>
+
+        <h3>存储方案的三角难题</h3>
+        <table>
+            <tr><th>方案</th><th>编码方式</th><th>优点</th><th>缺点</th></tr>
+            <tr><td><strong>UTF-32</strong></td><td>每个码点固定 4 字节</td><td>简单粗暴，O(1) 定位</td><td>英文字母从 1 字节→4 字节，空间膨胀 4 倍</td></tr>
+            <tr><td><strong>UTF-16</strong></td><td>常用字符 2 字节，生僻 4 字节</td><td>中文也是 2 字节，对东亚友好</td><td>不兼容 ASCII；BOM 问题；代理对增加复杂度</td></tr>
+            <tr><td><strong>UTF-8</strong></td><td>变长 1~4 字节，按使用频率分配长度</td><td>兼容 ASCII；无字节序问题；自同步</td><td>中文需要 3 字节（比 UTF-16 多 50%）</td></tr>
+        </table>
+        <p>UTF-32 因为太浪费几乎没人用。剩下两个——<strong>UTF-16 vs UTF-8</strong>——是真正的战场。Windows NT 内核选 UTF-16，互联网选 UTF-8。结果是 UTF-8 赢了。</p>
+
+        <span class="dot"></span>
+
+        <!-- 四 -->
+        <h2>四、变长的艺术：UTF-8 的精妙设计</h2>
+
+        <h3>编码规则：通过头部字节的自描述结构</h3>
+        <p>UTF-8 的设计可以浓缩为一张表和两条规则。这张表是它的灵魂：</p>
+        <table class="code-table">
+            <tr><th>字节数</th><th>有效比特位</th><th>码点范围</th><th>模板模式</th><th>覆盖内容</th></tr>
+            <tr><td><strong>1</strong></td><td>7</td><td>U+0000~U+007F</td><td><code>0xxxxxxx</code></td><td><strong>ASCII 全部 128 个字符</strong>——完全兼容</td></tr>
+            <tr><td><strong>2</strong></td><td>11</td><td>U+0080~U+07FF</td><td><code>110xxxxx 10xxxxxx</code></td><td>拉丁扩展（希腊文、西里尔文、阿拉伯文等）</td></tr>
+            <tr><td><strong>3</strong></td><td>16</td><td>U+0800~U+FFFF</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td><td><strong>CJK 汉字</strong>、韩文、常用符号——覆盖绝大多数日常文字</td></tr>
+            <tr><td><strong>4</strong></td><td>21</td><td>U+10000~U+10FFFF</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td>表情符号、古文字、罕见汉字、音乐符号</td></tr>
+        </table>
+
+        <p>两条规则同样重要：</p>
+        <ul>
+            <li><strong>规则一</strong>：首字节以 <code>0</code>、<code>110</code>、<code>1110</code>、<code>11110</code> 开头，分别表示 1~4 字节序列</li>
+            <li><strong>规则二</strong>：非首字节（后续字节）一律以 <code>10</code> 开头</li>
+        </ul>
+        <p>这两条规则赋予了 UTF-8 一个 ASCII 没有、UTF-16 也没有的特性：<strong>自同步</strong>。无论你在字节流中从哪个位置开始读取，扫描几个字节就能找到下一个字符的起始位置。即使数据从中段损坏，损失也仅限于当前字符，不会像其他编码那样后续全部错位。</p>
+
+        <h3>具体字符的编码实例</h3>
+        <p>看三个典型字符，覆盖 1 字节、3 字节、4 字节三种情况：</p>
+        <pre>'A' → U+0041 → 7 位就放得下 → 1 字节模板 0xxxxxxx → <strong>01000001</strong> = 0x41
+      → 结果：1 个字节，和 ASCII 的 'A' 字节完全一致</pre>
+        <pre>'中' → U+4E2D → 超出了 2 字节上限（07FF）→ 3 字节模板
+
+  U+4E2D = 0100 1110 0010 1101（16 位二进制）
+  填入 1110xxxx 10xxxxxx 10xxxxxx
+      = 11100100 10111000 10101101
+      = <strong>E4 B8 AD</strong>
+      → 结果：3 个字节（对照：GB2312 中「中」只需要 2 字节）</pre>
+        <pre>'😊' → U+1F60A → 超过了 3 字节上限（FFFF）→ 4 字节模板
+
+  U+1F60A = 0001 1111 0110 0000 1010（21 位二进制）
+  填入 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+      = 11110000 10011111 10011000 10001010
+      = <strong>F0 9F 98 8A</strong>
+      → 结果：4 个字节</pre>
+
+        <h3>为什么 UTF-8 赢了</h3>
+        <table>
+            <tr><th>特性</th><th>UTF-8</th><th>UTF-16</th><th>ASCII</th></tr>
+            <tr><td><strong>向后兼容 ASCII</strong></td><td>✅ 完全兼容——0x41 就是 'A'</td><td>❌ 不兼容——'A' 存为 00 41 或 41 00</td><td>—</td></tr>
+            <tr><td><strong>无字节序问题</strong></td><td>✅ 字节序无关——字节有明确的头部标识</td><td>❌ 需要 BOM——大端/小端让人头疼</td><td>✅ 没问题（单字节）</td></tr>
+            <tr><td><strong>自同步</strong></td><td>✅ 任何字节位置都能识别字符边界</td><td>❌ 无法自同步——16 位边界可能错位</td><td>❌ 无法自同步（混在扩展 ASCII 中时）</td></tr>
+            <tr><td><strong>空间效率（英文）</strong></td><td>⭐ 最优——1 字节</td><td>❌ 浪费——2 字节</td><td>⭐ 最优——1 字节</td></tr>
+            <tr><td><strong>空间效率（中文）</strong></td><td>尚可——3 字节</td><td>⭐ 最优——2 字节</td><td>❌ 不支持</td></tr>
+            <tr><td><strong>错误检测</strong></td><td>✅ 有——后续字节不以 10 开头则数据损坏</td><td>❌ 无</td><td>❌ 无</td></tr>
+        </table>
+
+        <p>UTF-8 的「兼容 ASCII」不是一种妥协——<strong>它是一种对历史的尊重和对迁移成本的精确计算。</strong> 世界上有无数的 ASCII 文件、C 源代码、Unix 配置文件——UTF-8 让它们不需要任何转换就自动成为了合法的 Unicode 文件。没有这个兼容性设计，UTF-8 不可能成为互联网事实标准。</p>
+
+        <span class="dot"></span>
+
+        <!-- 五 -->
+        <h2>五、ASCII 与 UTF-8 全方位对照总表</h2>
+
+        <h3>基础特性对照</h3>
+        <table>
+            <tr><th>维度</th><th>ASCII</th><th>UTF-8</th></tr>
+            <tr><td><strong>全称</strong></td><td>American Standard Code for Information Interchange</td><td>Unicode Transformation Format — 8-bit</td></tr>
+            <tr><td><strong>诞生年份</strong></td><td>1963（第一版）</td><td>1993（RFC 2044，后合并入 RFC 3629）</td></tr>
+            <tr><td><strong>制定者</strong></td><td>美国标准协会（ANSI）</td><td>Ken Thompson & Rob Pike（贝尔实验室）</td></tr>
+            <tr><td><strong>编码方式</strong></td><td>固定 7 比特/字符</td><td>可变 1~4 字节/字符</td></tr>
+            <tr><td><strong>最大字符数</strong></td><td>128</td><td>1,112,064（有效 Unicode 码点）</td></tr>
+            <tr><td><strong>英文字母</strong></td><td>1 字节（如 'A' = 0x41）</td><td>1 字节（完全一致，也是 0x41）</td></tr>
+            <tr><td><strong>中文字符</strong></td><td>❌ 不支持</td><td>3 字节（如 '中' = E4 B8 AD）</td></tr>
+            <tr><td><strong>表情符号</strong></td><td>❌ 不支持</td><td>4 字节（如 '😊' = F0 9F 98 8A）</td></tr>
+            <tr><td><strong>向后兼容</strong></td><td>—</td><td>完全兼容 ASCII（U+0000~U+007F）</td></tr>
+            <tr><td><strong>字节序依赖</strong></td><td>无（单字节）</td><td>无（自描述）</td></tr>
+            <tr><td><strong>自同步能力</strong></td><td>无</td><td>有</td></tr>
+            <tr><td><strong>错误检测</strong></td><td>无</td><td>有（无效字节序列可被识别）</td></tr>
+            <tr><td><strong>空字节（NUL）</strong></td><td>0x00</td><td>0x00（与 ASCII 一致，但只在 1 字节范围内）</td></tr>
+        </table>
+
+        <h3>字节长度对照表（按字符类型）</h3>
+        <table>
+            <tr><th>字符示例</th><th>字符名称</th><th>Unicode 码点</th><th>ASCII 字节数</th><th>UTF-8 字节数</th><th>UTF-8 实际字节</th></tr>
+            <tr><td>A</td><td>拉丁大写 A</td><td>U+0041</td><td>1</td><td>1</td><td><code>41</code></td></tr>
+            <tr><td>~</td><td>波浪号</td><td>U+007E</td><td>1</td><td>1</td><td><code>7E</code></td></tr>
+            <tr><td>é</td><td>带重音的 e</td><td>U+00E9</td><td>❌</td><td>2</td><td><code>C3 A9</code></td></tr>
+            <tr><td>ñ</td><td>带波浪线的 n</td><td>U+00F1</td><td>❌</td><td>2</td><td><code>C3 B1</code></td></tr>
+            <tr><td>α</td><td>希腊小写 alpha</td><td>U+03B1</td><td>❌</td><td>2</td><td><code>CE B1</code></td></tr>
+            <tr><td>π</td><td>希腊小写 pi</td><td>U+03C0</td><td>❌</td><td>2</td><td><code>CF 80</code></td></tr>
+            <tr><td>Д</td><td>西里尔大写 De</td><td>U+0414</td><td>❌</td><td>2</td><td><code>D0 94</code></td></tr>
+            <tr><td>中</td><td>CJK 汉字「中」</td><td>U+4E2D</td><td>❌</td><td>3</td><td><code>E4 B8 AD</code></td></tr>
+            <tr><td>文</td><td>CJK 汉字「文」</td><td>U+6587</td><td>❌</td><td>3</td><td><code>E6 96 87</code></td></tr>
+            <tr><td>あ</td><td>平假名「あ」</td><td>U+3042</td><td>❌</td><td>3</td><td><code>E3 81 82</code></td></tr>
+            <tr><td>😊</td><td>微笑表情</td><td>U+1F60A</td><td>❌</td><td>4</td><td><code>F0 9F 98 8A</code></td></tr>
+            <tr><td>🚀</td><td>火箭表情</td><td>U+1F680</td><td>❌</td><td>4</td><td><code>F0 9F 9A 80</code></td></tr>
+            <tr><td>𝄞</td><td>高音谱号</td><td>U+1D11E</td><td>❌</td><td>4</td><td><code>F0 9D 84 9E</code></td></tr>
+        </table>
+
+        <h3>一段文本的编码效果对比</h3>
+        <p>取一段短文本"Hello 世界 🌍"，看三种编码的存储差异：</p>
+        <table class="code-table">
+            <tr><th>字符</th><th>ASCII 字节</th><th>UTF-8 字节</th><th>UTF-16（小端）字节</th></tr>
+            <tr><td>H</td><td>48</td><td>48</td><td>48 00</td></tr>
+            <tr><td>e</td><td>65</td><td>65</td><td>65 00</td></tr>
+            <tr><td>l</td><td>6C</td><td>6C</td><td>6C 00</td></tr>
+            <tr><td>l</td><td>6C</td><td>6C</td><td>6C 00</td></tr>
+            <tr><td>o</td><td>6F</td><td>6F</td><td>6F 00</td></tr>
+            <tr><td>（空格）</td><td>20</td><td>20</td><td>20 00</td></tr>
+            <tr><td>世</td><td>❌</td><td>E4 B8 96</td><td>16 4E</td></tr>
+            <tr><td>界</td><td>❌</td><td>E7 95 8C</td><td>8C 75</td></tr>
+            <tr><td>（空格）</td><td>20</td><td>20</td><td>20 00</td></tr>
+            <tr><td>🌍</td><td>❌</td><td>F0 9F 8C 8D</td><td>0D F0 0D F0（代理对）</td></tr>
+            <tr><td><strong>总计</strong></td><td><strong>7 字节</strong>（只算英文+空格，中文和表情不支持）</td><td><strong>17 字节</strong></td><td><strong>22 字节</strong>（含代理对）</td></tr>
+        </table>
+        <p>注意：ASCII 直接拒绝中文和表情符号。UTF-8 只需要 17 字节就能表示所有字符——而且 7 个英文字符+空格共 8 字节与 ASCII 完全一致。这是它最优雅的地方。</p>
+
+        <span class="dot"></span>
+
+        <!-- 六 -->
+        <h2>六、暗流与碎片：编码世界的延伸战场</h2>
+
+        <h3>UTF-16 的 BOM 战争</h3>
+        <p>在 UTF-16 的世界里，两个字节的顺序是一个根本问题：</p>
+        <table>
+            <tr><th>字节序</th><th>'A' 的存储</th><th>主要使用者</th></tr>
+            <tr><td><strong>大端（BE）</strong></td><td>00 41（高位在前）</td><td>网络协议（TCP/IP 用大端，所以也叫"网络字节序"）</td></tr>
+            <tr><td><strong>小端（LE）</strong></td><td>41 00（低位在前）</td><td>x86 架构、Windows</td></tr>
+        </table>
+        <p>为了解决这个问题，Unicode 标准引入了 <strong>BOM（Byte Order Mark）</strong>——在文件开头放一个不可见的字符 <code>U+FEFF</code>（零宽不换行空格），告诉解码器我是什么字节序：</p>
+        <pre>UTF-16 BE 文件开头：FE FF → 后续字节按大端解读
+UTF-16 LE 文件开头：FF FE → 后续字节按小端解读</pre>
+        <p>这引发了一个更复杂的问题：<strong>有人把 BOM 引入了 UTF-8</strong>。UTF-8 根本没有字节序问题，但 Windows 记事本在保存 UTF-8 文件时，默认在开头加上了 <code>EF BB BF</code>——这就是 UTF-8 BOM。结果：</p>
+        <blockquote><p>你在 Windows 记事本里写了一个 Shell 脚本，保存为 UTF-8。<br>传到 Linux 服务器上，运行。<br><code>#!/bin/bash</code> 前面多了 3 个不可见字节。<br>Shell 报错：<code>bad interpreter: No such file or directory</code>。</p></blockquote>
+        <p>这就是经典的 <strong>Notepad BOM 灾难</strong>。20 年来，无数开发者因为这个原因踩过坑。</p>
+
+        <h3>NFC 与 NFD：同一个字符的两副面孔</h3>
+        <p>看这个字符：<strong>é</strong>（带重音的 e）。</p>
+        <p>在 Unicode 的世界里，<strong>它有两种表示方式：</strong></p>
+        <table>
+            <tr><th>形式</th><th>组成</th><th>码点</th><th>UTF-8 字节</th><th>长度</th></tr>
+            <tr><td><strong>NFC</strong>（预组合）</td><td>单个字符 é</td><td>U+00E9</td><td>C3 A9</td><td>2 字节</td></tr>
+            <tr><td><strong>NFD</strong>（分解）</td><td>字符 e + 组合重音符号</td><td>U+0065 + U+0301</td><td>65 CC 81</td><td>3 字节</td></tr>
+        </table>
+        <p>视觉上完全一样。计算机看来——<strong>完全不一样</strong>。这就是 Unicode 归一化问题，最经典的受害者是跨平台文件共享：</p>
+        <blockquote><p>macOS 的文件系统（HFS+ / APFS）默认将文件名存储为 NFD 形式。<br>Linux 用 NFC。</p>
+        <p>你在 Mac 上创建一个文件名叫「café.txt」。<br>git 提交。同事用 Linux 拉下来。<br>他的 git status 显示：「café.txt」被修改了。<br>但你明明没改过。</p>
+        <p>原因：你在 Mac 上创建的是 NFD 版（cafe + 重音），<br>同事的 Linux 自动转成了 NFC 版（预组合 é）。<br>git 认为这是两个不同的文件名。</p></blockquote>
+
+        <h3>中文编码的三代进化</h3>
+        <p>中文进入计算机的过程远比其他语言艰难——英文只需要 26 个字母，中文光常用字就六七千。</p>
+        <table>
+            <tr><th>标准</th><th>年份</th><th>汉字数</th><th>编码方式</th><th>说明</th></tr>
+            <tr><td><strong>GB2312</strong></td><td>1980</td><td>6,763</td><td>2 字节</td><td>第一代简体中文标准，覆盖常用字，但生僻姓名打不出来</td></tr>
+            <tr><td><strong>GBK</strong></td><td>1993</td><td>21,003</td><td>2 字节</td><td>扩展 GB2312，兼容原编码——「镕」字终于有了（朱镕基总理的名字问题）</td></tr>
+            <tr><td><strong>GB18030</strong></td><td>2000（2005 强制）</td><td>全部 Unicode 汉字</td><td>变长 1/2/4 字节</td><td>中国强制标准，向后兼容 GBK，覆盖全部 CJK 扩展</td></tr>
+        </table>
+        <p>同时，台湾和港澳走的是完全不同的 <strong>Big5（大五码）</strong>，和 GB 系列互不兼容。一段 Big5 文本在 GBK 解码器下看到的是一堆乱码——「我」变成「¦Ú」——直到 UTF-8 成为通用方案才终结了这场持续三十年的编码内战。</p>
+
+        <h3>「Ã±」灾难：Web 开发中最经典的编码 Bug</h3>
+        <p>这是 Web 开发中最经典的教学案例，涉及三处编码不匹配：</p>
+        <pre>你在 HTML 表单中输入「ñ」，提交。
+  ↓
+浏览器用 UTF-8 编码发送：C3 B1
+  ↓
+服务端误以为用 Latin-1 接收：
+    把 C3 解读为 Ã（U+00C3）
+    把 B1 解读为 ±（U+00B1）
+  ↓
+数据库里存下了「Ã±」
+  ↓
+渲染出来就是「Ã±」</pre>
+        <p><strong>修复方法</strong>：确认三处编码一致——页面声明的 charset、HTTP 响应头的 Content-Type、数据库连接字符集——全部设为 UTF-8。少一处都不行。</p>
+
+        <h3>Emoji 的字节膨胀</h3>
+        <p>一个表情符号已经是 4 字节了。如果是由多个表情用 <strong>ZWJ（零宽连接符，U+200D）</strong> 连接起来的家庭组合表情呢？</p>
+        <pre>「👨‍👩‍👧‍👧」（一家四口）
+
+👨 U+1F468（4 字节）
+  ‍ U+200D（3 字节）
+👩 U+1F469（4 字节）
+  ‍ U+200D（3 字节）
+👧 U+1F467（4 字节）
+  ‍ U+200D（3 字节）
+👧 U+1F468（4 字节）
+
+→ UTF-8 下共 25 个字节</pre>
+        <p>这就是为什么 Twitter 和微博的「字数限制」和编码有关——一条 140 字符的推文中如果混入大量 emoji，实际存储开销远不止 140 字节。</p>
+
+        <span class="dot"></span>
+
+        <!-- 七 -->
+        <h2>七、编码一致性的黄金法则</h2>
+
+        <h3>三个必须一致的环节</h3>
+        <p>无论你做的是 Web 开发、数据库设计还是文件处理，以下三处编码<strong>必须一致</strong>：</p>
+        <blockquote><p><strong>声明 ≠ 实际 ≠ 存储</strong>——任何一处的编码不匹配，都会导致乱码。</p></blockquote>
+        <table>
+            <tr><th>环节</th><th>Web 开发</th><th>数据库</th><th>文件处理</th></tr>
+            <tr><td><strong>声明</strong></td><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>表的 COLLATION</td><td>文件头 BOM / .gitattributes</td></tr>
+            <tr><td><strong>传输</strong></td><td>HTTP <code>Content-Type: charset=utf-8</code></td><td>连接字符集（<code>SET NAMES utf8mb4</code>）</td><td>HTTP 响应头 / 流编码</td></tr>
+            <tr><td><strong>实际内容</strong></td><td>编辑器的保存编码</td><td>实际存储的二进制字节</td><td>文件本身的字节序列</td></tr>
+        </table>
+        <p>在 Web 开发中，一个最省心的原则是：<strong>从浏览器到服务器到数据库，全链路 UTF-8。</strong></p>
+
+        <h3>编码探测工具</h3>
+        <p>当你拿到一个没有编码声明的文件时，怎么猜它的编码？Mozilla 的 <strong>chardet</strong> 库是目前最好的探测工具，它的策略是：</p>
+        <ul>
+            <li><strong>试探法</strong>：前几个字节是否匹配某种编码的特征（BOM、NULL 模式等）</li>
+            <li><strong>统计法</strong>：分析字节频率分布——0x80~0xFF 之间的高频字节模式指向特定的编码</li>
+            <li><strong>降级法</strong>：如果全是 0x00~0x7F → 必然是 ASCII（同时也是合法的 UTF-8）</li>
+        </ul>
+        <p>但它不是 100% 准确的。唯一的可靠方案就是<strong>明确标注编码</strong>。</p>
+
+        <span class="dot"></span>
+
+        <!-- 八 -->
+        <h2>八、补充专题：URL 编码、Base64 与不同场景下的编码方案</h2>
+
+        <h3>Percent-encoding：URL 中的中文</h3>
+        <p>你在浏览器地址栏输入「https://example.com/中文」，按下回车后——浏览器会自动将其转换为 <code>https://example.com/%E4%B8%AD%E6%96%87</code>。这就是 <strong>Percent-encoding（URL 编码）</strong>。它的规则很简单：每个非 ASCII 字节用 <code>%</code> 前缀 + 两位十六进制表示。<code>%E4%B8%AD</code> 就是「中」字 UTF-8 编码的三个字节。浏览器的地址栏只接受 ASCII 字符集，一切超出范围的字符都必须这样转义才能传输。</p>
+
+        <h3>Base64：用 ASCII 传二进制</h3>
+        <p>邮件附件、图片的 Data URI、JWT Token——这些场景有一个共同点：需要在只允许 ASCII 字符的传输通道里传递任意二进制数据。Base64 将每 3 个字节（24 位）拆成 4 组 6 位，每组映射到一个可打印的 ASCII 字符（A-Z、a-z、0-9、+、/）。效果就是二进制变成了看起来像乱码的 ASCII 文本。代价是体积膨胀约 33%。</p>
+
+        <h3>Punycode：中文域名的工作原理</h3>
+        <p>当你访问「例子.测试」这样的中文域名时，DNS 系统只理解 ASCII。解决方案是 <strong>Punycode</strong>——将 Unicode 字符编码为 ASCII 兼容的字符串，以 <code>xn--</code> 开头。例如「例子.测试」在 DNS 层面实际上是 <code>xn--fsq.xn--0zwm56d</code>。浏览器在地址栏显示给人看的是中文，发给 DNS 服务器的是 Punycode。</p>
+
+        <h3>字符编码与 tokenization：两个不同层</h3>
+        <p>字符编码（ASCII、UTF-8）解决的是「字符怎么变成字节」，而 LLM 的 tokenization 解决的是「文本怎么切分成模型理解的语义单元」。两者在完全不同的抽象层上工作：</p>
+        <blockquote><p>「Hello world」→ 11 个字符 → 11 字节（UTF-8）→ 约 3~4 个 token<br>「你好世界」→ 4 个字符 → 12 字节（UTF-8）→ 约 4~6 个 token</p></blockquote>
+        <p>一个 token 和字节之间没有固定比例。中文每个字在主流 tokenizer 中通常被切得更碎——同一个意思的表达，中文产生的 token 数通常是英文的 1.5~2 倍。这也是为什么中文场景下 token 消耗比英文更快。</p>
+
+        <span class="dot"></span>
+
+        <!-- 待延伸线索 -->
+        <h2>📝 待延伸线索</h2>
+        <ul>
+            <li><strong>Base64 编码</strong>——为什么在邮件和 URL 中要把二进制数据变成 ASCII 字符？Base64 是另一种编码，但不是字符编码，而是传输编码</li>
+            <li><strong>Percent-encoding（URL 编码）</strong>——中文 URL 中 %E4%B8%AD 的来历：UTF-8 字节的十六进制表示加百分号前缀</li>
+            <li><strong>Mojibake（文字化け）</strong>——日本人对「乱码」的称呼，Shift_JIS 被以 EUC-JP 解码时产生的经典日文乱码模式</li>
+            <li><strong>Unicode 13.0 之后的扩充</strong>——CJK 扩展 G 区和 H 区收录了哪些濒危汉字？</li>
+            <li><strong>Punycode</strong>——中文域名（xn--...) 的编码原理：将 Unicode 字符转为 ASCII 兼容的表示</li>
+            <li><strong>编码与加密的区别</strong>——编码（encoding）不是为了隐藏，而是为了兼容传输介质；加密是为了保密——两者经常被混淆</li>
+            <li><strong>SQL 注入与编码</strong>——编码不一致能否引发安全漏洞？历史上确有因 GBK/UTF-8 编码混淆导致的 SQL 注入案例</li>
+            <li><strong>XML 与 HTML 实体编码</strong>——<code>&amp;amp;</code> 和 <code>&amp;#x4E2D;</code> 是另一种在标记语言中转义特殊字符的编码方案</li>
+            <li><strong>Python 2 的 str vs unicode 噩梦</strong>——Python 2 中 bytes 和 string 的暧昧关系导致了持续十余年的编码 Bug，直到 Python 3 才彻底解决</li>
+            <li><strong>UTF-8 Everywhere 运动</strong>——2012 年发起的技术倡议，呼吁业界全面采用 UTF-8，终结编码分裂</li>
+            <li><strong>Charset 检测与 MIME</strong>——电子邮件中 Content-Type 头部的 charset 字段如何声明编码，没有它邮件客户端只能猜</li>
+            <li><strong>BMP（Basic Multilingual Plane）与增补平面</strong>——Unicode 的前 65536 个码点（U+0000~U+FFFF）囊括了绝大多数现代文字，增补平面才轮到表情和古文字</li>
+        </ul>
+        </ul>
+
+        <hr>
+
+        <p style="text-align:center;font-size:0.8rem;color:#aaa;">对话日期：2026年5月30日 &nbsp;|&nbsp; 记录整理：知白</p>
+
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回首页</a>
+        </div>
+
+    </div>
+</body>
+</html>
