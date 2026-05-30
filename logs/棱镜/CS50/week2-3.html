@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50 · Week 2–3 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif; background: #fafafa; color: #333; line-height: 1.9; }
+        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+        h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; line-height: 1.5; margin-bottom: 16px; color: #1a1a1a; }
+        .meta { font-size: 0.85rem; color: #999; margin-bottom: 48px; }
+        .meta span { margin-right: 16px; }
+        .intro { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 48px; padding-left: 16px; border-left: 2px solid #ddd; }
+        h2 { font-size: 1.25rem; font-weight: 500; margin-top: 56px; margin-bottom: 20px; color: #1a1a1a; letter-spacing: 1px; }
+        h3 { font-size: 1.05rem; font-weight: 500; margin-top: 36px; margin-bottom: 14px; color: #333; }
+        p { font-size: 0.95rem; margin-bottom: 16px; color: #444; }
+        blockquote { margin: 24px 0; padding: 16px 20px; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #ccc; }
+        blockquote p { margin-bottom: 0; color: #555; }
+        strong { color: #1a1a1a; font-weight: 600; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; line-height: 1.6; }
+        th { background: #f9f9f9; font-weight: 500; color: #555; font-size: 0.8rem; letter-spacing: 1px; }
+        tr:hover td { background: #fcfcfc; }
+        hr { border: none; border-top: 1px solid #e8e8e8; margin: 48px 0; }
+        .dot { display: block; width: 6px; height: 6px; background: #ccc; border-radius: 50%; margin: 40px auto; }
+        ul, ol { margin: 12px 0 20px 20px; font-size: 0.9rem; color: #555; line-height: 2; }
+        code { background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 0.85rem; font-family: "SF Mono", "Menlo", "Consolas", monospace; color: #c7254e; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 16px 20px; border-radius: 6px; overflow-x: auto; font-size: 0.82rem; line-height: 1.7; margin: 16px 0 24px; font-family: "SF Mono", "Menlo", "Consolas", monospace; }
+        .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e8e8e8; text-align: center; }
+        .nav-bottom a { color: #999; text-decoration: none; font-size: 0.85rem; }
+        .nav-bottom a:hover { color: #333; }
+        @media (max-width: 600px) { .container { padding: 32px 16px 64px; } h1 { font-size: 1.4rem; } table { font-size: 0.78rem; } th, td { padding: 8px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="index.html">← CS50</a>
+
+        <h1>CS50x 2025 · 听课笔记<br>Week 2 &amp; Week 3</h1>
+        <div class="meta"><span>星尘 整理</span><span>2026年5月29日</span></div>
+        <div class="intro">
+            <p>Week 2 和 Week 3 是 CS50 的第一次「爬坡」。Week 2 把编译流程从黑箱变成白箱，引入数组和字符串，终结了「CS50 的 string 是魔法」的幻觉。Week 3 则是算法与复杂度的全面展开——Malan 会把学生叫上讲台，用真人演示排序，用横轴和纵轴画出算法效率的视觉直觉。这两周的内容叠加在一起，构成一个分水岭：在此之前你在学「怎么写」，在此之后你开始学「怎么想」。</p>
+        </div>
+
+        <!-- KEYWORDS -->
+        <h2>🔑 关键词索引</h2>
+        <table>
+            <tr><th>关键词</th><th>一句话说明</th></tr>
+            <tr><td><strong>预处理（Preprocessing）</strong></td><td>编译第一步——把 <code>#include</code> 替换成对应头文件的全文，把 <code>#define</code> 宏展开</td></tr>
+            <tr><td><strong>汇编（Assembly）</strong></td><td>比 C 低一级、比机器码高一级的中间语言——人类能勉强读懂的最后一级</td></tr>
+            <tr><td><strong>链接（Linking）</strong></td><td>编译最后一步——把你编译好的目标文件和库文件缝在一起，生成可执行文件</td></tr>
+            <tr><td><strong>debug50</strong></td><td>CS50 的图形化调试器——在代码里设断点、逐行执行、实时查看变量值。命令行版就是 GDB</td></tr>
+            <tr><td><strong>⭐ 数组越界</strong></td><td>C 不会阻止你读 <code>array[100]</code>（哪怕数组只有 10 个元素）——它会读相邻内存的垃圾值，或者直接让你的程序崩溃</td></tr>
+            <tr><td><strong>字符串 = char 数组</strong></td><td>Week 4 伏笔至此揭晓——<code>string</code> 就是 <code>char *</code>，一个指向字符数组第一个元素的指针。字符串末尾有一个隐藏的 <code>'\0'</code>（空字符）标记结束</td></tr>
+            <tr><td><strong>argc / argv</strong></td><td>命令行参数——<code>argc</code> = 参数个数，<code>argv</code> = 参数数组（字符串数组）</td></tr>
+            <tr><td><strong>退出码（Exit Status）</strong></td><td><code>return 0</code> 表示成功，<code>return 1</code>（或任何非零值）表示出错。命令行里用 <code>echo $?</code> 查看上一条命令的退出码</td></tr>
+            <tr><td><strong>凯撒密码</strong></td><td>最简单的加密算法——把每个字母向后移动固定位数。A→D, B→E（移动 3 位）。Week 2 的 Problem Set</td></tr>
+            <tr><td><strong>⭐ 大 O 记号（Big O）</strong></td><td>算法在最坏情况下的运行时间增长趋势——O(n²) 意味着数据量翻倍，时间翻四倍</td></tr>
+            <tr><td><strong>Ω（Omega）记号</strong></td><td>算法在最好情况下的运行时间——冒泡排序最好 Ω(n)（数据已排好），最坏 O(n²)</td></tr>
+            <tr><td><strong>线性搜索</strong></td><td>从头到尾一个一个找。O(n)。最简单也最慢</td></tr>
+            <tr><td><strong>冒泡排序</strong></td><td>相邻两两比较，大的往后「冒」。O(n²)。教学用，实战基本没人用</td></tr>
+            <tr><td><strong>选择排序</strong></td><td>每轮挑出最小的放在最前面。O(n²)。比冒泡少一些交换次数，但比较次数一样多</td></tr>
+            <tr><td><strong>归并排序</strong></td><td>分治法的经典——把数组不断对半切，切到只剩 1 个元素，再两两合并。O(n log n)。效率质变</td></tr>
+            <tr><td><strong>⭐ 递归（Recursion）</strong></td><td>函数调用自身。必须有一个「基准条件」来停止，否则无限递归 → 栈溢出（Segmentation Fault）</td></tr>
+            <tr><td><strong>结构体（struct）</strong></td><td>把多个不同类型的变量打包成一个新类型。比如 <code>struct person { string name; int age; };</code></td></tr>
+            <tr><td><strong>宏 / #define</strong></td><td>预处理器功能——不是变量，是文本替换。带参数的宏必须给每个参数加括号，否则灾难性展开</td></tr>
+            <tr><td><strong>魔术数字（Magic Number）</strong></td><td>代码里孤立的裸数字（如 <code>for (i=0; i&lt;3; i++)</code> 里的 3）。用 <code>#define</code> 或 <code>const</code> 替换</td></tr>
+            <tr><td><strong>静态链接 vs 动态链接</strong></td><td>库代码嵌入你的程序（静态）还是运行时共享（动态）。动态是默认——安全补丁不需要重编译你的程序</td></tr>
+            <tr><td><strong>安全字符串函数</strong></td><td><code>strncpy</code> / <code>strncat</code> / <code>fgets</code>——带上 <code>n</code> 的版本限制拷贝长度，防止缓冲区溢出</td></tr>
+            <tr><td><strong>莫里斯蠕虫</strong></td><td>1988 年利用 <code>gets()</code> 缓冲区溢出感染互联网 10% 的电脑。史上第一个重大网络安全事件。肇事者后来成了 MIT 教授</td></tr>
+            <tr><td><strong>Θ（Theta）记号</strong></td><td>当最好情况和最坏情况相同时的紧界记号——如归并排序 Θ(n log n)</td></tr>
+            <tr><td><strong>调用栈（Call Stack）</strong></td><td>函数调用时压栈、返回时弹栈的内存区域。递归过深 → 栈溢出。Week 4 内存布局的核心概念</td></tr>
+            <tr><td><strong>快速排序（Quick Sort）</strong></td><td>O(n log n) 排序的另一个支柱——选 pivot 分左右，原地排序。平均比归并快，最坏 O(n²)</td></tr>
+        </table>
+
+        <span class="dot"></span>
+
+        <!-- ==================== WEEK 2 ==================== -->
+        <h2>Week 2 · Arrays</h2>
+
+        <h3>这节课的转折感</h3>
+        <p>Week 1 结束时，你已经能用 C 写猜数字游戏——但有一个神秘的词汇挥之不去：<strong>编译</strong>。你只知道「make 把我的代码变成程序」，但不知道里面发生了什么。Week 2 前半段，Malan 把编译的黑箱撬开给你看。后半段，他引入数组——从单一变量到成排数据，编程的尺度第一次真正放大。而当他揭穿 string 就是 char 数组时，Week 1 埋下的伏笔兑现了。</p>
+
+        <h3>2-1：编译的四步流水线——这次讲透</h3>
+        <p>Malan 在第 1 周用 <code>make hello</code> 一笔带过。第 2 周他把整个过程拆成四步，每一步在终端手动执行一遍：</p>
+
+        <table>
+            <tr><th>步骤</th><th>命令</th><th>输入 → 输出</th><th>干什么</th></tr>
+            <tr><td><strong>① 预处理</strong></td><td><code>clang -E hello.c</code></td><td><code>.c</code> → 预处理后的文本</td><td>把头文件（如 <code>stdio.h</code>）的<strong>全文</strong>复制粘贴进你的代码。处理 <code>#define</code> 宏替换。Malan 跑完这步后把输出打到屏幕上——原本 5 行的 hello.c 变成了几百行。</td></tr>
+            <tr><td><strong>② 编译</strong></td><td><code>clang -S hello.c</code></td><td><code>.c</code> → <code>.s</code>（汇编）</td><td>把 C 翻译成<strong>汇编语言</strong>——人类能勉强读懂的、最接近机器码的一层。你会看到 <code>movl</code>、<code>call</code>、<code>ret</code> 这些指令。</td></tr>
+            <tr><td><strong>③ 汇编</strong></td><td><code>clang -c hello.c</code></td><td><code>.c</code> → <code>.o</code>（目标文件）</td><td>把汇编转成<strong>纯 0 和 1 的机器码</strong>。但此时还不能运行——因为引用的 <code>printf</code> 还没有接上。</td></tr>
+            <tr><td><strong>④ 链接</strong></td><td><code>clang hello.o -o hello</code></td><td><code>.o</code> → 可执行文件</td><td>把你的 <code>hello.o</code> 和标准库中的 <code>printf</code> 机器码「缝」在一起，生成最终的 <code>hello</code> 可执行文件。</td></tr>
+        </table>
+
+        <blockquote><p>Malan 做了一个漂亮的类比：「预处理就像做菜前把食材从冰箱拿出来放在台面上。编译是把食材切好。汇编是下锅炒。链接是装盘上桌。」每一步的输出都可以单独保存和查看——这不是什么神秘魔法，只是一条流水线。</p></blockquote>
+
+        <h3>宏（Macro）——预处理不只是 #include</h3>
+        <p>Malan 演示了另一个预处理器的核心功能——<strong>宏替换</strong>。在 C 中，<code>#define</code> 告诉预处理器：看到 A 就替换成 B：</p>
+        <pre>#define PI 3.14159
+#define COURSE "CS50"
+
+int main(void)
+{
+    printf("欢迎来到 %s\n", COURSE);  // 预处理器把 COURSE 替换成 "CS50"
+    printf("圆周率约等于 %f\n", PI);   // PI 替换成 3.14159
+}</pre>
+        <p>预处理之后，编译器收到的代码里<strong>根本没有 <code>PI</code> 和 <code>COURSE</code> 这两个词</strong>——它们已经被替换成字面量了。这和变量完全不同——宏不占内存、没有类型、不参与编译。它只是「查找替换」。</p>
+        <p>Malan 还演示了带参数的宏：</p>
+        <pre>#define SQUARE(x) (x * x)
+
+// 使用
+int area = SQUARE(5);  // → 5 * 5 = 25</pre>
+        <p>然后他写了一个陷阱——不加括号会怎样：</p>
+        <pre>#define BAD_SQUARE(x) x * x   // 注意：没有括号！
+int result = BAD_SQUARE(1 + 2);
+// 展开后：1 + 2 * 1 + 2 = 1 + 2 + 2 = 5
+// 你期望的：3 * 3 = 9  ← 错了！</pre>
+        <blockquote><p><strong>宏的黄金法则：给每个参数和整个表达式都加括号。</strong> <code>#define SQUARE(x) ((x) * (x))</code>。多一对括号不会有人受伤，少一对可能让你 debug 到凌晨三点。</p></blockquote>
+
+        <h3>静态链接 vs 动态链接</h3>
+        <p>Malan 在第 2 周提到一个连接（linking）的分岔口——你的程序用到的库代码，是「嵌进」可执行文件里（静态链接），还是「运行时去系统里找」（动态链接）？</p>
+        <table>
+            <tr><th></th><th>静态链接</th><th>动态链接</th></tr>
+            <tr><td><strong>怎么做</strong></td><td>库的机器码被直接复制进你的可执行文件</td><td>库的机器码单独存放（.so / .dll / .dylib），运行时加载</td></tr>
+            <tr><td><strong>文件大小</strong></td><td>大（每个程序各带一份库的副本）</td><td>小（所有程序共享同一份库文件）</td></tr>
+            <tr><td><strong>更新库</strong></td><td>必须重新编译程序</td><td>替换库文件即可，不需要重编译程序</td></tr>
+            <tr><td><strong>速度</strong></td><td>略快（不需要运行时查找）</td><td>略慢（但几乎感觉不到）</td></tr>
+            <tr><td><strong>CS50 中</strong></td><td><code>clang hello.c -static -o hello</code></td><td><code>clang hello.c -o hello</code>（这是默认行为）</td></tr>
+        </table>
+        <p>Malan 的评论：「动态链接是现代操作系统的默认选择——在你的 Mac 上打开『活动监视器』，你能看到几十个程序都在共享同一套系统库。如果库有安全漏洞，替换一个文件就能修好所有程序。这是计算机科学里最漂亮的共享设计之一。」</p>
+
+        <h3>2-2：调试——程序出 bug 了怎么办</h3>
+        <p>Malan 先演示了最朴素的调试法——<strong>printf 大法</strong>：在怀疑出问题的地方插 <code>printf("到这里了，x = %i\n", x);</code>。他说「这是全世界程序员最常用的调试技术，虽然不高级，但有效。」</p>
+        <p>然后他掏出真正的武器：<strong>debug50</strong>（CS50 封装的 GDB 前端）。设断点、单步执行、查看变量——Malan 现场演示了一段有 bug 的代码（数组求和，但没有初始化 sum 为 0，结果是垃圾值），然后用 debug50 逐行追踪，让学生眼睁睁看着 sum 从 32767 变成了 32768——<strong>「看，这就是内存里的垃圾。」</strong></p>
+
+        <table>
+            <tr><th>调试方法</th><th>怎么做</th><th>什么时候用</th></tr>
+            <tr><td><strong>printf 大法</strong></td><td>在关键位置插 <code>printf</code> 打印变量值</td><td>快速定位「哪一步数据不对了」</td></tr>
+            <tr><td><strong>debug50 / GDB</strong></td><td>设断点 → 逐行执行 → 查看变量 → 看调用栈</td><td>逻辑 bug、需要看每一步变化时</td></tr>
+            <tr><td><strong>橡皮鸭调试法</strong></td><td>对着一个橡皮鸭（或任何不会还嘴的东西）逐行解释你的代码</td><td>你被卡住超过 15 分钟的任何时候。Malan 专门带了一只橡皮鸭到讲台上</td></tr>
+        </table>
+
+        <blockquote><p>Malan 的原话：「调试不是'找 bug'——调试是<strong>修正你对代码的认知</strong>。你写的代码做了<strong>你以为你让它做的事</strong>，而不是你以为它<strong>应该</strong>做的事。调试器让你看到真相。」</p></blockquote>
+
+        <h3>2-3：数组——把同类型数据排成一排</h3>
+        <p>到目前为止你只能声明 <code>int score1, score2, score3;</code>。但如果你有 100 个学生呢？这就是数组存在的理由——<strong>一个名字，一组同类型的数据，用编号（索引）区分。</strong></p>
+
+        <pre>// 声明一个数组：3 个 int 排成一排
+int scores[3];   // scores[0], scores[1], scores[2] 三个位置
+
+// 赋值
+scores[0] = 72;
+scores[1] = 85;
+scores[2] = 93;
+
+// 声明 + 初始化二合一
+int scores[3] = {72, 85, 93};
+
+// 遍历数组——for 循环 + 数组 = 天生一对
+for (int i = 0; i < 3; i++)
+{
+    printf("第 %i 个学生的成绩：%i\n", i + 1, scores[i]);
+}</pre>
+
+        <p>几个硬核细节，Malan 会反复强调：</p>
+        <ul>
+            <li><strong>索引从 0 开始</strong>——数组第 1 个元素是 <code>array[0]</code>，不是 <code>array[1]</code>。这是计算机科学最古老的传统（因为 0 偏移量在底层寻址中更自然）</li>
+            <li><strong>数组长度是固定的</strong>——声明后不能「增长」。要动态大小？Week 4 的 <code>malloc</code> 见</li>
+            <li><strong>数组名本身是指向第一个元素的指针</strong>——这句话 Week 4 才完全展开，但 Malan 在第 2 周就埋下种子</li>
+        </ul>
+
+        <h3>用常量来定义数组长度——告别「魔术数字」</h3>
+        <p>Malan 特别讨厌代码里的裸数字——3 个学生还好，100 个呢？每个用到的地方都要改。他用一行 <code>#define</code> 解决：</p>
+        <pre>#define TOTAL 3   // 常量——要改只需要改这一行
+
+int scores[TOTAL];
+
+for (int i = 0; i < TOTAL; i++)
+{
+    scores[i] = get_int("成绩 %i: ", i + 1);
+}</pre>
+        <p>这种「写死在代码里的数字」叫<strong>魔术数字（Magic Number）</strong>——过两周你自己都看不懂为什么这里写了个 3。</p>
+
+        <h3>数组作为函数参数——被悄悄退化的指针</h3>
+        <p>这是 Week 2 到 Week 4 之间最重要的伏笔。Malan 演示了把数组传给函数来求平均值：</p>
+        <pre>float average(int array[], int length)
+{
+    int sum = 0;
+    for (int i = 0; i < length; i++)
+        sum += array[i];
+    return (float) sum / length;
+}</pre>
+        <p>然后甩出一句话：<strong>「为什么我要同时传 <code>array</code> 和 <code>length</code>？因为 <code>array</code> 一进函数就退化成指针了——函数里只知道第一个元素的地址，根本不知道数组有多长。」</strong> 大部分学生听到这里只是默默点头。到 Week 4 学指针时他们才会惊觉——Malan 在第 2 周就已经说过答案了。</p>
+
+        <h3>2-4：数组越界——C 的安全带从来就没系上</h3>
+        <p>这是 C 语言最危险的特性之一。Malan 写了一段代码：</p>
+        <pre>int scores[3] = {72, 85, 93};
+
+// 故意越界
+printf("%i\n", scores[3]);   // scores 只有 0-2，3 是越界！
+printf("%i\n", scores[-1]);  // 负数索引！</pre>
+        <p><strong>C 不会阻止你。</strong> 它会乖乖地读出 <code>scores[3]</code> 所在的内存位置的值——那是什么？可能是另一个变量的值。可能是函数返回地址。可能是任何东西。Malan 把这种行为比喻成「你走到邻居家门口，发现门没锁，走进去拿了冰箱里的东西——没人阻止你，但后果自负。」</p>
+        <blockquote><p>这就是 C 的双刃剑：<strong>给你完全的权力，也给你完全的责任。</strong> 大多数现代语言（Python、Java、Go）会在数组越界时直接报错并终止程序。C 不。这是它快的原因之一——它不检查。这也是它危险的原因之一。</p></blockquote>
+
+        <h3>2-5：字符串 = 字符数组 + 一个看不见的 \0</h3>
+        <p>Malan 终于揭开了 <code>string</code> 的真面目。他在黑板上画了一排格子：</p>
+        <pre>  索引:  [0]   [1]   [2]   [3]   [4]   [5]
+  字符:   H     i     !    \0    ?     ?
+//                          ↑ 空字符——字符串结束的标志</pre>
+        <p>当你写 <code>string s = "Hi";</code>，内存里存的不是 2 字节，而是<strong>3 字节</strong>——H、i、和看不见的 <code>\0</code>（空字符，ASCII 码为 0）。这个 <code>\0</code> 是字符串的「终点标记」——<code>printf</code> 从第一个字符开始打印，遇到 <code>\0</code> 就停。</p>
+        <p>如果没有 <code>\0</code> 会怎样？<code>printf</code> 会继续往内存后面读——打印出一串垃圾，直到碰巧撞上下一个 <code>\0</code>。</p>
+
+        <h3>2-6：字符串操作——strlen / strcmp / strcpy</h3>
+        <p>C 的字符串不像 Python 那样自带方法。你不能 <code>s.length()</code>，不能 <code>s1 == s2</code>。你需要用标准库函数——都来自 <code>#include &lt;string.h&gt;</code>：</p>
+
+        <table>
+            <tr><th>函数</th><th>做什么</th><th>注意</th></tr>
+            <tr><td><code>strlen(s)</code></td><td>返回字符串长度（不含 <code>\0</code>）</td><td>逐个数字符直到找到 <code>\0</code>。如果字符串没有 <code>\0</code>，它会一路数到天荒地老</td></tr>
+            <tr><td><code>strcmp(s1, s2)</code></td><td>比较两个字符串是否相等。返回 0 表示相等</td><td><strong>不能用 <code>==</code>！</strong> <code>s1 == s2</code> 比较的是两个<strong>内存地址</strong>，不是内容</td></tr>
+            <tr><td><code>strcpy(dest, src)</code></td><td>把 src 拷贝到 dest</td><td>你负责确保 dest 有足够空间。空间不够 → 缓冲区溢出 → 可能被黑客利用</td></tr>
+            <tr><td><code>strcat(dest, src)</code></td><td>把 src 拼接在 dest 后面</td><td>同样，dest 必须有足够空间</td></tr>
+        </table>
+
+        <blockquote><p>Malan 在这一点上特别严肃：「<code>strcpy</code> 和 <code>strcat</code> 是历史上最臭名昭著的漏洞来源之一。1988 年莫里斯蠕虫——互联网第一个重大安全事故——就是利用了 <code>gets()</code> 函数（<code>strcpy</code> 的表亲）的缓冲区溢出。」</p></blockquote>
+
+        <h3>安全的字符串操作——带上 N</h3>
+        <p>标准库的补救措施：每个「危险」函数都有一个对应的「限制长度」版本——函数名里多加一个 <code>n</code>：</p>
+        <table>
+            <tr><th>不安全的</th><th>安全的替代</th><th>区别</th></tr>
+            <tr><td><code>strcpy(dest, src)</code></td><td><code>strncpy(dest, src, n)</code></td><td>最多拷贝 n 个字符，超出就截断</td></tr>
+            <tr><td><code>strcat(dest, src)</code></td><td><code>strncat(dest, src, n)</code></td><td>最多拼接 n 个字符</td></tr>
+            <tr><td><code>gets(str)</code></td><td><code>fgets(str, n, stdin)</code></td><td><code>gets</code> 在 C11 标准中已被彻底移除——它没有任何长度限制，是教科书级的危险函数</td></tr>
+        </table>
+        <blockquote><p><strong>莫里斯蠕虫简史（1988 年 11 月 2 日）：</strong> 康奈尔大学研究生 Robert Morris 写了一个实验性程序——本意是想「偷偷数一下互联网上有多少台电脑」。但他代码里出了个小失误：蠕虫在侵入一台电脑后没有检查这台电脑是否已经被感染过。结果——<strong>同一台电脑被反复感染，直到系统崩溃。</strong> 蠕虫利用了 Unix 系统上 <code>fingerd</code> 服务的 <code>gets()</code> 缓冲区溢出漏洞。大约 6000 台电脑宕机（占当时互联网的 10%）。Morris 被判 3 年缓刑 + 400 小时社区服务 + $10,050 罚款。后来他成了 MIT 教授……还是 Y Combinator 的联合创始人。</p></blockquote>
+
+        <h3>2-7：命令行参数——argc 与 argv</h3>
+        <p>你之前写的 C 程序都是 <code>int main(void)</code>——注意那个 <code>void</code>，意思是「我不收任何参数」。但 <code>main</code> 其实可以这样写：</p>
+        <pre>int main(int argc, string argv[])
+{
+    // argc = 参数个数（包括程序名本身）
+    // argv = 参数数组（每个参数是一个字符串）
+
+    printf("你好，%s\n", argv[1]);  // 打印第一个参数
+}</pre>
+        <p>这是你的程序第一次能像 <code>gcc hello.c -o hello</code> 这样从命令行接收参数。Malan 的解释非常简洁：</p>
+        <ul>
+            <li><code>argc</code> = <strong>arg</strong>ument <strong>c</strong>ount。永远至少是 1——因为 <code>argv[0]</code> 是程序自己的名字</li>
+            <li><code>argv</code> = <strong>arg</strong>ument <strong>v</strong>ector。一个字符串数组</li>
+        </ul>
+
+        <h3>2-8：退出码——程序怎么告诉系统「我成功了还是失败了」</h3>
+        <p>你一直在写 <code>return 0;</code>，但可能没想过这个 0 去了哪里。Malan 演示：</p>
+        <pre>int main(int argc, string argv[])
+{
+    if (argc != 2)
+    {
+        printf("用法：%s &lt;名字&gt;\n", argv[0]);
+        return 1;   // 非 0 = 出错了
+    }
+    printf("你好，%s\n", argv[1]);
+    return 0;   // 0 = 一切正常
+}</pre>
+        <p>然后在终端跑完后输入 <code>echo $?</code>——它会打印上一个程序的退出码。0 是成功，非 0 是失败。<strong>这是程序之间通信的最基本方式。</strong></p>
+
+        <h3>2-9：凯撒密码（Caesar Cipher）——Week 2 的 Problem Set</h3>
+        <p>Malan 用凯撒密码把数组、字符串、命令行参数、循环全串起来。任务：接受一个数字作为密钥，把输入文本中的每个字母向后移动 N 位。</p>
+        <pre>密钥 = 1
+明文：Hello
+密文：Ifmmp   （H→I, e→f, l→m, l→m, o→p）
+
+密钥 = 13
+明文：Hello, World!
+密文：Uryyb, Jbeyq!  （这是著名的 ROT13——来回转 13 位，两次回到原文）</pre>
+        <p>这道题要求的核心能力：遍历字符串（字符数组）、判断大小写、处理 Z→A 的回绕（<code>'Z' + 1</code> 不是 <code>'A'</code>，是 <code>'['</code>！你必须自己写回绕逻辑）、用 <code>argv[1]</code> 读取密钥、用 <code>atoi()</code> 把字符串转成整数。</p>
+
+        <h3>凯撒密码完整实现</h3>
+        <p>Malan 在黑板上逐步搭建的代码框架，还原如下（这是 CS50 Problem Set 2 的标准解法雏形）：</p>
+        <pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;   // atoi
+#include &lt;string.h&gt;   // strlen
+#include &lt;ctype.h&gt;    // isupper, islower, isalpha
+
+int main(int argc, string argv[])
+{
+    // === 第 1 步：验证命令行参数 ===
+    if (argc != 2)
+    {
+        printf("用法：%s &lt;密钥&gt;\n", argv[0]);
+        return 1;
+    }
+
+    int key = atoi(argv[1]);  // 把字符串 "13" 转成整数 13
+
+    // === 第 2 步：获取明文 ===
+    string plaintext = get_string("明文：");
+
+    // === 第 3 步：逐字符加密 ===
+    printf("密文：");
+    for (int i = 0, n = strlen(plaintext); i &lt; n; i++)
+    {
+        char c = plaintext[i];
+
+        if (isupper(c))       // 大写字母
+        {
+            // 'A' = 65。减去 'A' 得到 0-25 → 加密钥 → 取模 26 → 加回 'A'
+            printf("%c", (c - 'A' + key) % 26 + 'A');
+        }
+        else if (islower(c))  // 小写字母
+        {
+            printf("%c", (c - 'a' + key) % 26 + 'a');
+        }
+        else                  // 非字母（空格、标点）→ 原样输出
+        {
+            printf("%c", c);
+        }
+    }
+    printf("\n");
+    return 0;
+}</pre>
+        <p>核心公式 <code>(c - 'A' + key) % 26 + 'A'</code> 拆开看：</p>
+        <ol>
+            <li><code>c - 'A'</code>：把字母映射到 0-25 的数字空间（A=0, B=1, ..., Z=25）</li>
+            <li><code>+ key</code>：向后移动 N 位</li>
+            <li><code>% 26</code>：解决回绕问题——Z(25) + 1 = 26，取模 26 → 0 → A。没有这步，'Z' + 1 = '['</li>
+            <li><code>+ 'A'</code>：从数字空间映射回字母</li>
+        </ol>
+        <blockquote><p>这段代码把 Week 2 分散的知识点全部缝在了一起：命令行参数（<code>argc/argv</code>）、字符串转整数（<code>atoi</code>）、字符数组遍历（<code>strlen</code>）、<code>ctype.h</code> 库函数、ASCII 算术运算、取模回绕。写完这道题，你对 C 的「手感」就基本成型了。</p></blockquote>
+
+        <span class="dot"></span>
+
+        <!-- ==================== WEEK 3 ==================== -->
+        <h2>Week 3 · Algorithms</h2>
+
+        <h3>这节课的张力</h3>
+        <p>Week 3 是 CS50 的哲学课。前两周围绕「怎么写」，这一周围绕「怎么想」。Malan 会问一个简单到让人一愣的问题——<strong>「在电话簿里找一个人——最快的方法是什么？」</strong>——然后花整节课证明，这个问题的答案完全取决于电话簿的数据结构。他会在黑板上画出搜索和排序算法的运行轨迹，把学生叫上讲台站成两排演示冒泡排序和归并排序。到这节课结束时，你会掌握一个终身受用的思维工具——大 O 复杂度分析。</p>
+
+        <h3>3-1：搜索——在数据里找到你要的东西</h3>
+        <p>Malan 用两个问题开场：</p>
+        <ol>
+            <li>在一个<strong>无序</strong>的数组里找 50——怎么找？</li>
+            <li>在一个<strong>已排序</strong>的数组里找 50——怎么找？</li>
+        </ol>
+
+        <h3>线性搜索（Linear Search）</h3>
+        <pre>// 在一个无序数组中找 needle。逐个看，找到了就返回 true
+bool linear_search(int array[], int size, int needle)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (array[i] == needle)
+            return true;
+    }
+    return false;
+}</pre>
+        <p>最坏情况：要找的元素在最后（或根本不存在）→ 需要查完所有 N 个元素。<strong>时间复杂度 O(n)。</strong></p>
+
+        <h3>二分搜索（Binary Search）——只对已排序的数组有效</h3>
+        <p>Malan 重新拿起电话簿（Week 0 的记忆呼应）。这次他用 C 代码写出来：</p>
+        <pre>bool binary_search(int array[], int size, int needle)
+{
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right)
+    {
+        int middle = (left + right) / 2;
+
+        if (array[middle] == needle)
+            return true;
+        else if (array[middle] < needle)
+            left = middle + 1;   // 丢掉左半
+        else
+            right = middle - 1;  // 丢掉右半
+    }
+    return false;
+}</pre>
+        <p>每次循环砍掉一半搜索范围。1000 个元素 → 最多 10 步。100 万个元素 → 最多 20 步。<strong>时间复杂度 O(log n)。</strong> 这是质的飞跃——当 n 从 1000 变成 100 万，线性搜索慢了 1000 倍，二分搜索只多了一倍的步数。</p>
+        <blockquote><p>Malan 在这里做了一个残酷的对比：「如果你的程序用线性搜索处理 40 亿条数据，而你用的是二分搜索——你的用户会以为你的程序没运行。因为 32 步后就出结果了，屏幕甚至还没来得及刷新。」</p></blockquote>
+
+        <h3>3-2：排序——搜索的前提是数据有序</h3>
+        <p>二分搜索快，但代价是数组必须先排序。Malan 在这里把讲台变成了真人场景——<strong>叫了 8 个学生上台，每人举一个数字牌，站成一排。</strong> 然后他逐个演示三种排序算法。</p>
+
+        <h3>冒泡排序（Bubble Sort）</h3>
+        <p>Malan 让相邻的学生两两比较——数字大的往右移一步。一轮下来，最大的数字「冒」到了最右边。然后对剩下的 n−1 个数字重复。学生们在讲台上像气泡一样来回交换位置，场面一度混乱。</p>
+        <pre>void bubble_sort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - 1 - i; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                // 交换——还记得 Week 0 的杯子吗？
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}</pre>
+        <p><strong>O(n²)。</strong> 两层循环嵌套 → n × n 次比较。100 个元素 ≈ 10000 次操作。10000 个元素 ≈ 1 亿次。Malan 的评价很直接：<strong>「教科书教你冒泡排序，是让你理解什么是 O(n²)——不是为了让你真的用它。」</strong></p>
+
+        <h3>选择排序（Selection Sort）</h3>
+        <p>这一轮策略不同：<strong>每一轮在整个数组中找出最小值，放到最前面。</strong></p>
+        <pre>void selection_sort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int min_index = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[min_index])
+                min_index = j;
+        }
+        // 把找到的最小值与 i 位置交换
+        int temp = arr[i];
+        arr[i] = arr[min_index];
+        arr[min_index] = temp;
+    }
+}</pre>
+        <p><strong>还是 O(n²)。</strong> 比较次数和冒泡一样多，但交换次数更少（每轮最多一次）。所以实际比冒泡快一点——<strong>但不多。</strong></p>
+
+        <h3>⭐ 归并排序（Merge Sort）——分治法 debut</h3>
+        <p>Malan 的表情变了。他说：「现在我们来点真正的算法。」归并排序的核心思想——<strong>分治法（Divide and Conquer）</strong>：</p>
+        <ol>
+            <li>把数组不断对半切，切到每个子数组只剩 1 个元素</li>
+            <li>把这些单元素数组两两合并——合并时保证有序</li>
+            <li>合并完的数组再两两合并……直到整个数组完整</li>
+        </ol>
+        <p>他在黑板上画了一棵树——从 8 个元素切到 1 个，再从 1 个合并回 8 个。树的高度是 log₂8 = 3 层，每一层需要合并 N 个元素。<strong>所以总操作量 = n × log n。O(n log n)。</strong></p>
+        <p>Malan 让上台的学生重新演示——这次他们把数字分成两组、四组、八个单元素……然后按步骤合并。场面从混乱变成了有序的「舞蹈」。</p>
+        <blockquote><p><strong>O(n²) vs O(n log n) 的残酷对比</strong>：对 100 万元素排序——冒泡排序需要约 1 万亿次比较；归并排序只需要约 2000 万次。<strong>差距是 50000 倍。</strong> 这就是为什么「算法」不是一个可以「以后学」的话题——它是你代码性能的决定性因素。</p></blockquote>
+
+        <h3>3-3：大 O 记号——算法效率的共同语言</h3>
+        <p>Malan 在白板上画了一个坐标系——横轴是数据量 n，纵轴是操作次数。然后他画了四条线：</p>
+        <table>
+            <tr><th>复杂度</th><th>名字</th><th>n=1000 时</th><th>n=100万时</th><th>典型算法</th></tr>
+            <tr><td><strong>O(1)</strong></td><td>常数时间</td><td>1 步</td><td>1 步</td><td>哈希表查找、数组索引 <code>arr[i]</code></td></tr>
+            <tr><td><strong>O(log n)</strong></td><td>对数时间</td><td>~10 步</td><td>~20 步</td><td>二分搜索</td></tr>
+            <tr><td><strong>O(n)</strong></td><td>线性时间</td><td>1000 步</td><td>100 万步</td><td>线性搜索、单层循环</td></tr>
+            <tr><td><strong>O(n log n)</strong></td><td>线性对数</td><td>~10000 步</td><td>~2000 万步</td><td>归并排序、快速排序</td></tr>
+            <tr><td><strong>O(n²)</strong></td><td>平方时间</td><td>100 万步</td><td>1 万亿步</td><td>冒泡、选择排序、双层嵌套循环</td></tr>
+            <tr><td><strong>O(2ⁿ)</strong></td><td>指数时间</td><td>—</td><td>—</td><td>暴力破解密码、某些递归问题。Malan：「这基本等于没用」</td></tr>
+        </table>
+
+        <p>Malan 特别强调了大 O 的含义：「它不是精确的步数——它是<strong>当 n 趋于无穷时，运行时间的增长趋势。</strong> O(n²) 的意思是，如果把数据量翻倍，运行时间大约翻四倍。你不需要知道精确数字——你只需要知道<strong>这件事有多严重</strong>。」</p>
+
+        <h3>Ω（Omega）——最好情况</h3>
+        <p>大 O 描述的是<strong>上界</strong>（最坏情况）。Omega 描述的是<strong>下界</strong>（最好情况）。同一个算法，两种记号可以不一样：</p>
+        <table>
+            <tr><th>算法</th><th>Ω（最好）</th><th>O（最坏）</th></tr>
+            <tr><td>线性搜索</td><td>Ω(1)——第一个就是</td><td>O(n)——在最后或不存在</td></tr>
+            <tr><td>冒泡排序</td><td>Ω(n)——数据已经排好了</td><td>O(n²)——完全反序</td></tr>
+            <tr><td>二分搜索</td><td>Ω(1)——第一刀就中了</td><td>O(log n)</td></tr>
+        </table>
+
+        <h3>Θ（Theta）——最好和最坏一样时的「紧界」</h3>
+        <p>Malan 在 Omega 之后再加了一个希腊字母——<strong>Theta（Θ）</strong>。当算法的最好情况和最坏情况<strong>完全相同</strong>时，你不需要分别说 Ω 和 O——直接用 Θ。</p>
+        <table>
+            <tr><th>场景</th><th>例子</th></tr>
+            <tr><td>一个 for 循环遍历长度为 n 的数组</td><td>不管数据是什么，你都必须访问全部 n 个元素。<strong>Θ(n)。</strong></td></tr>
+            <tr><td>数组求平均值</td><td>你必须把 n 个数全加一遍。无论数据怎么排——<strong>Θ(n)。</strong></td></tr>
+            <tr><td>找数组中的最大值</td><td>你必须检查每一个元素才能确定谁最大——<strong>Θ(n)。</strong></td></tr>
+        </table>
+        <p>三种记号的关系图——Malan 在黑板上画的「复杂度三明治」：</p>
+        <pre>             Ω(最好)    Θ(紧界)    O(最坏)
+线性搜索      Ω(1)        —        O(n)    ← 最好≠最坏，没有 Θ
+二分搜索      Ω(1)       Θ(log n)  O(log n) ← 其实平均和最坏一样
+归并排序     Ω(n log n)  Θ(n log n) O(n log n) ← 不管数据怎么排都一样
+冒泡排序      Ω(n)        —       O(n²)    ← 有 Θ 吗？没有，好坏差太多</pre>
+
+        <h3>3-4：递归——函数调用自己</h3>
+        <p>「递归」是归并排序背后的核心机制，Malan 用一个更简单的问题引入——<strong>画一个三角形。</strong> 他在黑板上画了一个倒金字塔：</p>
+        <pre>#
+##
+###
+####</pre>
+        <p>迭代（循环）写法你立刻就能写出来：</p>
+        <pre>void draw(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+            printf("#");
+        printf("\n");
+    }
+}</pre>
+        <p>然后他写了<strong>递归版</strong>——没有一句循环：</p>
+        <pre>void draw(int n)
+{
+    if (n <= 0)
+        return;             // ← 基准条件：停止递归
+
+    draw(n - 1);            // ← 递归调用：先画 n-1 层的三角形
+
+    for (int i = 0; i < n; i++)
+        printf("#");        // ← 然后画第 n 行
+    printf("\n");
+}</pre>
+
+        <p>Malan 的解释：「递归就像俄罗斯套娃。你打开一个娃娃，里面还有一个娃娃。你一直打，直到打到最小的那个——然后一层层合上。基准条件就是那个最小的、不再继续打开的娃娃。」</p>
+        <p>每个递归函数必须有两个部分：</p>
+        <table>
+            <tr><th>组件</th><th>是什么</th><th><code>draw(n)</code> 中对应</th></tr>
+            <tr><td><strong>基准条件（Base Case）</strong></td><td>什么时候停下来，不再调用自己</td><td><code>if (n <= 0) return;</code></td></tr>
+            <tr><td><strong>递归调用（Recursive Call）</strong></td><td>用更小/更简单的问题调用自己</td><td><code>draw(n - 1)</code></td></tr>
+        </table>
+        <blockquote><p><strong>忘了写基准条件 = 无限递归 = 栈溢出（Stack Overflow）。</strong> 每次函数调用都会在内存的「调用栈」上压一帧。递归没有终点 → 栈被压满 → 程序崩溃。那个著名的程序员问答网站 Stack Overflow 的名字就是这么来的。</p></blockquote>
+
+        <h3>递归的经典案例——阶乘（Factorial）</h3>
+        <p>画三角形很好，但递归的「教科书入门」是阶乘。Malan 在黑板上演示——比三角形更短，但比三角形更触及递归的数学本质：</p>
+        <pre>// 阶乘的数学定义：
+// fact(1) = 1
+// fact(n) = n × fact(n-1)   for n > 1
+
+int fact(int n)
+{
+    if (n == 1)
+        return 1;           // ← 基准条件
+    else
+        return n * fact(n - 1);  // ← 递归调用
+}</pre>
+        <p>Malan 在黑板上画了 <code>fact(4)</code> 的调用过程——一个向下扩展、再向上收缩的树：</p>
+        <pre>fact(4)
+  → 4 * fact(3)
+       → 3 * fact(2)
+            → 2 * fact(1)
+                 → return 1          ← 触底！基准条件
+            → return 2 * 1 = 2
+       → return 3 * 2 = 6
+  → return 4 * 6 = 24</pre>
+        <p>这就是「调用栈」（Call Stack）的视觉化：<strong>每层递归都是在栈上压一个「等着结果」的函数帧。</strong> 当 <code>fact(1)</code> 返回 1 时，最底层的帧弹出，结果向上传递——一路弹回 <code>fact(4)</code>，24 出炉。</p>
+        <blockquote><p>Malan 在这里画了一张在后续课程中反复出现的图——一个栈，每次递归调用时向下生长一帧，归时逐帧销毁。这是 Week 4 内存布局（栈区 vs 堆区）的完美前奏。</p></blockquote>
+
+        <h3>3-5：归并排序的递归实现</h3>
+        <p>看到了递归之后，Malan 回到归并排序，这次用递归写出来：</p>
+        <pre>void merge_sort(int arr[], int left, int right)
+{
+    if (left >= right)
+        return;              // 基准条件：只剩 1 个元素
+
+    int mid = (left + right) / 2;
+
+    merge_sort(arr, left, mid);       // 递归：排左半
+    merge_sort(arr, mid + 1, right);  // 递归：排右半
+
+    merge(arr, left, mid, right);     // 合并两个已排好的子数组
+}</pre>
+        <p>Malan 没有完整写 <code>merge()</code>——它太长了，会分散注意力。但他在黑板上画出了合并的过程：两个有序小数组，各有一个「手指」指着当前最小元素，比较两个手指指向的值，取小的放进大数组，手指后移——就像整理两副已经按大小排好的扑克牌。</p>
+        <blockquote><p>这段代码完美展示了递归的本质：<strong>你把「排一整副牌」的问题，分解成「排半副牌」的问题——分解到每副牌只有 1 张（基准条件），然后从底层一层层合并。</strong> 你不需要理解每一步合并的细节——你只需要相信 <code>merge_sort</code> 能排好半副牌，然后你负责合并。</p></blockquote>
+
+        <h3>merge() 函数完整实现——归并排序的灵魂</h3>
+        <p>Malan 在课上没有完整写 <code>merge()</code>（太长），但作为笔记，这里补全——它展示了临时数组、双指针扫描、和「剩余元素一次搬完」这三个核心技巧：</p>
+        <pre>// 把 arr[left..mid] 和 arr[mid+1..right] 两个<strong>已有序</strong>的子数组合并
+void merge(int arr[], int left, int mid, int right)
+{
+    int n1 = mid - left + 1;  // 左半边元素个数
+    int n2 = right - mid;     // 右半边元素个数
+
+    // 临时数组——存储左右两半的副本
+    int L[n1], R[n2];
+
+    // 拷贝数据到临时数组
+    for (int i = 0; i &lt; n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j &lt; n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // 三根指针：i 指 L，j 指 R，k 指 arr
+    int i = 0, j = 0, k = left;
+
+    // 核心循环：比较 L[i] 和 R[j]，小的放进 arr[k]
+    while (i &lt; n1 &amp;&amp; j &lt; n2)
+    {
+        if (L[i] &lt;= R[j])
+            arr[k++] = L[i++];
+        else
+            arr[k++] = R[j++];
+    }
+
+    // 扫尾：L 或 R 可能还剩元素没放完（另一方已经空了）
+    while (i &lt; n1)  arr[k++] = L[i++];  // L 有剩余
+    while (j &lt; n2)  arr[k++] = R[j++];  // R 有剩余
+
+    // 临时数组 L 和 R 是局部变量，函数结束时自动销毁
+}</pre>
+        <p>这段代码的几个巧思（Malan 会逐行拆解）：</p>
+        <ul>
+            <li><strong>临时数组 L 和 R</strong>——合并操作需要一个「工作台」，你不能在原数组上直接合并，会互相踩脚。L 和 R 就是这个工作台</li>
+            <li><strong>双指针 i 和 j</strong>——就像你左手一副牌、右手一副牌，每只手的大拇指指着「当前最小」的那张</li>
+            <li><strong><code>arr[k++] = L[i++]</code></strong>——这是 C 语言的经典简写：先把值赋过去，然后两个指针都往后移。等效于 <code>arr[k] = L[i]; k++; i++;</code></li>
+            <li><strong>扫尾的两个 while</strong>——当一方先耗尽，另一方的剩余元素已经是有序的，直接整段搬</li>
+        </ul>
+
+        <h3>3-6：结构体（struct）——创造你自己的数据类型</h3>
+        <p>Malan 在第 3 周末尾引入了 struct——这是为 Week 5 的数据结构（链表、哈希表）做铺垫。你之前只能声明 <code>int</code>、<code>string</code>、<code>float</code>——这些是 C 语言自带的。但如果想表示「一个人」（有名字和电话号码），你需要把不同类型的变量打包在一起：</p>
+        <pre>// 定义一个新类型——就像你自己造了一个"模具"
+typedef struct
+{
+    string name;
+    string number;
+}
+person;
+
+// 使用这个新类型
+person alice;
+alice.name = "Alice";
+alice.number = "+1-617-495-1000";
+
+// 数组里也可以放结构体
+person phonebook[3];
+phonebook[0].name = "Alice";
+phonebook[0].number = "+1-617-495-1000";</pre>
+        <p><code>.</code> 是成员访问运算符——取这个结构体里的某个字段。Malan 说：「记住这个点。Week 5 你会需要它。」</p>
+
+        <h3>在结构体数组中搜索</h3>
+        <p>Malan 把一个简单 phonebook 数组的搜索搬到了 struct 版本——这是你第一次把「算法」和「自定义数据类型」拼在一起：</p>
+        <pre>// 在电话簿中按姓名搜索——线性搜索的结构体版
+person find(person phonebook[], int size, string target)
+{
+    for (int i = 0; i &lt; size; i++)
+    {
+        if (strcmp(phonebook[i].name, target) == 0)
+            return phonebook[i];
+    }
+    person empty = {"", ""};
+    return empty;  // 没找到，返回一个空 person
+}</pre>
+        <p>到这里，你已经把 Week 0-3 的知识全串起来了：<strong>结构体</strong>存储数据 → <strong>数组</strong>组织数据 → <strong>线性搜索</strong>查找数据 → <strong>strcmp</strong> 比较字符串。到 Week 5，Malan 会说「线性搜索太慢了」——然后掏出链表和哈希表来替换这个 phonebook 数组。</p>
+
+        <h3>快速排序（Quick Sort）——O(n log n) 的另一大支柱</h3>
+        <p>Malan 没有在第 3 周详细讲快排（它会在 Week 5 作为递归的深入案例回归），但他简要提了一句：归并排序不是唯一达到 O(n log n) 的算法，还有一个叫「快速排序」的，用的是<strong>分区</strong>而不是分半。</p>
+        <table>
+            <tr><th></th><th>归并排序</th><th>快速排序</th></tr>
+            <tr><td><strong>策略</strong></td><td>分治法——对半切，分别排序，再合并</td><td>分治法——选一个「基准」（pivot），小的丢左边，大的丢右边，再递归左右</td></tr>
+            <tr><td><strong>时间复杂度</strong></td><td>Θ(n log n)——稳定不变</td><td>O(n log n) 平均，O(n²) 最坏（每次选的 pivot 都是最小/最大值）</td></tr>
+            <tr><td><strong>空间</strong></td><td>需要额外数组（L 和 R）</td><td>原地排序——不需要额外的大数组。空间更省</td></tr>
+            <tr><td><strong>选谁</strong></td><td>当你需要稳定性（相同值的元素保持原顺序），或不能接受最坏 O(n²) 时</td><td>大多数实战场景——平均快于归并，且不额外占用内存</td></tr>
+        </table>
+
+        <span class="dot"></span>
+
+        <h3>Malan 的真人排序演示——Week 3 最高光时刻</h3>
+        <p>这可能是整个 CS50 最经典的场景，值得用文字还原：</p>
+        <p>Malan 叫了 8 个学生站上讲台，每人拿一个大数字牌，面朝观众站成一排。数字是乱的——7, 2, 5, 4, 1, 6, 0, 3。</p>
+        <p><strong>冒泡排序演示</strong>：Malan 让学生们按相邻两人一组比较。第一轮：「7 大于 2？换位置。」讲台上两个人笨拙地交换位置。一轮结束，最大的 7 在最右边。然后：<strong>「再来一轮！但这次最右边那个已经排好了，不用动他。」</strong> 台下的学生开始笑——他们看到了 O(n²) 的「笨拙」。</p>
+        <p><strong>选择排序演示</strong>：Malan 让学生们在整排里找最小的数字。「0！」拿着 0 的学生跑到最左边，和原来在那里的人交换。下一个最小的是 1——跑到第二位。这次少了很多交换，但找最小值的「扫视」依然要扫完整排。</p>
+        <p><strong>归并排序演示</strong>：Malan 让学生先分散开——每个人自己就是一个「已排序数组」（只有一个元素当然有序）。然后两人一组合并——「2 和 7 谁小？2 排前面。4 和 5 谁小？4 排前面。」然后再四人一组合并。八个人像编舞一样在两分钟内完成了排序。台下一片掌声。</p>
+        <blockquote><p>这个演示的精妙之处：<strong>你不需要一行代码，就直观地理解了 O(n²) 为什么比 O(n log n) 差。</strong> 看人演示算法，比看代码效率高一百倍。这也是为什么 Malan 愿意花 20 分钟做这些「街头魔术」——它种下的直觉会在你写代码时自动浮现。</p></blockquote>
+
+        <hr>
+        <p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+        <div class="nav-bottom"><a href="#">↑ 回到顶部</a></div>
+    </div>
+</body>
+</html>

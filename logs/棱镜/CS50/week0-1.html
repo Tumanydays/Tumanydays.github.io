@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50 · Week 0–1 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+        .intro {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: #333;
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: #444;
+        }
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+        strong { color: #1a1a1a; font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+        ul, ol {
+            margin: 12px 0 20px 20px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 2;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: "SF Mono", "Menlo", "Consolas", monospace;
+            color: #c7254e;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 16px 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            margin: 16px 0 24px;
+            font-family: "SF Mono", "Menlo", "Consolas", monospace;
+        }
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: #333; }
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="index.html">← CS50</a>
+
+        <h1>CS50x 2025 · 听课笔记<br>Week 0 &amp; Week 1</h1>
+
+        <div class="meta">
+            <span>星尘 整理</span><span>2026年5月29日</span>
+        </div>
+
+        <div class="intro">
+            <p>缘起：水母流星大人正在学习 C 语言，同时希望系统性地修读哈佛大学 David J. Malan 教授的 CS50 课程。这两份笔记以「逐课还原」为目标——不是大纲摘录，是跟着 Malan 的讲台走一遍。每一节都附带与 Python 的对照，因为水母流星大人已有 Python 基础。Week 0 是 Scratch（建立计算思维），Week 1 是 C 语言入门（你正在学的那部分）。</p>
+        </div>
+
+        <!-- ==================== KEYWORDS ==================== -->
+        <h2>🔑 关键词索引</h2>
+        <table>
+            <tr><th>关键词</th><th>一句话说明</th></tr>
+            <tr><td><strong>计算思维</strong></td><td>把一个大问题拆成更小的问题，直到每块都能被计算机直接执行——这是整门 CS50 的元主题</td></tr>
+            <tr><td><strong>二进制 / 比特</strong></td><td>计算机只认 0 和 1。一个比特就是一位（0 或 1）。8 个比特 = 1 字节，可以表示 256 种状态（0–255）</td></tr>
+            <tr><td><strong>ASCII</strong></td><td>美国信息交换标准码——把字母映射到数字的一套约定。'A' = 65，'a' = 97</td></tr>
+            <tr><td><strong>抽象（Abstraction）</strong></td><td>把复杂细节「装进一个黑盒子」，你只需要知道它做什么，不需要知道里面怎么做。这是 CS 最核心的思维方式</td></tr>
+            <tr><td><strong>编译器</strong></td><td>把人类可读的源代码翻译成机器可执行的 0/1 的程序。C 需要编译，Python 不需要</td></tr>
+            <tr><td><strong>源代码 vs 机器码</strong></td><td>你写的叫源代码（.c 文件），编译器输出的叫机器码（可执行文件）。前者人类能读，后者只有 CPU 能读</td></tr>
+            <tr><td><strong>make 自动化编译</strong></td><td>CS50 教学环境提供的命令，替代手打 <code>gcc hello.c -o hello</code>。输入 <code>make hello</code> 自动找到 hello.c 并编译</td></tr>
+            <tr><td><strong>CS50 IDE / Codespace</strong></td><td>哈佛为学生提供的云端编程环境（VS Code 网页版），预装了所有课程工具，免去本地配置的麻烦</td></tr>
+            <tr><td><strong>⭐ 整型溢出</strong></td><td>Malan 用「里程表翻回 0」和「俄罗斯方块溢出画面」来演示——当数字超过变量能存的最大值，它会绕回最小值</td></tr>
+            <tr><td><strong>浮点数精度</strong></td><td>计算机存储小数有精度限制——0.1 在二进制中是一个无限循环小数，所以 0.1 + 0.2 ≠ 0.3</td></tr>
+            <tr><td><strong>CS50 Manual Pages</strong></td><td>课程提供的简化版手册页，用大白话解释每个函数怎么用，比标准的 <code>man</code> 手册友好得多</td></tr>
+            <tr><td><strong>style50</strong></td><td>CS50 的代码风格检查工具，运行 <code>style50 xxx.c</code> 自动指出缩进、空格问题</td></tr>
+            <tr><td><strong>check50</strong></td><td>CS50 的自动评分工具，运行 <code>check50 cs50/problems/2025/x/xxx</code> 自动测试你的作业是否通过所有用例</td></tr>
+            <tr><td><strong>⭐ 二分查找</strong></td><td>Week 0 里 Malan 撕电话簿的最经典演示——每次砍掉一半搜索范围，从 N 步降到 log₂N 步</td></tr>
+            <tr><td><strong>伪代码（Pseudocode）</strong></td><td>用人类语言写算法步骤，不关心语法。是「先想清楚再写代码」的中间产物</td></tr>
+        </table>
+
+        <span class="dot"></span>
+
+        <!-- ==================== WEEK 0 ==================== -->
+        <h2>Week 0 · Scratch</h2>
+
+        <h3>这节课在 CS50 中的定位</h3>
+        <p>Week 0 不讲任何「真正的编程语言」。Malan 选择 Scratch（MIT 开发的图形化编程工具，像拼积木一样编程）作为入口，用意很深：<strong>在语法成为障碍之前，先建立计算思维。</strong> 你看完这节课会发现——循环、条件、变量、函数、事件——这些概念用积木理解起来只需要 2 小时。然后 Week 1 切换到 C 语言时，你只需要学习「怎么写」，不需要重新学「是什么」。</p>
+
+        <h3>Malan 经典名场面：撕电话簿</h3>
+        <p>课程第 10 分钟左右，Malan 拿起一本巨大的黄色电话簿走上讲台——一个助教被叫上台扮演「计算机」。他让这个助教一页一页翻找「Mike Smith」。翻了几页后，Malan 说：<strong>「等一下，你比这聪明。」</strong></p>
+        <p>然后他拿起另一本电话簿——<strong>一撕两半</strong>。把不包含 Mike Smith 的那半本丢进垃圾桶。「再撕一次。」又丢掉一半。反复几次后，手里只剩一页——目标找到了。</p>
+        <blockquote><p>这个演示的核心不是算法本身，而是一句直抵本质的话：「计算机很快，但快不是偷懒的理由。你给它的指令决定了它有多聪明。」一本 1000 页的电话簿，逐页翻需要最多 1000 步。对半撕只需要最多 10 步（log₂1000 ≈ 10）。速度差 100 倍。</p></blockquote>
+
+        <h3>0-1：信息的表示——计算机为什么只懂 0 和 1</h3>
+        <p>Malan 用灯泡做开场：一个灯泡可以亮（1）或灭（0）。如果你有一排灯泡——8 个灯泡就有 256 种组合。你可以用这些组合来表示任何东西——字母、颜色、声音。</p>
+        <table>
+            <tr><th>比特数</th><th>能表示几种状态</th><th>实际用途</th></tr>
+            <tr><td>1 bit</td><td>2（0, 1）</td><td>真/假、是/否</td></tr>
+            <tr><td>8 bits = 1 byte</td><td>256（0–255）</td><td>ASCII 编码一个英文字母</td></tr>
+            <tr><td>24 bits = 3 bytes</td><td>约 1677 万</td><td>RGB 一个像素的颜色（R=8bit, G=8bit, B=8bit）</td></tr>
+            <tr><td>32 bits = 4 bytes</td><td>约 42 亿</td><td>IPv4 地址、int 型整数的范围</td></tr>
+        </table>
+        <blockquote><p>关键顿悟：<strong>信息是什么不重要，如何表示才重要。</strong> 同一串 0 和 1，可以被解释为数字、字母、颜色、音乐——取决于「上下文」。ASCII 就是一个上下文约定：全世界同意 01000001 = 'A'。</p></blockquote>
+
+        <h3>ASCII 不够用了——Unicode 与 Emoji</h3>
+        <p>Malan 在这里抛出一个自然的问题：ASCII 只有 128 个字符（7 bits），够英语用。但中文怎么办？阿拉伯文？日语假名？更不用说 😂🔥💻 这些 emoji 了。答案是一个更庞大的编码系统——<strong>Unicode</strong>。</p>
+        <p>Unicode 不是 8 比特，也不止 16 比特。它现在有超过 14 万个字符，还在增长。但 Unicode 只是「给每个字符发一个编号」——并不规定怎么存到内存里。实际存储使用 <strong>UTF-8</strong>（可变长度编码）：英文 1 字节、常见符号 2 字节、中文 3 字节、emoji 4 字节。</p>
+        <blockquote><p>最经典的例子：😂（Face with Tears of Joy）在 2015 年被牛津词典评为「年度词汇」。但计算机里它只是一个数字——U+1F602。准确地说，在 UTF-8 编码下是 4 个字节：<code>11110000 10011111 10011000 10000010</code>。这就是「信息的表示」——连表情都不是表情，是数字。</p></blockquote>
+
+        <h3>0-2：算法（Algorithm）——解决问题的一步一步的指令</h3>
+        <p>算法 = 一组有顺序、有终点的步骤。它不一定是代码——菜谱是算法，乐谱是算法，宜家家具组装说明书也是算法。</p>
+        <p>Malan 在黑板上的经典板书：</p>
+        <pre>1. 拿起电话簿
+2. 翻到中间
+3. 看这一页有没有要找的名字
+4. 如果有 → 打电话！
+5. 如果名字在字母顺序上靠前 → 撕掉后半本，回到第 2 步
+6. 如果名字在字母顺序上靠后 → 撕掉前半本，回到第 2 步
+7. 如果电话簿撕完了还没找到 → 名字不在里面</pre>
+        <p>这就是「伪代码」——<strong>先用人话把逻辑讲清楚，然后才翻译成编程语言。</strong> 这是一种职业习惯：任何编程问题，在你打开编辑器之前，应该能在白纸上用伪代码写出来。</p>
+
+        <h3>Malan 的杯子演示：变量与交换</h3>
+        <p>这是 Week 0 里另一个让人印象深刻的场景。Malan 拿了两个杯子——一个装红色液体，一个装蓝色液体。他问学生：「怎么把两个杯子里的液体互换？」</p>
+        <p>答案是：你需要<strong>第三个空杯子</strong>。红液体倒进空杯 → 蓝液体倒进红杯 → 空杯里的红液体倒进蓝杯。</p>
+        <p>这就是编程里两个变量交换值的原理——需要一个「临时变量」。Malan 要把这个最简单的道理念叨一整门课，因为到了 Week 4 和 Week 5，你会发现链表反转、二叉树旋转全都靠这个基本操作。</p>
+        <pre>// 交换两个变量的值
+int x = 1;
+int y = 2;
+
+int temp = x;  // 先把 x 倒进"空杯子"
+x = y;         // y 倒进 x
+y = temp;      // 空杯子里的值倒进 y
+// 结果：x=2, y=1</pre>
+
+        <h3>0-3：Scratch 动手——把所有概念串起来</h3>
+        <p>Malan 在讲台上打开 Scratch 编程环境，逐个拖拽积木，现场做了一个「让猫说 hello」然后跟鼠标跑的程序。他的教学节奏很快，但每一块积木都对应一个你之后在 C 里会看到的语法结构：</p>
+
+        <table>
+            <tr><th>Scratch 积木</th><th>它在教你什么</th><th>C 语言对应</th><th>Python 对应</th></tr>
+            <tr><td>「当绿旗被点击」</td><td>程序入口——一切从这里开始</td><td><code>int main()</code></td><td>脚本第一行</td></tr>
+            <tr><td>「说 ___ 持续 2 秒」</td><td>输出——让程序告诉你一些东西</td><td><code>printf("...")</code></td><td><code>print("...")</code></tr>
+            <tr><td>「询问 ___ 并等待」→「回答」</td><td>输入——让程序从用户那里获得信息</td><td><code>scanf("%d", &amp;x)</code></td><td><code>x = input("...")</code></td></tr>
+            <tr><td>「将 x 设为 0」</td><td>变量——在内存里存一个值，给它起个名字</td><td><code>int x = 0;</code></td><td><code>x = 0</code></td></tr>
+            <tr><td>「重复执行 10 次」</td><td>循环——一件事件重复做</td><td><code>for (int i=0; i&lt;10; i++)</code></td><td><code>for i in range(10):</code></td></tr>
+            <tr><td>「重复执行直到 ___」</td><td>条件循环——满足某个条件之前一直循环</td><td><code>while (x != 0)</code></td><td><code>while x != 0:</code></td></tr>
+            <tr><td>「如果 ___ 那么...否则...」</td><td>条件分支</td><td><code>if (...) {...} else {...}</code></td><td><code>if ...: else:</code></td></tr>
+            <tr><td>「碰到鼠标指针？」</td><td>布尔表达式——判断一个条件是真还是假</td><td><code>x == 5</code> 返回 1（真）或 0（假）</td><td><code>x == 5</code> 返回 True/False</td></tr>
+            <tr><td>「定义 ___」积木</td><td>函数——把一段逻辑打包，起个名字，随时调用</td><td><code>void greet(void) { ... }</code></td><td><code>def greet():</code></td></tr>
+        </table>
+
+        <blockquote><p>Scratch 不是「儿童玩具」——它是<strong>去掉了所有语法噪音的程序设计训练场</strong>。你看不到 <code>;</code>、<code>{}</code>、类型声明，但你学到的是真正的编程：顺序、选择、循环、抽象。这些才是编程的骨架。语法只是皮肤。</p></blockquote>
+
+        <h3>Malan 在 Week 0 布置的作业</h3>
+        <p>Week 0 的 Problem Set：用 Scratch 做一个原创作品——可以是游戏、动画、互动故事。要求使用至少：两个精灵（sprite）、三个脚本（script）、一个条件、一个循环、一个变量、一个自定义积木（函数）。</p>
+        <p>学生在第一周交出的是什么？Malan 会在 Week 1 开场展示几个（这是他的传统）：从《塞尔达传说》同人游戏到自动生成俳句的程序。他想说的是：<strong>「你看，这就是你第一周能做的事。接下来我们把它翻译成 C。」</strong></p>
+
+        <span class="dot"></span>
+
+        <!-- ==================== WEEK 1 ==================== -->
+        <h2>Week 1 · C</h2>
+
+        <h3>这节课的震撼感</h3>
+        <p>从 Scratch 的彩色积木，跳到一个纯黑色的终端窗口，敲下 <code>#include &lt;stdio.h&gt;</code>——Malan 知道这个跳跃很大。他的策略是：<strong>不讲任何你还没见过对应积木的东西。</strong> 你会惊喜地发现，C 里的每一行代码，都能在 Scratch 中找到对应的积木。<strong>变的只是外观，思维模型完全一样。</strong></p>
+
+        <h3>1-1：从积木到文本——你的第一个 C 程序</h3>
+        <p>Malan 在终端里敲下这段代码，编译，运行——屏幕上出现 <code>hello, world</code>：</p>
+        <pre>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf("hello, world\n");
+}</pre>
+
+        <p>然后他把每一行拆开，讲得极细。以下是还原他的讲解逻辑：</p>
+
+        <table>
+            <tr><th>代码</th><th>Malan 的讲解</th><th>Scratch 等价</th></tr>
+            <tr><td><code>#include &lt;stdio.h&gt;</code></td><td>我要用打印功能。C 自己不会打印——这个功能在「标准输入输出库」里。这行代码的意思是：把那个库拿过来，装到我的程序里。就像你要用 Scratch 的「外观」类积木，你得先找到那个分类。stdio = Standard Input Output。</td><td>打开「外观」积木分类</td></tr>
+            <tr><td><code>int main(void)</code></td><td>程序从这里开始。就像 Scratch 的「当绿旗被点击」——它告诉计算机：<strong>别乱跑，从这里开始读。</strong> <code>int</code> 是说这个程序结束时会给操作系统返回一个整数（0 表示一切正常）。<code>void</code> 是说 main 不需要任何输入。</td><td>「当绿旗被点击」</td></tr>
+            <tr><td><code>{</code> 和 <code>}</code></td><td>花括号 = 积木的边框。Scratch 里你看到积木的凸起和凹陷就知道哪块该嵌在哪块里。C 里没有凸起凹槽，所以用花括号表示「这一段代码属于谁」。缩进是为了人好看——计算机只看花括号，不看缩进。</td><td>积木的外形凹凸</td></tr>
+            <tr><td><code>printf("hello, world\n");</code></td><td>打印。往屏幕上输出文字。<code>\n</code> 是换行符（newline）——不写的话，光标会停在单词后面，下一行输出会黏在右边。<strong>分号 ; 是每个语句的句号。</strong></td><td>「说 hello, world」</td></tr>
+            <tr><td><code>return 0;</code></td><td>给操作系统报个平安。返回 0 = 一切正常。如果程序出错了，可以返回其他数字。</td><td>（没有对应——Scratch 不需要管操作系统）</td></tr>
+        </table>
+
+        <blockquote><p>Malan 最强调的一点：「你不需要理解每一行的每一个词。Week 1 你只需要'魔术词'——<code>int main(void)</code> 和 <code>printf()</code> 的样子。后面的课会一层层剥开。」这种「先用起来，原理后面补」的教学哲学贯穿整个 CS50。</p></blockquote>
+
+        <h3>1-2：编译——从文本到机器码</h3>
+        <p>Malan 讲编译的方式非常直观。他在终端敲 <code>make hello</code>（CS50 的简化编译命令，实际背后调用 <code>clang</code>），系统输出了一行看起来很吓人的命令：</p>
+        <pre>clang -fsanitize=signed-integer-overflow -fsanitize=undefined \
+  -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare \
+  -Wno-unused-parameter -Wno-unused-variable -Wshadow \
+  hello.c -lcrypt -lcs50 -lm -o hello</pre>
+        <p>然后他说：<strong>「你现在不需要懂这一行。你只需要知道 <code>make hello</code> 是做什么的——它把 hello.c 变成 hello。」</strong></p>
+        <p>这背后是四步流水线，Malan 在第 1 周只提概要，后面会展开：</p>
+        <ol>
+            <li><strong>预处理（Preprocessing）</strong>——把 <code>#include</code> 行替换成真正的库文件内容</li>
+            <li><strong>编译（Compiling）</strong>——把 C 代码翻译成汇编语言（更接近机器的一种中间语言）</li>
+            <li><strong>汇编（Assembling）</strong>——把汇编翻译成 0 和 1（机器码）</li>
+            <li><strong>链接（Linking）</strong>——把你自己写的代码和你引用的库代码「缝」在一起</li>
+        </ol>
+        <blockquote><p>对你而言，现在记住一件事就够了：<strong>C 程序每次改了代码必须重新编译。忘了编译就跑，跑的还是旧版本——这是 C 初学者排名第一的「灵异事件」。</strong></p></blockquote>
+
+        <h3>1-3：变量与数据类型</h3>
+        <p>Malan 在这里有一段非常经典的讲述。他问学生：「你有没有想过——为什么叫 'int'？为什么不是 'integer'？」然后自己回答：「因为 1970 年代的程序员觉得打完 <code>integer</code> 太浪费时间。」</p>
+        <p>然后他列出了 C 语言中最常用的数据类型，每个都带上一句「这样记」：</p>
+
+        <table>
+            <tr><th>类型</th><th>存什么</th><th>占几个字节</th><th>能存的范围</th><th>Malan 的口诀</th></tr>
+            <tr><td><code>int</code></td><td>整数</td><td>4 bytes</td><td>约 ±21 亿（-2³¹ 到 2³¹−1）</td><td>「用这个，除非你数的人比地球人口还多」</td></tr>
+            <tr><td><code>char</code></td><td>单个字符</td><td>1 byte</td><td>−128 到 127（或 0–255）</td><td>「记住：一个字母 = 一个数字」</td></tr>
+            <tr><td><code>float</code></td><td>小数（约 7 位精度）</td><td>4 bytes</td><td>±3.4×10³⁸</td><td>「浮点 32 位——够用，但不精确」</td></tr>
+            <tr><td><code>double</code></td><td>小数（约 15 位精度）</td><td>8 bytes</td><td>±1.7×10³⁰⁸</td><td>「double 就是两倍精度的 float」</td></tr>
+            <tr><td><code>long</code></td><td>更大的整数</td><td>8 bytes</td><td>±9×10¹⁸</td><td>「当你觉得 21 亿不够用的时候」</td></tr>
+            <tr><td><code>bool</code></td><td>真/假</td><td>1 byte</td><td><code>true</code> 或 <code>false</code></td><td>「需要 <code>#include &lt;stdbool.h&gt;</code>」</td></tr>
+        </table>
+
+        <h3>格式化字符串——printf 的占位符语言</h3>
+        <p>Malan 花了几分钟专门讲 <code>printf</code> 里的 <code>%</code> 符号。你的变量有不同类型，printf 需要知道你塞给它的是什么，才能正确地把它转成文字。这套「占位符语言」不长，但必须背下来：</p>
+        <table>
+            <tr><th>占位符</th><th>对应类型</th><th>含义</th><th>示例</th></tr>
+            <tr><td><code>%i</code> 或 <code>%d</code></td><td><code>int</code></td><td>有符号十进制整数</td><td><code>printf("年龄：%i\n", 25);</code> → 年龄：25</td></tr>
+            <tr><td><code>%c</code></td><td><code>char</code></td><td>单个字符</td><td><code>printf("等级：%c\n", 'A');</code> → 等级：A</td></tr>
+            <tr><td><code>%f</code></td><td><code>float</code> / <code>double</code></td><td>小数（默认 6 位）</td><td><code>printf("圆周率：%f\n", 3.14159);</code> → 3.141590</td></tr>
+            <tr><td><code>%.2f</code></td><td><code>float</code> / <code>double</code></td><td>小数，保留 2 位</td><td><code>printf("价格：%.2f\n", 19.9);</code> → 19.90</td></tr>
+            <tr><td><code>%s</code></td><td><code>string</code> / <code>char *</code></td><td>字符串</td><td><code>printf("你好，%s\n", "世界");</code> → 你好，世界</td></tr>
+            <tr><td><code>%li</code></td><td><code>long</code></td><td>长整数</td><td><code>printf("人口：%li\n", 8000000000L);</code></td></tr>
+            <tr><td><code>%p</code></td><td>指针</td><td>内存地址（16进制）</td><td>Week 4 会大量使用</td></tr>
+            <tr><td><code>%%</code></td><td>—</td><td>字面量的百分号</td><td><code>printf("折扣 20%%\n");</code> → 折扣 20%</td></tr>
+            <tr><td><code>\n</code></td><td>—</td><td>换行（不是占位符，是转义字符）</td><td>每次 printf 结尾几乎必有</td></tr>
+        </table>
+
+        <h3>算数运算符与自增自减</h3>
+        <p>C 的算术和数学课本一样：</p>
+        <table>
+            <tr><th>运算符</th><th>含义</th><th>示例</th><th>注意</th></tr>
+            <tr><td><code>+</code></td><td>加</td><td><code>x + y</code></td><td></td></tr>
+            <tr><td><code>-</code></td><td>减</td><td><code>x - y</code></td><td></td></tr>
+            <tr><td><code>*</code></td><td>乘</td><td><code>x * y</code></td><td></td></tr>
+            <tr><td><code>/</code></td><td>除</td><td><code>x / y</code></td><td><strong>整数除法会截断小数！</strong> <code>5 / 2</code> = 2，不是 2.5</td></tr>
+            <tr><td><code>%</code></td><td>取余（模）</td><td><code>x % y</code></td><td>只能用于整数。判断奇偶的经典手段</td></tr>
+        </table>
+        <p>然后是一组 Malan 特别强调的「简写」——它们在 C 里出现频率极高，不看懂会懵：</p>
+        <table>
+            <tr><th>写法</th><th>等价于</th><th>意思</th></tr>
+            <tr><td><code>i++</code></td><td><code>i = i + 1</code></td><td>自增 1</td></tr>
+            <tr><td><code>i--</code></td><td><code>i = i - 1</code></td><td>自减 1</td></tr>
+            <tr><td><code>i += 5</code></td><td><code>i = i + 5</code></td><td>加 N</td></tr>
+            <tr><td><code>i -= 3</code></td><td><code>i = i - 3</code></td><td>减 N</td></tr>
+            <tr><td><code>i *= 2</code></td><td><code>i = i * 2</code></td><td>乘 N</td></tr>
+            <tr><td><code>i /= 2</code></td><td><code>i = i / 2</code></td><td>除 N（整数除法截断！）</td></tr>
+        </table>
+        <blockquote><p><strong>整数除法是 C 初学者最容易踩的坑之一。</strong> <code>1 / 2</code> 在数学上是 0.5，在 C 里是 <code>0</code>。因为两个操作数都是 <code>int</code>，结果也是 <code>int</code>。想要 0.5？把其中一个变成浮点数：<code>1.0 / 2</code> 或 <code>(float) 1 / 2</code>。</p></blockquote>
+
+        <h3>浮点数精度——计算机不会算「真的」小数</h3>
+        <p>紧接在数据类型之后，Malan 会抛出一个让全场沉默的实验。他在终端里写：</p>
+        <pre>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf("%.20f\n", 0.1 + 0.2);
+}</pre>
+        <p>你期待的结果：<code>0.3</code> 或 <code>0.30000000000000000000</code>。实际输出：<code>0.30000000000000004441</code>。</p>
+        <p>这<strong>不是 bug</strong>。这是浮点数（float / double）的<strong>数学本质</strong>——计算机用二进制存小数，而 0.1 在二进制里是一个无限循环小数（就像十进制的 1/3 = 0.33333...），永远无法精确存储。你存进去的 0.1 是一个<strong>近似值</strong>，它和真正的 0.1 之间存在一个微小的误差。两个近似值相加，误差也相加。所以 <strong>0.1 + 0.2 ≠ 0.3</strong>，不是 C 的错，是所有编程语言（包括 Python）都这样的。</p>
+        <blockquote><p>实用口诀：<strong>永远不要用 <code>==</code> 比较两个浮点数。</strong> 判断两个小数是否「相等」，应该检查它们差值的绝对值是否小于一个极小的阈值（如 <code>0.000001</code>）。这就是为什么金融系统从来不用 float 计算金额——它们用整数存「分」而不是「元」。</p></blockquote>
+
+        <h3>1-4：整型溢出——Malan 最精彩的小实验</h3>
+        <p>他在黑板上画了一个里程表——就是老式汽车仪表盘上的数字滚轮。然后问学生：「999999 + 1 会怎样？」——答案是 000000。里程表没有第 7 位数。</p>
+        <p>然后他切到终端，写下这段代码：</p>
+        <pre>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(void)
+{
+    for (int i = 1; ; i *= 2)
+    {
+        printf("%i\n", i);
+        sleep(1);
+    }
+}</pre>
+        <p>程序打印 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024……数字疯狂翻倍。大概 30 秒后——<strong>突然变成负数。</strong> 然后变成 0。</p>
+        <blockquote><p><strong>这就是整型溢出（Integer Overflow）。</strong> 当一个 <code>int</code> 超过了它能存的最大值（约 21 亿），它会<strong>绕回到最小值（约 −21 亿）</strong>——就像里程表从 99999 翻回 00000。这不是「bug」——这就是计算机硬件的工作方式。如果你写的程序不检查边界，后果可能是灾难性的：1996 年阿丽亚娜 5 型火箭升空 40 秒后自毁——原因就是整型溢出。一个 64 位浮点数被塞进了 16 位的整数变量里。4 亿美元在空中炸了。</p></blockquote>
+
+        <h3>1-5：条件判断——if / else if / else</h3>
+        <p>Malan 说条件判断是「让程序变聪明」的第一步。他用一个非常直观的流程图（在黑板上面竖线和分叉）来解释。然后对照 Scratch：</p>
+        <table>
+            <tr><th>Scratch</th><th>C</th><th>Python</th></tr>
+            <tr><td>如果 ___ 那么</td><td><code>if (x &lt; y) { ... }</code></td><td><code>if x &lt; y:</code></td></tr>
+            <tr><td>如果 ___ 那么...否则</td><td><code>if (x &lt; y) { ... } else { ... }</code></td><td><code>if x &lt; y: ... else: ...</code></td></tr>
+        </table>
+        <p>注意：C 的条件必须<strong>用小括号包起来</strong>。等于判断用两个等号 <code>==</code>——一个等号是赋值，这是 C 初学者最容易犯的错。</p>
+        <pre>if (x = 5)   // 危险！这是赋值，不是判断。条件永远为真！
+if (x == 5)  // 正确✅ —— 判断 x 是否等于 5</pre>
+
+        <p>除了单个比较，Malan 还介绍了逻辑运算符——把多个条件组合起来：</p>
+        <table>
+            <tr><th>运算符</th><th>含义</th><th>示例</th><th>解读</th></tr>
+            <tr><td><code>&amp;&amp;</code></td><td>并且（AND）</td><td><code>if (x &gt; 0 &amp;&amp; x &lt; 10)</code></td><td>x 在 0 到 10 之间</td></tr>
+            <tr><td><code>||</code></td><td>或者（OR）</td><td><code>if (c == 'y' || c == 'Y')</code></td><td>用户输入了 y 或 Y</td></tr>
+            <tr><td><code>!</code></td><td>取反（NOT）</td><td><code>if (!found)</code></td><td>如果 found 是 false / 0</td></tr>
+        </table>
+        <blockquote><p>注意：C 里没有 Python 的 <code>and</code> / <code>or</code> / <code>not</code> 关键字。这里是 <code>&amp;&amp;</code> / <code>||</code> / <code>!</code>。而且 <strong>C 会「短路」求值</strong>——对 <code>&amp;&amp;</code>，只要左边是 false，右边根本不会执行；对 <code>||</code>，只要左边是 true，右边就跳过了。这和 Python 一样。</p></blockquote>
+
+        <h3>1-6：循环——for 和 while</h3>
+        <p>Malan 把 for 循环拆成三个问题：</p>
+        <table>
+            <tr><th>问题</th><th>C 的答案</th><th>例子</th></tr>
+            <tr><td>从哪开始？</td><td>第一个分号前</td><td><code>int i = 0</code></td></tr>
+            <tr><td>做到什么时候？</td><td>两个分号之间</td><td><code>i &lt; 10</code></td></tr>
+            <tr><td>每轮完了做什么？</td><td>第二个分号后</td><td><code>i++</code>（等同于 <code>i = i + 1</code>）</td></tr>
+        </table>
+        <p>他演示了一个猫叫 3 次的程序（Scratch→C 对照）：</p>
+        <pre>// C 版——猫叫 3 声
+for (int i = 0; i &lt; 3; i++)
+{
+    printf("meow\n");
+}</pre>
+        <p>然后他故意把 <code>i &lt; 3</code> 写成 <code>i &lt;= 3</code>，输出变成 4 声——<strong>off-by-one（差一错误）是 CS 里最常见的 bug</strong>，没有之一。</p>
+        <p>然后 Malan 在黑板上画出 while 的结构——它比 for 更简单，只保留了一个部分：</p>
+        <pre>// while 版——猫叫，计数器写法
+int i = 0;
+while (i &lt; 3)
+{
+    printf("meow\n");
+    i++;
+}
+
+// while 版——无限循环 + 手动跳出（常见于猜数字、菜单等场景）
+while (true)
+{
+    printf("meow\n");
+    break;  // 这里只是个演示——实际会在某个条件满足时 break
+}</pre>
+        <table>
+            <tr><th>for 更适合</th><th>while 更适合</th></tr>
+            <tr><td>你知道要循环多少次的场景（「打印 10 个数字」）</td><td>你不知道要循环多少次、在等某个条件发生的场景（「猜对了就停」）</td></tr>
+        </table>
+
+        <h3>1-7：变量与用户输入</h3>
+        <p>Malan 在第 1 周介绍 <code>get_string()</code>、<code>get_int()</code> 等 CS50 专属函数。这些函数来自 <code>cs50.h</code> 这个课程定制库——它不是标准 C，是教学辅助工具，用来<strong>让你在第 1 周就能做交互式程序，而不需要先学指针</strong>。</p>
+        <table>
+            <tr><th>CS50 函数（教学用）</th><th>标准 C 等价（你之后会学）</th></tr>
+            <tr><td><code>string name = get_string("What's your name? ");</code></td><td><code>char name[50]; scanf("%49s", name);</code>（涉及数组和指针）</td></tr>
+            <tr><td><code>int age = get_int("How old are you? ");</code></td><td><code>int age; scanf("%d", &amp;age);</code></td></tr>
+        </table>
+        <blockquote><p>这就是 CS50 的教学智慧：<strong>不让学生在第一周就撞上指针这堵墙。</strong> 用一层薄薄的「教学壳」包裹复杂概念，让你先建立「输入→处理→输出」的完整感觉。壳会在后面几周一层层剥开。你已经在咱们实操里直接用 <code>scanf</code> 了——所以你比 CS50 标准路线超前了一些。</p></blockquote>
+
+        <h3>1-8：代码风格与工具链</h3>
+        <p>Malan 在第 1 周末尾花了 10 分钟讲代码风格。他的理由：</p>
+        <blockquote><p>「代码被阅读的次数远远多于被编写的次数。你写的代码，三个星期后的你自己就是另一个读者。」</p></blockquote>
+        <p>CS50 提供了两个工具：</p>
+        <ul>
+            <li><strong><code>style50 hello.c</code></strong> — 自动检查你的缩进、空格、花括号位置。绿色 = OK，红色 = 需要改。</li>
+            <li><strong><code>check50 cs50/problems/2025/x/hello</code></strong> — 自动跑测试用例，告诉你作业过没过。</li>
+        </ul>
+        <p>CS50 的评分系统也是教学的一部分。学生不需要等着助教反馈——写完之后立刻跑 check50，马上知道哪错了、怎么改。<strong>即时反馈是学习效果的最大杠杆。</strong></p>
+
+        <h3>1-9：CS50 特有的数据类型——string</h3>
+        <p>Malan 在课上说了一句话，很多学生当场没意识到它的分量：</p>
+        <blockquote><p>「C 语言<strong>没有</strong> string 类型。我们用的 <code>string</code> 是我帮你发明的。在 Week 4 你会看到它的真面目——一个指向字符数组头部的指针。」</p></blockquote>
+        <p>这是 CS50 最巧妙的伏笔之一。学生在前三周正常使用 <code>string</code>，写字符串操作——然后到 Week 4 学指针时，Malan 问：「还记得你一直在用的 <code>string</code> 吗？」——然后掏出 <code>char *</code>。那一刻整个教室都是倒吸凉气的声音。</p>
+
+        <h3>1-10：类型转换（Type Casting）——换个马甲</h3>
+        <p>Malan 在 Week 1 末尾简单地提了类型转换。场景：你要算平均分——总分是 int，人数是 int，但平均分应该是小数。如果直接做 <code>total / count</code>，两个 int 相除 → 截断，小数部分被吃了。解决方法是「强制类型转换」：</p>
+        <pre>int total = 85;
+int count = 3;
+float average = (float) total / (float) count;
+// average = 28.333334  ✅ 不是 28.0</pre>
+        <p>语法：<code>(目标类型) 变量名</code>——注意括号贴紧类型名，不要跟函数调用搞混。常见的：</p>
+        <table>
+            <tr><th>写法</th><th>效果</th></tr>
+            <tr><td><code>(float) x</code></td><td>把整数 x 临时当成小数用</td></tr>
+            <tr><td><code>(int) 3.14</code></td><td>砍掉小数部分 → 3（注意不是四舍五入！）</td></tr>
+            <tr><td><code>(char) 65</code></td><td>把数字 65 转成字符 → 'A'（对照 ASCII 表）</td></tr>
+        </table>
+        <blockquote><p>Malan 的原话：「类型转换不会修改变量本身——它只是临时换了个马甲。就像你穿着睡衣去拿快递，快递员不在乎你是谁。但你自始至终还是你自己。」</p></blockquote>
+
+        <span class="dot"></span>
+
+        <h2>📝 下一步</h2>
+        <ul>
+            <li><strong>Week 2（Arrays）</strong> — 数组、字符串的底层实现、命令行参数（<code>argc</code>/<code>argv</code>）、调试技巧</li>
+            <li><strong>Week 3（Algorithms）</strong> — 搜索与排序算法的可视化对比、大 O 复杂度分析</li>
+            <li><strong>Week 4（Memory）</strong> — 指针、<code>malloc</code>/<code>free</code>、内存泄漏、<code>valgrind</code></li>
+            <li><strong>Week 5（Data Structures）</strong> — 链表、哈希表、树——用 C 全部手写一遍</li>
+        </ul>
+        <p>Week 2–5 是 C 语言核心区，也是 CS50 最难但最有收获的部分。Malan 会在这一段使出浑身解数——每一个数据结构他都有真人演示。</p>
+
+        <hr>
+
+        <p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+
+        <div class="nav-bottom">
+            <a href="#">↑ 回到顶部</a>
+        </div>
+
+    </div>
+</body>
+</html>

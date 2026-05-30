@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS50 · Week 6–7 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif SC",serif;background:#fafafa;color:#333;line-height:1.9}
+.container{max-width:680px;margin:0 auto;padding:64px 24px 80px}
+h1{font-size:1.8rem;font-weight:400;letter-spacing:2px;line-height:1.5;margin-bottom:16px;color:#1a1a1a}
+.meta{font-size:.85rem;color:#999;margin-bottom:48px}.meta span{margin-right:16px}
+.intro{font-size:.9rem;color:#777;line-height:1.8;margin-bottom:48px;padding-left:16px;border-left:2px solid #ddd}
+h2{font-size:1.25rem;font-weight:500;margin-top:56px;margin-bottom:20px;color:#1a1a1a;letter-spacing:1px}
+h3{font-size:1.05rem;font-weight:500;margin-top:36px;margin-bottom:14px;color:#333}
+p{font-size:.95rem;margin-bottom:16px;color:#444}
+blockquote{margin:24px 0;padding:16px 20px;background:#f5f5f5;border-radius:6px;font-size:.9rem;color:#555;border-left:3px solid #ccc}
+blockquote p{margin-bottom:0;color:#555}
+strong{color:#1a1a1a;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:20px 0 28px;font-size:.85rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e8e8e8;vertical-align:top;line-height:1.6}
+th{background:#f9f9f9;font-weight:500;color:#555;font-size:.8rem;letter-spacing:1px}
+tr:hover td{background:#fcfcfc}
+hr{border:none;border-top:1px solid #e8e8e8;margin:48px 0}
+.dot{display:block;width:6px;height:6px;background:#ccc;border-radius:50%;margin:40px auto}
+ul,ol{margin:12px 0 20px 20px;font-size:.9rem;color:#555;line-height:2}
+code{background:#f0f0f0;padding:1px 6px;border-radius:3px;font-size:.85rem;font-family:"SF Mono","Menlo","Consolas",monospace;color:#c7254e}
+pre{background:#2d2d2d;color:#f8f8f2;padding:16px 20px;border-radius:6px;overflow-x:auto;font-size:.82rem;line-height:1.7;margin:16px 0 24px;font-family:"SF Mono","Menlo","Consolas",monospace}
+.nav-bottom{margin-top:64px;padding-top:24px;border-top:1px solid #e8e8e8;text-align:center}
+.nav-bottom a{color:#999;text-decoration:none;font-size:.85rem}.nav-bottom a:hover{color:#333}
+@media(max-width:600px){.container{padding:32px 16px 64px}h1{font-size:1.4rem}table{font-size:.78rem}th,td{padding:8px}}
+</style>
+</head>
+<body><div class="container">
+        <a class="back" href="index.html">← CS50</a>
+
+<h1>CS50x 2025 · 听课笔记<br>Week 6 &amp; Week 7</h1>
+<div class="meta"><span>星尘 整理</span><span>2026年5月29日</span></div>
+<div class="intro">
+<p>Week 6 和 Week 7 标志着 CS50 的地层转换。前 5 周你在 C 语言的地壳深处挖矿——指针、malloc、链表。Week 6 上升到 Python 的地表——同一套思维模型换了一门语言，你会以一种前所未有的轻松感把过去五周写的代码重写一遍，然后震惊于代码量的缩减。Week 7 则进入 SQL 的世界——不再是「写程序操作数据」，而是「描述你想要什么数据，让数据库引擎自己去算」。这两周加起来，是你从「程序员」向「全栈开发者」过渡的起点。</p>
+</div>
+
+<h2>🔑 关键词索引</h2>
+<table>
+<tr><th>关键词</th><th>一句话说明</th></tr>
+<tr><td><strong>⭐ C → Python 代码量对比</strong></td><td>同一功能，Python 代码量通常是 C 的 1/5 到 1/10。不是因为 Python 更聪明——是它背后藏了你不用写的几万行 C 代码</td></tr>
+<tr><td><strong>Python 之禅</strong></td><td><code>import this</code>——19 条设计哲学。核心：可读性高于一切。Malan 会花 3 分钟读给学生听</td></tr>
+<tr><td><strong>解释型语言</strong></td><td>不需要编译。写完直接 <code>python hello.py</code>。背后是 CPython 解释器（用 C 写的）逐行翻译字节码</td></tr>
+<tr><td><strong>动态类型</strong></td><td>变量不声明类型。C 的 <code>int x = 5;</code> 在 Python 里就是 <code>x = 5</code>。代价：运行时才能发现类型错误</td></tr>
+<tr><td><strong>def 函数定义</strong></td><td>Python 的函数——没有返回类型声明、没有参数类型声明、没有花括号。缩进就是作用域</td></tr>
+<tr><td><strong>dict / list / set / tuple</strong></td><td>Python 四大内置数据结构——它们就是 Week 5 里你用 C 手写过的链表、哈希表、数组的「开箱即用版」</td></tr>
+<tr><td><strong>⭐ 切片（Slicing）</strong></td><td><code>s[2:5]</code>——从字符串或列表中取一段。C 里你需要写 for 循环 + 下标——Python 一个冒号搞定</td></tr>
+<tr><td><strong>with 上下文管理器</strong></td><td><code>with open(...) as f:</code>——自动关闭文件，不用写 <code>fclose</code>。告别 C 的文件句柄泄漏焦虑</td></tr>
+<tr><td><strong>列表推导式</strong></td><td><code>[x*2 for x in range(10)]</code>——一行搞定原来需要 3-5 行的 for 循环。Malan：「这是 Python 最美的语法之一」</td></tr>
+<tr><td><strong>f-strings</strong></td><td><code>f"你好，{name}"</code>——Python 3.6+ 的字符串格式化。对比 C 的 <code>printf("%s", name)</code> 简直是降维打击</td></tr>
+<tr><td><strong>try/except 异常处理</strong></td><td>Python 的错误处理——不是检查返回值、不是检查 errno。错误发生时自动跳到 except 块。告别 C 的「每个函数调用完都要 if 检查」</td></tr>
+<tr><td><strong>PIL / Pillow</strong></td><td>Python 图像处理库。Week 6 作业：用 Python 做图像滤镜（模糊、边缘检测、镜像等）</td></tr>
+<tr><td><strong>sys.argv / import 体系</strong></td><td>Python 的命令行参数和模块化——对应 C 的 argc/argv 和 #include。但 Python 的 import 比 C 的 #include 强大得多</td></tr>
+<tr><td><strong>⭐ SQL</strong></td><td>结构化查询语言——不是说「怎么取数据」，是说「要什么数据」。SELECT 比 C 的 for+if 快几个数量级</td></tr>
+<tr><td><strong>CRUD</strong></td><td>Create, Read, Update, Delete——数据库的四种基本操作。对应的 SQL：INSERT, SELECT, UPDATE, DELETE</td></tr>
+<tr><td><strong>主键 / 外键</strong></td><td>一条记录的唯一身份证 + 跨表引用。外键 = 数据库版的指针</td></tr>
+<tr><td><strong>约束（Constraints）</strong></td><td>NOT NULL, UNIQUE, DEFAULT, CHECK——在数据库层面强制数据规则。让错误的脏数据根本插不进去</td></tr>
+<tr><td><strong>⭐ JOIN</strong></td><td>把两张表按某个共同字段「缝」在一起。INNER / LEFT / RIGHT JOIN。这是关系型数据库的超级能力</td></tr>
+<tr><td><strong>索引（Index）</strong></td><td>给某列建 B-Tree——WHERE 查找从 O(n) 变成 O(log n)。代价：INSERT 变慢（要更新索引）</td></tr>
+<tr><td><strong>聚合 + HAVING + 子查询</strong></td><td>COUNT/AVG/SUM/MAX/MIN + 对聚合结果的过滤 + 查询中的查询。SQL 的表达力在这三个特性组合下达到顶峰</td></tr>
+<tr><td><strong>⭐ SQL 注入</strong></td><td>用户输入中包含 SQL 代码——Malan 现场演示：输入 "Robert'); DROP TABLE students;--"。防御：参数化查询（?占位符）</td></tr>
+<tr><td><strong>事务（Transaction）</strong></td><td>BEGIN → 一堆操作 → 全部成功就 COMMIT，任何一步出错就 ROLLBACK。银行转账的原子性保障</td></tr>
+<tr><td><strong>SQLite</strong></td><td>轻量级数据库——一个 .db 文件就是整个数据库。CS50 用它。你的手机 App 本地数据库也是它</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 6 ==================== -->
+<h2>Week 6 · Python</h2>
+
+<h3>这节课的解放感</h3>
+<p>Malan 的开场白很有仪式感。他打开终端，敲了三行：</p>
+<pre>#include &lt;stdio.h&gt;
+int main(void) {
+    printf("hello, world\n");
+}</pre>
+<p>「这是 C。五周了。现在看这个——」然后他敲：</p>
+<pre>print("hello, world")</pre>
+<p>全场起哄、鼓掌。Malan 摊手：「这就是 Python。」这 3 秒的对比是整个 Week 6 教学策略的浓缩——不是从零教 Python，而是<strong>用你已经背下来的 C 代码做参照物</strong>，让你震惊于「同一个任务为什么能短这么多」。每多一行对比，你的大脑就多理解一层：你不是在学新语言——你是在「卸载包袱」。</p>
+
+<h3>6-1：C 和 Python 的直觉对照——用你会的语言学新的语言</h3>
+<p>Malan 不做 Python 语法逐条讲解。他打开两周前用 C 写的程序——<code>mario.c</code>（打印马里奥金字塔）、<code>caesar.c</code>（凯撒加密）、<code>phonebook.c</code>——然后用 Python 逐行重写。整个教学就是一场「代码减肥秀」。</p>
+
+<table>
+<tr><th>你要做的事</th><th>C（你 5 周前写的）</th><th>Python（现在写）</th><th>少了多少</th></tr>
+<tr><td>打印 hello world</td><td><code>#include &lt;stdio.h&gt;<br>int main(void){<br>&nbsp;&nbsp;printf("hello, world\n");<br>}</code></td><td><code>print("hello, world")</code></td><td>4 行 → 1 行</td></tr>
+<tr><td>读一个整数</td><td><code>int x;<br>scanf("%i", &amp;x);</code></td><td><code>x = int(input("x: "))</code></td><td>指针消失了</td></tr>
+<tr><td>条件判断</td><td><code>if (x &lt; y) { ... }</code></td><td><code>if x &lt; y: ...</code></td><td>括号和花括号消失了</td></tr>
+<tr><td>for 循环</td><td><code>for (int i=0; i&lt;3; i++){...}</code></td><td><code>for i in range(3): ...</code></td><td>三个表达式→一个</td></tr>
+<tr><td>字符串比较</td><td><code>strcmp(s1,s2)==0</code></td><td><code>s1 == s2</code></td><td>5 个词 → 1 个词</td></tr>
+<tr><td>创建动态数组</td><td><code>int *arr = malloc(n*sizeof(int));<br>free(arr);</code></td><td><code>arr = []</code>（自动扩容 + 自动回收）</td><td>你不需要知道堆在哪</td></tr>
+</table>
+
+<blockquote><p>Malan 在逐一重写后的总结：「你不是在学新的语法——你是在<strong>卸掉 C 语言的脏活</strong>。你在 Week 4 花了整整一节课学 malloc/free，Week 5 花了半节课学链表和哈希表。现在 Python 一个 <code>list</code> 和 <code>dict</code> 全包了。这不代表 Week 4 和 Week 5 白学了——<strong>恰恰相反，只有学过它们，你才能理解为什么 Python 的 list 这么慢、dict 这么快。</strong>」</p></blockquote>
+
+<h3>6-2：Python 函数定义——def 的简洁哲学</h3>
+<p>Malan 在 C → Python 对照之后，立刻讲函数——因为 Python 函数和 C 函数的对比，完美浓缩了两门语言的哲学差异：</p>
+<pre>// C 版本——猜数字游戏的核心判断逻辑
+bool check(int guess, int secret)
+{
+    if (guess == secret)
+    {
+        printf("猜对了！\n");
+        return true;
+    }
+    else if (guess &lt; secret)
+    {
+        printf("太小了！\n");
+        return false;
+    }
+    else
+    {
+        printf("太大了！\n");
+        return false;
+    }
+}</pre>
+<pre># Python 版本——同一个函数
+def check(guess, secret):
+    if guess == secret:
+        print("猜对了！")
+        return True
+    elif guess &lt; secret:
+        print("太小了！")
+        return False
+    else:
+        print("太大了！")
+        return False</pre>
+<table>
+<tr><th>差异维度</th><th>C 的 def（函数定义）</th><th>Python 的 def</th></tr>
+<tr><td><strong>关键字</strong></td><td>前置返回类型（bool, int, void）</td><td>统一 <code>def</code>——返回类型不写，由 return 决定</td></tr>
+<tr><td><strong>参数</strong></td><td>必须声明类型</td><td>只写名字，类型由调用者传入的实参决定</td></tr>
+<tr><td><strong>代码块</strong></td><td>花括号 <code>{</code> <code>}</code></td><td>冒号 <code>:</code> + 缩进</td></tr>
+<tr><td><strong>else if</strong></td><td><code>else if (...)</code></td><td><code>elif ...:</code>（C 里两个词，Python 一个词）</td></tr>
+<tr><td><strong>返回真假</strong></td><td><code>true / false</code>（小写，来自 stdbool.h）</td><td><code>True / False</code>（大写，内置关键字）</td></tr>
+</table>
+
+<h3>6-3：Python 没有的 C 概念——被「藏起来」的复杂度</h3>
+<p>Malan 在白板上列出了一个「悼念名单」——Python 里你不用再亲自操作的东西：</p>
+<table>
+<tr><th>C 里你亲手做了 5 周的东西</th><th>Python 里谁替你干了</th><th>代价</th></tr>
+<tr><td><strong>编译</strong>（gcc / make）</td><td>解释器（CPython，用 C 写的）</td><td>必须安装 Python。没有独立的可执行文件（除非用 PyInstaller 打包）</td></tr>
+<tr><td><strong>内存管理</strong>（malloc / free）</td><td>垃圾回收器（引用计数 + 循环检测）</td><td>内存回收时机不确定。可能有短暂的「内存峰值」</td></tr>
+<tr><td><strong>类型声明</strong>（int, float, char *）</td><td>动态类型（运行时存一个类型标签）</td><td>类型错误只会在运行到那一行时暴露——编译阶段发现不了</td></tr>
+<tr><td><strong>指针</strong>（&amp;, *, ->, 指针运算）</td><td>「一切皆引用」——赋值默认传引用</td><td>你可能在不知情的情况下修改了不该修改的变量（可变对象共享引用）</td></tr>
+<tr><td><strong>数组边界</strong></td><td>list 自动扩容 + 越界自动报错 IndexError</td><td>list 扩容需要复制整个数组——O(n) 的隐藏成本。但大部分时间你注意不到</td></tr>
+<tr><td><strong>字符串结尾 \0</strong></td><td>Python str 对象自带长度字段——不用数 \0</td><td>Python str 是<strong>不可变的</strong>——每次「修改」字符串实际是创建了新对象</td></tr>
+</table>
+<blockquote><p>Malan 的结语：「Python 不是 C 的'升级'——它是 C 的<strong>抽象层</strong>。你在 Python 里写的每一行代码，底层都有 C 代码在替你跑。<code>arr.append(42)</code> 背后是 C 写的 <code>realloc</code>。<code>dict['key']</code> 背后是 C 写的哈希表查找。<strong>你现在是从'造车轮的人'变成了'开车的人'。</strong>」</p></blockquote>
+
+<h3>异常处理——try/except 替代了 C 的「每个函数调用完都要 if 检查」</h3>
+<p>Malan 在第 4 周花了大量时间演示 C 的错误处理模式——每次 <code>malloc</code> 之后检查是否为 NULL，每次 <code>fopen</code> 之后检查是否为 NULL。<strong>Python 换了一套思路：</strong></p>
+<pre># C 风格——每个操作都要检查返回值
+FILE *f = fopen("data.txt", "r");
+if (f == NULL) { printf("打不开！\n"); return 1; }
+int *arr = malloc(100 * sizeof(int));
+if (arr == NULL) { printf("内存不够！\n"); return 1; }
+// 正常操作...
+fclose(f);
+free(arr);
+
+# Python 风格——try 包裹正常逻辑，except 收拾残局
+try:
+    with open("data.txt", "r") as f:
+        data = f.read()
+    numbers = [int(line) for line in data.split("\n") if line]
+except FileNotFoundError:
+    print("文件不存在！")
+except ValueError:
+    print("文件里有不是数字的行！")
+# 不需要手动关闭文件——with 已经处理了</pre>
+<p>Malan 的评价：「C 和 Python 的错误处理代表了两种哲学——<strong>C 倾向于'每次做事之前先看路'，Python 倾向于'先干再说，摔了再爬起来'。</strong> 前者更严谨——你知道每一步是否成功。后者更简洁——你不被错误处理打断主逻辑。」</p>
+<blockquote><p>常见的 Python 异常速查：<code>FileNotFoundError</code>（文件不存在）、<code>ValueError</code>（值类型/范围不对）、<code>TypeError</code>（类型错误）、<code>IndexError</code>（列表越界）、<code>KeyError</code>（字典键不存在）、<code>ZeroDivisionError</code>（除以零）。</p></blockquote>
+
+<h3>6-4：Python 四大内置数据结构——它们就是 Week 5 的成品</h3>
+<p>Malan 在第 6 周引出了四个 Python 核心类型，并明确指出了每一类是 Week 5 里哪一种手写数据结构的「开箱版」：</p>
+
+<table>
+<tr><th>类型</th><th>C 对应（你手写过的）</th><th>Python 中怎么用</th><th>时间复杂度</th></tr>
+<tr><td><strong>list</strong></td><td>动态数组（malloc + realloc）</td><td><code>nums = [1,2,3]; nums.append(4)</code></td><td>索引 O(1), 末尾插入 O(1) 均摊, 头部插入 O(n)</td></tr>
+<tr><td><strong>dict</strong></td><td>哈希表（装链表的数组 + 哈希函数）</td><td><code>phonebook = {"Alice": "+1-111"}; phonebook["Bob"] = "+1-222"</code></td><td>增删查平均 O(1)</td></tr>
+<tr><td><strong>set</strong></td><td>哈希表（只存键不存值）</td><td><code>unique = set(); unique.add(42); 42 in unique → True</code></td><td>增删查 O(1); 自动去重</td></tr>
+<tr><td><strong>tuple</strong></td><td>不可变数组（const）</td><td><code>point = (3, 4)</code>——不能改，但可以用作 dict 的键</td><td>索引 O(1)</td></tr>
+</table>
+
+<h3>6-5：Python 的语法糖——让 C 程序员沉默的瞬间</h3>
+<p>Malan 专门挑了四个 Python 语法特性，每个都配了一个「等效的 C 代码」来制造震撼效果。</p>
+
+<h3>切片（Slicing）</h3>
+<pre>s = "CS50"
+print(s[1:4])   # → "S50"（索引 1 到 3，不含 4）
+
+# C 等效（你需要写）：
+for (int i = 1; i &lt; 4; i++) printf("%c", s[i]); // 3 行才搞定</pre>
+
+<h3>列表推导式（List Comprehension）</h3>
+<pre># Python——一行
+squares = [x * x for x in range(10)]
+# → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# C 等效（你需要写）：
+int squares[10];
+for (int i = 0; i &lt; 10; i++) squares[i] = i * i; // 3 行 + 数组声明</pre>
+
+<h3>f-strings——终于不用数 % 占位符了</h3>
+<pre># Python f-string——变量直接嵌入字符串
+name = "Alice"
+age = 20
+print(f"你好，{name}，你明年 {age + 1} 岁。")
+# → 你好，Alice，你明年 21 岁。
+
+# C 等效——你需要数 % 的个数和对应的变量排列
+printf("你好，%s，你明年 %i 岁。\n", name, age + 1);</pre>
+
+<h3>with 上下文管理器</h3>
+<pre># Python——自动关闭，就算中间出错也会关
+with open("file.txt", "r") as f:
+    for line in f:
+        print(line, end="")
+# 缩进结束 → 文件自动关闭。你永远不会忘记 f.close()
+
+# C 等效——你必须手动 fclose，而且如果中间 return 或出错，
+# 很可能跳过 fclose → 文件句柄泄漏
+FILE *f = fopen("file.txt", "r");
+while (fgets(buffer, sizeof(buffer), f) != NULL) ...
+fclose(f);  // ← 必须记得这一行</pre>
+<blockquote><p>Malan 的评论：「<code>with</code> 是 Python 解决'人类的健忘'的设计。C 要求你记住 <code>fclose</code> 和 <code>free</code>——这很严格，但你确实会忘。Python 说：<strong>你只管写逻辑，收尾的事我来。</strong>」</p></blockquote>
+
+<h3>6-6：模块与导入——Python 的 #include 进化版</h3>
+<p>Malan 把 Python 的 <code>import</code> 和 C 的 <code>#include</code> 做了系统对比。核心区别：<code>#include</code> 是文本复制粘贴（预处理阶段）。<code>import</code> 是运行时加载——模块是真正的代码实体，有自己的命名空间。</p>
+<pre># 方式一：导入整个模块
+import random
+coin = random.choice(["正面", "反面"])
+
+# 方式二：从模块中导入特定的函数
+from random import choice, randint
+coin = choice(["正面", "反面"])
+dice = randint(1, 6)
+
+# 方式三：导入全部（不推荐——会污染命名空间）
+from random import *
+
+# 方式四：导入并起别名（当模块名太长时）
+import numpy as np
+
+# 你自己的模块也可以被导入——
+# 如果有一个 helpers.py 文件，里面定义了 greet() 函数：
+from helpers import greet</pre>
+
+<h3>命令行参数——sys.argv</h3>
+<p>对应 C 的 <code>argc/argv</code>，Python 使用 <code>sys.argv</code>：</p>
+<pre>import sys
+
+# sys.argv 是一个列表——第一个元素是程序名
+if len(sys.argv) != 2:
+    print(f"用法：python {sys.argv[0]} &lt;名字&gt;")
+    sys.exit(1)          # 对应 C 的 return 1
+
+print(f"你好，{sys.argv[1]}")
+# 等价于 C 的：printf("你好，%s\n", argv[1]);</pre>
+
+<h3>6-7：凯撒密码——C vs Python 完整对照</h3>
+<p>Malan 在课上一定会做这个对照——从 Week 2 的 C 实现翻到 Python 实现。因为凯撒密码是 CS50 前 6 周的共同锚点：</p>
+<pre># include &lt;...&gt;           →  import sys
+# int main(int argc,       →  def main():
+#           string argv[])
+# {                        →  （缩进开始）
+# argv[1]                  →  sys.argv[1]
+# atoi(argv[1])            →  int(sys.argv[1])
+# get_string("...")        →  input("...")
+# isupper(c)               →  c.isupper()
+# islower(c)               →  c.islower()
+# printf("%c", ...)        →  print(..., end="")
+# printf("\n")             →  print()
+# return 0;                →  sys.exit(0)
+# }                        →  （缩进结束）
+#
+# 每一行 C 代码都有一行更短的 Python 代码在等着它。
+# 同一个算法，同一种思维，两门语言。</pre>
+
+<h3>6-8：Python 里的怪东西——C 程序员的认知挑战</h3>
+<p>Malan 花了 10 分钟讲 Python 里几个「C 程序员一看就懵」的特性。不是 bug，是设计：</p>
+<table>
+<tr><th>现象</th><th>代码</th><th>为什么</th></tr>
+<tr><td><strong>可变对象作为默认参数</strong></td><td><code>def f(x, memo={}):</code></td><td>默认参数只在函数定义时创建一次——不是每次调用都建新的。如果函数修改了它，下次调用会看到上次的残留值。Malan：「这是 Python 面试题 Top 3。」</td></tr>
+<tr><td><strong>嵌套列表引用共享</strong></td><td><code>a = [[0]*3]*3</code>→<br><code>a[0][0]=1</code> 后整列变 1</td><td><code>*</code> 复制的是引用，不是值。三行指向了同一个内部列表。正确做法：<code>[[0]*3 for _ in range(3)]</code></td></tr>
+<tr><td><strong>字符串不可变</strong></td><td><code>s = "hello"; s[0] = 'H'</code> → 报错</td><td>Python str 是 immutable。任何「修改」都创建新对象。想逐字符修改？用 list 中转</td></tr>
+</table>
+
+<h3>6-9：Week 6 的 Problem Set——图像滤镜</h3>
+<p>Malan 用一个非常漂亮的方式让 Python 的第一个作业落地——<strong>图像处理</strong>。你写一个程序，读取 BMP 位图，逐个像素处理，然后输出一张新图片。这和 Week 4 的 JPEG 恢复作业形成了精妙的对照——同样的底层原理（逐字节处理二进制文件），但用 Python 写起来像是换了一个世界。</p>
+<p>滤镜列表：</p>
+<ul>
+<li><strong>灰度（Grayscale）</strong>——每个像素的 R/G/B 取平均值</li>
+<li><strong>棕褐色（Sepia）</strong>——给像素加一层暖色滤镜（有标准公式）</li>
+<li><strong>反射（Reflect）</strong>——水平翻转图像。每行像素逆序排列</li>
+<li><strong>模糊（Blur）</strong>——每个像素替换为周围 3x3 网格的平均值。注意：需要读原图的值、写新图——不能边读边改</li>
+<li><strong>边缘检测（Edges）</strong>——用 Sobel 算子做卷积。这是最具挑战性的滤镜——每个像素拆成 Gx 和 Gy 两个方向计算梯度，再做每通道的 255 值裁剪</li>
+</ul>
+<blockquote><p>这个作业的精妙之处：<strong>它逼你正确使用 Python 的二维列表。</strong> 你如果像 C 程序员那样用 <code>[[0]*width]*height</code> 创建「二维数组」——恭喜，你会收获一个整整一下午的引用共享 bug。做完这道题，你对 Python 的「一切皆引用」和「可变 vs 不可变」的理解就落地了。</p></blockquote>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 7 ==================== -->
+<h2>Week 7 · SQL</h2>
+
+<h3>这节课的哲学：从「怎么做」到「要什么」</h3>
+<p>Malan 用一个问题开场：「如果我有 1000 万行数据，想要找出其中所有在 2024 年消费超过 1000 元的北京用户——你写 C 或 Python 怎么做？」学生们想了几秒：读文件、解析 CSV、for 循环、if 筛选……「大概 50 行代码。现在看 SQL：」</p>
+<pre>SELECT * FROM users
+WHERE city = 'Beijing'
+  AND year = 2024
+  AND amount > 1000;</pre>
+<p>全场安静。<strong>这就是 SQL 的本质区别——你不需要告诉电脑「怎么取」，你只告诉它「要什么」。</strong> 数据库引擎自己决定用不用索引、走哪条执行计划。你描述结果，引擎负责效率。</p>
+
+<h3>7-1：关系型数据库的核心概念——一张表就是一个 Excel 工作表</h3>
+<p>Malan 的入门比喻始终围绕电子表格：</p>
+<table>
+<tr><th>SQL 概念</th><th>Excel 对应</th><th>解释</th></tr>
+<tr><td><strong>表（Table）</strong></td><td>一个工作表</td><td>数据按行和列组织</td></tr>
+<tr><td><strong>行（Row / Record）</strong></td><td>一行</td><td>一个实体的一条完整记录（如：一个用户）</td></tr>
+<tr><td><strong>列（Column / Field）</strong></td><td>一列</td><td>一种属性（如：姓名、年龄、城市）</td></tr>
+<tr><td><strong>主键（Primary Key）</strong></td><td>第一列的行号</td><td>唯一标识一行。通常是自增整数。永远不为空、不重复</td></tr>
+<tr><td><strong>外键（Foreign Key）</strong></td><td>VLOOKUP 的目标列</td><td>一张表中的列，存着另一张表的主键值——相当于 C 的指针</td></tr>
+</table>
+<blockquote><p>Malan 指着外键说：「<strong>外键就是数据库的指针。</strong> 你在 C 里用一个内存地址指向另一个节点。在 SQL 里，你用一个整数（外键值）指向另一行的主键。同样的思路——间接引用——只是换了语言。」</p></blockquote>
+
+<h3>7-2：SQL 数据类型与约束——在数据库层面建立防线</h3>
+<p>Malan 在讲完「表是什么」之后，立刻进入数据定义——<strong>你可以在建表时声明「这一列只接受什么类型」和「这一列有什么规则」</strong>。这比 C 的类型系统更接近「业务规则」：</p>
+
+<table>
+<tr><th>SQLite 数据类型</th><th>对应 C 类型</th><th>存什么</th></tr>
+<tr><td><code>INTEGER</code></td><td><code>int</code> / <code>long</code></td><td>整数（自动选择 1/2/4/8 字节存储）</td></tr>
+<tr><td><code>TEXT</code></td><td><code>char *</code> / <code>string</code></td><td>任意长度的文本</td></tr>
+<tr><td><code>REAL</code></td><td><code>float</code> / <code>double</code></td><td>8 字节浮点数</td></tr>
+<tr><td><code>BLOB</code></td><td><code>void *</code></td><td>二进制数据（图片、文件等）——原样存储，不解码</td></tr>
+<tr><td><code>NUMERIC</code></td><td>—</td><td>精确数值。可能存为 INTEGER 或 REAL，取决于值</td></tr>
+</table>
+
+<p>比数据类型更重要的是 <strong>约束（Constraints）</strong>——Malan 强调这是「在数据库层面防呆，而不是在 Python 代码里防呆」：</p>
+<table>
+<tr><th>约束</th><th>作用</th><th>示例</th></tr>
+<tr><td><code>NOT NULL</code></td><td>这一列不允许为空</td><td><code>name TEXT NOT NULL</code>——每个用户必须有名字</td></tr>
+<tr><td><code>UNIQUE</code></td><td>这一列的值在整个表中不重复</td><td><code>email TEXT UNIQUE</code>——不能有两个相同邮箱</td></tr>
+<tr><td><code>DEFAULT</code></td><td>不指定值时自动填入默认值</td><td><code>score INTEGER DEFAULT 0</code></td></tr>
+<tr><td><code>CHECK</code></td><td>插入/更新时验证条件</td><td><code>CHECK(age >= 0 AND age <= 150)</code></td></tr>
+<tr><td><code>PRIMARY KEY</code></td><td>NOT NULL + UNIQUE 的组合，且只能有一个主键</td><td><code>id INTEGER PRIMARY KEY</code></td></tr>
+<tr><td><code>FOREIGN KEY</code></td><td>确保引用的目标行确实存在</td><td><code>FOREIGN KEY (user_id) REFERENCES users(id)</code></td></tr>
+</table>
+
+<blockquote><p>Malan 的一个关键观点：「在 C 里，类型错误发生在<strong>编译时</strong>。在 Python 里，类型错误发生在<strong>运行时</strong>。在 SQL 里——加了约束之后——类型错误<strong>根本不会发生</strong>，因为数据库在错误值被写入之前就拒绝了。这是'防线前置'——把错误挡在最外层的入口。」</p></blockquote>
+
+<h3>7-3：CRUD 四大操作——建表、插入、查询、更新、删除</h3>
+
+<pre>-- ① 建表（CREATE）——定义列名、类型和约束
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER CHECK(age > 0),
+    city TEXT DEFAULT 'Unknown'
+);
+
+-- ② 插入（INSERT）——往里加一行
+INSERT INTO students (name, age, city)
+VALUES ('Alice', 20, 'Beijing');
+
+-- ③ 查询（SELECT）——这是 SQL 的 80%
+SELECT name, age FROM students WHERE city = 'Beijing' ORDER BY age DESC;
+
+-- ④ 更新（UPDATE）——修改已有数据
+UPDATE students SET age = 21 WHERE id = 1;
+
+-- ⑤ 删除（DELETE）——删一行
+DELETE FROM students WHERE id = 1;</pre>
+
+<p>Malan 强调 SELECT 的重要性：「SQL 里 80% 的语句是 SELECT。UPDATE 和 DELETE 你可能一天写一条。SELECT 你一分钟写三条。把 WHERE 和 ORDER BY 练到睡着觉都能写对。」</p>
+
+<h3>7-4：常用查询模式——WHERE、LIKE、聚合函数、GROUP BY、HAVING</h3>
+<pre>-- 条件筛选
+SELECT * FROM movies WHERE year >= 2000 AND genre = 'Sci-Fi';
+
+-- 模糊匹配（LIKE + 通配符 %）
+SELECT * FROM books WHERE title LIKE '%Harry%';  -- 书名包含 Harry
+
+-- 聚合函数——COUNT, AVG, SUM, MAX, MIN
+SELECT COUNT(*) FROM users;                     -- 总用户数
+SELECT AVG(age) FROM users;                     -- 平均年龄
+SELECT SUM(amount) FROM orders;                 -- 总销售额
+SELECT MAX(price), MIN(price) FROM products;    -- 最贵和最便宜
+
+-- 分组统计——每个城市的用户数
+SELECT city, COUNT(*) AS count
+FROM users
+GROUP BY city
+ORDER BY count DESC
+LIMIT 10;
+
+-- 去重
+SELECT DISTINCT city FROM users ORDER BY city;</pre>
+
+<h3>HAVING vs WHERE——一个关键的区分</h3>
+<p>Malan 专门花了 3 分钟讲这对极易混淆的概念：</p>
+<table>
+<tr><th></th><th>WHERE</th><th>HAVING</th></tr>
+<tr><td><strong>过滤时机</strong></td><td><strong>分组之前</strong>——先筛行，再分组</td><td><strong>分组之后</strong>——先分组，再筛组</td></tr>
+<tr><td><strong>能过滤什么</strong></td><td>原始列的值</td><td>聚合函数的结果（COUNT, AVG 等）</td></tr>
+<tr><td><strong>典型用法</strong></td><td><code>WHERE city = 'Beijing'</code></td><td><code>HAVING COUNT(*) > 5</code>（找出用户数超过 5 的城市）</td></tr>
+</table>
+<pre>-- 正确：找出用户数超过 5 的城市（必须用 HAVING，不能用 WHERE）
+SELECT city, COUNT(*) AS cnt FROM users
+GROUP BY city
+HAVING cnt > 5;
+
+-- 错误！WHERE 在分组之前执行，此时 cnt 还不存在
+SELECT city, COUNT(*) AS cnt FROM users
+GROUP BY city
+WHERE cnt > 5;   -- ❌</pre>
+
+<h3>子查询（Subquery）——查询中的查询</h3>
+<p>这是 SQL 最强大的特性之一——一个 SELECT 的结果可以直接作为另一个 SELECT 的条件或数据源：</p>
+<pre>-- 找出评分高于平均分所有的电影
+SELECT title, rating FROM movies
+WHERE rating > (SELECT AVG(rating) FROM movies);
+
+-- 找出和 'Tom Hanks' 合作过的所有演员
+SELECT DISTINCT name FROM people
+WHERE id IN (
+    SELECT person_id FROM stars
+    WHERE movie_id IN (
+        SELECT movie_id FROM stars
+        WHERE person_id = (
+            SELECT id FROM people WHERE name = 'Tom Hanks'
+        )
+    )
+) AND name != 'Tom Hanks';</pre>
+<blockquote><p>Malan 在第 7 周的 Problem Set 中会让学生写这种嵌套子查询。他的建议：「从最内层开始写、开始理解。最内层的查询先独立跑通，然后一层层向外包。」</p></blockquote>
+
+<h3>7-5：⭐ JOIN——把分散在多张表中的数据拼在一起</h3>
+<p>这是关系型数据库真正的超能力。Malan 用一个场景说明：「你用 Week 5 的链表写了电话簿——每个人存一个 name 和 number。但如果你想要每个人的'购物记录'呢？你不可能在 phonebook 节点里塞一个可变长的购物数组。在 SQL 里——两张表，一行 JOIN，齐活。」</p>
+
+<pre>-- 建两张表
+CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);
+CREATE TABLE orders (id INTEGER PRIMARY KEY, user_id INTEGER, product TEXT, price REAL);
+
+-- 插入数据
+INSERT INTO users VALUES (1, 'Alice'), (2, 'Bob');
+INSERT INTO orders VALUES (1, 1, 'Book', 29.9), (2, 1, 'Pen', 3.5), (3, 2, 'Laptop', 999.0);
+
+-- JOIN：把两张表按 user_id = users.id 缝在一起
+SELECT users.name, orders.product, orders.price
+FROM users
+JOIN orders ON users.id = orders.user_id;
+
+-- 结果：
+-- Alice | Book  | 29.9
+-- Alice | Pen   | 3.5
+-- Bob   | Laptop| 999.0</pre>
+
+<table>
+<tr><th>JOIN 类型</th><th>结果</th><th>什么时候用</th></tr>
+<tr><td><strong>INNER JOIN</strong></td><td>只返回两张表中<strong>匹配到的行</strong></td><td>最常用。只关心有对应关系的记录</td></tr>
+<tr><td><strong>LEFT JOIN</strong></td><td>左表的所有行 + 右表匹配的行（没匹配到显示 NULL）</td><td>「用户列表 + 订单（含没下过单的用户）」</td></tr>
+<tr><td><strong>RIGHT JOIN</strong></td><td>右表所有行 + 左表匹配的行</td><td>较少用。SQLite 不支持，但概念存在</td></tr>
+</table>
+
+<h3>数据库设计——为什么拆表（范式入门）</h3>
+<p>Malan 在第 7 周用一个非常接地气的例子引入数据库设计的思想：</p>
+<pre>-- ❌ 坏设计——一张大表存一切
+CREATE TABLE bad (
+    user_name TEXT,
+    user_email TEXT,
+    order_product TEXT,
+    order_price REAL
+);
+-- 问题：Alice 买了 3 件东西 → 她的名字和邮箱被重复存了 3 遍
+--       如果 Alice 改邮箱 → 需要更新 3 行，容易漏
+--       如果删除 Alice 的最后一个订单 → Alice 这个人就消失了
+
+-- ✅ 好设计——拆成两张表，用外键关联
+CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT UNIQUE);
+CREATE TABLE orders (id INTEGER PRIMARY KEY, user_id INTEGER, product TEXT, price REAL,
+                     FOREIGN KEY (user_id) REFERENCES users(id));
+-- 好处：Alice 的信息只存一次。改邮箱 → 改 1 行。删订单 → 人还在</pre>
+<blockquote><p>这个原则叫<strong>数据库规范化（Normalization）</strong>——减少数据冗余、避免更新异常和删除异常。Malan 没有深入 1NF/2NF/3NF 的理论，但他用一个「坏设计→好设计」的对比让你直观感受到了「为什么拆表是对的」。</p></blockquote>
+
+<h3>7-6：索引——为什么加了一行 CREATE INDEX 查询就快了 1000 倍</h3>
+<p>Malan 用了一组实测数字。一张有 100 万行数据的 users 表，查询 <code>WHERE name = 'Zoe'</code>：</p>
+<table>
+<tr><th>状态</th><th>耗时</th><th>为什么</th></tr>
+<tr><td>没有索引</td><td>约 0.5 秒</td><td>全表扫描（O(n)）——从头扫到尾找 'Zoe'</td></tr>
+<tr><td>加了 <code>CREATE INDEX idx_name ON users(name);</code></td><td>约 0.0003 秒</td><td>B-Tree 索引查找（O(log n)）——直接定位到 'Z' 开头的区域</td></tr>
+</table>
+<p>索引的原理和你在 Week 3 学的二分搜索完全一样——<strong>但数据库自动维护索引，你不需要在每次插入后重新排序。</strong> 代价：</p>
+<ul>
+<li>索引本身占磁盘空间</li>
+<li>INSERT / UPDATE 时除了写数据表，还要更新索引——会慢一些</li>
+<li>太多索引反而拖慢写入。Malan：「只在 WHERE / JOIN / ORDER BY 经常用的列上建索引。」</li>
+</ul>
+
+<h3>7-7：⭐ SQL 注入——CS50 最惊悚的现场演示</h3>
+<p>Malan 的脸色变得严肃起来。这是 CS50 最重要的安全课之一——他在讲台上现场演示一个经典的 SQL 注入攻击。</p>
+<p>场景：一个登录页面，用户输入用户名和密码。后端代码是（用 Python 写的 CS50 示例）：</p>
+<pre># 危险示范——用字符串拼接直接构造 SQL 语句！
+username = input("Username: ")
+password = input("Password: ")
+db.execute(f"SELECT * FROM users WHERE username='{username}' AND password='{password}'")</pre>
+<p>正常人输入：<code>alice</code> / <code>12345</code>。构造的 SQL：</p>
+<pre>SELECT * FROM users WHERE username='alice' AND password='12345'</pre>
+<p>工作正常。但攻击者输入：<code>alice'--</code>。构造的 SQL 变成：</p>
+<pre>SELECT * FROM users WHERE username='alice'--' AND password='...'</pre>
+<p><code>--</code> 在 SQL 中是注释——后面的所有内容（包括密码检查）全被注释掉了！<strong>攻击者用不知谁的密码登录了 alice 的账户。</strong></p>
+<p>更可怕的——攻击者输入：<code>Robert'); DROP TABLE students;--</code>。这条语句会被执行两次：第一次 SELECT，第二次删除整张 students 表。Malan 没有在课上真的执行——他在黑板上写好然后盯着学生：「你们现在知道了——永远不要把用户输入直接拼进 SQL 语句。」</p>
+
+<h3>防御：参数化查询 + 纵深防御</h3>
+<pre># 安全做法——用占位符（?），让数据库引擎处理转义
+username = input("Username: ")
+password = input("Password: ")
+db.execute("SELECT * FROM users WHERE username = ? AND password = ?", username, password)</pre>
+<p>此时 <code>?</code> 占位符告诉数据库：「这两个值是数据，不是 SQL 代码。」即使用户输入了 <code>'--</code>，它也会被当作<strong>字面文本</strong>存储和比较——而不是被当作 SQL 语法执行。</p>
+<p>Malan 补充了两条防线（纵深防御原则）：</p>
+<ul>
+<li><strong>不止参数化查询</strong>——确保你的数据库用户只有「必需的最小权限」。如果 Web 应用只需要 SELECT 和 INSERT，就不要给它 DROP TABLE 的权限。这样即使注入成功，攻击者也删不了表</li>
+<li><strong>输入验证也在前端做</strong>——虽然攻击者可以绕过前端，但合法的「用户名不应该包含单引号」在前端就能拦截 99% 的误操作和脚本小子的试探</li>
+</ul>
+<blockquote><p>Malan 的总结：「SQL 注入不是高级黑客技术——它是一个 10 岁小孩在输入框里打 <code>'; DROP TABLE</code> 就能做到的事。但防御也同样简单：<strong>永远用参数化查询。</strong> 永远。一个字。」</p></blockquote>
+
+<h3>7-8：事务（Transaction）——要么全做，要么全不做</h3>
+<p>Malan 在第 7 周的后半段引入了事务——这是数据库的「原子性」保障。场景：银行转账——从 Alice 的账户扣 100 元，加给 Bob。两步操作必须<strong>要么都成功，要么都撤销</strong>。如果扣了 Alice 的钱但加不到 Bob 的账户（因为网络断了、数据库崩了）——钱就丢了。</p>
+<pre>-- 事务的写法
+BEGIN TRANSACTION;
+    UPDATE accounts SET balance = balance - 100 WHERE name = 'Alice';
+    UPDATE accounts SET balance = balance + 100 WHERE name = 'Bob';
+COMMIT;    -- 全部成功 → 提交，数据持久化
+
+-- 如果中间出错了——
+ROLLBACK;  -- 全部撤销，回到 BEGIN 之前的状态</pre>
+<blockquote><p>Malan 的经典拆解：「事务给数据库加了一个'后悔药'——在 COMMIT 之前，所有的修改都只存在于你的会话中，外部用户看不到。一旦 COMMIT，修改才真正写入磁盘。一旦 ROLLBACK——什么都没发生过。这就是为什么银行转账的代码里一定会有 BEGIN 和 COMMIT。这不是可选功能，这是法律要求。」</p></blockquote>
+
+<h3>7-9：SQLite——你电脑上的数据库</h3>
+<p>Malan 在第 7 周选择 SQLite 而不是 MySQL/PostgreSQL——理由很实际：「SQLite 不需要安装服务器。一个 <code>.db</code> 文件就是整个数据库。你的 iPhone 里每一个 App 的本地数据存的都是 SQLite。你在 CS50 IDE 里不需要配置任何东西——<code>sqlite3 mydata.db</code> 回车，就开始写 SQL。」</p>
+<pre># 打开数据库
+sqlite3 mydata.db
+
+# 在 sqlite3 命令行中：
+.tables                  -- 列出所有表
+.schema students         -- 查看 students 表的结构（建表语句）
+.mode csv                -- 输出格式设为 CSV
+.import data.csv students -- 从 CSV 文件导入数据
+.headers on              -- 查询结果的第一行显示列名
+.output result.txt       -- 把之后的查询结果输出到文件
+.quit                    -- 退出</pre>
+
+<h3>7-10：Week 7 的 Problem Set——电影数据库</h3>
+<p>CS50 提供了一份近百万行的电影数据库（IMDb 数据），包含 movies（电影）、people（演员/导演）、ratings（评分）、stars（主演关系）等表。你的任务——用纯 SQL 查询回答一系列问题：</p>
+<ul>
+<li>列出 2008 年上映的所有电影</li>
+<li>找出评分最高的 10 部电影（需要 JOIN movies 和 ratings）</li>
+<li>找出和 Johnny Depp 合作次数最多的演员（需要自 JOIN stars 表两次 + 排除 Johnny Depp 自己）</li>
+<li>写出一个查询，找出同时出演了某两部的演员——需要嵌套子查询或多次 JOIN</li>
+<li>高级挑战：找出在最多电影中担任主角的演员</li>
+</ul>
+<p>这个作业的迷人之处：<strong>不需要 C，不需要 Python，不需要编译。你就在一个终端里写 SELECT 语句，每一行回答一个问题。</strong> 学生反馈中最常见的感叹：「我第一次感受到'数据在语言层面就是可查询的'。」</p>
+
+<span class="dot"></span>
+
+<h2>📝 Week 6-7 核心对照速查</h2>
+<table>
+<tr><th>你之前在做什么</th><th>C 的方式</th><th>Python / SQL 的方式</th></tr>
+<tr><td>存一组数据</td><td><code>int arr[n];</code> 或 <code>malloc</code></td><td>Python: <code>list</code> — 自动扩容<br>SQL: CREATE TABLE — 持久化到磁盘，自动索引</td></tr>
+<tr><td>查数据</td><td>for 循环逐行比对</td><td>Python: <code>if x in list</code> (O(n)), <code>dict[key]</code> (O(1))<br>SQL: SELECT WHERE — 引擎自动用索引，你甚至不用想 O(n) 的问题</td></tr>
+<tr><td>处理文本</td><td><code>strcmp, strlen, strcpy</code></td><td>Python: <code>==, len, s[2:5]</code><br>SQL: LIKE '%keyword%'</td></tr>
+<tr><td>处理图像</td><td>fread 逐字节读 BMP 文件头 → 逐像素处理 → fwrite</td><td>Python: PIL/Pillow — 3 行开图、5 行做滤镜、1 行保存</td></tr>
+<tr><td>多表关联查询</td><td>嵌套 for 循环 + if 比对 ID</td><td>SQL: JOIN ON — 一行声明，引擎自动优化执行计划</td></tr>
+<tr><td>错误处理</td><td>每个函数调用完检查返回值</td><td>Python: try/except 包裹<br>SQL: 约束在数据入口拦截</td></tr>
+<tr><td>数据一致性</td><td>手动管理——如果中间崩溃，状态未知</td><td>SQL: 事务（BEGIN+COMMIT/ROLLBACK）保证原子性</td></tr>
+</table>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+<div class="nav-bottom"><a href="#">↑ 回到顶部</a></div>
+</div></body></html>

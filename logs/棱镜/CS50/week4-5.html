@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS50 · Week 4–5 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif SC",serif;background:#fafafa;color:#333;line-height:1.9}
+.container{max-width:680px;margin:0 auto;padding:64px 24px 80px}
+h1{font-size:1.8rem;font-weight:400;letter-spacing:2px;line-height:1.5;margin-bottom:16px;color:#1a1a1a}
+.meta{font-size:.85rem;color:#999;margin-bottom:48px}.meta span{margin-right:16px}
+.intro{font-size:.9rem;color:#777;line-height:1.8;margin-bottom:48px;padding-left:16px;border-left:2px solid #ddd}
+h2{font-size:1.25rem;font-weight:500;margin-top:56px;margin-bottom:20px;color:#1a1a1a;letter-spacing:1px}
+h3{font-size:1.05rem;font-weight:500;margin-top:36px;margin-bottom:14px;color:#333}
+p{font-size:.95rem;margin-bottom:16px;color:#444}
+blockquote{margin:24px 0;padding:16px 20px;background:#f5f5f5;border-radius:6px;font-size:.9rem;color:#555;border-left:3px solid #ccc}
+blockquote p{margin-bottom:0;color:#555}
+strong{color:#1a1a1a;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:20px 0 28px;font-size:.85rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e8e8e8;vertical-align:top;line-height:1.6}
+th{background:#f9f9f9;font-weight:500;color:#555;font-size:.8rem;letter-spacing:1px}
+tr:hover td{background:#fcfcfc}
+hr{border:none;border-top:1px solid #e8e8e8;margin:48px 0}
+.dot{display:block;width:6px;height:6px;background:#ccc;border-radius:50%;margin:40px auto}
+ul,ol{margin:12px 0 20px 20px;font-size:.9rem;color:#555;line-height:2}
+code{background:#f0f0f0;padding:1px 6px;border-radius:3px;font-size:.85rem;font-family:"SF Mono","Menlo","Consolas",monospace;color:#c7254e}
+pre{background:#2d2d2d;color:#f8f8f2;padding:16px 20px;border-radius:6px;overflow-x:auto;font-size:.82rem;line-height:1.7;margin:16px 0 24px;font-family:"SF Mono","Menlo","Consolas",monospace}
+.nav-bottom{margin-top:64px;padding-top:24px;border-top:1px solid #e8e8e8;text-align:center}
+.nav-bottom a{color:#999;text-decoration:none;font-size:.85rem}.nav-bottom a:hover{color:#333}
+@media(max-width:600px){.container{padding:32px 16px 64px}h1{font-size:1.4rem}table{font-size:.78rem}th,td{padding:8px}}
+</style>
+</head>
+<body><div class="container">
+        <a class="back" href="index.html">← CS50</a>
+
+<h1>CS50x 2025 · 听课笔记<br>Week 4 &amp; Week 5</h1>
+<div class="meta"><span>星尘 整理</span><span>2026年5月29日</span></div>
+<div class="intro">
+<p>Week 4 和 Week 5 是 CS50 的「心脏」。Week 4 揭开指针和内存的面纱——这是 C 语言区别于几乎所有高级语言的标志性特征，也是理解计算机底层工作方式的钥匙。Week 5 则把指针变成实实在在的数据结构——链表、哈希表、树——Malan 会在讲台上搭起真实的积木模型，用最物理的方式教你最抽象的概念。这两周学完，你不再是「会写 C」的人——你是「理解计算机」的人。</p>
+</div>
+
+<h2>🔑 关键词索引</h2>
+<table>
+<tr><th>关键词</th><th>一句话说明</th></tr>
+<tr><td><strong>⭐ 指针（Pointer）</strong></td><td>存储另一个变量内存地址的变量。是 C 的灵魂——没有指针，就没有动态内存、链表、树，甚至没有 Python 的引用</td></tr>
+<tr><td><strong>&amp;（取地址）</strong></td><td>一元运算符，返回变量的内存地址。你在 <code>scanf("%d", &amp;x)</code> 里已经用了三周，现在揭晓它到底在干什么</td></tr>
+<tr><td><strong>*（解引用）</strong></td><td>一元运算符，沿着指针「走到」目标地址，读写那个地址上存的值。指针的「*」和乘法的「*」是同一个符号但完全不同的操作</td></tr>
+<tr><td><strong>⭐ malloc / free</strong></td><td>C 的动态内存分配——<code>malloc</code> 向操作系统申请一块堆内存，<code>free</code> 归还。忘了 free = 内存泄漏。这是 Week 4 的重中之重</td></tr>
+<tr><td><strong>calloc / realloc</strong></td><td><code>calloc</code> = malloc + 清零初始化；<code>realloc</code> = 调整已分配内存的大小。和 malloc 组成动态内存三剑客</td></tr>
+<tr><td><strong>栈（Stack）vs 堆（Heap）</strong></td><td>程序内存的两个主区域——栈管局部变量和函数调用（自动回收），堆管动态分配（你负责回收）</td></tr>
+<tr><td><strong>程序内存全景</strong></td><td>从低地址到高地址：text（代码）→ data（全局变量）→ bss（未初始化）→ heap ↑ → ... → stack ↓。一图胜千言</td></tr>
+<tr><td><strong>valgrind</strong></td><td>内存调试神器——检测内存泄漏、非法读写、未初始化值。Malan 说「当你折腾到凌晨三点找不到 bug 时，valgrind 是你的最后希望」</td></tr>
+<tr><td><strong>野指针 &amp; 悬垂指针</strong></td><td>未初始化的指针（野指针）指向随机地址；free 后还用的指针（悬垂指针）指向已归还的内存。两者都是段错误的元凶</td></tr>
+<tr><td><strong>缓冲区溢出</strong></td><td>向数组写入超过其容量的数据，多余的数据覆盖了相邻内存——可能覆盖其他变量，甚至覆盖函数返回地址（被黑客利用跳转到恶意代码）</td></tr>
+<tr><td><strong>Segmentation Fault</strong></td><td>操作系统给你的惩罚——访问了不属于你的内存。段错误 = 你的程序在未经允许的情况下碰了不该碰的内存地址</td></tr>
+<tr><td><strong>文件 I/O</strong></td><td><code>fopen</code> / <code>fread</code> / <code>fwrite</code> / <code>fclose</code>——读写磁盘文件。Week 4 的 Problem Set 是用 C 从磁盘镜像中恢复被删除的 JPEG</td></tr>
+<tr><td><strong>memcpy / memmove / memset</strong></td><td>内存操作三剑客——拷贝、安全拷贝（处理重叠）、填充。比 strcpy 更底层，直接操作原始字节</td></tr>
+<tr><td><strong>⭐ 链表（Linked List）</strong></td><td>最简单的动态数据结构——每个节点存一个值 + 一个指向下一个节点的指针。插入 O(1)，查找 O(n)。Malan 用真人 + 毛线演示</td></tr>
+<tr><td><strong>双向链表</strong></td><td>每个节点多一个 <code>prev</code> 指针——可以向前向后走。删除节点不需要遍历找前驱，但多一个指针 = 多一份内存和维护成本</td></tr>
+<tr><td><strong>哈希表（Hash Table）</strong></td><td>数组 + 链表的混血——哈希函数把键映射成数组索引，冲突时用链表处理。理想 O(1) 查找。索引卡片的比喻</td></tr>
+<tr><td><strong>负载因子（Load Factor）</strong></td><td>哈希表已用槽位 / 总槽位。超过阈值（如 0.7）就需要扩容（rehash），否则性能从 O(1) 退化到 O(n)</td></tr>
+<tr><td><strong>二叉搜索树</strong></td><td>每个节点最多两个子节点——左边小、右边大。查找 O(log n)（平衡时），O(n)（退化成链表时）</td></tr>
+<tr><td><strong>树的遍历</strong></td><td>前序（根→左→右）、中序（左→根→右，刚好是升序！）、后序（左→右→根）。是递归在数据结构上最漂亮的展示</td></tr>
+<tr><td><strong>Trie（前缀树）</strong></td><td>按「字符」组织——每个节点存一个字母，沿着路径走到头就是一个单词。查找时间是单词长度，与数据总量无关</td></tr>
+<tr><td><strong>队列 vs 栈</strong></td><td>FIFO（先进先出，像排队）vs LIFO（后进先出，像一摞盘子）。所有复杂的软件架构最终都归结为这两种抽象</td></tr>
+<tr><td><strong>抽象数据类型（ADT）</strong></td><td>把「做什么」（接口）和「怎么做」（实现）分开。链表、栈、队列都是 ADT——你可以用数组或指针来实现它们</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 4 ==================== -->
+<h2>Week 4 · Memory</h2>
+
+<h3>这节课的定位——过了这关就是另一个世界</h3>
+<p>Week 4 是 CS50 公认的「试金石」。前 3 周你一直在用别人封装好的东西——<code>string</code>、<code>get_int()</code>、<code>make</code>。这一周全部掀开。你会看到 <code>string</code> 的骨骼（就是一个 <code>char *</code>）、你会理解为什么 <code>scanf</code> 要加 <code>&</code>、你会亲手申请内存然后亲手还回去。学生口碑里这一周的评语很统一：「上完 Week 4 之前，我写 C；上完 Week 4 之后，我理解 C。」</p>
+
+<h3>4-1：指针——C 语言的灵魂</h3>
+<p>Malan 的开场是一行看似无害的代码：「我们用了三周的 <code>string</code>，今天要看看它的真面目。」然后他在黑板上写：</p>
+<pre>string s = "HI!";
+// 等价于
+char *s = "HI!";    // 这才是真的——指针！string 是假名，char * 是真名</pre>
+<p>从这一刻起，<strong>你不能再假装「string 是一个基本类型」了。</strong></p>
+
+<h3>内存地址——每个变量都有一个门牌号</h3>
+<p>Malan 用一栋公寓楼做比喻。内存就像一栋巨大的公寓楼——每户人家（每个字节）都有一个独一无二的门牌号（地址）。变量是你给住户起的外号，指针是你在纸上抄下来的门牌号。</p>
+<pre>int n = 50;
+// n 存着整数 50，但 n 本身住在内存的某个地址
+
+int *p = &n;   // p 存着的不是 50——是 n 的门牌号（地址）
+// p 的类型是「指向 int 的指针」
+
+printf("%p\n", p);    // 打印 n 的地址，如 0x7ffd5f3a2c14
+printf("%i\n", *p);   // 沿着地址走过去，读出里面的值 → 50</pre>
+
+<h3>&amp; 和 *——指针世界的「来」和「回」</h3>
+<p>这是你三周前就在用的 <code>&</code>（<code>scanf("%d", &x)</code>），现在 Malan 终于揭晓全貌：</p>
+<table>
+<tr><th>运算符</th><th>方向</th><th>作用</th><th>比喻</th></tr>
+<tr><td><code>&amp;x</code></td><td>变量 → 地址</td><td>「x 住在哪里？」</td><td>查门牌号</td></tr>
+<tr><td><code>*p</code></td><td>地址 → 变量</td><td>「这个门牌号里面住着谁？」</td><td>按门牌号敲门</td></tr>
+</table>
+<blockquote><p>Malan 的经典口诀：「<code>&amp;</code> 给你地址。 <code>*</code> 沿着地址走。」他说完会停顿三秒，让这句话沉下去，因为后面所有内容都建立在这句话之上。</p></blockquote>
+
+<h3>用指针交换两个变量的值——终于解开了「为什么需要第三个杯子」</h3>
+<p>Week 0 的杯子演示。Week 1 的 C 代码实现。但一直有个问题挥之不去——你在 C 里写的交换函数，为什么需要指针？</p>
+<pre>// ❌ 这样不行——C 的传参是「值传递」，函数收到的是副本
+void swap_bad(int a, int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;     // 只修改了副本！外部的 x 和 y 纹丝不动
+}
+
+// ✅ 传地址进去——函数顺着地址去改原版
+void swap(int *a, int *b)
+{
+    int temp = *a;   // 去 a 的地址，把值拿出来
+    *a = *b;         // 去 b 的地址，把值搬到 a 的地址
+    *b = temp;       // 把暂存的值放到 b 的地址
+}
+
+// 调用时
+int x = 1, y = 2;
+swap(&x, &y);   // 传的是门牌号，不是值本身
+// x=2, y=1 ✅ 终于换了！</pre>
+<blockquote><p>Malan 在这里说出了 Week 1-3 一直藏着的话：「<strong>所以 scanf 为什么需要 <code>&</code>？因为它需要知道把你输入的值存到哪里去。</strong> <code>scanf</code> 的签名是 <code>scanf(format, 地址)</code>——它通过地址去改你的变量，而不是通过值的副本。现在你明白了。」</p></blockquote>
+
+<h3>4-2：动态内存分配——malloc 与 free</h3>
+<p>到现在为止，你声明的所有数组大小都是编译时确定的——<code>int scores[100]</code>。但你不知道用户有几个学生——10 个？1000 个？Malan 掏出了一个新武器：<strong>堆（Heap）</strong>。</p>
+
+<h3>栈 vs 堆——程序内存的两个世界</h3>
+<p>Malan 在黑板上画了一个长方形——程序运行时的整个内存空间。然后他在中间画了一条横线，上半部分标注「堆」，下半部分标注「栈」。</p>
+<table>
+<tr><th></th><th>栈（Stack）</th><th>堆（Heap）</th></tr>
+<tr><td><strong>谁管</strong></td><td>编译器自动管理</td><td>你手动管理（malloc / free）</td></tr>
+<tr><td><strong>放了什么</strong></td><td>局部变量、函数参数、返回地址</td><td>动态分配的数组、节点、字符串</td></tr>
+<tr><td><strong>回收时机</strong></td><td>函数返回时自动收回</td><td>你调用 <code>free</code> 时才收回。忘了？永远占着</td></tr>
+<tr><td><strong>大小</strong></td><td>相对较小（MB 级）</td><td>可以很大（GB 级）</td></tr>
+<tr><td><strong>增长方向</strong></td><td>向下（往低地址）</td><td>向上（往高地址）</td></tr>
+<tr><td><strong>满了会怎样</strong></td><td>栈溢出（Stack Overflow）</td><td>malloc 返回 NULL——优雅地失败</td></tr>
+</table>
+<blockquote><p>Malan 的比喻：「栈像自助餐厅的餐盘——你用完的盘子服务员自动收走。堆像你从仓库借出来的工具——你不还，它就永远占着仓库的位置。程序结束后操作系统会强制收回，但程序运行期间，你忘了 <code>free</code> 的那块内存就一直占着，像房间里堆满了你不用的箱子。」</p></blockquote>
+
+<h3>程序内存全景——不只是栈和堆</h3>
+<p>Malan 在第 4 周后半段展开了完整的程序内存地图——从最低地址到最高地址，一共五个区域。这张图是整个 CS50 被截图次数最多的板书之一：</p>
+<pre>  高地址 (0xFFFFFFFF...)
+  ┌──────────────────┐
+  │   命令行参数 &amp; 环境变量   │
+  ├──────────────────┤
+  │      栈 (Stack)        │ ← 向下生长 ↓  (局部变量、函数帧)
+  │                        │
+  │      ⬇ 未使用空间 ⬇      │
+  │      ⬆ 未使用空间 ⬆      │
+  │                        │
+  │       堆 (Heap)         │ ← 向上生长 ↑  (malloc 从这里分配)
+  ├──────────────────┤
+  │    未初始化数据 (BSS)    │ ← 全局变量、static 变量（未初始化）
+  ├──────────────────┤
+  │    已初始化数据 (Data)   │ ← 全局变量、static 变量（已初始化）
+  ├──────────────────┤
+  │      代码 (Text)        │ ← 你的程序的机器码（只读）
+  └──────────────────┘
+  低地址 (0x00000000)</pre>
+<table>
+<tr><th>区域</th><th>放了什么</th><th>特点</th></tr>
+<tr><td><strong>Text</strong></td><td>编译后的机器码（你的 main、swap、所有函数的指令）</td><td><strong>只读。</strong> 你的代码不能修改自己。共享——多个进程运行同一程序时共用一份 Text</td></tr>
+<tr><td><strong>Data</strong></td><td>已初始化的全局变量和 static 变量</td><td>可读写。程序启动时从可执行文件加载</td></tr>
+<tr><td><strong>BSS</strong></td><td>未初始化的全局变量和 static 变量</td><td>可读写。程序启动时自动清零。BSS 段在可执行文件中不占空间——只记录「需要多少字节的全零」</td></tr>
+<tr><td><strong>Heap</strong></td><td>malloc 分配的所有东西</td><td>往上长。你需要维护秩序（free 归还）</td></tr>
+<tr><td><strong>Stack</strong></td><td>局部变量、函数参数、返回地址</td><td>往下长。自动管理。满了 = Stack Overflow</td></tr>
+</table>
+<blockquote><p>Malan 指着这张图说：「这就是你写 C 程序时脚下的整个大陆。接下来 4 周的每次段错误、每次内存泄漏、每次栈溢出，你都可以回到这张图来定位问题。」</p></blockquote>
+
+<h3>malloc——向操作系统借一块内存</h3>
+<pre>// 借一块能存 3 个 int 的内存（3 × 4 bytes = 12 bytes）
+int *scores = malloc(3 * sizeof(int));
+
+// 检查是否借到了（内存可能不够）
+if (scores == NULL) {
+    printf("内存不足！\n");
+    return 1;
+}
+
+// 可以像普通数组一样用
+scores[0] = 72;
+scores[1] = 85;
+scores[2] = 93;
+
+// 用完必须还——忘了就泄漏
+free(scores);
+scores = NULL;  // 好习惯：释放后把指针置空，防止「悬垂指针」</pre>
+
+<h3>动态内存三剑客——malloc、calloc、realloc</h3>
+<p>Malan 介绍完 <code>malloc</code> 后，立刻引出了它的两个「兄弟」——它们仨一起构成 C 语言动态内存分配的完整武器库：</p>
+<table>
+<tr><th>函数</th><th>参数</th><th>做什么</th><th>关键区别</th></tr>
+<tr><td><code>malloc(n)</code></td><td>总字节数</td><td>向堆申请 n 个字节</td><td><strong>不清零。</strong> 内存里是上任用户留下的随机值</td></tr>
+<tr><td><code>calloc(count, size)</code></td><td>元素个数 + 每个的大小</td><td>申请 count×size 字节，<strong>全部初始化为 0</strong></td><td>两个参数，不是乘积。而且清零——适合数组</td></tr>
+<tr><td><code>realloc(ptr, new_size)</code></td><td>旧指针 + 新大小</td><td>调整已分配内存的大小——可以放大或缩小</td><td>可能搬走！返回的新地址可能与旧地址不同——旧指针会失效</td></tr>
+</table>
+<pre>// calloc 示例——直接拿到一个全零数组
+int *scores = calloc(3, sizeof(int));  // 3 个 int，全为 0
+// 等价于：
+// int *scores = malloc(3 * sizeof(int));
+// memset(scores, 0, 3 * sizeof(int));
+
+// realloc 示例——数组从 3 个元素扩展到 5 个
+int *tmp = realloc(scores, 5 * sizeof(int));
+if (tmp == NULL) {
+    free(scores);        // realloc 失败时原内存还在，记得释放！
+    return 1;
+}
+scores = tmp;            // ← 关键！必须用返回值覆盖旧指针
+// 前 3 个元素的值被保留了，后 2 个是未初始化的（realloc 不清零）</pre>
+<blockquote><p><strong>realloc 最常见的坑</strong>：直接写 <code>scores = realloc(scores, ...)</code>。如果 realloc 失败返回 NULL——<strong>你就失去了 scores 指向的原内存的引用。</strong> 内存泄漏 + 数据丢失双杀。正确做法：用一个临时变量接收 realloc 的返回值，确认非 NULL 后再赋值。</p></blockquote>
+
+<h3>内存泄漏——房间里堆满你不再用的箱子</h3>
+<p>Malan 写了一个演示——在一个循环里不停地 <code>malloc</code>，但从不 <code>free</code>：</p>
+<pre>// 这个程序会慢慢吃掉你所有的内存！
+int main(void)
+{
+    while (true)
+    {
+        int *leak = malloc(1000000);  // 每次借 1MB
+        // 没有 free(leak)！← 内存泄漏
+        sleep(1);
+    }
+}</pre>
+<p>运行这个程序，打开「活动监视器」——你会亲眼看到它的内存占用每秒增长 1MB。Malan 让学生打开终端跑这个，然后兴奋地指着监视器的曲线：「看，你的程序正在把自己吃成胖子。」</p>
+<blockquote><p><strong>三个经典的内存错误</strong>（后面 <code>valgrind</code> 能全部检测出来）：① 忘了 <code>free</code> → 内存泄漏。② <code>free</code> 之后还继续用那个指针 → 悬垂指针（Use After Free）。③ <code>free</code> 同一个地址两次 → 双重释放（Double Free）。</p></blockquote>
+
+<h3>野指针与悬垂指针——段错误的两个元凶</h3>
+<p>Malan 在第 4 周反复强调两种危险的指针状态，因为它们会导致最经典的 <strong>Segmentation Fault</strong>：</p>
+<table>
+<tr><th>类型</th><th>怎么产生的</th><th>为什么危险</th><th>防御</th></tr>
+<tr><td><strong>野指针（Wild Pointer）</strong></td><td>声明了指针但从未初始化——<br><code>int *p;</code>（p 里面是随机值）</td><td>解引用它 → 访问一个随机的内存地址 → 段错误（或者更糟——碰巧撞上了别人的数据）</td><td>声明时立刻初始化：<code>int *p = NULL;</code></td></tr>
+<tr><td><strong>悬垂指针（Dangling Pointer）</strong></td><td><code>free(p)</code> 之后还继续使用 p</td><td>那块内存已经归还给堆了——可能已经被别的 malloc 分配走了。你通过 p 去读写的，可能是别人的数据</td><td><code>free(p); p = NULL;</code> ——释放后立刻置空，之后再解引用 NULL 至少会干净地段错误，而不是默默破坏数据</td></tr>
+</table>
+<blockquote><p>Malan 的警示：「野指针导致的 bug 是最难排查的——因为它是<strong>不确定的</strong>。同一个程序，今天在 0x7fff... 那个随机地址上碰巧有你自己的数据，所以 '好像没问题'；明天换个环境，随机地址不同了，段错误。这种'时灵时不灵'的 bug 最让人崩溃。」</p></blockquote>
+
+<h3>4-3：valgrind——内存问题的终极侦探</h3>
+<p>Malan 把 valgrind 称作「你凌晨三点的最后希望」。它是一个命令行工具，运行你的程序并实时监视每一次内存操作——分配、读写、释放。然后生成一份详细报告：</p>
+<pre>valgrind ./myprogram
+==12345== HEAP SUMMARY:
+==12345==   definitely lost: 0 bytes in 0 blocks
+==12345==   indirectly lost: 0 bytes in 0 blocks
+==12345==   possibly lost:   0 bytes in 0 blocks
+==12345==   still reachable: 0 bytes in 0 blocks
+==12345== ERROR SUMMARY: 0 errors from 0 contexts</pre>
+<table>
+<tr><th>valgrind 能发现的</th><th>什么意思</th></tr>
+<tr><td><strong>内存泄漏</strong>（definitely lost）</td><td>有一块内存，你分配了但没有任何指针指向它——彻底弄丢了，永远没法释放了</td></tr>
+<tr><td><strong>非法读写</strong>（Invalid read/write）</td><td>你访问了不属于你的内存——比如 <code>array[100]</code> 越界，或者 <code>free</code> 之后还用了那个指针</td></tr>
+<tr><td><strong>未初始化值的使用</strong></td><td>你声明了一个变量但没赋值就用了——它的值是内存里的随机垃圾。valgrind 会标黄（Conditional jump depends on uninitialised value）</td></tr>
+<tr><td><strong>双重释放</strong></td><td>同一个地址被 <code>free</code> 两次——第二次 free 时那块内存可能已经被分配给别的东西了</td></tr>
+</table>
+
+<h3>4-4：指针运算——指针的算术</h3>
+<p>Malan 把指针的算术拆成最直观的图示。如果 <code>int *p = &scores[0]</code>，那么：</p>
+<ul>
+<li><code>p + 1</code> 不是地址值 + 1——是地址值 + <strong>sizeof(int)</strong>（通常是 4）</li>
+<li><code>p + 2</code> 是 +8 个字节</li>
+<li>这就是为什么 <code>scores[3]</code> 和 <code>*(scores + 3)</code> 完全等价——数组索引只是指针运算的语法糖</li>
+</ul>
+<pre>int scores[] = {72, 85, 93};
+int *p = scores;  // 等价于 &scores[0]
+
+printf("%i\n", *p);        // 72 → scores[0]
+printf("%i\n", *(p + 1));  // 85 → scores[1]
+printf("%i\n", *(p + 2));  // 93 → scores[2]
+
+// 这两个写法完全等价：
+scores[i]  ⇔  *(scores + i)  // C 就是这么实现数组的！</pre>
+<blockquote><p>Malan 的解密时刻：「这就是为什么 Week 2 我说数组名就是指向第一个元素的指针。整个 C 语言的数组操作——从 <code>scores[5]</code> 到 <code>strlen(s)</code>——底层全部是指针运算。你以为是数组，其实你一直在用指针。」</p></blockquote>
+
+<h3>指向指针的指针——指针的「元」操作</h3>
+<p>在链表等数据结构中，你经常需要「修改指针本身的值」。这时就需要一个指向指针的指针：</p>
+<pre>int x = 42;
+int *p = &x;        // p 指向 int
+int **pp = &p;      // pp 指向「指向 int 的指针」
+
+printf("%i\n", **pp);  // 解引用两次：pp → p → x → 42
+
+// 实战场景：在链表头部插入新节点，函数需要修改「头指针」的值
+void insert_head(node **list, int value)
+{
+    node *n = malloc(sizeof(node));
+    n->number = value;
+    n->next = *list;    // *list 是真实的头指针，不是副本
+    *list = n;          // 修改真实的头指针
+}</pre>
+<p>Malan 解释：「当你需要让一个函数修改指针本身——而不是指针指向的内容——你就往上再加一个 <code>*</code>。一层 <code>*</code> 能改值，两层 <code>*</code> 能改指针，三层能改指针的指针……但说实话，到第三层就该想想是不是设计出了问题。」</p>
+
+<h3>内存操作三剑客——memcpy / memmove / memset</h3>
+<p>和 <code>strcpy</code> 不同，这三个函数不关心数据「是什么」——它们直接操作原始字节。Malan 在 Week 4 末尾引入它们，为 JPEG 恢复作业做铺垫：</p>
+<pre>#include &lt;string.h&gt;
+
+// memset：把一块内存全部填成某个值
+char buffer[512];
+memset(buffer, 0, 512);  // 把 buffer 的 512 字节全设为 0
+
+// memcpy：从源地址拷贝 n 个字节到目标地址
+int src[5] = {1, 2, 3, 4, 5};
+int dest[5];
+memcpy(dest, src, 5 * sizeof(int));  // 拷贝 5 个 int = 20 字节
+
+// memmove：和 memcpy 一样，但能处理源和目标的<strong>内存重叠</strong>
+char str[] = "abcdef";
+memmove(str + 2, str, 4);  // str → "ababcd"（安全✅）
+// 如果用 memcpy 做同样的事 → 未定义行为（可能正确，可能崩溃，取决于实现）</pre>
+<table>
+<tr><th>函数</th><th>作用</th><th>区别</th></tr>
+<tr><td><code>memset(ptr, value, n)</code></td><td>把 ptr 开头的 n 个字节全填成 value</td><td>value 是 <strong>unsigned char</strong>，虽然参数是 int。常见用法：清零</td></tr>
+<tr><td><code>memcpy(dest, src, n)</code></td><td>把 src 的 n 个字节拷贝到 dest</td><td><strong>不检查</strong> dest 和 src 是否重叠。重叠时行为未定义——用 memmove</td></tr>
+<tr><td><code>memmove(dest, src, n)</code></td><td>把 src 的 n 个字节「移动」到 dest</td><td><strong>能正确处理重叠。</strong> 内部先判断方向，再从安全的端开始拷贝。比 memcpy 略慢一点</td></tr>
+</table>
+
+<h3>4-5：缓冲区溢出——黑客的入口</h3>
+<p>Malan 恢复了严肃的表情。他在黑板上画了一个字符数组 <code>char buffer[4]</code>，然后写了一个向它写入 8 个字符的程序。多余的 4 个字符不会消失——<strong>它们会覆盖 buffer 之后的内存。</strong> 在典型的程序内存布局中，buffer 后面紧挨着的是……<strong>函数的返回地址</strong>。</p>
+<blockquote><p>这就是历史上最经典的攻击手段——<strong>缓冲区溢出攻击</strong>：精心构造一个超长输入，让它覆盖函数返回地址，把这个地址改写成你提前植入的恶意代码的位置。函数执行完准备返回时，跳到了黑客指定的地方。Malan 说：「这不是科幻小说——这是过去 40 年里一切重大操作系统漏洞的核心机制。」</p></blockquote>
+
+<h3>4-6：文件 I/O——用 C 读写文件</h3>
+<p>Malan 说这是 Week 4 的「甜点」——相比指针和内存，文件操作意外地简单：</p>
+<pre>// 打开文件
+FILE *file = fopen("phonebook.txt", "r");  // "r"=读, "w"=写, "a"=追加
+if (file == NULL) {
+    printf("打不开文件！\n");
+    return 1;
+}
+
+// 逐行读取
+char buffer[256];
+while (fgets(buffer, sizeof(buffer), file) != NULL) {
+    printf("%s", buffer);  // 打印这一行
+}
+
+// 关闭文件
+fclose(file);</pre>
+<p>四个基本操作——<code>fopen</code>、<code>fread</code>（或 <code>fgets</code>）、<code>fwrite</code>（或 <code>fprintf</code>）、<code>fclose</code>——构成了 C 语言与磁盘世界的全部接口。</p>
+<p>文件读写模式和常见的文件操作函数：</p>
+<table>
+<tr><th>fopen 模式</th><th>含义</th><th>文件不存在时</th></tr>
+<tr><td><code>"r"</code></td><td>只读</td><td>返回 NULL</td></tr>
+<tr><td><code>"w"</code></td><td>只写（<strong>会清空已有内容！</strong>）</td><td>创建新文件</td></tr>
+<tr><td><code>"a"</code></td><td>追加（在末尾写，不清空）</td><td>创建新文件</td></tr>
+<tr><td><code>"rb"</code> / <code>"wb"</code></td><td>二进制读写（JPEG 恢复作业必须用这个！）</td><td>同上</td></tr>
+</table>
+<p>关键区分——<strong>文本模式（"r"）vs 二进制模式（"rb"）</strong>：在 Windows 上，文本模式会自动把 <code>\n</code> 转换为 <code>\r\n</code>（行尾符），会损坏 JPEG 等二进制文件。Mac/Linux 上两者行为相同，但<strong>为跨平台安全，读二进制永远用 "rb"。</strong></p>
+
+<h3>4-7：JPEG 恢复——Week 4 的 Problem Set</h3>
+<p>这是 CS50 最被人津津乐道的作业之一。给你一个叫 <code>card.raw</code> 的文件——这是一张数码相机存储卡的完整磁盘镜像（dd 命令做的）。你把照片删了？没关系——<strong>删除只是把文件系统的目录条目标记为「空」了，照片的原始数据还在存储卡上。</strong> 你的任务：写一个 C 程序，在这个镜像里扫描 JPEG 文件头（<code>0xff 0xd8 0xff</code> 这三个魔数开头），找到所有照片并恢复出来。</p>
+<blockquote><p>这就是为什么 Week 4 要花一大半时间讲指针和文件 I/O——因为你马上要用了。这个作业模拟的是真实的数字取证工作。而且你会发现，用 C 做这个事的代码不超过 100 行。Malan：「这就是 C 的魔力——它让你直接面对字节。没有 Python 的 <code>PIL.Image.open()</code>，没有 Java 的 <code>BufferedImage</code>。你和你需要恢复的数据之间只有 <code>fread</code> 和 <code>malloc</code>。」</p></blockquote>
+
+<p>作业的核心挑战：</p>
+<ul>
+<li><strong>找到 JPEG 文件头</strong>——前三个字节是 <code>0xff 0xd8 0xff</code>，第四个字节 <code>0xe0</code> 到 <code>0xef</code></li>
+<li><strong>管理多个输出文件</strong>——每遇到一个新 JPEG，就要 <code>fclose</code> 上一个文件、<code>fopen</code> 一个新文件（<code>001.jpg</code>, <code>002.jpg</code>...）</li>
+<li><strong>用 fread 按块读取</strong>——存储卡以 512 字节为块（block）。你需要用 <code>fread(buffer, 512, 1, file)</code> 逐块读取</li>
+<li><strong>用 <code>malloc</code> 分配缓冲区</strong>——你需要一个 512 字节的缓冲区来逐块读取镜像文件</li>
+<li><strong>理解 FAT 文件系统的块对齐</strong>——JPEG 文件恰好从块的边界开始（这是作业的简化假设）</li>
+</ul>
+
+<p>做完这个作业的学生，发朋友圈的标题通常是：「用 90 行 C 代码做了一次 FBI 的工作。」</p>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 5 ==================== -->
+<h2>Week 5 · Data Structures</h2>
+
+<h3>这节课的格局</h3>
+<p>到 Week 4 结束时，你有了两个超级技能——指针（能「指向」任何东西）和动态内存（能在运行时申请任意大小的空间）。把它们拼在一起，你就获得了第三个能力：<strong>创造不存在于硬盘和教科书里的数据结构。</strong> Week 5 全程在讲这件事——Malan 会用毛线、纸杯、乐高和至少 30 个学生志愿者，把抽象的数据结构变成物理世界的实物。</p>
+
+<h3>5-1：链表（Linked List）——为什么数组不够用了</h3>
+<p>Malan 以一个「痛点」开场——数组的插入。如果你有一个容量为 100 的数组，前 50 个位置存了数据，你想在第 3 个位置插入一个新数据——<strong>你必须把第 3 到第 50 个元素全部向右移一位。</strong> 这是 O(n) 的操作。删除同理。</p>
+<p>链表的回答：<strong>每个节点不需要紧挨着。每个节点有一个指针，指向「下一个在哪里」。</strong> 插入一个新节点只需要「拆开」两个旧节点的连接，各自指向新节点就行——<strong>O(1)。</strong></p>
+
+<h3>链表的结构——节点（Node）</h3>
+<pre>// 链表的一个节点：存一个值 + 存一个「指向下一个」的指针
+typedef struct node
+{
+    int number;           // 值
+    struct node *next;    // 指向下一个节点的指针
+}
+node;
+
+// 创建第一个节点
+node *list = NULL;  // 空链表
+
+// 在头部插入新节点（O(1)）
+node *n = malloc(sizeof(node));
+n->number = 42;
+n->next = list;   // 新节点「接上」旧的头
+list = n;         // 新节点成为新的头</pre>
+<p>注意 <code>n->number</code> 这个语法——它是 <code>(*n).number</code> 的简写。箭头「穿」过指针访问成员。Malan 说：「记住 <code>-></code> 吧，从今以后你天天用它。」</p>
+
+<h3>链表的完整操作——遍历、搜索、销毁</h3>
+<p>Malan 把链表「活」起来需要的不只是插入——你需要会走、会找、会收尾：</p>
+<pre>// ① 遍历——打印整个链表
+void print_list(node *list)
+{
+    for (node *cursor = list; cursor != NULL; cursor = cursor->next)
+        printf("%i → ", cursor->number);
+    printf("NULL\n");
+}
+
+// ② 搜索——找某个值是否存在
+bool search(node *list, int target)
+{
+    for (node *cursor = list; cursor != NULL; cursor = cursor->next)
+        if (cursor->number == target)
+            return true;
+    return false;
+}
+
+// ③ 销毁——释放整条链表（必须按顺序！）
+void destroy(node *list)
+{
+    while (list != NULL)
+    {
+        node *next = list->next;  // 先记住下一个在哪
+        free(list);               // 释放当前节点
+        list = next;              // 移到下一个
+    }
+}
+// ⚠️ 不能先 free(list) 再 list = list->next！
+// 因为 free 之后那块内存已经不属于你了——读 list->next 是未定义行为</pre>
+<blockquote><p>销毁链表的代码是 CS50 面试题的常客——<strong>必须先记住 <code>next</code>，再 free。</strong> 它的重要性不在于代码多长，在于它浓缩了指针操作的核心纪律：永远不要访问已经 free 了的内存。</p></blockquote>
+
+<h3>尾部插入——永远走到最后再加</h3>
+<p>头部插入是 O(1)，因为你知道头在哪。尾部插入呢？你必须从头走到尾——O(n)。但如果你的程序经常在尾部插入，可以额外维护一个 <code>tail</code> 指针：</p>
+<pre>node *head = NULL;
+node *tail = NULL;  // 始终指向最后一个节点
+
+// 在尾部插入（O(1)——前提是你维护了 tail）
+node *n = malloc(sizeof(node));
+n->number = 99;
+n->next = NULL;   // 新节点是新的尾，所以 next = NULL
+
+if (head == NULL)      // 空链表
+    head = tail = n;   // 头尾都是它
+else
+{
+    tail->next = n;    // 旧尾接上新节点
+    tail = n;          // 新节点成为尾
+}</pre>
+
+<h3>双向链表——可以往回走了</h3>
+<p>Malan 在讲完单向链表后提了一句：「如果你受够了单向链表'删除时需要从头开始找前驱'的痛苦——加一个 <code>prev</code>。」</p>
+<pre>typedef struct dnode
+{
+    int number;
+    struct dnode *prev;  // 指向上一个节点
+    struct dnode *next;  // 指向下一个节点
+}
+dnode;
+
+// 双向链表删除节点——不需要遍历找前驱了！
+void delete(dnode *n)
+{
+    if (n->prev != NULL)
+        n->prev->next = n->next;  // 跳过 n
+    if (n->next != NULL)
+        n->next->prev = n->prev;  // 倒着也跳过 n
+    free(n);
+}</pre>
+<table>
+<tr><th></th><th>单向链表</th><th>双向链表</th></tr>
+<tr><td><strong>每个节点的额外内存</strong></td><td>1 个指针（next）</td><td>2 个指针（prev + next）</td></tr>
+<tr><td><strong>删除已知节点</strong></td><td>O(n)——需要找前驱</td><td>O(1)——直接通过 prev 找到前驱</td></tr>
+<tr><td><strong>遍历方向</strong></td><td>只能向前</td><td>向前、向后都行</td></tr>
+<tr><td><strong>代码复杂度</strong></td><td>低</td><td>插入/删除时要处理 4 根指针（前->后、后->前），容易出错</td></tr>
+</table>
+
+<h3>Malan 的毛线链表——真人演示</h3>
+<p>这是 CS50 最著名的场景之一。Malan 叫了约 10 个学生上台，每人手里拿一个数字——<strong>但关键道具是一卷毛线。</strong> 第一人牵着毛线的一端，另一端递给第二人。第二人再牵一根给第三人……一条物理的链表在讲台上成型了。</p>
+<p>然后 Malan 演示插入——让一个新学生拿着数字「99」走到第 2 和第 3 人之间。旧毛线剪断，两条新毛线接上。O(1)。台下鼓掌。</p>
+<p>然后演示删除——他剪断连向第 4 个人的毛线，把第 3 和第 5 接上。第 4 人拿着数字尴尬地站在台中央——<strong>「你现在被 <code>free</code> 了。」</strong></p>
+
+<h3>链表的代价——查找 O(n)</h3>
+<p>毛线很直观，但 Malan 很快指出代价：你永远只能顺着毛线往下摸。要找第 50 个节点？你必须从第 1 个开始数。不能像数组那样 <code>list[49]</code> 直接跳过去。</p>
+<blockquote><p>这是数据结构的核心权衡：<strong>你不可能同时获得 O(1) 插入、O(1) 删除和 O(1) 随机访问。</strong> 数组给你 O(1) 随机访问但 O(n) 插入删除。链表给你 O(1) 插入删除但 O(n) 随机访问。选择一个数据结构，就是选择一组取舍。</p></blockquote>
+
+<h3>5-2：哈希表（Hash Table）——鱼与熊掌的调和</h3>
+<p>Malan 问了一个很实用的问题：「如果我要同时获得快速的查找和插入呢？」他拿起了……<strong>一叠索引卡片。</strong></p>
+<p>「假设我有 26 张卡片——每张代表字母表的一个字母。我把所有以 A 开头的人名写在 A 卡片上，B 的写在 B 卡片上……现在我要找 'Malan'——我翻到 M 那张卡片，然后只需要搜那一张卡片上的人名。」</p>
+<p>这就是哈希表：<strong>一个数组（26 张卡片），每个槽位挂着一个链表（卡片上的人名列表）。</strong></p>
+<pre>// 哈希表 = 一个「装链表的数组」
+node *table[26];   // 26 个链表头
+
+// 哈希函数——把人名变成 0-25 的索引
+int hash(string name) {
+    return toupper(name[0]) - 'A';   // 'A'→0, 'B'→1, ...
+}
+
+// 查找——去对应的卡片上翻
+int index = hash("Malan");
+for (node *cursor = table[index]; cursor != NULL; cursor = cursor->next)
+{
+    if (strcmp(cursor->name, "Malan") == 0)
+        return cursor->number;   // 找到了！
+}
+return -1;  // 没找到</pre>
+<p><strong>理论上 O(1) 查找</strong>——但如果所有人都叫 Alice，全部挤在 A 那张卡片上，就退化成了 O(n)。所以哈希表的核心挑战是设计一个<strong>分布均匀的哈希函数</strong>。</p>
+
+<h3>负载因子与重哈希——哈希表不坍缩的秘诀</h3>
+<p>Malan 在讲到哈希表退化时引入了两个关键概念：</p>
+<p><strong>负载因子（Load Factor）= 已存储元素数 / 槽位数。</strong> 当负载因子超过某个阈值（通常 0.7），冲突概率急剧上升，性能从 O(1) 滑向 O(n)。这时候你需要——<strong>重哈希（Rehash）</strong>：</p>
+<ol>
+<li>创建一个更大的数组（通常是原来的 2 倍）</li>
+<li>把旧表里<strong>每一个节点</strong>重新计算哈希值，插入新表</li>
+<li>释放旧表</li>
+</ol>
+<p>这就是 Python 的 dict 底层——每次扩容背后都有一套重哈希在跑。Malan：「你永远不需要手动重哈希——Python 帮你在幕后做了。但如果你不知道幕后有这么一台机器在运转，你会对 'dict 怎么这么快' 这个词产生一种接近迷信的信任。」</p>
+
+<h3>开放寻址——另一种冲突处理</h3>
+<p>Malan 顺便提了一句：链表解决冲突（链地址法）不是唯一的选择。另一种叫 <strong>开放寻址（Open Addressing）</strong>——槽位满了？按一个固定的规则往后找下一个空位（线性探测、二次探测、双重哈希）。</p>
+<table>
+<tr><th></th><th>链地址法</th><th>开放寻址</th></tr>
+<tr><td><strong>冲突时</strong></td><td>往槽位的链表里加一个节点</td><td>往后找下一个空槽位</td></tr>
+<tr><td><strong>内存</strong></td><td>每个节点额外有一个 next 指针</td><td>不需要额外指针——但需要预留空槽</td></tr>
+<tr><td><strong>删除</strong></td><td>简单——从链表中移除节点即可</td><td>麻烦——不能直接清空槽位，需要「墓碑」标记（否则后续查找会中断）</td></tr>
+<tr><td><strong>CS50 用哪个</strong></td><td>链地址法（因为学生已经会链表了）</td><td>仅介绍概念</td></tr>
+</table>
+
+<h3>5-3：二叉搜索树（Binary Search Tree）</h3>
+<p>Malan 换道具了——这次是彩色乒乓球。他拿起一个乒乓球写上「50」，放在白板正中央：「这是根（root）。」然后拿起一个写「30」的球：「30 比 50 小，放左边。」「70」放右边。然后「25」——30 比 50 小（放左），25 比 30 小（放左）。球在树上层层排开。</p>
+<pre>typedef struct node
+{
+    int number;
+    struct node *left;   // 比它小的在左边
+    struct node *right;  // 比它大的在右边
+}
+node;
+
+// 查找——沿着树往下走，每次砍掉一半候选
+bool search(node *root, int target)
+{
+    if (root == NULL)
+        return false;
+    if (root->number == target)
+        return true;
+    else if (target < root->number)
+        return search(root->left, target);   // 走左边
+    else
+        return search(root->right, target);  // 走右边
+}</pre>
+<p>查找 O(log n)——<strong>如果树是平衡的。</strong> 但如果你按 1-2-3-4-5 的顺序插入，树会退化成一根面条——<strong>退化成了链表，O(n)。</strong></p>
+
+<h3>BST 的插入——递归的又一次漂亮展示</h3>
+<p>查找只会「问路」，插入要「铺路」——找到合适的位置后，创建一个新节点挂上去：</p>
+<pre>// 插入一个值到 BST 中——返回（可能更新后的）根节点
+node *insert(node *root, int value)
+{
+    if (root == NULL)
+    {
+        // 走到空位了——在这里创建新节点
+        node *n = malloc(sizeof(node));
+        n->number = value;
+        n->left = n->right = NULL;
+        return n;  // 新节点成为子树的新根
+    }
+
+    if (value < root->number)
+        root->left = insert(root->left, value);    // 去左边找位置
+    else if (value > root->number)
+        root->right = insert(root->right, value);  // 去右边找位置
+    // 如果 value == root->number，不做任何事（不允许重复值）
+
+    return root;  // 返回自己——给上层递归「接回去」
+}
+
+// 使用
+node *root = NULL;
+root = insert(root, 50);
+root = insert(root, 30);
+root = insert(root, 70);
+// 对，每次都要 root = insert(root, x) —— 因为传入空树时 root 会被更新</pre>
+
+<h3>二叉树的三种遍历——递归在树上的最美展示</h3>
+<p>Malan 在第 5 周画了一棵小树，然后演示了三种走法——它们之间的区别<strong>只在于处理「根」的时机</strong>：</p>
+<pre>// 以这棵小树为例：
+//     2
+//    / \
+//   1   3
+
+// 前序（Pre-order）：根 → 左 → 右    输出：2 1 3
+void preorder(node *root) {
+    if (root == NULL) return;
+    printf("%i ", root->number);  // ← 先处理根
+    preorder(root->left);
+    preorder(root->right);
+}
+
+// 中序（In-order）：左 → 根 → 右    输出：1 2 3 ← 刚好升序！
+void inorder(node *root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    printf("%i ", root->number);  // ← 中间处理根
+    inorder(root->right);
+}
+
+// 后序（Post-order）：左 → 右 → 根  输出：1 3 2
+void postorder(node *root) {
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%i ", root->number);  // ← 最后处理根
+}</pre>
+<table>
+<tr><th>遍历</th><th>顺序</th><th>用途</th></tr>
+<tr><td><strong>前序</strong></td><td>根→左→右</td><td>「复制一棵树」——先建根节点，再递归建子树。也用于文件系统的序列化</td></tr>
+<tr><td><strong>中序</strong></td><td>左→根→右</td><td><strong>输出 BST 中所有值的升序排列。</strong>这是 BST 独有的超能力——中序遍历 = 排序</td></tr>
+<tr><td><strong>后序</strong></td><td>左→右→根</td><td>「删除一棵树」——先删除子树，再删除根。因为释放根之后就无法访问子树了</td></tr>
+</table>
+<blockquote><p>Malan 对这三种遍历的评价：「中序遍历是 BST 给你最大的礼物。你建好一棵树，中序遍历走一遍，所有值从小到大列出来——<strong>你不需要写任何排序算法。</strong> 建树本身就是排序。」</p></blockquote>
+
+<h3>BST 的删除——最复杂的操作</h3>
+<p>Malan 承认这是 BST 最棘手的部分——因为删除一个节点后，必须保持 BST 的性质（左边小、右边大）。分三种情况：</p>
+<table>
+<tr><th>情况</th><th>怎么删</th><th>难度</th></tr>
+<tr><td><strong>① 叶子节点</strong>（左右都 NULL）</td><td>直接 free，父节点的对应指针设为 NULL</td><td>⭐ 简单</td></tr>
+<tr><td><strong>② 只有一个子节点</strong></td><td>让父节点「跳过」当前节点，直接接上那个唯一的子节点。然后 free 当前节点</td><td>⭐⭐ 中等</td></tr>
+<tr><td><strong>③ 有两个子节点</strong></td><td>找到<strong>右子树的最小值</strong>（或左子树的最大值），用它替换当前节点的值，然后递归删除那个替身节点。这个替身一定是类型 ① 或 ②</td><td>⭐⭐⭐ 最难</td></tr>
+</table>
+<blockquote><p>情况 ③ 的「替身法」是整个 CS50 数据结构部分最优雅的技巧之一：你不在原地「硬删」——你找一个替身（后继节点），把它的值复制过来，然后去删那个替身。替身一定只有 0 或 1 个子节点，所以就退化成了情况 ① 或 ②。</p></blockquote>
+
+<h3>5-4：Trie（前缀树）——拿空间换时间的极致</h3>
+<p>Malan 展示了最后一种结构——Trie（发音同 try）。一个节点不是一个值，而是一个字母。<strong>沿着路径往下走，走到头就是一个单词。</strong></p>
+<pre>// 存 "cat", "car", "dog" 的 Trie：
+//    root
+//   /    \
+//  c      d
+//  |      |
+//  a      o
+// / \     |
+// t  r    g
+// (有词语) (有词语) (有词语)</pre>
+<p>Trie 的一个节点有 26 个子指针（每个字母一个）。存了 10 万个单词，查找 "zebra" 只需要 5 步（z-e-b-r-a）——<strong>跟字典里有多少个单词完全没有关系。</strong> 代价？内存。每个节点有 26 个指针，大部分是 NULL。Malan：「空间和时间永远是宿敌。你选一个。」</p>
+
+<h3>Trie 的代码实现</h3>
+<p>Malan 在黑板上逐步搭建的 Trie 节点结构与插入/搜索逻辑：</p>
+<pre>// Trie 节点——不是存一个值，而是存 26 个「子字母」的指针
+typedef struct trie_node
+{
+    bool is_word;                          // 这个节点是一个完整单词的结尾吗？
+    struct trie_node *children[26];        // 26 个子字母（a-z）
+}
+trie_node;
+
+// 插入单词——沿着字母路径走，走到头打上标记
+void insert(trie_node *root, string word)
+{
+    trie_node *cursor = root;
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        int index = word[i] - 'a';   // 'a'→0, 'b'→1, ..., 'z'→25
+        if (cursor->children[index] == NULL)
+        {
+            // 这个字母还没出现过——创建一个新节点
+            cursor->children[index] = calloc(1, sizeof(trie_node));
+        }
+        cursor = cursor->children[index];  // 往下走一层
+    }
+    cursor->is_word = true;  // 路径的终点打上「这里有个词」的标记
+}
+
+// 查找——完全一样的走法，只是走到 NULL 就说明没有
+bool search(trie_node *root, string word)
+{
+    trie_node *cursor = root;
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        int index = word[i] - 'a';
+        if (cursor->children[index] == NULL)
+            return false;        // 这条路不通！
+        cursor = cursor->children[index];
+    }
+    return cursor->is_word;      // 走到头了——这里是完整单词吗？
+}
+// 注意！不能用 cursor->is_word 替代最后的返回判断。
+// 你可能是沿着 "ca" 走到了 'a' 节点——它存在（因为 "cat" 和 "car" 都经过它），
+// 但 "ca" 本身不是一个完整的单词。is_word 专门区分这一点。</pre>
+<blockquote><p>这段代码里最微妙的设计是 <code>is_word</code> 布尔值。「这个节点被很多单词经过」和「这个节点本身就是一个单词的终点」是完全不同的概念。没有 <code>is_word</code>，你无法区分 "ca"（不是词）和已经插入的 "cat"（是词）——因为 "ca" 的路径也存在。</p></blockquote>
+
+<h3>5-5：队列（Queue）与栈（Stack）——最基础的结构抽象</h3>
+<p>Malan 把最后 10 分钟留给两个最简单的抽象——队列和栈。它们不是新的数据结构，它们是你对<strong>已有数据结构的一种使用限制</strong>：</p>
+<table>
+<tr><th></th><th>队列（FIFO）</th><th>栈（LIFO）</th></tr>
+<tr><td><strong>规则</strong></td><td>先进先出——排队的第一个人先被服务</td><td>后进先出——最后放上去的盘子最先被拿走</td></tr>
+<tr><td><strong>插入叫</strong></td><td>入队（enqueue）——加到尾部</td><td>压栈（push）——放在顶部</td></tr>
+<tr><td><strong>删除叫</strong></td><td>出队（dequeue）——从头部拿走</td><td>弹栈（pop）——从顶部拿走</td></tr>
+<tr><td><strong>实现方式</strong></td><td>数组（尾部加，头部取）或链表（头尾各一个指针）</td><td>数组（只操作末尾）或链表（只操作头部）</td></tr>
+<tr><td><strong>你会遇到的地方</strong></td><td>打印队列、消息队列、BFS（广度优先搜索）</td><td>函数调用栈、撤销操作（Undo）、DFS（深度优先搜索）、括号匹配</td></tr>
+</table>
+
+<h3>抽象数据类型（ADT）——把「做什么」和「怎么做」分开</h3>
+<p>Malan 在 Week 5 结束前引入了 CS50 的最后一个元概念——<strong>抽象数据类型（Abstract Data Type）</strong>。这不是新的数据结构，而是一种<strong>思维方式</strong>：</p>
+<blockquote><p>「你已经用两周时间手动实现了链表、栈、队列、BST。但下周开始——Python 周——你再也不会 <code>malloc(sizeof(node))</code> 了。你会用 <code>list.append()</code>、<code>dict['key']</code>、<code>set.add()</code>。这些是 Python 的 ADT——它们有清晰的接口（做什么），但<strong>隐藏了实现（怎么做）</strong>。你的 <code>list.append</code> 背后是动态数组 + realloc。你的 <code>dict</code> 背后是哈希表 + 负载因子 + 重哈希——你不需要知道这些也能用。但<strong>当你知道了</strong>，你就能理解为什么 <code>list.insert(0, x)</code> 比 <code>list.append(x)</code> 慢那么多。」</p></blockquote>
+<table>
+<tr><th>ADT</th><th>接口（你能做的操作）</th><th>可能的底层实现</th></tr>
+<tr><td><strong>列表（List）</strong></td><td>append、insert、remove、索引</td><td>动态数组（Python）或链表（Lisp）</td></tr>
+<tr><td><strong>字典（Dict / Map）</strong></td><td>按键取值、插入、删除、遍历</td><td>哈希表（Python/Java）或平衡二叉树（C++ std::map）</td></tr>
+<tr><td><strong>栈（Stack）</strong></td><td>push、pop、peek</td><td>数组或链表</td></tr>
+<tr><td><strong>队列（Queue）</strong></td><td>enqueue、dequeue</td><td>链表（头尾指针）或环形数组</td></tr>
+</table>
+<p>Malan 的收束：「这就是两门课的微妙关系——C 教你车轮是怎么造出来的。Python 教你开车。你不需要亲手造轮子才能开车，但<strong>只有造过轮子的人，才知道车在哪里会坏。</strong>」</p>
+
+<h3>Week 5 的 Problem Set：拼写检查器（Speller）</h3>
+<p>这是 CS50 标志性的终极作业——给你一本英文词典 + 一份待检查的文本，找出文本中所有不在词典里的单词。但要求是：<strong>你必须同时用链表实现一个版本，再用哈希表实现一个版本，最后用 Trie 实现一个版本。</strong> 然后比较三者的速度。</p>
+<p>做完这道题的学生，对 O(n)、O(1)、O(log n) 的理解不是「背下来的」——是用秒表亲自测出来的。</p>
+<p>Speller 作业的典型输出——你跑完三个版本后会在终端看到这样的对比：</p>
+<pre>WORDS MISSPELLED:     955
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        19190
+TIME IN load:         0.04   （哈希表加载词典）
+TIME IN check:        0.01   （哈希表检查拼写）
+TIME IN size:         0.00
+TIME IN unload:       0.02
+TOTAL:                0.07
+
+// 同样用链表实现时：TOTAL 可能是 2.45 秒
+// Trie：TOTAL 大概 0.15 秒
+// 你亲手制造了一个 35 倍的速度差异</pre>
+
+<span class="dot"></span>
+
+<h2>📝 核心公式速查——Week 4-5 的数据结构对决</h2>
+<table>
+<tr><th>数据结构</th><th>查找</th><th>插入</th><th>删除</th><th>空间</th><th>关键取舍</th></tr>
+<tr><td><strong>数组</strong></td><td>O(1)（索引）<br>O(n)（搜索）</td><td>O(n)</td><td>O(n)</td><td>紧凑</td><td>快速随机访问 + 固定大小（或用动态数组承担扩容成本）</td></tr>
+<tr><td><strong>链表</strong></td><td>O(n)</td><td>O(1)（头部）</td><td>O(1)（头部）</td><td>每个节点多一个指针</td><td>快速插入删除，代价是丢失随机访问</td></tr>
+<tr><td><strong>哈希表</strong></td><td>O(1) 平均<br>O(n) 最坏</td><td>O(1) 平均</td><td>O(1) 平均</td><td>比数组多一个指针数组 + 链表节点</td><td>近乎完美的平衡——除非哈希函数太烂导致全挤在一个槽</td></tr>
+<tr><td><strong>二叉搜索树</strong></td><td>O(log n) 平衡<br>O(n) 退化</td><td>O(log n) 平衡</td><td>O(log n) 平衡</td><td>每个节点两个指针</td><td>中序遍历 = 自动排序。但平衡是代价</td></tr>
+<tr><td><strong>Trie</strong></td><td>O(k)←单词长度</td><td>O(k)</td><td>O(k)</td><td>极大！每个节点 26 个指针</td><td>查找时间与数据总量无关——拿空间换时间的极致</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<h2>📝 CS50 C 语言期总结——Week 1-5 学到的能力栈</h2>
+<table>
+<tr><th>周</th><th>核心能力</th><th>能造什么了</th></tr>
+<tr><td><strong>Week 1</strong></td><td>编译、变量、条件、循环</td><td>猜数字游戏</td></tr>
+<tr><td><strong>Week 2</strong></td><td>数组、字符串、命令行参数</td><td>凯撒加密</td></tr>
+<tr><td><strong>Week 3</strong></td><td>搜索、排序、大 O、递归</td><td>归并排序、递归画图</td></tr>
+<tr><td><strong>Week 4</strong></td><td>指针、动态内存、文件 I/O</td><td>恢复删除的照片（JPEG 取证）</td></tr>
+<tr><td><strong>Week 5</strong></td><td>链表、哈希表、树、Trie</td><td>拼写检查器（三版本对比竞速）</td></tr>
+<tr><td colspan="3" style="text-align:center;color:#999;">↓ Week 6 起切换到 Python——你用来造工具的语言，变成你用来调 API 的语言</td></tr>
+</table>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+<div class="nav-bottom"><a href="#">↑ 回到顶部</a></div>
+</div></body></html>

