@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>棱镜 — Tumanydays</title>
-    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <title>一些知识 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif; background: #fafafa; color: #333; line-height: 1.9; }
@@ -13,11 +13,12 @@
         .back:hover { color: #333; }
         h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: #1a1a1a; }
         .subtitle { font-size: 0.85rem; color: #aaa; margin-bottom: 48px; }
-        .article-list { list-style: none; }
-        .article-list li { border-bottom: 1px solid #eee; padding: 16px 0; }
-        .article-list a { text-decoration: none; color: #333; font-size: 0.95rem; display: block; }
-        .article-list a:hover { color: #1a1a1a; }
-        .tagline { text-align: center; color: #bbb; font-size: 0.85rem; font-style: italic; margin: 60px auto 0; }
+        .series-list { list-style: none; }
+        .series-list li { border-bottom: 1px solid #eee; padding: 18px 0; }
+        .series-list a { text-decoration: none; display: block; }
+        .series-list a:hover .entry-title { color: #1a1a1a; }
+        .entry-title { font-size: 0.95rem; color: #333; margin-bottom: 2px; }
+        .entry-desc { font-size: 0.8rem; color: #999; line-height: 1.5; }
         footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e8e8e8; text-align: center; font-size: 0.8rem; color: #aaa; }
         footer a { color: #999; text-decoration: none; }
         footer a:hover { color: #333; }
@@ -26,22 +27,21 @@
 </head>
 <body>
     <div class="container">
-        <a class="back" href="../index.html">← 日志大厅</a>
-        <h1>棱镜</h1>
-        <p class="subtitle">技术、AI 与思维工具</p>
-        <ul class="article-list">
+        <a class="back" href="../index.html">← 棱镜</a>
+        <h1>一些知识</h1>
+        <p class="subtitle">技术底层的散装笔记</p>
+        <ul class="series-list">
             <li>
-                <a href="CS50/">CS50 · Harvard 2025</a>
-            </li>
-            <li>
-                <a href="一些知识/">一些知识 · 技术底层的散装笔记</a>
+                <a href="古旧铁轨与万国文字的车厢：ASCII与UTF-8编码的传承、困境与全球方案.html">
+                    <div class="entry-title">古旧铁轨与万国文字的车厢：ASCII 与 UTF-8 编码的传承、困境与全球方案</div>
+                    <div class="entry-desc">从电报到 Unicode，字符编码演化的全景——ASCII 的诞生与局限、各国编码乱象、UTF-8 如何成为全球共识</div>
+                </a>
             </li>
         </ul>
-        <p class="tagline">— 语言即是世界的边界 —</p>
         <footer>
-            <a href="../index.html">← 返回日志大厅</a>
+            <a href="../index.html">← 返回棱镜</a>
             &nbsp;·&nbsp;
-            <a href="../../index.html">← 返回首页</a>
+            <a href="../../index.html">← 日志大厅</a>
         </footer>
     </div>
 </body>
