@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>古旧铁轨与万国文字的车厢 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -22,12 +22,12 @@
         /* 返回链接 */
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
 
         /* 标题区 */
         h1 {
@@ -36,11 +36,11 @@
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 16px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 16px; }
@@ -48,7 +48,7 @@
         /* 引言 */
         .intro {
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 48px;
             padding-left: 16px;
@@ -61,7 +61,7 @@
             font-weight: 500;
             margin-top: 56px;
             margin-bottom: 20px;
-            color: #1a1a1a;
+            color: var(--text-title);
             letter-spacing: 1px;
         }
         h3 {
@@ -69,38 +69,38 @@
             font-weight: 500;
             margin-top: 36px;
             margin-bottom: 14px;
-            color: #333;
+            color: var(--text);
         }
         p {
             font-size: 0.95rem;
             margin-bottom: 16px;
-            color: #444;
+            color: var(--text);
         }
 
         /* 引用 */
         blockquote {
             margin: 24px 0;
             padding: 16px 20px;
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             border-radius: 6px;
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-soft);
             border-left: 3px solid #ccc;
         }
-        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote p { margin-bottom: 0; color: var(--text-soft); }
 
         /* 加粗强调 */
-        strong { color: #1a1a1a; font-weight: 600; }
+        strong { color: var(--text-title); font-weight: 600; }
         code {
-            background: #f0f0f0;
+            background: var(--code-bg);
             padding: 2px 6px;
             border-radius: 3px;
             font-size: 0.85rem;
             font-family: "SF Mono", "Fira Code", monospace;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         pre {
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             padding: 16px 20px;
             border-radius: 6px;
             font-size: 0.82rem;
@@ -108,7 +108,7 @@
             overflow-x: auto;
             line-height: 1.6;
             margin: 20px 0 28px;
-            color: #333;
+            color: var(--text);
         }
 
         /* 表格 */
@@ -121,14 +121,14 @@
         th, td {
             padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
             line-height: 1.6;
         }
         th {
             background: #f9f9f9;
             font-weight: 500;
-            color: #555;
+            color: var(--text-soft);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
@@ -145,13 +145,13 @@
         }
         .code-table td:first-child {
             text-align: right;
-            color: #888;
+            color: var(--text-muted);
         }
 
         /* 分隔线 */
         hr {
             border: none;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             margin: 48px 0;
         }
 
@@ -169,15 +169,15 @@
         .nav-bottom {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .nav-bottom a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
         }
-        .nav-bottom a:hover { color: #333; }
+        .nav-bottom a:hover { color: var(--text); }
 
         /* 响应式：小屏幕 */
         @media (max-width: 600px) {
@@ -206,12 +206,12 @@
         <h1>古旧铁轨与万国文字的车厢：ASCII 与 UTF-8 编码的传承、困境与全球方案</h1>
 
         <div class="meta">
-            <span>知白</span><span>2026年5月30日 &nbsp;·&nbsp; <a href="../../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+            <span>知白</span><span>2026年5月30日 &nbsp;·&nbsp; <a href="../../index.html" style="color:var(--text-faint);text-decoration:none;">日志</a></span>
         </div>
 
         <div class="intro">
             <p>缘起：一次对话中聊到不同语言在计算机中存储方式的差异——为什么英文字母只占 1 字节而中文需要 3 字节？为什么同一个文件在不同系统上打开会变成乱码？触发了一场从 ASCII 到 UTF-8、从技术方案到全球文字困境的编码体系漫游。</p>
-            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">对话跨度：不同语言存储差异的追问 → ASCII 编码的诞生与结构 → 非英语国家的编码困境 → Unicode 的调和方案 → UTF-8 变长编码的精妙设计 → UTF-16 与 BOM 战争 → 中文编码进化史 → 实际开发中的编码陷阱 → 字符编码与 token 的区分</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">对话跨度：不同语言存储差异的追问 → ASCII 编码的诞生与结构 → 非英语国家的编码困境 → Unicode 的调和方案 → UTF-8 变长编码的精妙设计 → UTF-16 与 BOM 战争 → 中文编码进化史 → 实际开发中的编码陷阱 → 字符编码与 token 的区分</p>
         </div>
 
         <!-- 关键词索引 -->
@@ -608,7 +608,7 @@ UTF-16 LE 文件开头：FF FE → 后续字节按小端解读</pre>
 
         <hr>
 
-        <p style="text-align:center;font-size:0.8rem;color:#aaa;">对话日期：2026年5月30日 &nbsp;|&nbsp; 记录整理：知白</p>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年5月30日 &nbsp;|&nbsp; 记录整理：知白</p>
 
         <div class="nav-bottom">
             <a href="../index.html">← 返回一些知识</a>

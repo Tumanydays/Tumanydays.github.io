@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>从#000000到#FFFFFF：十六进制颜色码完全手册 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -22,12 +22,12 @@
         /* 返回链接 */
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
 
         /* 标题区 */
         h1 {
@@ -36,11 +36,11 @@
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 16px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 16px; }
@@ -48,7 +48,7 @@
         /* 引言 */
         .intro {
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 48px;
             padding-left: 16px;
@@ -61,7 +61,7 @@
             font-weight: 500;
             margin-top: 56px;
             margin-bottom: 20px;
-            color: #1a1a1a;
+            color: var(--text-title);
             letter-spacing: 1px;
         }
         h3 {
@@ -69,28 +69,28 @@
             font-weight: 500;
             margin-top: 36px;
             margin-bottom: 14px;
-            color: #333;
+            color: var(--text);
         }
         p {
             font-size: 0.95rem;
             margin-bottom: 16px;
-            color: #444;
+            color: var(--text);
         }
 
         /* 引用 */
         blockquote {
             margin: 24px 0;
             padding: 16px 20px;
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             border-radius: 6px;
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-soft);
             border-left: 3px solid #ccc;
         }
-        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote p { margin-bottom: 0; color: var(--text-soft); }
 
         /* 加粗强调 */
-        strong { color: #1a1a1a; font-weight: 600; }
+        strong { color: var(--text-title); font-weight: 600; }
 
         /* 表格 */
         table {
@@ -102,14 +102,14 @@
         th, td {
             padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
             line-height: 1.6;
         }
         th {
             background: #f9f9f9;
             font-weight: 500;
-            color: #555;
+            color: var(--text-soft);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
@@ -119,13 +119,13 @@
         code {
             font-family: "SF Mono", "JetBrains Mono", monospace;
             font-size: 0.82rem;
-            background: #f0f0f0;
+            background: var(--code-bg);
             padding: 2px 6px;
             border-radius: 3px;
-            color: #c7254e;
+            color: var(--code-text);
         }
         pre {
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             padding: 16px 20px;
             border-radius: 6px;
             overflow-x: auto;
@@ -137,7 +137,7 @@
             background: none;
             padding: 0;
             border-radius: 0;
-            color: #444;
+            color: var(--text);
         }
 
         /* 内联色块 */
@@ -154,7 +154,7 @@
         /* 分隔线 */
         hr {
             border: none;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             margin: 48px 0;
         }
 
@@ -172,15 +172,15 @@
         .nav-bottom {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .nav-bottom a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
         }
-        .nav-bottom a:hover { color: #333; }
+        .nav-bottom a:hover { color: var(--text); }
 
         /* 响应式 */
         @media (max-width: 600px) {
@@ -198,10 +198,10 @@
             gap: 12px;
             margin: 16px 0;
             padding: 12px 16px;
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             border-radius: 6px;
             font-size: 0.85rem;
-            color: #555;
+            color: var(--text-soft);
         }
         .swatch-block {
             width: 60px;
@@ -216,7 +216,7 @@
             height: 24px;
             border-radius: 4px;
             margin: 12px 0 20px;
-            border: 1px solid #e8e8e8;
+            border: 1px solid var(--border);
         }
 
         /* 阅读进度条 */
@@ -237,12 +237,12 @@
         <h1>从#000000到#FFFFFF：十六进制颜色码完全手册</h1>
 
         <div class="meta">
-            <span>棱镜</span><span>2026年5月31日 &nbsp;·&nbsp; <a href="../../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+            <span>棱镜</span><span>2026年5月31日 &nbsp;·&nbsp; <a href="../../index.html" style="color:var(--text-faint);text-decoration:none;">日志</a></span>
         </div>
 
         <div class="intro">
             <p>屏幕上的每一个颜色，背后都是一组数字——不多不少，六个字符。这个看似简单的编码体系，连接着十六世纪数学家发明的计数法、人眼视网膜的感光细胞分布、CRT 显示器残留下来的 gamma 曲线，以及 WCAG 无障碍标准中关于「什么颜色才看得清」的精密计算。</p>
-            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">本文从两个具体颜色 <code>#8a939e</code>（冷灰）和 <code>#8a7e72</code>（暖灰）出发，逐层拆解这套编码系统的全部奥秘。</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">本文从两个具体颜色 <code>#8a939e</code>（冷灰）和 <code>#8a7e72</code>（暖灰）出发，逐层拆解这套编码系统的全部奥秘。</p>
         </div>
 
         <span class="dot"></span>
@@ -332,7 +332,7 @@
         <p>这是因为人类对光的感知是<strong>非线性</strong>的，显示器本身也有自己的非线性响应曲线。sRGB 标准定义了一条<strong>gamma 校正曲线</strong>来协调这个问题。</p>
 
         <div class="gradient-bar" style="background: linear-gradient(to right, #000000, #ffffff);"></div>
-        <p style="font-size:0.8rem;color:#999;text-align:center;margin-top:-12px;">黑白渐变：#000000 → #ffffff——视觉上均匀，但对应的物理亮度并非线性</p>
+        <p style="font-size:0.8rem;color:var(--text-dim);text-align:center;margin-top:-12px;">黑白渐变：#000000 → #ffffff——视觉上均匀，但对应的物理亮度并非线性</p>
 
         <h3>3.2 Gamma 校正</h3>
         <p>sRGB 中存储的值（就是 hex 里的数字）是经过 <strong>gamma 编码</strong>的。要获得真实的物理亮度（线性亮度），需要经过转换：</p>
@@ -464,22 +464,22 @@ L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
         <div class="swatch-row">
             <div class="swatch-block" style="background:#6b7685;"></div>
             <span><code>#6b7685</code> —— 更暗、饱和</span>
-            <span style="color:#999;">hsl(210°, 12%, 47%)</span>
+            <span style="color:var(--text-dim);">hsl(210°, 12%, 47%)</span>
         </div>
         <div class="swatch-row">
             <div class="swatch-block" style="background:#8a939e;"></div>
             <span><code>#8a939e</code> —— 基准色</span>
-            <span style="color:#999;">hsl(210°, 9%, 58%)</span>
+            <span style="color:var(--text-dim);">hsl(210°, 9%, 58%)</span>
         </div>
         <div class="swatch-row">
             <div class="swatch-block" style="background:#a8b1b8;"></div>
             <span><code>#a8b1b8</code> —— 更亮</span>
-            <span style="color:#999;">hsl(210°, 7%, 69%)</span>
+            <span style="color:var(--text-dim);">hsl(210°, 7%, 69%)</span>
         </div>
         <div class="swatch-row">
             <div class="swatch-block" style="background:#cdd3d8;"></div>
             <span><code>#cdd3d8</code> —— 更更亮（接近白色）</span>
-            <span style="color:#999;">hsl(210°, 5%, 82%)</span>
+            <span style="color:var(--text-dim);">hsl(210°, 5%, 82%)</span>
         </div>
 
         <p><strong>有趣的事情出现了</strong>——<code>#8a7e72</code> 的色相 H=30° 与 <code>#8a939e</code> 的 H=210° 恰好相差 180°。<strong>它们是互补色对</strong>。虽然在 UI 中它们看起来只是两块灰色，但一块偏冷一块偏暖，会产生微妙的冷暖对比张力——这就是高级配色中说的高级感。</p>
@@ -554,7 +554,7 @@ L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
         </table>
 
         <h3>7.3 实用原则</h3>
-        <ul style="margin:12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2.2;">
+        <ul style="margin:12px 0 20px 20px; font-size:0.9rem; color:var(--text-soft); line-height:2.2;">
             <li><strong>保留中灰给装饰，不用作文字</strong>。<code>#888</code> 在白底的对比度只有 3.54:1——远不达标</li>
             <li><strong>只检查你实际用的搭配</strong>。同样的文字色在不同背景上对比度天差地别</li>
             <li><strong>利用大文本例外</strong>。大标题 3:1 就够，给设计更多灵活空间</li>
@@ -591,11 +591,11 @@ L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
 
         <table>
             <tr><th>工具</th><th>用途</th></tr>
-            <tr><td><a href="https://coolors.co" target="_blank" style="color:#555;">Coolors</a></td><td>一键生成配色方案，锁定基准色探索和谐色</td></tr>
-            <tr><td><a href="https://color.adobe.com" target="_blank" style="color:#555;">Adobe Color</a></td><td>多种和谐规则 + 无障碍检测</td></tr>
-            <tr><td><a href="https://webaim.org/resources/contrastchecker/" target="_blank" style="color:#555;">WebAIM Contrast Checker</a></td><td>WCAG 对比度精确计算</td></tr>
-            <tr><td><a href="https://colorui.io/contrast" target="_blank" style="color:#555;">ColorUI Contrast</a></td><td>同时显示 WCAG 和 APCA 两项对比度</td></tr>
-            <tr><td><a href="https://lazytools.io/color-converter" target="_blank" style="color:#555;">Color Lab</a></td><td>HEX/RGB/HSL/HSV/CMYK/OKLCH 全格式互转</td></tr>
+            <tr><td><a href="https://coolors.co" target="_blank" style="color:var(--text-soft);">Coolors</a></td><td>一键生成配色方案，锁定基准色探索和谐色</td></tr>
+            <tr><td><a href="https://color.adobe.com" target="_blank" style="color:var(--text-soft);">Adobe Color</a></td><td>多种和谐规则 + 无障碍检测</td></tr>
+            <tr><td><a href="https://webaim.org/resources/contrastchecker/" target="_blank" style="color:var(--text-soft);">WebAIM Contrast Checker</a></td><td>WCAG 对比度精确计算</td></tr>
+            <tr><td><a href="https://colorui.io/contrast" target="_blank" style="color:var(--text-soft);">ColorUI Contrast</a></td><td>同时显示 WCAG 和 APCA 两项对比度</td></tr>
+            <tr><td><a href="https://lazytools.io/color-converter" target="_blank" style="color:var(--text-soft);">Color Lab</a></td><td>HEX/RGB/HSL/HSV/CMYK/OKLCH 全格式互转</td></tr>
             <tr><td>数码测色计（macOS 自带）</td><td><code>⌘⇧L</code> 锁定颜色，格式可设为十六进制</td></tr>
             <tr><td>Chrome DevTools</td><td>Elements → Styles 面板点击色块即可编辑和预览</td></tr>
         </table>
@@ -671,7 +671,7 @@ L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
 
         <hr>
 
-        <p style="text-align:center;font-size:0.8rem;color:#aaa;">对话日期：2026年5月31日 &nbsp;|&nbsp; 补充整理：知白</p>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年5月31日 &nbsp;|&nbsp; 补充整理：知白</p>
 
         <div class="nav-bottom">
             <a href="../index.html">← 返回一些知识</a>

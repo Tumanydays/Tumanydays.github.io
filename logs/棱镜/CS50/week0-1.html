@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS50 · Week 0–1 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -20,29 +20,29 @@
         }
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
         h1 {
             font-size: 1.8rem;
             font-weight: 400;
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 16px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 16px; }
         .intro {
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 48px;
             padding-left: 16px;
@@ -53,7 +53,7 @@
             font-weight: 500;
             margin-top: 56px;
             margin-bottom: 20px;
-            color: #1a1a1a;
+            color: var(--text-title);
             letter-spacing: 1px;
         }
         h3 {
@@ -61,24 +61,24 @@
             font-weight: 500;
             margin-top: 36px;
             margin-bottom: 14px;
-            color: #333;
+            color: var(--text);
         }
         p {
             font-size: 0.95rem;
             margin-bottom: 16px;
-            color: #444;
+            color: var(--text);
         }
         blockquote {
             margin: 24px 0;
             padding: 16px 20px;
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             border-radius: 6px;
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-soft);
             border-left: 3px solid #ccc;
         }
-        blockquote p { margin-bottom: 0; color: #555; }
-        strong { color: #1a1a1a; font-weight: 600; }
+        blockquote p { margin-bottom: 0; color: var(--text-soft); }
+        strong { color: var(--text-title); font-weight: 600; }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -88,21 +88,21 @@
         th, td {
             padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
             line-height: 1.6;
         }
         th {
             background: #f9f9f9;
             font-weight: 500;
-            color: #555;
+            color: var(--text-soft);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
         tr:hover td { background: #fcfcfc; }
         hr {
             border: none;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             margin: 48px 0;
         }
         .dot {
@@ -116,16 +116,16 @@
         ul, ol {
             margin: 12px 0 20px 20px;
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-soft);
             line-height: 2;
         }
         code {
-            background: #f0f0f0;
+            background: var(--code-bg);
             padding: 1px 6px;
             border-radius: 3px;
             font-size: 0.85rem;
             font-family: "SF Mono", "Menlo", "Consolas", monospace;
-            color: #c7254e;
+            color: var(--code-text);
         }
         pre {
             background: #2d2d2d;
@@ -141,15 +141,15 @@
         .nav-bottom {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .nav-bottom a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
         }
-        .nav-bottom a:hover { color: #333; }
+        .nav-bottom a:hover { color: var(--text); }
         @media (max-width: 600px) {
             .container { padding: 32px 16px 64px; }
             h1 { font-size: 1.4rem; }
@@ -502,7 +502,7 @@ float average = (float) total / (float) count;
 
         <hr>
 
-        <p style="text-align:center;font-size:0.8rem;color:#aaa;">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">笔记整理：星尘 &nbsp;|&nbsp; 基于 CS50x 2025 课程 &nbsp;|&nbsp; 2026年5月29日</p>
 
         <div class="nav-bottom">
             <a href="index.html">← 返回CS50</a>

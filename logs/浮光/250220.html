@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>250220 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -20,52 +20,52 @@
         }
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
         h1 {
             font-size: 1.8rem;
             font-weight: 400;
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 16px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 16px; }
-        .meta a { color: #bbb; text-decoration: none; }
-        .meta a:hover { color: #8a939e; }
+        .meta a { color: var(--text-faint); text-decoration: none; }
+        .meta a:hover { color: var(--hover); }
         p {
             font-size: 0.95rem;
             margin-bottom: 16px;
-            color: #444;
+            color: var(--text);
             line-height: 2;
             text-indent: 2em;
         }
         hr {
             border: none;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             margin: 48px 0;
         }
         .nav-bottom {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .nav-bottom a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
         }
-        .nav-bottom a:hover { color: #8a939e; }
+        .nav-bottom a:hover { color: var(--hover); }
         @media (max-width: 600px) {
             .container { padding: 32px 16px 64px; }
             h1 { font-size: 1.4rem; }
@@ -97,7 +97,7 @@
 
         <hr>
 
-        <p style="text-align:center;font-size:0.8rem;color:#aaa;">水母流星 · 浮光</p>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">水母流星 · 浮光</p>
 
         <div class="nav-bottom">
             <a href="../index.html">← 返回浮光</a>

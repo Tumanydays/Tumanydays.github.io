@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一些知识 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif; background: #fafafa; color: #333; line-height: 1.9; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif; background: var(--bg); color: var(--text); line-height: 1.9; }
         .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
-        .back { font-size: 0.85rem; color: #999; text-decoration: none; margin-bottom: 16px; display: inline-block; }
-        .back:hover { color: #8a939e; }
-        h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: #1a1a1a; }
-        .subtitle { font-size: 0.85rem; color: #aaa; margin-bottom: 48px; }
+        .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 16px; display: inline-block; }
+        .back:hover { color: var(--hover); }
+        h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: var(--text-title); }
+        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
         .series-list { list-style: none; }
         .series-list li { border-bottom: 1px solid #eee; padding: 18px 0; }
         .series-list a { text-decoration: none; display: block; }
-        .series-list a:hover .entry-title { color: #1a1a1a; }
-        .entry-title { font-size: 0.95rem; color: #333; margin-bottom: 2px; }
-        .entry-desc { font-size: 0.8rem; color: #999; line-height: 1.5; }
-        footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e8e8e8; text-align: center; font-size: 0.8rem; color: #aaa; }
-        footer a { color: #999; text-decoration: none; }
-        footer a:hover { color: #333; }
+        .series-list a:hover .entry-title { color: var(--text-title); }
+        .entry-title { font-size: 0.95rem; color: var(--text); margin-bottom: 2px; }
+        .entry-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+        footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-dim); }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--text); }
         @media (max-width: 500px) { .container { padding: 32px 16px 64px; } }
     </style>
 </head>

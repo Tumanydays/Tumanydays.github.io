@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>吊古战场文 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "Noto Serif SC", "Songti SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.8;
         }
         .container {
@@ -20,12 +20,12 @@
         }
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             display: inline-block;
             margin-bottom: 56px;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
 
         /* 标题区 */
         .essay-title {
@@ -33,12 +33,12 @@
             font-weight: 400;
             letter-spacing: 4px;
             text-align: center;
-            color: #1a1a1a;
+            color: var(--text-title);
             margin-bottom: 8px;
         }
         .essay-author {
             font-size: 0.85rem;
-            color: #aaa;
+            color: var(--text-dim);
             text-align: center;
             margin-bottom: 60px;
             letter-spacing: 1px;
@@ -76,10 +76,10 @@
             border-top: 1px solid #eee;
             text-align: center;
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-dim);
         }
-        footer a { color: #999; text-decoration: none; }
-        footer a:hover { color: #333; }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--text); }
 
         @media (max-width: 500px) {
             .container { padding: 40px 20px 64px; }

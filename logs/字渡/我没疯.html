@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我没疯 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -20,23 +20,23 @@
         }
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
         h1 {
             font-size: 1.8rem;
             font-weight: 400;
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 8px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 12px; }
@@ -44,7 +44,7 @@
         /* 每一条语录 */
         .aphorism {
             font-size: 0.95rem;
-            color: #555;
+            color: var(--text-soft);
             line-height: 2.2;
             margin-bottom: 28px;
             padding-left: 0;
@@ -54,13 +54,13 @@
         footer {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-dim);
         }
-        footer a { color: #999; text-decoration: none; }
-        footer a:hover { color: #333; }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--text); }
 
         @media (max-width: 500px) {
             .container { padding: 32px 16px 64px; }
@@ -75,7 +75,7 @@
 
         <h1>我没疯</h1>
         <div class="meta">
-            <span>萨尔瓦多·达利</span><span>&nbsp;·&nbsp; <a href="../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+            <span>萨尔瓦多·达利</span><span>&nbsp;·&nbsp; <a href="../index.html" style="color:var(--text-faint);text-decoration:none;">日志</a></span>
         </div>
 
         <p class="aphorism">绘画是诚实的艺术，没有欺骗的可能，不是好，就是坏。</p>

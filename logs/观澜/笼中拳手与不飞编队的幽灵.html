@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>笼中拳手与不飞编队的幽灵 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
         .container {
@@ -22,12 +22,12 @@
         /* 返回链接 */
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
 
         /* 标题区 */
         h1 {
@@ -36,11 +36,11 @@
             letter-spacing: 2px;
             line-height: 1.5;
             margin-bottom: 16px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .meta {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             margin-bottom: 48px;
         }
         .meta span { margin-right: 16px; }
@@ -48,7 +48,7 @@
         /* 引言 */
         .intro {
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 48px;
             padding-left: 16px;
@@ -61,7 +61,7 @@
             font-weight: 500;
             margin-top: 56px;
             margin-bottom: 20px;
-            color: #1a1a1a;
+            color: var(--text-title);
             letter-spacing: 1px;
         }
         h3 {
@@ -69,28 +69,28 @@
             font-weight: 500;
             margin-top: 36px;
             margin-bottom: 14px;
-            color: #333;
+            color: var(--text);
         }
         p {
             font-size: 0.95rem;
             margin-bottom: 16px;
-            color: #444;
+            color: var(--text);
         }
 
         /* 引用 */
         blockquote {
             margin: 24px 0;
             padding: 16px 20px;
-            background: #f5f5f5;
+            background: var(--blockquote-bg);
             border-radius: 6px;
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-soft);
             border-left: 3px solid #ccc;
         }
-        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote p { margin-bottom: 0; color: var(--text-soft); }
 
         /* 加粗强调 */
-        strong { color: #1a1a1a; font-weight: 600; }
+        strong { color: var(--text-title); font-weight: 600; }
 
         /* 表格 */
         table {
@@ -102,14 +102,14 @@
         th, td {
             padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
             line-height: 1.6;
         }
         th {
             background: #f9f9f9;
             font-weight: 500;
-            color: #555;
+            color: var(--text-soft);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
@@ -118,7 +118,7 @@
         /* 分隔线 */
         hr {
             border: none;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             margin: 48px 0;
         }
 
@@ -136,15 +136,15 @@
         .nav-bottom {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .nav-bottom a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
         }
-        .nav-bottom a:hover { color: #333; }
+        .nav-bottom a:hover { color: var(--text); }
 
         /* 响应式：小屏幕 */
         @media (max-width: 600px) {
@@ -172,12 +172,12 @@
         <h1>笼中拳手与不飞编队的幽灵：资本主义政府的自主性、美联储的独立性与历史的失忆症</h1>
 
         <div class="meta">
-            <span>观澜</span><span>2026年5月27日 &nbsp;·&nbsp; <a href="../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+            <span>观澜</span><span>2026年5月27日 &nbsp;·&nbsp; <a href="../index.html" style="color:var(--text-faint);text-decoration:none;">日志</a></span>
         </div>
 
         <div class="intro">
             <p>缘起：水母流星大人从今日新闻精读中对西方话语霸权的批判出发，在讨论中塞关系三层利益结构与西方双标之后，突然转向了一个尖锐的结构性追问——「西方资本主义国家会有一个专门的政府部门来维护资本主义制度吗？」由此展开了一场跨越五轮追问、从制度表层一直打到历史哲学底层的政治经济学深潜。</p>
-            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">对话跨度：制度维护机构的隐形形态 → 制度在超级资本家面前的五个失效维度 →「那资本主义政府最终只能是傀儡吗？」→「被框定的自主性」理论与三种历史模式 →「可你也知道，西奥多·罗斯福最后遇刺了，就像他的后继者约翰·肯尼迪那样」→ 背叛阶级的个人与不背叛利益的阶级 →「老罗斯福的侄子算是很好的继承了他的意志」→ 两位罗斯福的精神传承与制度故事 →「再和我讲讲美联储与美国政府的关系」→ 美联储的结构、独立性、权力膨胀 →「这样的关系最终会发展成为什么呢」→ 四种终局推演 →「如果出现那么一位总统去打破制度……大概也会被无害化处理吧」→ 标本化的工序与社会主义「曾经来过」→「人们唯一能够从历史中记住的就是他们什么也不会记住」→ 黑格尔的猫头鹰与螺旋</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">对话跨度：制度维护机构的隐形形态 → 制度在超级资本家面前的五个失效维度 →「那资本主义政府最终只能是傀儡吗？」→「被框定的自主性」理论与三种历史模式 →「可你也知道，西奥多·罗斯福最后遇刺了，就像他的后继者约翰·肯尼迪那样」→ 背叛阶级的个人与不背叛利益的阶级 →「老罗斯福的侄子算是很好的继承了他的意志」→ 两位罗斯福的精神传承与制度故事 →「再和我讲讲美联储与美国政府的关系」→ 美联储的结构、独立性、权力膨胀 →「这样的关系最终会发展成为什么呢」→ 四种终局推演 →「如果出现那么一位总统去打破制度……大概也会被无害化处理吧」→ 标本化的工序与社会主义「曾经来过」→「人们唯一能够从历史中记住的就是他们什么也不会记住」→ 黑格尔的猫头鹰与螺旋</p>
         </div>
 
         <!-- 关键词索引 -->
@@ -234,7 +234,7 @@
         <h3>但如果是这样——2008年呢？</h3>
         <p>如果非要从历史中找一个最接近「资本主义制度维护部」显形的时刻，那就是2008年9月到10月。当雷曼兄弟倒闭、AIG濒临崩溃、整个全球金融体系站在悬崖边上——</p>
         <p>美国财政部和美联储在几周内做了这件事：<strong>用国家的全部力量，阻止资本主义的自毁机制运行。</strong></p>
-        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2;">
+        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:var(--text-soft); line-height:2;">
             <li>$7000亿的TARP（问题资产救助计划）——纳税人的钱注入岌岌可危的银行</li>
             <li>美联储资产负债表从$8000亿飙升至$4.5万亿——买了一万七千亿美元的抵押贷款支持证券</li>
             <li>AIG被国有化（一个社会主义手段被用来拯救资本主义）</li>
@@ -275,7 +275,7 @@
         <h3>维度四：技术不对称——制度永远在追，资本永远在跑</h3>
         <p>美国国会听证会上，78岁的参议员问扎克伯格：「Facebook是怎么赚钱的？」扎克伯格回答：「Senator, we run ads.」全场尴尬。不是因为扎克伯格无礼——是因为参议员真的不理解Facebook的商业模式。而这个人，投票决定是否拆分Facebook。</p>
         <p>这不是个案。这是<strong>结构性的知识不对称</strong>：</p>
-        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2;">
+        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:var(--text-soft); line-height:2;">
             <li>监管机构里年薪10万美元的公务员，在审查年薪200万美元的算法工程师写的代码</li>
             <li>立法者对区块链、AI决策系统、算法定价的理解，比科技公司落后至少五年</li>
             <li>一项反垄断调查从立案到裁决平均需要3-5年——而在这段时间里，一家科技公司已经迭代了三代产品</li>
@@ -332,7 +332,7 @@
 
         <h3>「傀儡」是错误的问题——正确的词是「共生」</h3>
         <blockquote><p>「傀儡」意味着操纵者和被操纵者是完全分离的两个实体。但政府和资本已经<strong>长在一起了</strong>——不是谁控制谁，而是一种相互渗透、相互依存、有时相互对抗但永不分手的纠缠关系。</p></blockquote>
-        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2;">
+        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:var(--text-soft); line-height:2;">
             <li>美国国防部的预算流向了洛克希德·马丁、波音、SpaceX——这些公司的利润来自政府合同。但政府进入太空、发动战争、监视地球的能力依赖这些公司。<strong>谁依赖谁？</strong></li>
             <li>美联储的量化宽松推高了资产价格，让最富有的1%更加富有——但这是稳定经济的必要手段。<strong>谁在为谁服务？</strong></li>
             <li>美国财政部发行国债，中国、日本和华尔街购买——政府需要资本的融资，资本需要政府的利息。<strong>谁是买方，谁是卖方？</strong></li>
@@ -410,7 +410,7 @@
         <h3>欣慰与苦涩之间</h3>
         <p>西奥多死于1919年1月6日，心脏栓塞，年仅60岁。去世时富兰克林36岁，担任海军助理部长。西奥多看到的是一个正在沿着他开辟的道路上升的年轻人。</p>
         <p>如果他能活到1933年——看到那个「站在角落里的年轻人」把手按在圣经上宣誓就职，面对2500万个失业的美国人和一个瘫痪的银行系统——他应该是欣慰的。但他的欣慰中会有苦涩：</p>
-        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2;">
+        <ul style="margin: 12px 0 20px 20px; font-size:0.9rem; color:var(--text-soft); line-height:2;">
             <li><strong>他是共和党人。</strong> 如果他看到另一个罗斯福以民主党人的身份连续四次当选——这是胜利还是讽刺？</li>
             <li><strong>新政的规模超越了他的想象力。</strong> 他要的是一个公正的竞技场。富兰克林在竞技场上建了一个安全网、一个记分牌、一个急救站——而且把竞技场老板赶走了。是延续，还是越界？</li>
             <li><strong>他相信伟人改变历史。富兰克林证明了制度比伟人更持久。</strong></li>
@@ -584,7 +584,7 @@
 
         <hr>
 
-        <p style="text-align:center;font-size:0.8rem;color:#aaa;">对话日期：2026年5月27日 &nbsp;|&nbsp; 记录整理：观澜</p>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年5月27日 &nbsp;|&nbsp; 记录整理：观澜</p>
 
         <div class="nav-bottom">
             <a href="../index.html">← 返回观澜</a>

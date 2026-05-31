@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>诗笺 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../images/icon.png">
-    <style>
+    <link rel="stylesheet" href="../style.css">    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", "Songti SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 2.2;
         }
         .container {
@@ -20,26 +20,26 @@
         }
         .back {
             font-size: 0.85rem;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
             margin-bottom: 48px;
             display: inline-block;
         }
-        .back:hover { color: #8a939e; }
+        .back:hover { color: var(--hover); }
         h1 {
             font-size: 1.4rem;
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 4px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .subtitle {
             font-size: 0.8rem;
-            color: #bbb;
+            color: var(--text-faint);
             margin-bottom: 56px;
         }
-        .subtitle a { color: #bbb; text-decoration: none; }
-        .subtitle a:hover { color: #8a939e; }
+        .subtitle a { color: var(--text-faint); text-decoration: none; }
+        .subtitle a:hover { color: var(--hover); }
 
         /* ---------- 诗墙核心：连绵的意识流 ---------- */
         .poem {
@@ -51,7 +51,7 @@
         /* 诗题：轻，不喧宾夺主 */
         .poem-title {
             font-size: 0.75rem;
-            color: #bbb;
+            color: var(--text-faint);
             letter-spacing: 2px;
             margin-bottom: 14px;
             font-weight: 400;
@@ -60,7 +60,7 @@
         /* 诗句本身：浅灰斜体，舒朗清瘦 */
         .poem-body {
             font-size: 0.95rem;
-            color: #777;
+            color: var(--text-muted);
             line-height: 2.6;
             letter-spacing: 1px;
             font-style: italic;
@@ -68,7 +68,7 @@
 
         /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
         .poem-body .light {
-            color: #aaa;
+            color: var(--text-dim);
         }
 
         /* 分隔用极细线，像毛笔提起来时的飞白 */
@@ -94,10 +94,10 @@
             border-top: 1px solid #eee;
             text-align: center;
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-dim);
         }
-        footer a { color: #999; text-decoration: none; }
-        footer a:hover { color: #8a939e; }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--hover); }
 
         @media (max-width: 500px) {
             .container { padding: 32px 20px 64px; }
