@@ -30,12 +30,6 @@
             justify-content: center;
         }
 
-        /* 悬浮动画：极轻的上下浮动 */
-        @keyframes float {
-            0%, 100% { margin-top: 0px; }
-            50% { margin-top: -3px; }
-        }
-
         /* 每个词片 */
         .frag {
             position: absolute;
@@ -43,7 +37,6 @@
             color: #555;
             white-space: nowrap;
             letter-spacing: inherit;
-            animation: float var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
             transition: color 0.3s, transform 0.3s, opacity 0.3s;
             cursor: pointer;
         }
@@ -51,7 +44,6 @@
             color: #1a1a1a;
             transform: scale(1.25);
             opacity: 1 !important;
-            animation-play-state: paused;
         }
 
         /* 轻/重节奏：五维渐变 ── 字重·透明度·字间距同步变化 */
@@ -124,6 +116,9 @@
     // 把碎片打散到各层
     var perRing = Math.ceil(fragments.length / rings.length);
 
+    // 存储词片数据用于浮动动画
+    var floatData = [];
+
     fragments.forEach(function(f, i) {
         var ringIdx = Math.floor(i / perRing);
         if (ringIdx >= rings.length) ringIdx = rings.length - 1;
@@ -151,9 +146,6 @@
         a.className = "frag " + f.weight + (f.special ? " special" : "");
         a.href = f.link;
         a.textContent = f.text;
-        // 每个词片有自己的浮动节奏
-        a.style.setProperty('--dur', (2.5 + Math.random() * 2) + 's');
-        a.style.setProperty('--delay', (Math.random() * 3) + 's');
         a.style.left = x + "px";
         a.style.top  = y + "px";
         a.style.transform = "translate(-50%, -50%)";
@@ -161,7 +153,26 @@
         a.style.transform += " rotate(" + ((Math.random()-0.5)*10) + "deg)";
 
         stage.appendChild(a);
+        // 收集浮动数据
+        floatData.push({
+            el: a,
+            speed: 1.2 + Math.random() * 0.8,
+            phase: Math.random() * Math.PI * 2,
+            amp: 3
+        });
     });
+
+    // 正弦波浮动动画（比 CSS keyframes 更圆滑自然）
+    function floatLoop(now) {
+        if (!floatLoop.start) floatLoop.start = now;
+        var t = (now - floatLoop.start) / 1000;
+        floatData.forEach(function(fd) {
+            var y = Math.sin(t * fd.speed + fd.phase) * fd.amp;
+            fd.el.style.marginTop = y + 'px';
+        });
+        requestAnimationFrame(floatLoop);
+    }
+    requestAnimationFrame(floatLoop);
 
     // 窗口变化时重新居中
     window.addEventListener("resize", function() {
