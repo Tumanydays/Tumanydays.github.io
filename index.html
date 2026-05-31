@@ -16,7 +16,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.8s cubic-bezier(0.0, 0.0, 0.3, 1);
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
 
         /* 背景几何动画 */
@@ -103,7 +104,6 @@
             .card { padding: 32px 16px; }
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -130,6 +130,12 @@
 
         <footer>— 始于 2026.5.28 —</footer>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() { document.body.style.opacity = 1; }, 80);
+    });
+    </script>
 
     <!-- ========== 随机抽牌 ========== -->
     <script src="logs/Echo/fragments.js"></script>
