@@ -25,3 +25,67 @@
 
 /* ── 全局基础 ── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── 引用块 ── */
+blockquote {
+    margin: 24px 0;
+    padding: 16px 20px;
+    background: var(--blockquote-bg);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    border-left: 3px solid #ccc;
+}
+blockquote p { margin-bottom: 0; color: var(--text-soft); }
+
+/* ── 加粗 ── */
+strong { color: var(--text-title); font-weight: 600; }
+
+/* ── 表格 ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 0.85rem;
+}
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+}
+th {
+    background: #f9f9f9;
+    font-weight: 500;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+tr:hover td { background: #fcfcfc; }
+
+/* ── 分割线 ── */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+}
+
+/* ── 小圆点分隔符 ── */
+.dot {
+    display: block;
+    width: 6px; height: 6px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 40px auto;
+}
+
+/* ── 行内代码 ── */
+code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace;
+    color: var(--code-text);
+}
