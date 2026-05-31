@@ -230,18 +230,17 @@
         };
 
         p.draw = function() {
-            // 响应鼠标：移动时圆点短暂加速，像被「惊动」
+            // 极轻惊动：鼠标/手指移动时圆点只给一点点被触碰的反馈
             var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
             gLastMouseX = gMouseX;
             gLastMouseY = gMouseY;
-            // 距离衰减：鼠标/手指离动画中心越远，惊动越弱
             var distFromCenter = p.dist(gMouseX, gMouseY, p.width / 2, p.height / 2);
             var triggerRadius = p.min(p.width, p.height) * 0.4;
             var atten = 1 - p.max(0, distFromCenter - triggerRadius) / triggerRadius;
             atten = p.constrain(atten, 0, 1);
-            flutter += mv * 0.003 * atten;
-            flutter = p.lerp(flutter, 0, 0.15);
-            flutter = p.constrain(flutter, 0, 0.12);
+            flutter += mv * 0.0005 * atten;
+            flutter = p.lerp(flutter, 0, 0.25);
+            flutter = p.constrain(flutter, 0, 0.02);
             var speedMod = 1 + flutter;
 
             t = speed * p.millis();
