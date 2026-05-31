@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tumanydays</title>
     <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -40,19 +41,19 @@
             font-weight: 400;
             letter-spacing: 4px;
             margin-bottom: 52px;
-            color: #1a1a1a;
+            color: var(--text-title);
         }
         .tagline {
             font-size: 0.95rem;
             line-height: 1.8;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 36px;
         }
         .dot {
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: #bbb;
+            background: var(--text-faint);
             border-radius: 50%;
             margin: 24px auto;
         }
@@ -60,7 +61,7 @@
         /* 诗句入口：轻盈，不抢眼 */
         .verse-link {
             display: block;
-            color: #aaa;
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.82rem;
             font-style: italic;
@@ -69,18 +70,18 @@
             margin-bottom: 28px;
             transition: color 0.3s;
         }
-        .verse-link:hover { color: #8a939e; }
+        .verse-link:hover { color: var(--hover); }
 
         /* 文章链接 */
         .article-link {
             display: block;
-            color: #333;
+            color: var(--text);
             text-decoration: none;
             font-size: 0.9rem;
             line-height: 1.8;
             margin-bottom: 12px;
         }
-        .article-link:hover { color: #8a939e; }
+        .article-link:hover { color: var(--hover); }
 
         /* 图片入口 */
         .gate-img {
@@ -96,7 +97,7 @@
         footer {
             margin-top: 48px;
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-dim);
         }
         @media (max-width: 400px) {
             .card { padding: 32px 16px; }
@@ -105,6 +106,7 @@
     </style>
 </head>
 <body>
+    <button id="theme-toggle" aria-label="切换主题">○</button>
     <div id="p5-bg"></div>
     <div class="card">
 
@@ -289,6 +291,19 @@
         }
     };
     new p5(sketch);
+    </script>
+    <script>
+    (function() {
+        var html = document.documentElement;
+        var btn = document.getElementById('theme-toggle');
+        var saved = localStorage.getItem('theme');
+        if (saved) html.setAttribute('data-theme', saved);
+        btn.addEventListener('click', function() {
+            var theme = html.getAttribute('data-theme') === 'dark' ? '' : 'dark';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    })();
     </script>
 </body>
 </html>

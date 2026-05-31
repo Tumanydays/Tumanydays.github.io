@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日志 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../images/icon.png">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
-            background: #fafafa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.9;
         }
 
@@ -67,7 +68,7 @@
             border: 1px solid #e8e8e8;
             border-radius: 8px;
             padding: 20px;
-            background: rgba(255,255,255,0.65);
+            background: var(--card-bg);
             transition: border-color 0.2s, box-shadow 0.2s;
         }
         .cat-card:hover {
@@ -76,13 +77,13 @@
         }
         .cat-name {
             font-size: 1.05rem;
-            color: #1a1a1a;
+            color: var(--text-title);
             font-weight: 500;
             margin-bottom: 4px;
         }
         .cat-desc {
             font-size: 0.78rem;
-            color: #999;
+            color: var(--text-dim);
             line-height: 1.6;
         }
         .cat-count {
@@ -100,19 +101,20 @@
         footer {
             margin-top: 64px;
             padding-top: 24px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--border);
             text-align: center;
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-dim);
         }
         footer a {
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
         }
-        footer a:hover { color: #333; }
+        footer a:hover { color: var(--text); }
     </style>
 </head>
 <body>
+    <button id="theme-toggle" aria-label="切换主题">○</button>
     <div id="p5-bg"></div>
     <div class="container">
 
@@ -258,6 +260,18 @@
     };
     new p5(sketch);
     </script>
-
+    <script>
+    (function() {
+        var html = document.documentElement;
+        var btn = document.getElementById('theme-toggle');
+        var saved = localStorage.getItem('theme');
+        if (saved) html.setAttribute('data-theme', saved);
+        btn.addEventListener('click', function() {
+            var theme = html.getAttribute('data-theme') === 'dark' ? '' : 'dark';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    })();
+    </script>
 </body>
 </html>
