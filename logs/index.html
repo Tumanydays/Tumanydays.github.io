@@ -114,7 +114,6 @@
     </style>
 </head>
 <body>
-    <button id="theme-toggle" aria-label="切换主题">○</button>
     <div id="p5-bg"></div>
     <div class="container">
 
@@ -259,19 +258,6 @@
         }
     };
     new p5(sketch);
-    </script>
-    <script>
-    (function() {
-        var html = document.documentElement;
-        var btn = document.getElementById('theme-toggle');
-        var saved = localStorage.getItem('theme');
-        if (saved) html.setAttribute('data-theme', saved);
-        btn.addEventListener('click', function() {
-            var theme = html.getAttribute('data-theme') === 'dark' ? '' : 'dark';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
-    })();
     </script>
 </body>
 </html>
