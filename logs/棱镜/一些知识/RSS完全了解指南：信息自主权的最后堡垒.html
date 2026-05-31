@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS完全了解指南：信息自主权的最后堡垒 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        /* 返回链接 */
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #8a939e; }
+
+        /* 文章标题 */
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        /* 分类/日期行 */
+        .meta {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+        .meta a { color: #bbb; text-decoration: none; }
+        .meta a:hover { color: #8a939e; }
+
+        /* 引言区 */
+        .intro {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+
+        /* 正文层级 */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: #333;
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: #444;
+        }
+
+        /* 引用块 */
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+
+        /* 加粗强调 */
+        strong { color: #1a1a1a; font-weight: 600; }
+
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+
+        /* 代码 / 预格式化 */
+        code {
+            font-family: "SF Mono", "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c7254e;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0 24px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: #444;
+        }
+
+        /* 无序列表 */
+        ul {
+            margin: 12px 0 20px 20px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 2.2;
+        }
+        ul li { margin-bottom: 4px; }
+
+        /* 有序列表 */
+        ol {
+            margin: 12px 0 20px 24px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 2.2;
+        }
+        ol li { margin-bottom: 4px; }
+
+        /* 分隔与导航 */
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: #8a939e; }
+
+        /* 阅读进度条 */
+        #progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 2px; width: 0%;
+            background: #4a6b80;
+            z-index: 999;
+        }
+
+        /* 小屏适配 */
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="container">
+
+    <a class="back" href="../../index.html">← Tumanydays</a>
+
+    <h1>RSS完全了解指南：信息自主权的最后堡垒</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月1日 &nbsp;·&nbsp; <a href="../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>推荐算法替你决定了你应该看什么——它比你更了解你的弱点，于是不断推送那些让你停留更久的内容，而不是对你更有价值的内容。<strong>RSS</strong> 是这套规则的反面：没有算法、没有推荐、没有广告。只有你主动订阅的来源，按你决定的顺序出现。</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">本文从基础定义到 AI 时代的最新演进、从阅读器选择到端到端自动化管线搭建，逐层拆解这套被严重低估的信息基础设施。</p>
+    </div>
+
+    <!-- 关键词索引 -->
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>⭐ RSS</strong></td><td>一种让网站主动推送更新给你的 XML 格式——信息聚合的元老级标准，1999 年沿用至今</td></tr>
+        <tr><td><strong>⭐ RSS 阅读器</strong></td><td>聚合你所有订阅源的应用，在一个界面中消费所有内容</td></tr>
+        <tr><td><strong>Feed / 源</strong></td><td>一个 RSS 订阅地址，指向一个 XML 文件，阅读器定期拉取</td></tr>
+        <tr><td><strong>RSSHub</strong></td><td>万能 RSS 生成器——为不提供 RSS 的网站（B站、微博、小红书等）生成源</td></tr>
+        <tr><td><strong>Podcast Index</strong></td><td>开源播客目录，扩展 RSS 协议支持播客的现代需求</td></tr>
+        <tr><td><strong>全文输出 vs 摘要输出</strong></td><td>有些源输出完整文章内容，有些只给标题+简介</td></tr>
+        <tr><td><strong>自托管阅读器</strong></td><td>在自己服务器上部署 RSS 服务（如 Miniflux、FreshRSS）</td></tr>
+        <tr><td><strong>WebSub</strong></td><td>RSS 的实时推送协议——让延迟从分钟级降到秒级</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 正文 ═══════ -->
+
+    <h2>一、RSS 是什么——一句话捅破窗户纸</h2>
+
+    <p><strong>RSS（Really Simple Syndication，真正简易聚合）</strong>的核心逻辑惊人地简单：它让网站主动"推送"更新给你，而不是你逐个网站去"拉取"。</p>
+
+    <blockquote><p>没有 RSS 的世界：你每天手动打开 30 个网站看有没有新文章——像在没有通知栏的时代反复下拉刷新。<br>有 RSS 的世界：所有网站的新内容自动发到你的阅读器，你一个界面读完所有。</p></blockquote>
+
+    <p>这个差异的实质是<strong>控制权的转移</strong>。在 RSS 体系下：你决定订阅什么来源，你决定阅读什么内容。没有推荐算法替你排序，没有"你可能也喜欢"的干扰，没有广告穿插在你的信息流中。你不是产品，你只是读者。</p>
+
+    <table>
+        <tr><th></th><th>社交媒体信息流</th><th>RSS 信息流</th></tr>
+        <tr><td><strong>谁选内容</strong></td><td>推荐算法</td><td>你本人</td></tr>
+        <tr><td><strong>排序依据</strong></td><td>互动概率预测——你停留最久的排最前</td><td>发布时间——最新的排最前</td></tr>
+        <tr><td><strong>内容边界</strong></td><td>平台生态内（算法认为你可能喜欢的）</td><td>你订阅的源（你明确选择要看的）</td></tr>
+        <tr><td><strong>广告</strong></td><td>穿插在信息流中，伪装成内容</td><td>无（除非源本身就有广告）</td></tr>
+        <tr><td><strong>你的角色</strong></td><td>被优化的对象（注意力 = 商品）</td><td>自主的读者（注意力 = 你的资产）</td></tr>
+        <tr><td><strong>信息过载的解法</strong></td><td>算法帮你"过滤"（但你看不到它过滤了什么）</td><td>你自己管理订阅源 + 设置过滤规则</td></tr>
+        <tr><td><strong>跨平台</strong></td><td>锁定在单一平台</td><td>任何阅读器都能订阅任何 RSS 源</td></tr>
+    </table>
+
+    <p>一种常见的误解是"RSS 是留给极客的古老技术"。恰恰相反——<strong>RSS 是留给每一个在意自己注意力的人的生存工具</strong>。它不是一项需要学习的技术，而是一种你可以重新拥有的权利。</p>
+
+    <span class="dot"></span>
+
+    <h2>二、它古老吗？是的。它死了吗？没有。</h2>
+
+    <h3>2.1 简史</h3>
+    <p>RSS 的雏形由网景公司（Netscape）在 1999 年提出，最初是为了让 My.Netscape.com 门户聚合新闻内容。随后二十多年经历了多个版本的迭代：RSS 0.9（原型）→ RSS 1.0（基于 W3C RDF 标准，语义网取向）→ RSS 2.0（今天的主流版本）。同一时期还诞生了 <strong>Atom</strong>（IETF 标准化版本，RFC 4287，2005 年）——结构更严谨，但普及度始终不及 RSS 2.0。</p>
+
+    <h3>2.2 Google Reader 的兴衰</h3>
+    <p>2005 年 Google 收购了 FeedBurner 并推出了 Google Reader，RSS 由此进入大众视野。到 2012 年，Google Reader 是全球最大的 RSS 阅读平台。2013 年 3 月 13 日，Google 宣布关闭它——官方口径是"使用量下降"，但更真实的背景是 Google 的战略重心已转向封闭的社交平台 Google+。RSS 是开放的，而开放不符合封闭平台的利益。</p>
+
+    <p>主流媒体在那一天纷纷撰写了 RSS 的悼词。"RSS 已死"成为科技圈的年度叙事。但真正理解这项技术的人知道：<strong>杀死的是 Google Reader 这个产品，不是 RSS 这个协议</strong>。</p>
+
+    <h3>2.3 真正的复兴</h3>
+    <p>Google Reader 的死洗掉的是"被动使用 RSS 的用户"。留下来的是真正需要它的人——研究员、记者、独立博客作者、写作者、信息成瘾者——形成了一个小而坚定的用户群。2020 年代出现了几股推动 RSS 复兴的力量：</p>
+    <ul>
+        <li><strong>NetNewsWire</strong> 被 Black Pixel 开源后重新成为 macOS/iOS 上最优雅的免费阅读器</li>
+        <li><strong>Miniflux</strong> 等现代自托管方案大幅降低了部署门槛——一个 Go 二进制文件搞定一切</li>
+        <li><strong>独立博客运动</strong>（IndieWeb、全球博客圈的复苏）重新把 RSS 推回前台</li>
+        <li><strong>社交媒体算法疲劳</strong>——越来越多用户主动逃离推荐系统</li>
+        <li><strong>RSSHub</strong> 的出现解决了"网站不提供 RSS"的最大痛点</li>
+        <li><strong>Podcast Index</strong>（2020）在播客领域为 RSS 注入了新生命</li>
+    </ul>
+
+    <blockquote><p>RSS 没有死。它只是从聚光灯下回到了它该在的位置——一个可靠、开放、不受平台控制的信息基础设施。</p></blockquote>
+
+    <p><strong>信心等级：高</strong>——RSS 在绝对用户数上远不及社交平台，但在技术写作、学术研究、独立媒体生态中，它的渗透率没有下降，甚至在缓慢回升。2022-2025 年，Readwise Reader、NetNewsWire 等新产品/重要更新进一步证实了生态的活跃度。</p>
+
+    <span class="dot"></span>
+
+    <h2>三、技术原理——知道这些就够了</h2>
+
+    <h3>3.1 RSS 文件是什么</h3>
+    <p>RSS 本质上是一个 <strong>XML 文件</strong>，放在网站上，结构大致如下：</p>
+
+    <pre><code>&lt;rss version="2.0"&gt;
+  &lt;channel&gt;
+    &lt;title&gt;博客名称&lt;/title&gt;
+    &lt;link&gt;https://example.com&lt;/link&gt;
+    &lt;description&gt;博客简介&lt;/description&gt;
+    &lt;item&gt;
+      &lt;title&gt;文章标题&lt;/title&gt;
+      &lt;link&gt;https://example.com/article&lt;/link&gt;
+      &lt;description&gt;文章摘要或全文&lt;/description&gt;
+      &lt;pubDate&gt;Mon, 01 Jun 2026 12:00:00 GMT&lt;/pubDate&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;</code></pre>
+
+    <p>你的阅读器定期（通常每 15-60 分钟）去检查这个文件，发现 <code>&lt;item&gt;</code> 有新增就拉下来展示给你。这个协议轻到可以手写，可靠到跑了二十多年没有需要替换的充分理由。</p>
+
+    <h3>3.2 RSS vs Atom vs JSON Feed</h3>
+
+    <table>
+        <tr><th>格式</th><th>技术基础</th><th>特点</th><th>现状</th></tr>
+        <tr><td><strong>RSS 2.0</strong></td><td>XML</td><td>最广泛、最简单，但规范有些模糊（"description"可以含 HTML 也可以不含）</td><td>绝对主流</td></tr>
+        <tr><td><strong>Atom</strong></td><td>XML（IETF RFC 4287）</td><td>结构更严谨，日期格式强制 RFC 3339，<code>&lt;entry&gt;</code> 更规范</td><td>技术博客/标准组织偏爱</td></tr>
+        <tr><td><strong>JSON Feed</strong></td><td>JSON</td><td>JSON 格式而非 XML，天然适合 Web 开发者，规范清晰（https://jsonfeed.org）</td><td>小众但有增长趋势</td></tr>
+    </table>
+
+    <p>作为用户，<strong>你不需要关心区别</strong>——所有现代阅读器都支持三者。如果你自己建站输出 Feed，Atom 是更规范的选择；要兼容最广，RSS 2.0 仍然是最安全的。</p>
+
+    <h3>3.3 关键概念</h3>
+
+    <table>
+        <tr><th>概念</th><th>说明</th></tr>
+        <tr><td><strong>Feed / 源</strong></td><td>一个 RSS 订阅地址，指向一个 XML/JSON 文件</td></tr>
+        <tr><td><strong>Item / 条目</strong></td><td>一篇文章、一则播客、一条 YouTube 视频——Feed 中每一个独立的内容单元</td></tr>
+        <tr><td><strong>全文输出</strong></td><td>源在 <code>&lt;description&gt;</code> 或 <code>&lt;content:encoded&gt;</code> 中输出完整正文。你可以在阅读器里读完</td></tr>
+        <tr><td><strong>摘要输出</strong></td><td>只有标题和简介，阅读体验依赖跳转原文</td></tr>
+        <tr><td><strong>轮询（Polling）</strong></td><td>阅读器定期请求 Feed 文件。不是真正的实时推送</td></tr>
+        <tr><td><strong>WebSub</strong></td><td>原称 PubSubHubbub——发布者主动通知订阅者的实时推送协议。YouTube、GitHub 等已支持。延迟从分钟级降到秒级</td></tr>
+        <tr><td><strong>Enclosure</strong></td><td>RSS 2.0 的附件机制——播客音频文件、视频文件通过它附加在条目中</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <h2>四、RSS 阅读器生态——选哪个</h2>
+
+    <p>市面上的阅读器种类繁多，按使用场景可以分五条路线。</p>
+
+    <h3>4.1 跨设备同步（手机 + 电脑）</h3>
+
+    <table>
+        <tr><th>阅读器</th><th>平台</th><th>费用</th><th>特点</th></tr>
+        <tr><td><strong>Inoreader</strong></td><td>Web / iOS / Android</td><td>免费版够用 / Pro $10/月</td><td>功能最全：规则引擎、全文提取、搜索归档、标签系统。生态位中的主力选手</td></tr>
+        <tr><td><strong>Feedly</strong></td><td>Web / iOS / Android</td><td>免费版有限 / Pro $8/月</td><td>老牌玩家，UI 漂亮，AI 辅助功能（Leo 摘要），但免费版限制较多</td></tr>
+        <tr><td><strong>NetNewsWire</strong></td><td>macOS / iOS</td><td><strong>完全免费</strong></td><td>开源、Apple 原生设计、极简。同步需搭配 iCloud 或自建服务后端</td></tr>
+        <tr><td><strong>Readwise Reader</strong></td><td>Web / iOS / macOS</td><td>$9.99/月（全功能）</td><td>集 RSS + 高亮 + 笔记 + AI 于一体。适合深度阅读和知识管理需求，支持导入 EPUB、PDF、Newsletter</td></tr>
+    </table>
+
+    <h3>4.2 单设备专用</h3>
+
+    <table>
+        <tr><th>阅读器</th><th>平台</th><th>特点</th></tr>
+        <tr><td><strong>Reeder</strong></td><td>macOS / iOS</td><td>付费买断，设计感极强的标杆级阅读器。支持 Inoreader/Feedly/Miniflux 等服务后端</td></tr>
+        <tr><td><strong>Fluent Reader</strong></td><td>Windows / Linux / macOS</td><td>开源、Electron 构建、支持本地阅读和自托管服务</td></tr>
+        <tr><td><strong>NewsFlash</strong></td><td>Linux（GNOME）</td><td>GNOME 原生阅读器，干净利落，支持 FreshRSS/Miniflux 后端</td></tr>
+        <tr><td><strong>FeedMe</strong></td><td>Android</td><td>Android 上口碑最好的阅读器，支持多个服务后端，可定制性强</td></tr>
+    </table>
+
+    <h3>4.3 自托管（服务器在自己手里）</h3>
+
+    <table>
+        <tr><th>方案</th><th>语言</th><th>部署难度</th><th>推荐理由</th></tr>
+        <tr><td><strong>Miniflux</strong></td><td>Go</td><td>★☆☆</td><td>单二进制部署，极轻量，SQLite/PostgreSQL，完善 REST API。个人认为自托管首选</td></tr>
+        <tr><td><strong>FreshRSS</strong></td><td>PHP</td><td>★★☆</td><td>功能更全，支持多用户，API 兼容 Google Reader 协议，可对接 Reeder/NetNewsWire</td></tr>
+        <tr><td><strong>Miniflux</strong> 的 API</td><td>Go</td><td>★☆☆</td><td>兼容 Fever API，完美对接 Reeder、NetNewsWire 等客户端</td></tr>
+        <tr><td><strong>Tiny Tiny RSS</strong></td><td>PHP</td><td>★★☆</td><td>老牌、插件生态丰富，但界面稍显陈旧</td></tr>
+        <tr><td><strong>Yarr</strong></td><td>Go</td><td>★☆☆</td><td>更轻量的 Miniflux 变体——单文件、SQLite、无外部依赖</td></tr>
+    </table>
+
+    <h3>4.4 CLI / 极客路线</h3>
+
+    <table>
+        <tr><th>工具</th><th>说明</th></tr>
+        <tr><td><strong>Newsboat</strong></td><td>终端 RSS 阅读器，Vim 快捷键操作，可搭配 tmux 常驻后台。支持播客下载</td></tr>
+        <tr><td><strong>rsstail</strong></td><td><code>tail -f</code> 风格——终端中滚动显示新条目，适合搭配通知脚本</td></tr>
+        <tr><td><strong>RainbowStream</strong></td><td>终端内三栏布局，类邮箱操作体验</td></tr>
+        <tr><td><strong>sfeed</strong></td><td>纯 C 实现的 RSS/Atom 解析工具集，极简主义者的选择</td></tr>
+    </table>
+
+    <blockquote><p><strong>我的建议（针对水母流星大人）</strong>：入门选 <strong>NetNewsWire</strong>（macOS + iOS，免费且优雅）。需要跨平台和规则引擎选 <strong>Inoreader 免费版</strong>。做知识管理可以从 <strong>Readwise Reader</strong> 起步（付费但整合度高）。想要完全掌控自己的数据——<strong>Miniflux</strong> 部署一次，几乎无需维护。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>五、怎么找到 RSS 源</h2>
+
+    <p>很多网站不再主动宣传自己的 RSS 源，但它们通常还在。</p>
+
+    <h3>5.1 方法一：直接在 URL 上试（最快）</h3>
+    <pre><code>https://example.com/feed/
+https://example.com/feed.xml
+https://example.com/rss/
+https://example.com/rss.xml
+https://example.com/atom.xml
+https://example.com/index.xml
+https://example.com/feed/atom/</code></pre>
+    <p>技术类博客尤其标准——<code>/feed.xml</code> 或 <code>/atom.xml</code> 几乎是行业惯例。</p>
+
+    <h3>5.2 方法二：浏览器扩展自动发现</h3>
+    <table>
+        <tr><th>扩展</th><th>用途</th></tr>
+        <tr><td><strong>RSSHub Radar</strong></td><td>识别当前页面的 Feed 链接 + 通过 RSSHub 生成源。Chrome/Firefox/Safari 均可用</td></tr>
+        <tr><td><strong>Feedbro</strong></td><td>内置阅读器 + 自动发现，适合入门用户一步到位</td></tr>
+        <tr><td><strong>QuiteRSS</strong> 的发现器</td><td>桌面端 Feed 发现工具</td></tr>
+    </table>
+
+    <h3>5.3 方法三：RSSHub——万能生成器</h3>
+    <p>RSSHub 是一个开源项目（<a href="https://rsshub.app" target="_blank" style="color:#555;">rsshub.app</a>），能把"没有 RSS 的网站"的内容转换成 RSS 格式。以下是你可以实际使用的路由：</p>
+
+    <pre><code># 视频平台
+/rsshub.app/bilibili/user/video/2267573      → B站 UP 主视频更新
+/rsshub.app/bilibili/user/dynamic/2267573    → B站 UP 主动态（含转发）
+/rsshub.app/youtube/channel/UC...            → YouTube 频道（RSSHub 包装）
+/rsshub.app/douyin/user/xxx                  → 抖音
+
+# 社交媒体
+/rsshub.app/weibo/user/xxx                   → 微博用户
+/rsshub.app/twitter/user/elonmusk            → Twitter/X 用户（可能受限）
+/rsshub.app/xiaohongshu/user/xxx             → 小红书用户
+
+# 知识/社区
+/rsshub.app/zhihu/people/activities/xxx      → 知乎用户动态
+/rsshub.app/zhihu/zhuanlan/xxx               → 知乎专栏
+/rsshub.app/douban/group/xxx                 → 豆瓣小组
+/rsshub.app/douban/movie/playing             → 豆瓣正在上映
+/rsshub.app/jianshu/user/xxx                 → 简书用户
+
+# 新闻/资讯
+/rsshub.app/36kr/motif/xxx                   → 36氪
+/rsshub.app/huxiu/article                    → 虎嗅</code></pre>
+
+    <p>RSSHub 有<strong>公共实例</strong>（rsshub.app），也可以自部署。重度用户建议自部署——公共实例有请求频率限制和稳定性问题。</p>
+
+    <h3>5.4 方法四：阅读器内置搜索</h3>
+    <p>Inoreader 和 Feedly 都内置了搜索发现功能。输入域名或关键词，直接找到相关源。这是最懒惰也最适合初学者的方法。</p>
+
+    <span class="dot"></span>
+
+    <h2>六、进阶玩法——RSS 不止用来读博客</h2>
+
+    <h3>6.1 追 YouTube / 播客</h3>
+    <p>YouTube 每个频道都有一个隐藏的原生 RSS 源：</p>
+    <pre><code>https://www.youtube.com/feeds/videos.xml?channel_id=UC...</code></pre>
+    <p>把它扔进阅读器，新视频自动出现——不需要打开 YouTube 首页被推荐算法轰炸。</p>
+    <p><strong>播客本质上就是 RSS + 音频附件（Enclosure）</strong>。所有播客客户端底层都是 RSS 协议。这就是为什么你可以用任意播客应用订阅任意播客，不会被锁定在某个平台内。这个开放生态是 Apple Podcasts 和 Spotify 始终无法"垄断"播客的原因。</p>
+
+    <h3>6.2 追 GitHub 仓库动态</h3>
+    <pre><code>https://github.com/用户名/仓库名/releases.atom    → Release 发布通知
+https://github.com/用户名/仓库名/commits.atom     → 提交动态
+https://github.com/用户名.atom                     → 用户动态（Star、Fork 等）</code></pre>
+
+    <h3>6.3 追 Reddit / Hacker News</h3>
+    <pre><code>https://www.reddit.com/r/子版块名/.rss               → Reddit 版块新帖
+https://hnrss.org/frontpage                           → Hacker News 首页
+https://hnrss.org/newest                              → Hacker News 最新
+https://hnrss.org/user/用户名                         → 特定用户</code></pre>
+    <p>hnrss.org 是社区维护的项目，支持按关键词、用户、分数阈值过滤。</p>
+
+    <h3>6.4 追 Mastodon / 去中心化社交</h3>
+    <pre><code>https://mastodon.example/@用户名.rss                → Mastodon 用户公开嘟文
+https://mastodon.example/tags/tagname.rss            → 话题标签</code></pre>
+
+    <h3>6.5 邮件通讯 → RSS</h3>
+    <p>用 <strong>Kill the Newsletter!</strong>（kill-the-newsletter.com）生成一个临时邮箱地址——邮件发进来，自动转为 RSS 源。还可以自托管 <strong>mado</strong>（一个更简单的邮件转 RSS 方案）。</p>
+
+    <h3>6.6 RSS 配合自动化</h3>
+    <table>
+        <tr><th>方案</th><th>玩法</th></tr>
+        <tr><td><strong>IFTTT / Zapier / Make</strong></td><td>RSS 新条目 → Telegram / Slack / 邮件 / Discord 通知</td></tr>
+        <tr><td><strong>Huginn</strong></td><td>自托管自动化平台——监听 RSS 变化后触发任意动作，比 IFTTT 灵活百倍</td></tr>
+        <tr><td><strong>n8n</strong></td><td>Node-RED 风格的可视化工作流引擎，RSS 节点 + AI 节点 + 通知节点自由组合</td></tr>
+        <tr><td><strong>Miniflux API + 任意脚本</strong></td><td>通过 REST API 拉取未读条目，用 Python/JS 写出任何你想要的处理逻辑</td></tr>
+    </table>
+
+    <h3>6.7 RSS 过滤——信息降噪</h3>
+    <p>当订阅源积累到 30+ 时，"读不完"是最常见的问题。解决方式是加一层过滤，而不是放弃 RSS：</p>
+    <ul>
+        <li><strong>Inoreader 规则引擎</strong>（Pro 完整）：只保留含特定关键词的文章、自动跳过含"广告""推广"的条目、按字数过滤</li>
+        <li><strong>Miniflux 过滤规则</strong>：基于正则表达式的条目筛选，支持屏蔽和自动标记</li>
+        <li><strong>FreshRSS 标签 + 标记</strong>：用标签系统给条目分类，配合标记实现工作流</li>
+        <li><strong>AI 筛选</strong>（见下一章）：用 LLM 判断条目是否值得阅读，是最聪明但也最消耗资源的方式</li>
+    </ul>
+
+    <blockquote><p>过滤的黄金法则：<strong>先增加，再删减</strong>。初期不要怕订阅太多——先用一段时间，看清楚哪些源你实际在读、哪些你从来不看，再逐步修剪。不要为了追求"零未读"而过度过滤。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 新增内容：RSS + AI ═══════ -->
+
+    <h2>七、RSS + AI 时代：信息管线的智能化</h2>
+
+    <p>这是 2024-2026 年 RSS 生态中最令人兴奋的新方向。<strong>RSS 解决了信息获取的自主权问题，AI 解决了信息过载的处理效率问题</strong>——两者结合，产生的是远大于各自之和的效果。</p>
+
+    <h3>7.1 AI 做的三件事</h3>
+
+    <table>
+        <tr><th>能力</th><th>说明</th><th>典型场景</th></tr>
+        <tr><td><strong>智能摘要</strong></td><td>用 LLM 为每篇条目生成 2-3 句摘要，快速判断是否值得精读</td><td>早晨打开阅读器，先扫摘要再决定点开哪篇，而不是逐篇扫读</td></tr>
+        <tr><td><strong>多语言翻译</strong></td><td>把不同语言的条目翻译成你的母语摘要</td><td>关注日本 tech 博客、德语媒体、法语期刊，不需要会这些语言</td></tr>
+        <tr><td><strong>兴趣筛选</strong></td><td>根据你设定的兴趣维度，自动给条目打分/标记/归类</td><td>"只标记涉及 LLM 推理架构的文章""跳过所有 iPhone 评测"</td></tr>
+    </table>
+
+    <p><strong>⚠️ 关键区分</strong>：AI 筛选和推荐算法有本质区别。推荐算法决定了"你看什么"——你失去了选择权。AI 筛选决定了"你从你已经选择的内容中优先看什么"——你仍然控制着信息来源，AI 只是帮你提高处理效率。前者是剥夺，后者是赋能。</p>
+
+    <h3>7.2 实际工具</h3>
+    <ul>
+        <li><strong>Readwise Reader</strong>——内置 AI（基于 GPT-4）对每篇文章生成摘要、关键要点、术语解释。支持用 AI 搜索你的全部阅读历史。付费但整合度高</li>
+        <li><strong>Feedly Leo</strong>——Feedly 的 AI 功能，做条目摘要和优先级排序。Pro 功能</li>
+        <li><strong>Miniflux + OpenAI API</strong>——用 Miniflux API 拉取未读条目，过一遍 LLM，把结果写回或推送。完全自定义，完全免费（除了 API 费用）。示例流见第九章</li>
+        <li><strong>Newsboat + 外部脚本</strong>——用 Newsboat 的 <code>macro</code> 功能绑定外部脚本，选中条目后按一个键触发 AI 摘要</li>
+    </ul>
+
+    <h3>7.3 一个具体的 AI 处理例子</h3>
+    <p>假设你的阅读器收到一篇关于 Rust 异步编程的 5000 字英文技术文章。AI 管线可以自动：</p>
+    <ol>
+        <li>提取全文（如果是摘要输出源）</li>
+        <li>生成 100 字的中文摘要</li>
+        <li>标注关键词：Rust、Tokio、async/await、性能</li>
+        <li>按你设定的规则归类到"编程/Rust"文件夹</li>
+        <li>如果包含具体代码示例，自动标记为"值得精读"</li>
+    </ol>
+    <p>你看到的就是这样一条条目——标题 + 中文摘要 + 分类标签。5 秒钟决定要不要点开。效率提升是数量级的。</p>
+
+    <blockquote><p><strong>不要把 AI 当成新的推荐算法</strong>——让 AI 帮你处理你已经决定要读的内容，而不是替你做决定。这条线一旦模糊，RSS 最珍贵的价值（自主选择权）就消失了。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 新增内容：RSS 与播客 ═══════ -->
+
+    <h2>八、RSS 与播客：被低估的协议扩展</h2>
+
+    <p>很多人不知道的是：<strong>播客生态是今天 RSS 协议最活跃、最创新的应用领域</strong>。每一次你用播客客户端搜索和订阅一个新节目，底层都是 RSS。</p>
+
+    <h3>8.1 Enclosure——播客的核心机制</h3>
+    <p>RSS 2.0 的 <code>&lt;enclosure&gt;</code> 标签允许在条目中附加一个媒体文件：</p>
+    <pre><code>&lt;enclosure url="https://.../episode.mp3"
+            length="12345678"
+            type="audio/mpeg" /&gt;</code></pre>
+    <p>这就是播客的全部技术起源——一个 1999 年为聚合文本设计的协议，因为一个附件标签延展出了整个播客产业。这个例子的启示：<strong>简单开放的协议，演化能力远超精心设计的封闭系统</strong>。</p>
+
+    <h3>8.2 Podcast Index 与 Podcasting 2.0</h3>
+    <p>2020 年，一群播客布道者启动了 <strong>Podcast Index</strong>（podcastindex.org）——一个完全开源、去中心化的播客目录，不依赖 Apple Podcasts 或 Spotify。同时他们发起了 <strong>Podcasting 2.0</strong> 倡议，为 RSS 增加了大量新标签：</p>
+
+    <table>
+        <tr><th>新标签</th><th>作用</th></tr>
+        <tr><td><code>&lt;podcast:transcript&gt;</code></td><td>关联播客的文字稿（支持多语言）</td></tr>
+        <tr><td><code>&lt;podcast:chapters&gt;</code></td><td>章节标记——听众可以跳转到指定时间点</td></tr>
+        <tr><td><code>&lt;podcast:person&gt;</code></td><td>标注嘉宾/主持人身份</td></tr>
+        <tr><td><code>&lt;podcast:funding&gt;</code></td><td>捐赠/赞助链接</td></tr>
+        <tr><td><code>&lt;podcast:socialInteraction&gt;</code></td><td>关联评论/社交互动</td></tr>
+        <tr><td><code>&lt;value&gt;</code></td><td>Value4Value——通过比特币闪电网络实现微支付</td></tr>
+    </table>
+
+    <p>截至 2026 年，Podcasting 2.0 的标签已经被大量播客客户端（Pocket Casts、AntennaPod、Podverse 等）部分或全部支持。</p>
+
+    <p><strong>信心等级：高</strong>——Podcast Index 的索引量已超过 600 万个节目，Podcasting 2.0 是播客行业最活跃的标准制定工作。</p>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 新增内容：端到端工作流 ═══════ -->
+
+    <h2>九、搭建端到端的信息管线</h2>
+
+    <p>当你把前面所有章节的内容串起来，就得到了一条完整的信息管线——从源头的信息获取到最终的知识沉淀，全链路受你控制。</p>
+
+    <h3>9.1 三个实际可用的工作流</h3>
+
+    <p><strong>工作流 A：Miniflux + AI 摘要 → Telegram 推送</strong></p>
+    <pre><code>┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ RSS 源    │ →  │ Miniflux │ →  │ Python   │ →  │ Telegram │
+│ (50+)     │    │ (自托管) │    │ 脚本     │    │ 频道     │
+└──────────┘    └──────────┘    │ + LLM    │    └──────────┘
+                                │ 摘要     │
+                                └──────────┘</code></pre>
+    <p>Python 脚本定时（如每 30 分钟）通过 Miniflux API 拉取新条目，对感兴趣的条目调用 LLM 生成中文摘要，推送到自己的 Telegram 频道。你刷 Telegram 的时候就能扫完所有重要信息——但控制权握在你自己手里。</p>
+
+    <p><strong>工作流 B：RSSHub + Huginn + 多通道分发</strong></p>
+    <pre><code>┌──────────┐    ┌──────────┐    ┌──────────┐
+│ B站动态   │ →  │          │    │ Telegram │
+│ 知乎专栏  │ →  │ Huginn   │ →  │ 邮件     │
+│ Twitter/X │ →  │ (过滤/   │    │ Slack    │
+│ 播客      │ →  │  转换)   │    │ 本地归档 │
+└──────────┘    └──────────┘    └──────────┘</code></pre>
+    <p>Huginn 是自托管的 IFTTT 替代品。你定义 Agent：RSS 源 → 过滤（保留含特定关键词的）→ 转换格式 → 分发给不同通道。较 IFTTT 的优势是数据完全本地，无限制，可编程。</p>
+
+    <p><strong>工作流 C：Newsboat 终端全流</strong></p>
+    <pre><code> tmux 窗口 1          tmux 窗口 2         tmux 窗口 3
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│ Newsboat     │    │ 终端浏览器   │    │ 笔记文件     │
+│ (浏览条目)   │ →  │ (阅读全文)   │ →  │ (摘录+笔记)  │
+└──────────────┘    └──────────────┘    └──────────────┘
+                        ↓                    ↓
+                    AI 摘要脚本          Git 提交备份</code></pre>
+    <p>这个工作流的魅力在于：你不离开终端，就完成了从阅读到存档的全过程。Newsboat 支持播客下载（<code>podboat</code>），连音频内容都可以纳入这条管线。</p>
+
+    <h3>9.2 管线的哲学</h3>
+    <p>信息管线不只是工具链——它是一种<strong>信息摄入的架构思维</strong>：</p>
+    <ul>
+        <li><strong>源头控制</strong>：你决定哪些源进入管线，而不是算法决定</li>
+        <li><strong>处理层透明</strong>：过滤、摘要、归类的规则完全由你定义和调整</li>
+        <li><strong>输出灵活</strong>：同样的输入可以推送到多个出口，不同出口服务于不同目的（Telegram 扫读、本地归档、邮件备份）</li>
+        <li><strong>可审计</strong>：任何时候你都可以回看一条内容的完整旅程——从哪个源来的、经过了什么处理、最终去了哪里</li>
+    </ul>
+
+    <blockquote><p>信息管线的最终目标不是"不错过任何东西"——这是不可能的。它的目标是<strong>让你对"你错过了什么"有完全的知情权和控制权</strong>。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>十、局限与注意事项——诚实说</h2>
+
+    <p>RSS 不是万能的。它的局限源于它的核心设计原则——开放和简单——在特定场景下会变成短板。</p>
+
+    <table>
+        <tr><th>局限</th><th>说明</th><th>应对方案</th></tr>
+        <tr><td><strong>部分网站已取消 RSS</strong></td><td>大平台主动移除或屏蔽 RSS 输出</td><td>RSSHub 生成桥接，或直接放弃该平台</td></tr>
+        <tr><td><strong>仅输出摘要</strong></td><td>只输出标题 + 一两句简介，打断阅读流</td><td>Inoreader/FreshRSS 有"全文提取"功能，或部署 Mercury Parser</td></tr>
+        <tr><td><strong>没有互动功能</strong></td><td>你不能在阅读器里点赞、评论</td><td>RSS 是阅读层，不是社交层。想互动？点击链接回到原页面</td></tr>
+        <tr><td><strong>订阅膨胀</strong></td><td>加源太容易，很快被"几百条未读"淹没</td><td>定期清理 + 过滤规则 + 接受"读不完就跳过"的心态</td></tr>
+        <tr><td><strong>不是实时</strong></td><td>基于轮询，通常 15-60 分钟延迟。突发新闻不够快</td><td>WebSub 协议可秒级推送，但支持有限。对博客内容完全够用</td></tr>
+        <tr><td><strong>隐私风险</strong></td><td>你的阅读器 IP 对源站可见；RSS 也可以嵌入追踪像素</td><td>自托管阅读器 = 只有你的服务器 IP 暴露；使用 Miniflux 等可禁用图片加载</td></tr>
+        <tr><td><strong>图片/样式丢失</strong></td><td>很多源输出纯文本或精简 HTML</td><td>全文提取或直接打开原页面阅读</td></tr>
+        <tr><td><strong>源可能不再更新</strong></td><td>独立博客可能停更但 Feed 仍在</td><td>Miniflux 可设置"超过 X 天无更新自动移除"规则</td></tr>
+    </table>
+
+    <p><strong>信心等级：高</strong>——这些局限是 RSS 协议本身的特性，而非实现缺陷。</p>
+
+    <span class="dot"></span>
+
+    <h2>十一、进阶管理：如何不让自己被订阅淹没</h2>
+
+    <p>RSS 用户最终都会遇到同一个问题：订阅了好几十个源，每天几百条未读，逐渐失去打开阅读器的动力。这不是 RSS 的问题，是<strong>缺乏信息卫生习惯</strong>的问题。</p>
+
+    <h3>11.1 文件夹/标签体系设计</h3>
+    <p>不要把所有源扔进一个收件箱。分出层级：</p>
+    <pre><code>📁 每日必读（2-3 个源——每天必须扫完的）
+📁 兴趣关注（10-15 个——有兴趣就看，没兴趣跳过）
+📁 技术研究（特定领域深挖，少量高质量源）
+📁 新闻资讯（时效性强，可以设置为每 2 小时更新）
+📁 偶尔看看（无关紧要但不想取消订阅的——有空再看）</code></pre>
+
+    <h3>11.2 订阅审计节奏</h3>
+    <p>每季度做一次"源清理"：</p>
+    <ol>
+        <li>检查每个源的"近期阅读率"——最近一个月点开过几篇？</li>
+        <li>连续两个月从未点开的源：取消订阅，或者挪到"偶尔看看"</li>
+        <li>内容质量明显下降的源：毫不犹豫地取消</li>
+        <li>源已经停止更新 3 个月以上：取消</li>
+    </ol>
+
+    <h3>11.3 阅读节奏管理</h3>
+    <ul>
+        <li><strong>不追求零未读</strong>——阅读器不是 Email 收件箱，没有清零压力</li>
+        <li><strong>固定时间打开</strong>——比如早上一杯咖啡的时间 + 晚饭后 15 分钟，而不是随时刷</li>
+        <li><strong>学会跳过</strong>——标题没有吸引你？直接按"标记已读"键。不需要愧疚</li>
+        <li><strong>无用的信息是负担</strong>——多一个源不意味着多一份见识，可能只是多一层噪音</li>
+    </ul>
+
+    <blockquote><p><strong>读不完不是你的错——是你订得太多了。</strong>削减源比找新源更需要勇气。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>十二、快速上手路线图</h2>
+
+    <p>如果你现在想开始用 RSS，按这个节奏走——不需要一次性全部搞懂。</p>
+
+    <ol>
+        <li><strong>选一个阅读器</strong>（15 分钟）——<strong>NetNewsWire</strong>（macOS/iOS 免费）或 <strong>Inoreader 免费版</strong>（Web 跨平台）。不要纠结，先用起来比"选最好的"重要一百倍</li>
+        <li><strong>添加 3-5 个你常看的网站</strong>（10 分钟）——在输入框输入域名，阅读器自动检测 RSS 源</li>
+        <li><strong>日常使用 2 周</strong>——养成"先打开阅读器"的习惯。感受没有算法干预的阅读体验</li>
+        <li><strong>开始扩源</strong>——用 RSSHub Radar 发现更多源。把 B站关注、知乎专栏、微博关注也加进来</li>
+        <li><strong>修剪 + 过滤</strong>——两周后回头看：哪些源一次都没点开过？删掉。哪些源太多无用信息？加过滤规则</li>
+        <li><strong>尝试自动化</strong>（可选）——到了这个阶段，你已经有了足够的信息摄入量来判断自己想优化什么——缩小"必读"的范围？还是扩大覆盖面然后靠 AI 筛选？根据自己的习惯去搭建管线</li>
+    </ol>
+
+    <blockquote><p><strong>关于 RSS，最重要的一句话</strong>：它是你的信息自主权的最后堡垒。没有算法、没有推荐、没有广告、没有"你可能也喜欢"——只有你决定要看的东西，按你决定的顺序出现。它是 1999 年的技术，但在 2026 年的今天，它比任何"AI 推荐引擎"都更诚实地对待你的注意力。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- 待延伸线索 -->
+    <h2>📝 待延伸线索</h2>
+    <ul style="margin:12px 0 20px 20px; font-size:0.85rem; color:#666; line-height:2.2;">
+        <li><strong>RSSHub 自部署</strong>——在自家 VPS 上用 Docker 部署 RSSHub 实例，彻底摆脱公共实例的依赖。搭配环境变量配置，一行 <code>docker-compose up</code> 启动</li>
+        <li><strong>独立博客运动与 IndieWeb</strong>——POSSE（Publish on Own Site, Syndicate Elsewhere）理念如何重塑内容创作者的发布逻辑</li>
+        <li><strong>WebSub 协议深入</strong>——Hub 和 Subscriber 的角色分配、如何自建 Hub、YouTube/GitHub 等大站的 WebSub 实现</li>
+        <li><strong>ActivityPub 与 Fediverse</strong>——Mastodon、Pleroma、Misskey 等去中心化社交网络的核心协议。与 RSS 的互补关系：RSS 解决聚合阅读，ActivityPub 解决去中心化互动</li>
+        <li><strong>Value4Value 与播客微支付</strong>——Podcasting 2.0 引入的 <code>&lt;value&gt;</code> 标签如何通过比特币闪电网络实现听众到创作者的直接打赏</li>
+        <li><strong>sfeed / gorss / yarr</strong>——三款极简自托管方案的横向对比（Go vs C vs Go），如果连 Miniflux 都觉得重了</li>
+        <li><strong>Mercury Parser / readability</strong>——把摘要输出变成全文的开源库，可嵌入自己的信息管线</li>
+    </ul>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.8rem;color:#aaa;">对话日期：2026年6月1日 | 补充整理：知白</p>
+
+    <div class="nav-bottom">
+        <a href="../../index.html">← 返回首页</a>
+    </div>
+
+</div>
+
+<script>
+    window.addEventListener('scroll', function() {
+        var bar = document.getElementById('progress-bar');
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (scrollTop / docHeight * 100) + '%';
+    });
+</script>
+
+</body>
+</html>
