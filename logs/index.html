@@ -13,8 +13,6 @@
             background: #fafafa;
             color: #333;
             line-height: 1.9;
-            opacity: 0;
-            transition: opacity 0.6s ease;
         }
 
         /* 背景几何动画 */
@@ -182,11 +180,6 @@
 
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() { document.body.style.opacity = 1; }, 80);
-    });
-    </script>
     <script>
     // 自动统计各分类文章数量（从各分类目录页抓取 .article-list li）
     document.addEventListener('DOMContentLoaded', function() {
