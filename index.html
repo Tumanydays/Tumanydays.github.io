@@ -108,7 +108,7 @@
     <div class="card">
 
         <h1>Tumanydays</h1>
-        <p class="tagline">当我对世事厌倦的时候，我就会想到你。<br>想到你在世界的某个地方生活着、存在着，<br>我就愿意忍受一切。</p>
+        <p id="tagline-spot" class="tagline"></p>
 
         <!-- 文章入口：由 JS 随机填充 -->
         <a id="article-spot" class="article-link" href="#"></a>
@@ -129,6 +129,7 @@
     </div>
 
     <!-- ========== 随机抽牌 ========== -->
+    <script src="logs/碎句/fragments.js"></script>
     <script>
     // ── 第一步：建池子 ──
     // 文章池：每篇文章写 { title: "标题", url: "链接" }
@@ -173,6 +174,11 @@
     var article = pick(articles);
     var image   = pick(images);
     var verse   = pick(verses);
+    var fragment = pick(fragments);
+
+    // 填 tagline：从碎片库随机抽取
+    var t = document.getElementById("tagline-spot");
+    t.innerHTML = fragment.text.join("<br>");
 
     // 填诗句
     var v = document.getElementById("verse-spot");

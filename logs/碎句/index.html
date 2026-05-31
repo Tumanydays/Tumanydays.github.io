@@ -7,26 +7,147 @@
     <link rel="icon" type="image/png" href="../../images/icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif; background: #fafafa; color: #333; line-height: 1.9; }
-        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
-        .back { font-size: 0.85rem; color: #999; text-decoration: none; margin-bottom: 16px; display: inline-block; }
-        .back:hover { color: #333; }
-        h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: #1a1a1a; }
-        .subtitle { font-size: 0.85rem; color: #aaa; margin-bottom: 48px; }
-        .tagline { text-align: center; color: #bbb; font-size: 0.85rem; font-style: italic; margin-top: 60px; }
-        footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e8e8e8; text-align: center; font-size: 0.8rem; color: #aaa; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .back:hover { color: #8a939e; }
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 56px;
+        }
+
+        /* ---------- 碎片墙 ---------- */
+        .fragment {
+            margin-bottom: 48px;
+        }
+        .fragment-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 2.2;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        .fragment-source {
+            font-size: 0.8rem;
+            color: #bbb;
+            text-align: right;
+            margin-top: 8px;
+            font-style: normal;
+        }
+        .fragment::after {
+            content: "";
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: #ddd;
+            margin: 48px auto 0;
+        }
+        .fragment:last-child::after { display: none; }
+
+        .tagline {
+            text-align: center;
+            color: #bbb;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 60px auto 0;
+        }
+
+        footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
         footer a { color: #999; text-decoration: none; }
-        footer a:hover { color: #333; }
-        @media (max-width: 500px) { .container { padding: 32px 16px 64px; } }
+        footer a:hover { color: #8a939e; }
+
+        @media (max-width: 500px) {
+            .container { padding: 32px 16px 64px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+
         <a class="back" href="../index.html">← 日志大厅</a>
+
         <h1>碎句</h1>
         <p class="subtitle">书页间的尘埃</p>
+
+        <!-- 碎片墙：由 JS 从 fragments.js 自动渲染 -->
+        <div id="fragment-wall"></div>
+
+        <!-- 隐藏列表，供日志大厅自动计数 -->
+        <ul class="article-list" style="display:none;"></ul>
+
         <p class="tagline">— 思想的讨论不会停止 —</p>
-        <footer><a href="../index.html">← 返回日志大厅</a></footer>
+
+        <footer>
+            <a href="../index.html">← 返回日志大厅</a>
+        </footer>
+
     </div>
+
+    <script src="fragments.js"></script>
+    <script>
+        // 渲染碎片墙
+        var wall = document.getElementById("fragment-wall");
+
+        fragments.forEach(function(f) {
+            var div = document.createElement("div");
+            div.className = "fragment";
+            div.id = f.id;
+
+            var textDiv = document.createElement("div");
+            textDiv.className = "fragment-text";
+            f.text.forEach(function(line, i) {
+                if (i > 0) textDiv.appendChild(document.createElement("br"));
+                textDiv.appendChild(document.createTextNode(line));
+            });
+            div.appendChild(textDiv);
+
+            if (f.source) {
+                var sourceDiv = document.createElement("div");
+                sourceDiv.className = "fragment-source";
+                sourceDiv.textContent = "—— " + f.source;
+                div.appendChild(sourceDiv);
+            }
+
+            wall.appendChild(div);
+        });
+
+        // 填充隐藏列表，供日志大厅自动计数
+        var hiddenList = document.querySelector(".article-list");
+        fragments.forEach(function() {
+            var li = document.createElement("li");
+            hiddenList.appendChild(li);
+        });
+    </script>
+
 </body>
 </html>
