@@ -230,7 +230,7 @@
             gLastMouseX = gMouseX;
             gLastMouseY = gMouseY;
             flutter += mv * 0.003;
-            flutter = p.lerp(flutter, 0, 0.03);
+            flutter = p.lerp(flutter, 0, 0.15);
             flutter = p.constrain(flutter, 0, 0.12);
             var speedMod = 1 + flutter;
 
