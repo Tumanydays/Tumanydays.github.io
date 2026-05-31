@@ -191,12 +191,22 @@
     </script>
 
     <script>
+    // ── 鼠标追踪（背景 canvas 设了 pointer-events: none，需独立追踪）──
+    var gMouseX = 0, gMouseY = 0, gLastMouseX = 0, gLastMouseY = 0;
+    document.addEventListener('mousemove', function(e) {
+        gMouseX = e.clientX;
+        gMouseY = e.clientY;
+    });
+    </script>
+
+    <script>
     // ═══ 背景几何动画 ═══
     // 极简灰调，Dave Whyte / beesandbombs.com 灵感
     var sketch = function(p) {
         var t, speed = 2e-5;
         var l = 80;
         var rads = [];
+        var flutter = 0;
 
         p.setup = function() {
             var canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -206,9 +216,20 @@
             for (var i = 3; i < 11; i++) {
                 rads[i] = l / (2 * p.tan(p.PI / i));
             }
+            gLastMouseX = gMouseX;
+            gLastMouseY = gMouseY;
         };
 
         p.draw = function() {
+            // 响应鼠标：移动时圆点短暂加速，像被「惊动」
+            var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
+            gLastMouseX = gMouseX;
+            gLastMouseY = gMouseY;
+            flutter += mv * 0.006;
+            flutter = p.lerp(flutter, 0, 0.03);
+            flutter = p.constrain(flutter, 0, 0.4);
+            var speedMod = 1 + flutter;
+
             t = speed * p.millis();
             p.background(250 / 255);
             p.push();
@@ -222,7 +243,7 @@
             }
             for (var i = 3; i < 11; i++) {
                 p.fill(0, 0, 0.35);
-                dott(i, (11 - i) * t);
+                dott(i, (11 - i) * t * speedMod);
             }
             p.pop();
         };
