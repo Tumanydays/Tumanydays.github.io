@@ -9,9 +9,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", "Songti SC", serif;
-            background: #fafafa;
+            background: radial-gradient(ellipse at center, #ffffff 0%, #f5f5f5 60%, #efefef 100%);
             color: #333;
-            overflow-x: hidden;
+            overflow: hidden;
+            height: 100vh;
         }
 
         .back {
@@ -25,7 +26,14 @@
             position: relative;
             width: 100vw; height: 100vh;
             display: flex;
-            align-items: center; justify-content: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 悬浮动画：极轻的上下浮动 */
+        @keyframes float {
+            0%, 100% { margin-top: 0px; }
+            50% { margin-top: -3px; }
         }
 
         /* 每个词片 */
@@ -35,6 +43,7 @@
             color: #555;
             white-space: nowrap;
             letter-spacing: inherit;
+            animation: float var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
             transition: color 0.3s, transform 0.3s, opacity 0.3s;
             cursor: pointer;
         }
@@ -42,6 +51,7 @@
             color: #1a1a1a;
             transform: scale(1.25);
             opacity: 1 !important;
+            animation-play-state: paused;
         }
 
         /* 轻/重节奏：五维渐变 ── 字重·透明度·字间距同步变化 */
@@ -141,6 +151,9 @@
         a.className = "frag " + f.weight + (f.special ? " special" : "");
         a.href = f.link;
         a.textContent = f.text;
+        // 每个词片有自己的浮动节奏
+        a.style.setProperty('--dur', (2.5 + Math.random() * 2) + 's');
+        a.style.setProperty('--delay', (Math.random() * 3) + 's');
         a.style.left = x + "px";
         a.style.top  = y + "px";
         a.style.transform = "translate(-50%, -50%)";
