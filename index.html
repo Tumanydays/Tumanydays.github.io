@@ -191,12 +191,16 @@
     </script>
 
     <script>
-    // ── 鼠标追踪（背景 canvas 设了 pointer-events: none，需独立追踪）──
+    // ── 指针／触摸追踪（canvas 设了 pointer-events: none，需独立监听）──
     var gMouseX = 0, gMouseY = 0, gLastMouseX = 0, gLastMouseY = 0;
     document.addEventListener('mousemove', function(e) {
         gMouseX = e.clientX;
         gMouseY = e.clientY;
     });
+    document.addEventListener('touchmove', function(e) {
+        gMouseX = e.touches[0].clientX;
+        gMouseY = e.touches[0].clientY;
+    }, { passive: true });
     </script>
 
     <script>
@@ -225,9 +229,9 @@
             var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
             gLastMouseX = gMouseX;
             gLastMouseY = gMouseY;
-            flutter += mv * 0.006;
+            flutter += mv * 0.003;
             flutter = p.lerp(flutter, 0, 0.03);
-            flutter = p.constrain(flutter, 0, 0.4);
+            flutter = p.constrain(flutter, 0, 0.12);
             var speedMod = 1 + flutter;
 
             t = speed * p.millis();
