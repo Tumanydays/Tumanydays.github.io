@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十六进制颜色码完全手册 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        /* 返回链接 */
+        .back {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: #333; }
+
+        /* 标题区 */
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+
+        /* 引言 */
+        .intro {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+
+        /* 正文 */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: #333;
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: #444;
+        }
+
+        /* 引用 */
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+
+        /* 加粗强调 */
+        strong { color: #1a1a1a; font-weight: 600; }
+
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+
+        /* 代码块 */
+        code {
+            font-family: "SF Mono", "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c7254e;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0 24px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: #444;
+        }
+
+        /* 内联色块 */
+        .color-swatch {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin: 0 4px;
+            border: 1px solid #ddd;
+        }
+
+        /* 分隔线 */
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+
+        /* 小圆点分隔符 */
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+
+        /* 导航 */
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e8e8e8;
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: #333; }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+
+        /* 色块示例行 */
+        .swatch-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+            padding: 12px 16px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .swatch-block {
+            width: 60px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+
+        /* 色阶条 */
+        .gradient-bar {
+            height: 24px;
+            border-radius: 4px;
+            margin: 12px 0 20px;
+            border: 1px solid #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a class="back" href="../../index.html">← Tumanydays</a>
+
+        <h1>十六进制颜色码完全手册：从数字到视觉的色彩解码</h1>
+
+        <div class="meta">
+            <span>棱镜</span><span>2026年5月31日 &nbsp;·&nbsp; <a href="../index.html" style="color:#bbb;text-decoration:none;">日志</a></span>
+        </div>
+
+        <div class="intro">
+            <p>屏幕上的每一个颜色，背后都是一组数字——不多不少，六个字符。这个看似简单的编码体系，连接着十六世纪数学家发明的计数法、人眼视网膜的感光细胞分布、CRT 显示器残留下来的 gamma 曲线，以及 WCAG 无障碍标准中关于「什么颜色才看得清」的精密计算。</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">本文从两个具体颜色 <code>#8a939e</code>（冷灰）和 <code>#8a7e72</code>（暖灰）出发，逐层拆解这套编码系统的全部奥秘。</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- 一 -->
+        <h2>一、数字基础——什么是十六进制</h2>
+
+        <h3>1.1 为什么不是十进制</h3>
+        <p>我们日常用<strong>十进制</strong>（0–9），计算机用<strong>二进制</strong>（0–1）。<strong>十六进制</strong>（0–9 + A–F）是连接二者的桥梁：<strong>一位十六进制数恰好等于四位二进制数</strong>。</p>
+
+        <table>
+            <tr><th>十进制</th><th>二进制</th><th>十六进制</th></tr>
+            <tr><td>0</td><td>0000</td><td>0</td></tr>
+            <tr><td>1</td><td>0001</td><td>1</td></tr>
+            <tr><td>9</td><td>1001</td><td>9</td></tr>
+            <tr><td>10</td><td>1010</td><td><strong>A</strong></td></tr>
+            <tr><td>11</td><td>1011</td><td><strong>B</strong></td></tr>
+            <tr><td>12</td><td>1100</td><td><strong>C</strong></td></tr>
+            <tr><td>13</td><td>1101</td><td><strong>D</strong></td></tr>
+            <tr><td>14</td><td>1110</td><td><strong>E</strong></td></tr>
+            <tr><td>15</td><td>1111</td><td><strong>F</strong></td></tr>
+        </table>
+
+        <h3>1.2 为什么两位十六进制 = 一个字节</h3>
+        <p>一位十六进制数最多表示 15（F）。两位十六进制数最多表示 <code>FF = 15×16 + 15 = 255</code>。而 255 恰好是<strong>一个字节（8 位二进制 <code>11111111</code>）</strong>能表达的最大值。</p>
+        <p>这意味着：<strong>每两位十六进制数，刚好填满一个字节的存储空间</strong>。三个颜色通道 × 一个字节 = <strong>总共 24 位</strong>，这就是「真彩色（True Color）」的由来——显示器上每个像素的颜色由 24 位数据驱动。</p>
+        <p><strong>可表达颜色总数</strong>：<code>256 × 256 × 256 = <strong>16,777,216</strong></code> 种颜色——超过人眼能区分的极限（约 1,000 万种）。</p>
+
+        <span class="dot"></span>
+
+        <!-- 二 -->
+        <h2>二、结构拆解——<code>#RRGGBB</code> 的秘密</h2>
+
+        <h3>2.1 三原色加法模型</h3>
+        <p>显示器是<strong>自发光</strong>设备——它从黑色开始，向每个像素的红、绿、蓝子像素施加电压，让它们以不同强度发光。三种光叠加，形成你看到的颜色。</p>
+
+        <table>
+            <tr><th>RGB 值</th><th>十六进制</th><th>结果</th><th>原理</th></tr>
+            <tr><td>(0, 0, 0)</td><td><code>#000000</code></td><td>纯黑</td><td>没有光</td></tr>
+            <tr><td>(255, 0, 0)</td><td><code>#ff0000</code></td><td>纯红</td><td>只有红光</td></tr>
+            <tr><td>(0, 255, 0)</td><td><code>#00ff00</code></td><td>纯绿</td><td>只有绿光</td></tr>
+            <tr><td>(0, 0, 255)</td><td><code>#0000ff</code></td><td>纯蓝</td><td>只有蓝光</td></tr>
+            <tr><td>(255, 255, 0)</td><td><code>#ffff00</code></td><td>黄色</td><td>红 + 绿</td></tr>
+            <tr><td>(0, 255, 255)</td><td><code>#00ffff</code></td><td>青色</td><td>绿 + 蓝</td></tr>
+            <tr><td>(255, 0, 255)</td><td><code>#ff00ff</code></td><td>品红</td><td>红 + 蓝</td></tr>
+            <tr><td>(255, 255, 255)</td><td><code>#ffffff</code></td><td>纯白</td><td>所有光全开</td></tr>
+        </table>
+
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#000000;"></div>
+            <div class="swatch-block" style="background:#ff0000;"></div>
+            <div class="swatch-block" style="background:#00ff00;"></div>
+            <div class="swatch-block" style="background:#0000ff;"></div>
+            <div class="swatch-block" style="background:#ffff00;"></div>
+            <div class="swatch-block" style="background:#00ffff;"></div>
+            <div class="swatch-block" style="background:#ff00ff;"></div>
+            <div class="swatch-block" style="background:#ffffff;"></div>
+        </div>
+
+        <h3>2.2 完整结构</h3>
+        <pre><code># 8a  93  9e
+↑ ↑   ↑   ↑
+│ │   │   └── 蓝色通道: 9e₁₆ = 158₁₀
+│ │   └────── 绿色通道: 93₁₆ = 147₁₀
+│ └───────── 红色通道: 8a₁₆ = 138₁₀
+└─────────── "井号"标识这是十六进制颜色码</code></pre>
+
+        <h3>2.3 HEX 的变体</h3>
+
+        <table>
+            <tr><th>格式</th><th>示例</th><th>说明</th></tr>
+            <tr><td><strong>6 位标准</strong></td><td><code>#8a939e</code></td><td>最常见，#RRGGBB</td></tr>
+            <tr><td><strong>3 位缩写</strong></td><td><code>#fc3</code> = <code>#ffcc33</code></td><td>每两位相同时可缩写，节省三个字符</td></tr>
+            <tr><td><strong>8 位带 Alpha</strong></td><td><code>#8a939e80</code></td><td>末尾两位是透明度：00=全透明，ff=完全不透明</td></tr>
+            <tr><td><strong>4 位缩写+Alpha</strong></td><td><code>#f3c8</code> = <code>#ff33cc88</code></td><td>3 位缩写 + 1 位透明度</td></tr>
+        </table>
+
+        <blockquote><p>⚠️ 3 位缩写只能在每对数字相同时使用。<code>#aabbcc</code> → <code>#abc</code> ✔，但 <code>#8a939e</code> 不能缩写为 <code>#839</code>（因为 8a ≠ 83，39 ≠ 93）。</p></blockquote>
+
+        <span class="dot"></span>
+
+        <!-- 三 -->
+        <h2>三、从数学到视觉——sRGB、Gamma 与亮度感知</h2>
+
+        <h3>3.1 RGB 值不等于亮度</h3>
+        <p>一个反直觉的事实：<code>#808080</code>（RGB 128, 128, 128）的亮度不是纯白 <code>#ffffff</code> 的一半。128 ÷ 255 ≈ 50%，但它的<strong>视觉亮度只有约 21.4%</strong>。</p>
+        <p>这是因为人类对光的感知是<strong>非线性</strong>的，显示器本身也有自己的非线性响应曲线。sRGB 标准定义了一条<strong>gamma 校正曲线</strong>来协调这个问题。</p>
+
+        <div class="gradient-bar" style="background: linear-gradient(to right, #000000, #ffffff);"></div>
+        <p style="font-size:0.8rem;color:#999;text-align:center;margin-top:-12px;">黑白渐变：#000000 → #ffffff——视觉上均匀，但对应的物理亮度并非线性</p>
+
+        <h3>3.2 Gamma 校正</h3>
+        <p>sRGB 中存储的值（就是 hex 里的数字）是经过 <strong>gamma 编码</strong>的。要获得真实的物理亮度（线性亮度），需要经过转换：</p>
+
+        <pre><code>对于每个通道值 c（范围 0-255）：
+  先归一化：c' = c / 255
+
+  如果 c' ≤ 0.04045：
+    c_linear = c' / 12.92
+  否则：
+    c_linear = ((c' + 0.055) / 1.055) ^ 2.4</code></pre>
+
+        <p>这个转换的实质是：<strong>把 8 位值中更多的精度分配给人眼更敏感的区域（暗部）</strong>。</p>
+
+        <table>
+            <tr><th>颜色</th><th>sRGB 值</th><th>物理亮度</th><th>你看到的感觉</th></tr>
+            <tr><td><code>#ffffff</code></td><td>R=1.0, G=1.0, B=1.0</td><td>100%</td><td>最亮</td></tr>
+            <tr><td><code>#808080</code></td><td>R=0.5, G=0.5, B=0.5</td><td><strong>21.4%</strong></td><td>中灰</td></tr>
+            <tr><td><code>#404040</code></td><td>R=0.25, G=0.25, B=0.25</td><td><strong>5.0%</strong></td><td>深灰</td></tr>
+            <tr><td><code>#000000</code></td><td>R=0, G=0, B=0</td><td>0%</td><td>最暗</td></tr>
+        </table>
+
+        <h3>3.3 相对亮度（Relative Luminance）——三通道权重不同</h3>
+        <p>即使在线性空间，人眼对红、绿、蓝的敏感度也完全不同。<strong>绿色通道占了视觉亮度的绝大部分</strong>：</p>
+
+        <pre><code>L = 0.2126 × R_linear + 0.7152 × G_linear + 0.0722 × B_linear</code></pre>
+
+        <p>为什么绿色权重这么高？这是进化的结果——在自然环境中，人类的视觉系统演化出了对光谱中段（黄-绿）最敏感的响应，因为这对应着阳光最强的波段。</p>
+
+        <p>这意味着：<strong>改动 hex 中的绿色通道（中间两位），对颜色明暗的影响最大</strong>；改动蓝色通道（最后两位）影响最小。</p>
+
+        <p>以 <code>#8a939e</code> 为例计算相对亮度：</p>
+        <pre><code>R_linear = linearize(138/255 = 0.541) = 0.259
+G_linear = linearize(147/255 = 0.576) = 0.298
+B_linear = linearize(158/255 = 0.620) = 0.348
+
+L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
+  = 0.055 + 0.213 + 0.025
+  = 0.293</code></pre>
+
+        <p>这个 <strong>0.293</strong> 的含义：<code>#8a939e</code> 的亮度约等于纯白色的 <strong>29.3%</strong>。</p>
+
+        <span class="dot"></span>
+
+        <!-- 四 -->
+        <h2>四、色彩模型三角——HEX、RGB、HSL、HSV 与 OKLCH</h2>
+
+        <p>十六进制只是 RGB 的一种<strong>书写方式</strong>。同样的颜色信息，可以用完全不同的坐标系来表达。</p>
+
+        <h3>4.1 核心对比</h3>
+
+        <table>
+            <tr><th>模型</th><th>坐标系</th><th>对人类的友好度</th><th>主要用途</th></tr>
+            <tr><td><strong>RGB</strong></td><td>直角坐标 (R, G, B)</td><td>★☆☆☆☆</td><td>硬件直通、CSS 标准</td></tr>
+            <tr><td><strong>HEX</strong></td><td>RGB 的紧凑十六进制</td><td>★☆☆☆☆</td><td>网页设计、工具间交换</td></tr>
+            <tr><td><strong>HSL</strong></td><td>圆柱坐标 (H, S, L)</td><td>★★★★☆</td><td>设计师调色、程序化操作</td></tr>
+            <tr><td><strong>HSV/HSB</strong></td><td>圆柱坐标 (H, S, V)</td><td>★★★★☆</td><td>拾色器（Photoshop/Figma）</td></tr>
+            <tr><td><strong>OKLCH</strong></td><td>圆柱坐标 (L, C, H)</td><td>★★★★★</td><td>现代设计系统、CSS Color Level 4</td></tr>
+        </table>
+
+        <h3>4.2 HSL——人类可读的色彩模型</h3>
+
+        <table>
+            <tr><th>分量</th><th>范围</th><th>含义</th></tr>
+            <tr><td><strong>H</strong>ue（色相）</td><td>0°–360°</td><td>色环上的角度：0°=红、120°=绿、240°=蓝、60°=黄、180°=青、300°=品红</td></tr>
+            <tr><td><strong>S</strong>aturation（饱和度）</td><td>0%–100%</td><td>色彩的鲜艳程度：0%=灰色、100%=最饱和</td></tr>
+            <tr><td><strong>L</strong>ightness（明度）</td><td>0%–100%</td><td>明暗程度：0%=纯黑、50%=纯色最饱满、100%=纯白</td></tr>
+        </table>
+
+        <p>将 <code>#8a939e</code> 转为 HSL：</p>
+        <pre><code>#8a939e → R=138, G=147, B=158
+         → H = 210°（蓝-青区域）
+         → S = 9.4%（极低，接近灰色）
+         → L = 58.0%（中明度，偏亮）
+
+结果：hsl(210°, 9.4%, 58.0%)</code></pre>
+
+        <p>这解释了为什么 <code>#8a939e</code> 是一块<strong>冷灰</strong>——色相指向蓝青方向（210°），但饱和度极低（9.4%），所以只是带了一丝蓝味的灰色。</p>
+
+        <p>同样计算 <code>#8a7e72</code>：</p>
+        <pre><code>#8a7e72 → R=138, G=126, B=114
+         → H = 30°（橙-黄区域）
+         → S = 9.7%（同样极低）
+         → L = 49.4%（略低于上一块灰）
+
+结果：hsl(30°, 9.7%, 49.4%)</code></pre>
+
+        <p><strong>HSL 的好处在此一目了然</strong>：不用看具体数字，只看 H 值就知道冷暖——H=210° 是冷的，H=30° 是暖的。</p>
+
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#8a939e;"></div>
+            <span><code>#8a939e</code> → hsl(210°, 9.4%, 58%) ❄️ 冷灰</span>
+        </div>
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#8a7e72;"></div>
+            <span><code>#8a7e72</code> → hsl(30°, 9.7%, 49.4%) 🔥 暖灰</span>
+        </div>
+
+        <h3>4.3 HSV——设计工具的拾色器逻辑</h3>
+        <p>HSV 和 HSL 的关键区别在第三个维度。在 HSV 中，Value=100% 时是<strong>最鲜艳的纯色</strong>（不是白色）；要到白色需要把饱和度降到 0%。你每天在 Photoshop 或 Figma 的方形色板里拖取颜色时，操作的就是 HSV 空间。</p>
+        <p>实用区别：<strong>HSL 更适合程序化调色</strong>（"把这个明度提高 10%"），<strong>HSV 更适合视觉选择</strong>（在色板中直观定位）。</p>
+
+        <h3>4.4 OKLCH——最新、最精准的色彩模型</h3>
+        <p>HSL 有一个严重问题：<strong>等量明度 ≠ 等量感知亮度</strong>。一个黄色在 50% L 时看起来比蓝色亮得多——这被称为 Helmholtz–Kohlrausch 效应。</p>
+        <p>OKLCH 由 Björn Ottosson 在 2020 年设计，已原生支持于 <strong>CSS Color Level 4</strong>，并被 GitHub Primer、Atlassian、BBC 等前端团队采用。同样是 50% 的 L，黄色和蓝色看起来<strong>确实一样亮</strong>——这对设计系统中的一致性至关重要。</p>
+
+        <blockquote><p>💡 如果你在建设需要跨色相保持视觉一致的设计系统，OKLCH 是比 HSL 好得多的选择。<code>oklch(L C H)</code> 用感知明度替代了 HSL 的数学明度，使不同色相之间的亮度真正可比。</p></blockquote>
+
+        <span class="dot"></span>
+
+        <!-- 五 -->
+        <h2>五、色彩和谐理论——从色环到配色方案</h2>
+
+        <h3>5.1 五种基本配色公式</h3>
+
+        <table>
+            <tr><th>方案</th><th>色环关系</th><th>效果</th><th>适合场景</th></tr>
+            <tr><td><strong>单色</strong> (Monochromatic)</td><td>同色相，变 S 和 L</td><td>统一、干净、克制</td><td>极简设计、内容型界面</td></tr>
+            <tr><td><strong>类似色</strong> (Analogous)</td><td>色环上相邻（±30°）</td><td>和谐、柔和、自然</td><td>品牌色、背景、大面积色块</td></tr>
+            <tr><td><strong>互补色</strong> (Complementary)</td><td>色环上 180° 对立</td><td>高对比、有冲击力</td><td>按钮高亮、信息图表强调</td></tr>
+            <tr><td><strong>分裂互补</strong> (Split-Complementary)</td><td>基准色 + 互补两侧（150°+210°）</td><td>对比但柔和</td><td>需要强视觉但不刺眼的设计</td></tr>
+            <tr><td><strong>三等分</strong> (Triadic)</td><td>120° × 3</td><td>平衡、活泼、丰富</td><td>多彩品牌、儿童产品</td></tr>
+        </table>
+
+        <h3>5.2 实例推演：从 <code>#8a939e</code> 构建调色板</h3>
+
+        <p><strong>单色调色板</strong>（保持 H=210°，只调 L 和 S）：</p>
+
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#6b7685;"></div>
+            <span><code>#6b7685</code> —— 更暗、饱和</span>
+            <span style="color:#999;">hsl(210°, 12%, 47%)</span>
+        </div>
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#8a939e;"></div>
+            <span><code>#8a939e</code> —— 基准色</span>
+            <span style="color:#999;">hsl(210°, 9%, 58%)</span>
+        </div>
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#a8b1b8;"></div>
+            <span><code>#a8b1b8</code> —— 更亮</span>
+            <span style="color:#999;">hsl(210°, 7%, 69%)</span>
+        </div>
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#cdd3d8;"></div>
+            <span><code>#cdd3d8</code> —— 更更亮（接近白色）</span>
+            <span style="color:#999;">hsl(210°, 5%, 82%)</span>
+        </div>
+
+        <p><strong>有趣的事情出现了</strong>——<code>#8a7e72</code> 的色相 H=30° 与 <code>#8a939e</code> 的 H=210° 恰好相差 180°。<strong>它们是互补色对</strong>。虽然在 UI 中它们看起来只是两块灰色，但一块偏冷一块偏暖，会产生微妙的冷暖对比张力——这就是高级配色中说的高级感。</p>
+
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#8a939e;"></div>
+            <div class="swatch-block" style="background:#8a7e72;"></div>
+            <span>❄️ + 🔥 = 冷暖对比 —— 比两块纯灰之间的边界更自然</span>
+        </div>
+
+        <p><strong>60-30-10 黄金比例</strong>：60% 主色 <code>#8a939e</code>（背景）+ 30% 辅色（卡片/侧栏）+ 10% 强调色（按钮/链接）。大多数配色失败不是因为颜色选错了——而是<strong>比例用错了</strong>。</p>
+
+        <span class="dot"></span>
+
+        <!-- 六 -->
+        <h2>六、实例深析——两种灰的全面对比</h2>
+
+        <h3>6.1 多模型对照</h3>
+
+        <table>
+            <tr><th>属性</th><th><code>#8a939e</code></th><th><code>#8a7e72</code></th></tr>
+            <tr><td><strong>HEX</strong></td><td><code>#8a939e</code></td><td><code>#8a7e72</code></td></tr>
+            <tr><td><strong>RGB</strong></td><td>rgb(138, 147, 158)</td><td>rgb(138, 126, 114)</td></tr>
+            <tr><td><strong>HSL</strong></td><td>hsl(210°, 9.4%, 58.0%)</td><td>hsl(30°, 9.7%, 49.4%)</td></tr>
+            <tr><td><strong>HSV</strong></td><td>hsv(210°, 12.7%, 62.0%)</td><td>hsv(30°, 17.4%, 54.1%)</td></tr>
+            <tr><td><strong>OKLCH</strong></td><td>oklch(61.6%, 0.016, 249°)</td><td>oklch(54.0%, 0.022, 64°)</td></tr>
+            <tr><td><strong>相对亮度</strong></td><td>0.293</td><td>0.243</td></tr>
+            <tr><td><strong>色温</strong></td><td>❄️ 冷（蓝青）</td><td>🔥 暖（橙黄）</td></tr>
+            <tr><td><strong>饱和度</strong></td><td>极低（9.4%）</td><td>极低（9.7%）</td></tr>
+            <tr><td><strong>明度</strong></td><td>中高（58%）</td><td>中等（49.4%）</td></tr>
+        </table>
+
+        <h3>6.2 视觉心理与场景</h3>
+
+        <table>
+            <tr><th>感受</th><th><code>#8a939e</code></th><th><code>#8a7e72</code></th></tr>
+            <tr><td><strong>像什么</strong></td><td>阴天天空、不锈钢、混凝土</td><td>砂石泥土、旧纸张、亚麻布料</td></tr>
+            <tr><td><strong>传达</strong></td><td>理性、克制、冷淡、工业感</td><td>温暖、自然、质朴、手作感</td></tr>
+            <tr><td><strong>UI 背景</strong></td><td>SaaS 后台、金融、科技感布局</td><td>内容型网站、博客、暖色品牌</td></tr>
+            <tr><td><strong>文字色</strong></td><td>次要信息、禁用态、帮助文字</td><td>正文辅助色（搭配米色/棕色主题）</td></tr>
+            <tr><td><strong>搭配</strong></td><td>白色、蓝/青色、银灰</td><td>米色、棕色、木色</td></tr>
+        </table>
+
+        <h3>6.3 <code>#8a939e</code> 做文字的可行性（对比度检测）</h3>
+        <p>将 <code>#8a939e</code>（L=0.293）放在纯白背景 <code>#ffffff</code>（L=1.0）上：</p>
+        <pre><code>(1.0 + 0.05) / (0.293 + 0.05) = 1.05 / 0.343 = 3.06:1</code></pre>
+        <p>3.06:1 < 4.5:1 → ❌ <strong>不满足 WCAG AA 普通文本标准</strong>。仅可用于大标题（≥18pt 或 ≥14pt 粗体）。</p>
+        <p>要让 <code>#8a939e</code> 达到 AA 标准，需降低明度。在 HSL 中保持 H=210°，S=9.4%，将 L 降到约 46%：</p>
+        <div class="swatch-row">
+            <div class="swatch-block" style="background:#737c87;"></div>
+            <span><code>#737c87</code> —— 对比度约 4.6:1 ✔ 满足 AA</span>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- 七 -->
+        <h2>七、无障碍与对比度——WCAG 标准</h2>
+
+        <h3>7.1 WCAG 对比度公式</h3>
+        <pre><code>对比度 = (L_亮 + 0.05) / (L_暗 + 0.05)</code></pre>
+        <p>其中 L 是相对亮度（第三章计算出的值）。结果范围 1:1（相同颜色）到 21:1（纯黑对纯白）。</p>
+
+        <h3>7.2 标准阈值</h3>
+
+        <table>
+            <tr><th>标准</th><th>要求</th><th>应用场景</th></tr>
+            <tr><td><strong>AA 普通文本</strong></td><td>≥ <strong>4.5:1</strong></td><td>正文、按钮文字、表单标签</td></tr>
+            <tr><td><strong>AA 大文本</strong></td><td>≥ <strong>3:1</strong></td><td>标题（≥18pt 或 ≥14pt 粗体）</td></tr>
+            <tr><td><strong>AAA 普通文本</strong></td><td>≥ <strong>7:1</strong></td><td>高可读性要求（医疗/政务等）</td></tr>
+            <tr><td><strong>AAA 大文本</strong></td><td>≥ <strong>4.5:1</strong></td><td>大标题的高标准</td></tr>
+            <tr><td><strong>非文本对比度</strong></td><td>≥ <strong>3:1</strong></td><td>图标、输入框边框、焦点环</td></tr>
+        </table>
+
+        <h3>7.3 实用原则</h3>
+        <ul style="margin:12px 0 20px 20px; font-size:0.9rem; color:#555; line-height:2.2;">
+            <li><strong>保留中灰给装饰，不用作文字</strong>。<code>#888</code> 在白底的对比度只有 3.54:1——远不达标</li>
+            <li><strong>只检查你实际用的搭配</strong>。同样的文字色在不同背景上对比度天差地别</li>
+            <li><strong>利用大文本例外</strong>。大标题 3:1 就够，给设计更多灵活空间</li>
+            <li><strong>非文本也要检查</strong>。表单边框 1px solid <code>#d4d4d4</code> 在白底上只有 1.6:1，远不达标</li>
+        </ul>
+
+        <span class="dot"></span>
+
+        <!-- 八 -->
+        <h2>八、实用工具箱</h2>
+
+        <h3>8.1 快速估读 HEX 的方法</h3>
+        <p>不需要每次都查表，记住五个锚点就够用了：</p>
+
+        <table>
+            <tr><th>十六进制</th><th>十进制</th><th>亮度感觉</th></tr>
+            <tr><td><code>00</code></td><td>0</td><td>全关 — 纯黑</td></tr>
+            <tr><td><code>40</code></td><td>64</td><td>暗</td></tr>
+            <tr><td><code>80</code></td><td>128</td><td>中灰</td></tr>
+            <tr><td><code>BF</code></td><td>191</td><td>亮</td></tr>
+            <tr><td><code>FF</code></td><td>255</td><td>全开 — 最亮</td></tr>
+        </table>
+
+        <p>看到 hex 的时候，每两位对着这个区间估一下：</p>
+        <pre><code>#a0b0c0
+  │  │  │
+  │  │  └─ c0 ≈ 192，亮蓝
+  │  └──── b0 ≈ 176，中亮绿
+  └─────── a0 ≈ 160，中亮红
+
+→ 三通道都没拉满，红略低于绿略低于蓝，亮而且偏冷。</code></pre>
+
+        <h3>8.2 推荐工具</h3>
+
+        <table>
+            <tr><th>工具</th><th>用途</th></tr>
+            <tr><td><a href="https://coolors.co" target="_blank" style="color:#555;">Coolors</a></td><td>一键生成配色方案，锁定基准色探索和谐色</td></tr>
+            <tr><td><a href="https://color.adobe.com" target="_blank" style="color:#555;">Adobe Color</a></td><td>多种和谐规则 + 无障碍检测</td></tr>
+            <tr><td><a href="https://webaim.org/resources/contrastchecker/" target="_blank" style="color:#555;">WebAIM Contrast Checker</a></td><td>WCAG 对比度精确计算</td></tr>
+            <tr><td><a href="https://colorui.io/contrast" target="_blank" style="color:#555;">ColorUI Contrast</a></td><td>同时显示 WCAG 和 APCA 两项对比度</td></tr>
+            <tr><td><a href="https://lazytools.io/color-converter" target="_blank" style="color:#555;">Color Lab</a></td><td>HEX/RGB/HSL/HSV/CMYK/OKLCH 全格式互转</td></tr>
+            <tr><td>数码测色计（macOS 自带）</td><td><code>⌘⇧L</code> 锁定颜色，格式可设为十六进制</td></tr>
+            <tr><td>Chrome DevTools</td><td>Elements → Styles 面板点击色块即可编辑和预览</td></tr>
+        </table>
+
+        <h3>8.3 设计系统最佳实践</h3>
+
+        <pre><code>/* 用 CSS 自定义属性定义色彩系统 */
+:root {
+  /* 冷灰色阶 */
+  --gray-cool-400: #8a939e;  /* 主体冷灰 */
+
+  /* 暖灰色阶 */
+  --gray-warm-400: #8a7e72;  /* 主体暖灰 */
+
+  /* 在令牌层级验证对比度 */
+  --text-body:      #333;
+  --text-muted:     #6f7a86;  /* 确保 ≥ 4.5:1 on white */
+
+  /* 语义色 */
+  --color-primary:  #3b82f6;
+  --color-accent:   #e67e22;
+}</code></pre>
+
+        <p>色彩令牌的好处：<strong>你只需要在一个地方验证对比度</strong>，所有用这个令牌的组件自动安全。</p>
+
+        <span class="dot"></span>
+
+        <!-- 九 -->
+        <h2>九、速查对照表</h2>
+
+        <h3>常见颜色 HEX ↔ 名称</h3>
+
+        <table>
+            <tr><th>HEX</th><th>名称</th><th>HEX</th><th>名称</th></tr>
+            <tr><td><code>#000000</code></td><td>纯黑</td><td><code>#ffffff</code></td><td>纯白</td></tr>
+            <tr><td><code>#ff0000</code></td><td>纯红</td><td><code>#00ff00</code></td><td>纯绿</td></tr>
+            <tr><td><code>#0000ff</code></td><td>纯蓝</td><td><code>#ffff00</code></td><td>纯黄</td></tr>
+            <tr><td><code>#ff00ff</code></td><td>品红</td><td><code>#00ffff</code></td><td>青色</td></tr>
+            <tr><td><code>#808080</code></td><td>中灰</td><td><code>#c0c0c0</code></td><td>银灰</td></tr>
+            <tr><td><code>#800000</code></td><td>栗色</td><td><code>#008000</code></td><td>深绿</td></tr>
+            <tr><td><code>#000080</code></td><td>藏蓝</td><td><code>#ff6600</code></td><td>橙色</td></tr>
+            <tr><td><code>#800080</code></td><td>紫色</td><td><code>#8a939e</code></td><td>冷灰</td></tr>
+            <tr><td><code>#8a7e72</code></td><td>暖灰</td><td></td><td></td></tr>
+        </table>
+
+        <h3>关键要义一页纸</h3>
+
+        <table>
+            <tr><th>问题</th><th>答案</th></tr>
+            <tr><td><code>#RRGGBB</code> 是什么？</td><td>红/绿/蓝各两位十六进制，范围 00–ff</td></tr>
+            <tr><td>能表示多少种颜色？</td><td>256³ = 16,777,216</td></tr>
+            <tr><td>三值越接近意味着什么？</td><td>饱和度越低，颜色越灰</td></tr>
+            <tr><td>哪个通道偏高决定什么？</td><td>颜色偏向该色相（冷/暖）</td></tr>
+            <tr><td><code>#8a939e</code> 是什么？</td><td>冷灰，H=210°，R&lt;G&lt;B，像不锈钢</td></tr>
+            <tr><td><code>#8a7e72</code> 是什么？</td><td>暖灰，H=30°，R&gt;G&gt;B，像砂石</td></tr>
+            <tr><td>为什么 128 不是 50% 亮度？</td><td>sRGB 用了 gamma 编码，128 物理亮度约 21%</td></tr>
+            <tr><td>绿色通道为什么特殊？</td><td>人眼对绿最敏感，亮度公式中 G 占 71.5% 权重</td></tr>
+            <tr><td>什么比 HSL 更好？</td><td>OKLCH——等量 L 在不同色相下感知一致</td></tr>
+            <tr><td>文字颜色 AA 标准？</td><td>4.5:1 对比度（大文本 3:1）</td></tr>
+        </table>
+
+        <span class="dot"></span>
+
+        <!-- 待延伸线索 -->
+        <h2>📝 待延伸线索</h2>
+        <ul style="margin: 12px 0 20px 20px; font-size:0.85rem; color:#666; line-height:2.2;">
+            <li><strong>APCA（Accessible Perceptual Contrast Algorithm）</strong>——WCAG 3 计划采用的下一代对比度算法，以感知亮度替代 WCAG 2.x 的数学亮度，对深色模式的评估更准确</li>
+            <li><strong>Display P3 广色域</strong>——Apple 设备使用的广色域标准，比 sRGB 大 25%，<code>color(display-p3 ...)</code> 已可在现代 CSS 中使用</li>
+            <li><strong>色彩错觉（Color Illusion）</strong>——同一颜色在不同背景下的感知变化，如 Munker–White 效应和 simultaneous contrast</li>
+            <li><strong>CIECAM02 / CAM16 色貌模型</strong>——考虑了环境光、背景色和观察条件的完整色彩外观模型，远超简单的色空间转换</li>
+            <li><strong>HSLuv 和 HPLuv</strong>——HSL 的感知均匀化变体，试图在保持 HSL 直觉的同时修正其感知不一致性</li>
+        </ul>
+
+        <hr>
+
+        <p style="text-align:center;font-size:0.8rem;color:#aaa;">2026年5月31日 &nbsp;|&nbsp; 棱镜</p>
+
+        <div class="nav-bottom">
+            <a href="../../index.html">← 返回首页</a>
+        </div>
+
+    </div>
+</body>
+</html>
