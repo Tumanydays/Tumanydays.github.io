@@ -115,10 +115,19 @@
 
     <script src="fragments.js"></script>
     <script>
-        // 渲染碎片墙
+        // 渲染碎片墙（打乱顺序，每次刷新看到的排列不一样）
         var wall = document.getElementById("fragment-wall");
 
-        fragments.forEach(function(f) {
+        // Fisher-Yates 洗牌
+        var shuffled = fragments.slice();
+        for (var i = shuffled.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = shuffled[i];
+            shuffled[i] = shuffled[j];
+            shuffled[j] = tmp;
+        }
+
+        shuffled.forEach(function(f) {
             var div = document.createElement("div");
             div.className = "fragment";
             div.id = f.id;
