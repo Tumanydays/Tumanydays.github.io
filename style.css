@@ -25,6 +25,11 @@
 
 /* ── 全局基础 ── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+    background: var(--bg);
+    color: var(--text);
+}
 
 /* ── 引用块 ── */
 blockquote {
