@@ -170,7 +170,6 @@
             <a class="cat-card" href="Echo/">
                 <div class="cat-name">Echo</div>
                 <div class="cat-desc">浮尘在光里</div>
-                <div class="cat-count">10 篇</div>
             </a>
 
         </div>
@@ -193,7 +192,8 @@
                     var parser = new DOMParser();
                     var doc = parser.parseFromString(html, 'text/html');
                     var count = doc.querySelectorAll('.article-list li').length;
-                    card.querySelector('.cat-count').textContent = count + ' 篇';
+                    var countEl = card.querySelector('.cat-count');
+                    if (countEl) countEl.textContent = count + ' 篇';
                 })
                 .catch(function() {
                     // 请求失败则保留硬编码数字作为 fallback
