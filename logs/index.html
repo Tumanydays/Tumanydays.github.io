@@ -182,28 +182,6 @@
     </div>
 
     <script>
-    // 自动统计各分类文章数量（从各分类目录页抓取 .article-list li）
-    document.addEventListener('DOMContentLoaded', function() {
-        var cards = document.querySelectorAll('.cat-card');
-        cards.forEach(function(card) {
-            var href = card.getAttribute('href');
-            fetch(href + 'index.html')
-                .then(function(r) { return r.text(); })
-                .then(function(html) {
-                    var parser = new DOMParser();
-                    var doc = parser.parseFromString(html, 'text/html');
-                    var count = doc.querySelectorAll('.article-list li').length;
-                    var countEl = card.querySelector('.cat-count');
-                    if (countEl) countEl.textContent = count + ' 篇';
-                })
-                .catch(function() {
-                    // 请求失败则保留硬编码数字作为 fallback
-                });
-        });
-    });
-    </script>
-
-    <script>
     var sketch = function(p) {
         var t, speed = 2e-5;
         var l = 80;
