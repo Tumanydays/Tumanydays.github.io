@@ -45,6 +45,10 @@ blockquote {
 }
 blockquote p { margin-bottom: 0; color: var(--text-soft); }
 
+/* ── meta 行链接 ── */
+.meta a { color: var(--text-faint); text-decoration: none; }
+.meta a:hover { color: var(--hover); }
+
 /* ── 加粗 ── */
 strong { color: var(--text-title); font-weight: 600; }
 
