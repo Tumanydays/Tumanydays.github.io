@@ -105,6 +105,19 @@
             font-size: 0.8rem;
             color: var(--text-dim);
         }
+        /* 随处走走 */
+        #random-walk {
+            display: block;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--text-faint);
+            text-decoration: none;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+        #random-walk:hover { color: var(--hover); }
+
         @media (max-width: 400px) {
             .card { padding: 32px 16px; }
         }
@@ -115,6 +128,7 @@
     <div id="p5-bg"></div>
     <div class="card">
 
+        <a href="#" id="random-walk">随处走走</a>
         <h1>Tumanydays</h1>
         <p id="tagline-spot" class="tagline"></p>
 
@@ -196,6 +210,26 @@
     var a = document.getElementById("article-spot");
     a.href = article.url;
     a.textContent = article.title;
+
+    // ── 随处走走 ──
+    var walkPages = [
+        "logs/观澜/笼中拳手与不飞编队的幽灵.html",
+        "logs/字渡/我没疯.html",
+        "logs/字渡/我是古巴.html",
+        "logs/字渡/摘花.html",
+        "logs/棱镜/一些知识/RSS完全了解指南：信息自主权的最后堡垒.html",
+        "logs/棱镜/一些知识/古旧铁轨与万国文字的车厢：ASCII与UTF-8编码的传承、困境与全球方案.html",
+        "logs/棱镜/一些知识/从000000到FFFFFF：十六进制颜色码完全手册.html",
+        "poetry/index.html",
+        "poetry/wall.html",
+        "logs/Echo/index.html",
+        "poetry/文/吊古战场文.html",
+        "logs/index.html"
+    ];
+    document.getElementById("random-walk").addEventListener("click", function(e) {
+        e.preventDefault();
+        location.href = pick(walkPages);
+    });
 
     // 填图片
     var imgA = document.getElementById("image-spot");
