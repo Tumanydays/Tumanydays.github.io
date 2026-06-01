@@ -184,9 +184,9 @@
     var verse   = pick(verses);
     var fragment = pick(fragments);
 
-    // 填 tagline：从碎片库随机抽取
+    // 填 tagline：从碎片库随机抽取（优先用 brief 短版）
     var t = document.getElementById("tagline-spot");
-    t.innerHTML = fragment.text.join("<br>");
+    t.innerHTML = fragment.brief || fragment.text.join("<br>");
 
     // 填诗句
     var v = document.getElementById("verse-spot");
