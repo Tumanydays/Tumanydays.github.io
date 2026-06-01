@@ -40,12 +40,11 @@
             font-family: "Noto Serif SC", "Songti SC", serif;
             white-space: nowrap;
             letter-spacing: inherit;
-            transition: color 0.3s, transform 0.3s, opacity 0.3s;
+            transition: color 0.3s, opacity 0.3s;
             cursor: pointer;
         }
         .frag:hover {
             color: var(--text-title);
-            transform: scale(1.25);
             opacity: 1 !important;
         }
 
@@ -151,18 +150,23 @@
         a.textContent = f.text;
         a.style.left = x + "px";
         a.style.top  = y + "px";
-        a.style.transform = "translate(-50%, -50%)";
-        // 给一点微旋转，增加自然感
-        a.style.transform += " rotate(" + ((Math.random()-0.5)*10) + "deg)";
+        var rot = (Math.random() - 0.5) * 10;
+        var baseTransform = "translate(-50%, -50%) rotate(" + rot + "deg)";
+        a.style.transform = baseTransform;
 
         stage.appendChild(a);
         // 收集浮动数据
         floatData.push({
             el: a,
+            baseTransform: baseTransform,
             speed: 1.2 + Math.random() * 0.8,
             phase: Math.random() * Math.PI * 2,
-            amp: 3
+            amp: 3,
+            hovered: false
         });
+        // hover 时放大（由 JS 统一控制，避免与浮动 transform 冲突）
+        a.addEventListener('mouseenter', function() { this._hovered = true; });
+        a.addEventListener('mouseleave', function() { this._hovered = false; });
     });
 
     // 正弦波浮动动画（比 CSS keyframes 更圆滑自然）
@@ -171,7 +175,11 @@
         var t = (now - floatLoop.start) / 1000;
         floatData.forEach(function(fd) {
             var y = Math.sin(t * fd.speed + fd.phase) * fd.amp;
-            fd.el.style.marginTop = y + 'px';
+            if (fd.el._hovered) {
+                fd.el.style.transform = fd.baseTransform + " scale(1.25)";
+            } else {
+                fd.el.style.transform = fd.baseTransform + " translateY(" + y + "px)";
+            }
         });
         requestAnimationFrame(floatLoop);
     }
