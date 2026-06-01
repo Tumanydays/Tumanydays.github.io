@@ -25,6 +25,7 @@ var poems = [
     },
     {
         id: "p2",
+        verse: "衣带渐宽终不悔，为伊消得人憔悴",
         title: "蝶恋花 · 伫倚危楼风细细",
         author: "柳永",
         lines: [
@@ -65,6 +66,7 @@ var poems = [
     },
     {
         id: "p5",
+        verse: "欲买桂花同载酒，终不似，少年游",
         title: "唐多令 · 芦叶满汀洲",
         author: "刘过",
         lines: [
@@ -97,6 +99,7 @@ var poems = [
     },
     {
         id: "p7",
+        verses: ["悠然心会，妙处难与君说","扣舷独啸，不知今夕何夕","素月分辉，明河共影，表里俱澄澈"],
         title: "念奴娇 · 过洞庭",
         author: "张孝祥",
         lines: [
@@ -127,6 +130,7 @@ var poems = [
     },
     {
         id: "p9",
+        verse: "小舟从此逝，江海寄余生",
         title: "临江仙 · 夜归临皋",
         author: "苏轼",
         lines: [
@@ -207,6 +211,7 @@ var poems = [
     },
     {
         id: "p15",
+        verses: ["我见青山多妩媚，料青山见我应如是","不恨古人吾不见，恨古人不见吾狂耳","知我者，二三子"],
         title: "贺新郎 · 甚矣吾衰矣",
         author: "辛弃疾",
         lines: [
@@ -226,6 +231,7 @@ var poems = [
     },
     {
         id: "p16",
+        verse: "几时归去，作个闲人，对一张琴，一壶酒，一溪云",
         title: "行香子 · 述怀",
         author: "苏轼",
         lines: [
@@ -241,6 +247,7 @@ var poems = [
     },
     {
         id: "p17",
+        verse: "今宵酒醒何处？杨柳岸，晓风残月",
         title: "雨霖铃 · 秋别",
         author: "柳永",
         lines: [
@@ -269,6 +276,7 @@ var poems = [
     },
     {
         id: "p19",
+        verse: "晓看天色暮看云，行也思君，坐也思君",
         title: "一剪梅 · 雨打梨花深闭门",
         author: "唐寅",
         lines: [

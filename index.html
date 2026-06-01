@@ -133,6 +133,7 @@
     </div>
 
     <!-- ========== 随机抽牌 ========== -->
+    <script src="poetry/poems.js"></script>
     <script src="logs/Echo/fragments.js"></script>
     <script>
     // ── 第一步：建池子 ──
@@ -161,21 +162,12 @@
         }
     ];
 
-    // 诗句池：从诗词库中精选。新增时在 ] 前面加一行 "诗句",
-    var verses = [
-        "欲买桂花同载酒，终不似，少年游",
-        "小舟从此逝，江海寄余生",
-        "我见青山多妩媚，料青山见我应如是",
-        "衣带渐宽终不悔，为伊消得人憔悴",
-        "悠然心会，妙处难与君说",
-        "扣舷独啸，不知今夕何夕",
-        "几时归去，作个闲人，对一张琴，一壶酒，一溪云",
-        "晓看天色暮看云，行也思君，坐也思君",
-        "今宵酒醒何处？杨柳岸，晓风残月",
-        "不恨古人吾不见，恨古人不见吾狂耳",
-        "素月分辉，明河共影，表里俱澄澈",
-        "知我者，二三子"
-    ];
+    // 诗句池：从 poems.js 动态收集（支持 verse 单句和 verses 数组）
+    var verses = [];
+    poems.forEach(function(p) {
+        if (p.verse) verses.push(p.verse);
+        if (p.verses) verses = verses.concat(p.verses);
+    });
 
     // ── 第二步：抽牌 ──
     function pick(arr) {
