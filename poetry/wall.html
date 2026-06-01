@@ -162,7 +162,7 @@
             speed: 1.2 + Math.random() * 0.8,
             phase: Math.random() * Math.PI * 2,
             amp: 3,
-            hovered: false
+            currentScale: 1
         });
         // hover 时放大（由 JS 统一控制，避免与浮动 transform 冲突）
         a.addEventListener('mouseenter', function() { this._hovered = true; });
@@ -175,8 +175,11 @@
         var t = (now - floatLoop.start) / 1000;
         floatData.forEach(function(fd) {
             var y = Math.sin(t * fd.speed + fd.phase) * fd.amp;
-            if (fd.el._hovered) {
-                fd.el.style.transform = fd.baseTransform + " scale(1.25)";
+            // 缓动缩放：悬浮时渐入 1.25，离开时渐退至 1.0
+            var targetScale = fd.el._hovered ? 1.25 : 1.0;
+            fd.currentScale += (targetScale - fd.currentScale) * 0.12;
+            if (fd.currentScale > 1.01) {
+                fd.el.style.transform = fd.baseTransform + " scale(" + fd.currentScale + ") translateY(" + y + "px)";
             } else {
                 fd.el.style.transform = fd.baseTransform + " translateY(" + y + "px)";
             }
