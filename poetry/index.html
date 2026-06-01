@@ -67,6 +67,17 @@
             font-style: italic;
         }
 
+        /* 渐入效果：诗句逐行从下方滑入 */
+        .poem-body p {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .poem-body p.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
         .poem-body .light {
             color: var(--text-dim);
@@ -149,15 +160,28 @@
         var body = document.createElement("div");
         body.className = "poem-body";
 
-        p.lines.forEach(function(line) {
+        p.lines.forEach(function(line, i) {
             var para = document.createElement("p");
             para.textContent = line;
+            para.style.transitionDelay = (i * 0.12) + "s";
             body.appendChild(para);
         });
 
         div.appendChild(body);
         wall.appendChild(div);
     });
+
+    // 渐入观察器：诗句进入视口时逐行浮现
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var lines = entry.target.querySelectorAll('.poem-body p');
+                lines.forEach(function(p) { p.classList.add('revealed'); });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.poem').forEach(function(p) { observer.observe(p); });
     </script>
 </body>
 </html>

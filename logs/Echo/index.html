@@ -40,10 +40,19 @@
             margin-bottom: 56px;
         }
 
-        /* ---------- 碎片墙 ---------- */
+        /* ---------- 渐入效果 ---------- */
         .fragment {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 1s ease, transform 1s ease;
             margin-bottom: 48px;
         }
+        .fragment.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- 碎片墙 ---------- */
         .fragment-text {
             font-size: 0.95rem;
             color: var(--text-soft);
@@ -131,10 +140,11 @@
             shuffled[j] = tmp;
         }
 
-        shuffled.forEach(function(f) {
+        shuffled.forEach(function(f, idx) {
             var div = document.createElement("div");
             div.className = "fragment";
             div.id = f.id;
+            div.style.transitionDelay = (idx * 0.08) + "s";
 
             var textDiv = document.createElement("div");
             textDiv.className = "fragment-text";
@@ -160,6 +170,17 @@
             var li = document.createElement("li");
             hiddenList.appendChild(li);
         });
+
+        // 渐入观察器：碎片进入视口时浮现
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fragment').forEach(function(f) { observer.observe(f); });
     </script>
 
 </body>
