@@ -239,6 +239,7 @@
                 gLastMouseY = gMouseY;
             }
         };
+        p.draw = function() {
             // 极轻惊动：仅桌面端，移动端圆点匀速运动
             var speedMod = 1;
             if (!isTouch) {
