@@ -8,7 +8,7 @@
     <meta property="og:description" content="一个在数字世界里散步的人。八间小屋，一首诗，一些句子。">
     <meta property="og:image" content="https://www.tumanydays.com/images/cover_web.jpg">
     <meta property="og:url" content="https://www.tumanydays.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Petit+Formal+Script&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
@@ -40,6 +40,8 @@
             text-align: center;
             padding: 48px 32px;
             max-width: 520px;
+            transform-origin: bottom left;
+            will-change: transform;
         }
         h1 {
             font-family: 'Cormorant Garamond', serif;
@@ -111,6 +113,73 @@
         /* 标题也是随处走走的入口 */
         h1 { cursor: pointer; }
 
+        /* ── 彩蛋 ── */
+        @keyframes shakeAndDrop {
+            0% { transform: translateX(0); opacity: 1; }
+            3% { transform: translateX(-10px); }
+            6% { transform: translateX(10px); }
+            10% { transform: translateX(-8px); }
+            14% { transform: translateX(8px); }
+            19% { transform: translateX(-6px); }
+            24% { transform: translateX(6px); }
+            30% { transform: translateX(-4px); }
+            36% { transform: translateX(4px); }
+            42% { transform: translateX(-3px); }
+            47% { transform: translateX(3px); }
+            51% { transform: translateX(-2px); }
+            54% { transform: translateX(2px); }
+            56% { transform: translateX(-1px); }
+            58% { transform: translateX(1px); }
+            59% { transform: translateX(0); opacity: 1; }
+            65% { transform: rotate(6deg); opacity: 0.85; }
+            72% { transform: rotate(18deg); opacity: 0.55; }
+            80% { transform: rotate(32deg); opacity: 0.25; }
+            88% { transform: rotate(42deg); opacity: 0.08; }
+            95% { transform: rotate(44.5deg); opacity: 0.02; }
+            100% { transform: rotate(45deg); opacity: 0; }
+        }
+        #easter-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 15vh 20vw 0 0;
+            background: rgba(250,250,250,0.72);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            line-height: 2;
+        }
+        #easter-overlay .line1 {
+            font-family: 'Petit Formal Script', cursive;
+            font-size: 1.5rem;
+            color: var(--text);
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        #easter-overlay .line1.show { opacity: 1; }
+        #easter-overlay .line2 {
+            font-family: 'Petit Formal Script', cursive;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 2em;
+            text-align: right;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        #easter-overlay .line2.show { opacity: 1; }
+        #easter-overlay .secret-link {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+        #easter-overlay .secret-link:hover { color: var(--hover); }
+
         @media (max-width: 400px) {
             .card { padding: 32px 16px; }
         }
@@ -118,6 +187,7 @@
     </style>
 </head>
 <body>
+    <div id="page-wrap">
     <div id="p5-bg"></div>
     <div class="card">
 
@@ -140,6 +210,13 @@
         </a>
 
         <footer>— 始于 2026.5.28 —</footer>
+    </div>
+
+    </div>
+
+    <div id="easter-overlay">
+        <div class="line1" id="easter-line1">似乎发生了一些变化……</div>
+        <div class="line2" id="easter-line2">一个<span class="secret-link" id="easter-link">入口</span>被发现了</div>
     </div>
 
     <!-- ========== 随机抽牌 ========== -->
@@ -324,6 +401,77 @@
         }
     };
     new p5(sketch);
+    </script>
+
+    <script>
+    // ═══ 彩蛋 ═══
+    (function() {
+        var triggered = false;
+        var overlay = document.getElementById('easter-overlay');
+        var line1 = document.getElementById('easter-line1');
+        var line2 = document.getElementById('easter-line2');
+
+        function reveal() {
+            if (triggered) return;
+            triggered = true;
+            var card = document.querySelector('.card');
+            if (card) card.style.animation = 'shakeAndDrop 5.5s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+            setTimeout(function() {
+                if (card) card.style.display = 'none';
+                overlay.style.display = 'flex';
+                setTimeout(function() { line1.classList.add('show'); }, 50);
+                setTimeout(function() {
+                    line2.classList.add('show');
+                    document.getElementById('easter-link').addEventListener('click', function() {
+                        location.href = 'secret.html';
+                    });
+                }, 3000);
+            }, 5500);
+        }
+
+        // ── 触发方式一：键盘输入 "la la land" ──
+        var keys = 'la la land';
+        var ki = 0;
+        document.addEventListener('keydown', function(e) {
+            if (triggered) return;
+            var k = e.key && e.key.toLowerCase();
+            if (k && k.length === 1 && k === keys[ki]) {
+                ki++;
+                if (ki === keys.length) reveal();
+            } else {
+                ki = 0;
+                if (k && k === keys[0]) ki = 1;
+            }
+        });
+
+        // ── 触发方式二：连点 footer 两次 → 再点图片 ──
+        var step = 0, tapTimer;
+        var footer = document.querySelector('footer');
+        var imgLink = document.getElementById('image-spot');
+        if (footer) {
+            footer.addEventListener('click', function() {
+                if (triggered) return;
+                clearTimeout(tapTimer);
+                if (step === 0) {
+                    step = 1;
+                    tapTimer = setTimeout(function() { step = 0; }, 600);
+                } else if (step === 1) {
+                    step = 2;
+                    tapTimer = setTimeout(function() { step = 0; }, 2000);
+                }
+            });
+        }
+        if (imgLink) {
+            imgLink.addEventListener('click', function() {
+                if (triggered) return;
+                if (step === 2) {
+                    step = 0;
+                    clearTimeout(tapTimer);
+                    reveal();
+                }
+            });
+        }
+    })();
     </script>
 </body>
 </html>
