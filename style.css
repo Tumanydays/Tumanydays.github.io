@@ -101,12 +101,3 @@ code {
     color: var(--code-text);
 }
 
-/* ── 房间推荐曲目 ── */
-.music-note {
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-faint);
-    font-style: italic;
-    margin: 0 auto 8px;
-    line-height: 1.6;
-}
