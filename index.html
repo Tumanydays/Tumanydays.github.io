@@ -105,18 +105,8 @@
             font-size: 0.8rem;
             color: var(--text-dim);
         }
-        /* 随处走走 */
-        #random-walk {
-            display: block;
-            text-align: center;
-            font-size: 0.72rem;
-            color: var(--text-faint);
-            text-decoration: none;
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-        #random-walk:hover { color: var(--hover); }
+        /* 标题也是随处走走的入口 */
+        h1 { cursor: pointer; }
 
         @media (max-width: 400px) {
             .card { padding: 32px 16px; }
@@ -128,8 +118,7 @@
     <div id="p5-bg"></div>
     <div class="card">
 
-        <a href="#" id="random-walk">随处走走</a>
-        <h1>Tumanydays</h1>
+        <h1 id="site-title">Tumanydays</h1>
         <p id="tagline-spot" class="tagline"></p>
 
         <!-- 文章入口：由 JS 随机填充 -->
@@ -226,8 +215,7 @@
         "poetry/文/吊古战场文.html",
         "logs/index.html"
     ];
-    document.getElementById("random-walk").addEventListener("click", function(e) {
-        e.preventDefault();
+    document.getElementById("site-title").addEventListener("click", function() {
         location.href = pick(walkPages);
     });
 
