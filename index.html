@@ -206,16 +206,15 @@
     </script>
 
     <script>
-    // ── 指针／触摸追踪（canvas 设了 pointer-events: none，需独立监听）──
+    // ── 指针／触摸追踪（仅桌面端，移动端不产生惊动）──
+    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     var gMouseX = 0, gMouseY = 0, gLastMouseX = 0, gLastMouseY = 0;
-    document.addEventListener('mousemove', function(e) {
-        gMouseX = e.clientX;
-        gMouseY = e.clientY;
-    });
-    document.addEventListener('touchmove', function(e) {
-        gMouseX = e.touches[0].clientX;
-        gMouseY = e.touches[0].clientY;
-    }, { passive: true });
+    if (!isTouch) {
+        document.addEventListener('mousemove', function(e) {
+            gMouseX = e.clientX;
+            gMouseY = e.clientY;
+        });
+    }
     </script>
 
     <script>
@@ -235,23 +234,26 @@
             for (var i = 3; i < 11; i++) {
                 rads[i] = l / (2 * p.tan(p.PI / i));
             }
-            gLastMouseX = gMouseX;
-            gLastMouseY = gMouseY;
+            if (!isTouch) {
+                gLastMouseX = gMouseX;
+                gLastMouseY = gMouseY;
+            }
         };
-
-        p.draw = function() {
-            // 极轻惊动：鼠标/手指移动时圆点只给一点点被触碰的反馈
-            var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
-            gLastMouseX = gMouseX;
-            gLastMouseY = gMouseY;
-            var distFromCenter = p.dist(gMouseX, gMouseY, p.width / 2, p.height / 2);
-            var triggerRadius = p.min(p.width, p.height) * 0.4;
-            var atten = 1 - p.max(0, distFromCenter - triggerRadius) / triggerRadius;
-            atten = p.constrain(atten, 0, 1);
-            flutter += mv * 0.0005 * atten;
-            flutter = p.lerp(flutter, 0, 0.25);
-            flutter = p.constrain(flutter, 0, 0.02);
-            var speedMod = 1 + flutter;
+            // 极轻惊动：仅桌面端，移动端圆点匀速运动
+            var speedMod = 1;
+            if (!isTouch) {
+                var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
+                gLastMouseX = gMouseX;
+                gLastMouseY = gMouseY;
+                var distFromCenter = p.dist(gMouseX, gMouseY, p.width / 2, p.height / 2);
+                var triggerRadius = p.min(p.width, p.height) * 0.4;
+                var atten = 1 - p.max(0, distFromCenter - triggerRadius) / triggerRadius;
+                atten = p.constrain(atten, 0, 1);
+                flutter += mv * 0.0005 * atten;
+                flutter = p.lerp(flutter, 0, 0.25);
+                flutter = p.constrain(flutter, 0, 0.02);
+                speedMod = 1 + flutter;
+            }
 
             t = speed * p.millis();
             p.background(250 / 255);
