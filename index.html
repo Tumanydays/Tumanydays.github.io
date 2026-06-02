@@ -542,9 +542,9 @@
 
             // 弹簧参数随距离变化（标准 accel = -k*x - d*v 模型）
             var t = Math.min(avgDist / 60, 1);
-            var k = 0.015 - 0.005 * t;        // 0.015→0.010，拉越远越软
-            var d = 0.08 - 0.06 * t;            // 0.08→0.02，拉越远阻尼越低
-            var pos = 1, vel = 0;
+            var k = 0.02 + 0.005 * t;         // 0.020→0.025，更硬过冲转折更快
+            var d = 0.12 - 0.095 * t;           // 0.12→0.025，短距紧长距浪
+            var pos = 1, vel = -t * 0.08 - 0.02;
 
             (function tick() {
                 var accel = -k * pos - d * vel;
@@ -577,6 +577,8 @@
             isDragging = true;
             wasDragged = false;
             wasEffectApplied = false;
+            // 桌面端阻止文字选中，移动端保留 click 事件
+            if (e.type === 'mousedown') e.preventDefault();
         }
 
         function onTitleMove(e) {
