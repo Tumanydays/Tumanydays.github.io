@@ -85,10 +85,18 @@
             transform: translateY(0);
         }
 
-        /* 指针滑过：短暂触感，像指尖划过水面 */
-        .poem-body p:hover {
-            color: var(--ink);
-            transform: translateY(0) scale(1.08);
+        /* 指针滑过：短暂触感，像指尖划过水面（仅桌面端） */
+        @media (hover: hover) {
+            .poem-body p:hover {
+                color: var(--ink);
+                transform: translateY(0) scale(1.08);
+            }
+        }
+
+        /* 移动端触摸：整首诗浸染蓝墨水色 */
+        .poem.ink-active .poem-body p {
+            color: var(--ink) !important;
+            font-size: 0.95rem;
         }
 
         /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
@@ -196,6 +204,28 @@
         });
     }, { threshold: 0.15 });
     document.querySelectorAll('.poem').forEach(function(p) { observer.observe(p); });
+
+    // 移动端：点击诗句行，整首诗凸显
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.querySelectorAll('#poem-wall .poem-body p').forEach(function(p) {
+            p.addEventListener('click', function(e) {
+                var target = this.closest('.poem');
+                // 关闭其他已激活的诗
+                document.querySelectorAll('.poem.ink-active').forEach(function(p) {
+                    if (p !== target) p.classList.remove('ink-active');
+                });
+                target.classList.toggle('ink-active');
+            });
+        });
+        // 点击外部区域关闭
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.poem')) {
+                document.querySelectorAll('.poem.ink-active').forEach(function(p) {
+                    p.classList.remove('ink-active');
+                });
+            }
+        });
+    }
     </script>
 </body>
 </html>

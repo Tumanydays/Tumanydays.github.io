@@ -65,9 +65,22 @@
             text-align: right;
             transition: transform 0.3s ease, color 0.3s ease;
         }
-        .fragment-text:hover {
+        /* 指针滑过：短暂触感，像指尖划过水面（仅桌面端） */
+        @media (hover: hover) {
+            .fragment-text:hover {
+                color: var(--ink);
+                transform: scale(1.05);
+            }
+        }
+
+        /* 移动端触摸：整段碎片浸染蓝墨水色 */
+        .fragment.ink-active .fragment-text,
+        .fragment.ink-active .fragment-source {
             color: var(--ink);
-            transform: scale(1.05);
+            font-size: 0.95rem;
+        }
+        .fragment.ink-active .fragment-source {
+            font-size: 0.88rem;
         }
         .fragment-source {
             font-size: 0.78rem;
@@ -190,6 +203,28 @@
             });
         }, { threshold: 0.15 });
         document.querySelectorAll('.fragment').forEach(function(f) { observer.observe(f); });
+
+        // 移动端：点击碎片，整段凸显
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.querySelectorAll('#fragment-wall .fragment-text').forEach(function(t) {
+                t.addEventListener('click', function(e) {
+                    var target = this.closest('.fragment');
+                    // 关闭其他已激活的碎片
+                    document.querySelectorAll('.fragment.ink-active').forEach(function(f) {
+                        if (f !== target) f.classList.remove('ink-active');
+                    });
+                    target.classList.toggle('ink-active');
+                });
+            });
+            // 点击外部区域关闭
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.fragment')) {
+                    document.querySelectorAll('.fragment.ink-active').forEach(function(f) {
+                        f.classList.remove('ink-active');
+                    });
+                }
+            });
+        }
     </script>
 
 </body>
