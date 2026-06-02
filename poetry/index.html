@@ -39,6 +39,7 @@
             font-size: 0.8rem;
             color: var(--text-faint);
             margin-bottom: 56px;
+            text-align: right;
         }
         .subtitle a { color: var(--text-faint); text-decoration: none; }
         .subtitle a:hover { color: var(--hover); }
@@ -56,16 +57,19 @@
             color: var(--text-faint);
             letter-spacing: 2px;
             margin-bottom: 14px;
-            font-weight: 400;
+            font-weight: 300;
+            text-align: right;
         }
 
-        /* 诗句本身：浅灰斜体，舒朗清瘦 */
+        /* 诗句本身：极细字重，右对齐，像写在纸边 */
         .poem-body {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 2.6;
-            letter-spacing: 1px;
-            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 2.4;
+            letter-spacing: 2px;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 300;
+            text-align: right;
         }
 
         /* 渐入效果：诗句逐行从下方滑入 */
@@ -91,7 +95,7 @@
             width: 24px;
             height: 1px;
             background: #ddd;
-            margin-top: 52px;
+            margin: 52px auto 0;
         }
         .poem:last-child::after { display: none; }
 
