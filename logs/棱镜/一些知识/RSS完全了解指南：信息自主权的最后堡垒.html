@@ -185,14 +185,6 @@
         }
         .nav-bottom a:hover { color: var(--hover); }
 
-        /* 阅读进度条 */
-        #progress-bar {
-            position: fixed; top: 0; left: 0;
-            height: 2px; width: 0%;
-            background: var(--ink);
-            z-index: 999;
-        }
-
         /* 小屏适配 */
         @media (max-width: 600px) {
             .container { padding: 32px 16px 64px; }
@@ -205,7 +197,6 @@
 </head>
 <body>
 
-<div id="progress-bar"></div>
 
 <div class="container">
 
@@ -704,14 +695,7 @@ https://mastodon.example/tags/tagname.rss            → 话题标签</code></pr
 
 </div>
 
-<script>
-    window.addEventListener('scroll', function() {
-        var bar = document.getElementById('progress-bar');
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (scrollTop / docHeight * 100) + '%';
-    });
-</script>
+<script src="../../../progress-bar.js"></script>
 
 </body>
 </html>

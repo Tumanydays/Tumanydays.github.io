@@ -150,17 +150,9 @@
             th, td { padding: 8px; }
         }
 
-        /* 阅读进度条 */
-        #progress-bar {
-            position: fixed; top: 0; left: 0;
-            height: 2px; width: 0%;
-            background: var(--ink);
-            z-index: 999;
-        }
     </style>
 </head>
 <body>
-    <div id="progress-bar"></div>
     <div class="container">
 
         <a class="back" href="../index.html">← 观澜</a>
@@ -589,13 +581,6 @@
         </div>
 
     </div>
-<script>
-    window.addEventListener('scroll', function() {
-        var bar = document.getElementById('progress-bar');
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (scrollTop / docHeight * 100) + '%';
-    });
-</script>
+<script src="../../progress-bar.js"></script>
 </body>
 </html>
