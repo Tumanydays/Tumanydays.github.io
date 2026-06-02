@@ -547,7 +547,8 @@
             var pos = 1, vel = -t * 0.08 - 0.02;
 
             (function tick() {
-                var accel = -k * pos - d * vel;
+                var extra = pos < 0 ? -0.3 * pos * pos * pos : 0;  // 过冲时非线性回复，减少停留
+                var accel = -k * pos + extra - d * vel;
                 vel += accel;
                 pos += vel;
 
