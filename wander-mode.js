@@ -1,5 +1,7 @@
 /* ═══════════════════════════════════════════
-   漫游模式 — 隐藏开关
+   迷失域 — 隐藏漫游模式
+   入口：首页标题向右拖拽触发
+   出口：所有页面右下角（隐形区域）单击
    每个页面在 </body> 前引用：
      <script src="../../wander-mode.js"></script>
    路径深度同 style.css
@@ -38,40 +40,24 @@
     ];
 
     var isOn = sessionStorage.getItem('wander-mode') === 'true';
-    var clickCount = 0;
-    var clickTimer = null;
 
-    // 注入「漫游」触发器
-    var dot = document.createElement('div');
-    dot.id = 'wander-dot';
-    dot.textContent = '漫游';
-    dot.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.6rem;color:' + (isOn ? '#ccc' : '#eee') + ';z-index:9999;cursor:default;user-select:none;font-weight:300;letter-spacing:1px;transition:color 0.6s;pointer-events:auto;';
-    document.body.appendChild(dot);
+    // 注入隐形退出按钮（右下角，完全不可见）
+    var exitEl = document.createElement('div');
+    exitEl.id = 'wander-exit';
+    exitEl.textContent = '迷失域';
+    exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.6rem;color:transparent;z-index:9999;cursor:default;user-select:none;pointer-events:auto;';
+    document.body.appendChild(exitEl);
 
-    // 点击触发器
-    dot.addEventListener('click', function(e) {
+    // 单击退出
+    exitEl.addEventListener('click', function(e) {
         e.stopPropagation();
         if (isOn) {
-            // 漫游中 → 检测三击退出
-            clickCount++;
-            if (clickCount === 1) {
-                clickTimer = setTimeout(function() { clickCount = 0; }, 800);
-            } else if (clickCount >= 3) {
-                isOn = false;
-                clickCount = 0;
-                clearTimeout(clickTimer);
-                sessionStorage.setItem('wander-mode', 'false');
-                dot.style.color = '#eee';
-            }
-        } else {
-            // 进入漫游
-            isOn = true;
-            sessionStorage.setItem('wander-mode', 'true');
-            dot.style.color = '#ccc';
+            isOn = false;
+            sessionStorage.setItem('wander-mode', 'false');
         }
     });
 
-    // 链接劫持（capture 阶段拦截，早于其他监听器）
+    // 链接劫持（capture 阶段拦截）
     document.addEventListener('click', function(e) {
         if (!isOn) return;
         var link = e.target.closest('a');

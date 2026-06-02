@@ -593,6 +593,16 @@
                 charEls[ci].style.color = 'rgb(' + c + ',' + c + ',' + c + ')';
             }
 
+            // 向右直拖较远 → 进入迷失域
+            if (dx > 250 && Math.abs(dy) < 30 && !triggered) {
+                isDragging = false;
+                wasDragged = false;
+                wasEffectApplied = false;
+                resetChars();
+                sessionStorage.setItem('wander-mode', 'true');
+                return;
+            }
+
             // 只有往右下方拉到极限才触发彩蛋
             if (dx > DEAD_ZONE && dy > DEAD_ZONE && progress >= 1) {
                 isDragging = false;
