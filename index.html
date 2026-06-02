@@ -51,6 +51,11 @@
             letter-spacing: 4px;
             margin-bottom: 52px;
             color: var(--text-title);
+            white-space: nowrap;
+        }
+        h1 .char {
+            display: inline-block;
+            vertical-align: baseline;
         }
         .tagline {
             font-size: 0.95rem;
@@ -300,6 +305,7 @@
         "logs/index.html"
     ];
     document.getElementById("site-title").addEventListener("click", function() {
+        if (window._dragSuppressClick) { window._dragSuppressClick = false; return; }
         location.href = pick(walkPages);
     });
 
@@ -474,6 +480,167 @@
                     reveal();
                 }
             });
+        }
+
+        // ── 触发方式三：拉扯标题（往右下方，像一根被拉紧的弦）──
+        var titleEl = document.getElementById('site-title');
+        // 将标题拆分为逐字符 span
+        var charEls = [];
+        var titleText = titleEl.textContent;
+        titleEl.textContent = '';
+        for (var ci = 0; ci < titleText.length; ci++) {
+            var sp = document.createElement('span');
+            sp.className = 'char';
+            sp.textContent = titleText[ci];
+            titleEl.appendChild(sp);
+            charEls.push(sp);
+        }
+        var CHAR_N = charEls.length;
+
+        var dragX = 0, dragY = 0, isDragging = false;
+        var wasDragged = false, wasEffectApplied = false;
+        var MAX_DRAG = 300, DEAD_ZONE = 8;
+
+        function getDragPos(e) {
+            return e.touches
+                ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
+                : { x: e.clientX, y: e.clientY };
+        }
+
+        // 重置所有字符为初始状态
+        function resetChars() {
+            for (var ci = 0; ci < CHAR_N; ci++) {
+                charEls[ci].style.transform = '';
+                charEls[ci].style.color = '';
+            }
+        }
+
+        // Q弹弹簧回弹——距离越远，弹得越浪
+        function jellyReset() {
+            var states = [];
+            var hasMotion = false;
+            var totalDist = 0;
+            for (var ci = 0; ci < CHAR_N; ci++) {
+                var el = charEls[ci];
+                var tx = 0, ty = 0;
+                var m = el.style.transform
+                    && el.style.transform.match(/translate\(([^,]+)px,([^)]+)px\)/);
+                if (m) { tx = parseFloat(m[1]); ty = parseFloat(m[2]); }
+                var d = Math.sqrt(tx*tx + ty*ty);
+                if (d > 0.5) hasMotion = true;
+                totalDist += d;
+                var cm = el.style.color && el.style.color.match(/rgb\((\d+),/);
+                var cv = cm ? parseInt(cm[1]) : 26;
+                states.push({ tx: tx, ty: ty, c: cv });
+            }
+            if (!hasMotion) { resetChars(); return; }
+
+            var avgDist = totalDist / CHAR_N;
+            var initStates = states.map(function(s) { return { tx: s.tx, ty: s.ty, c: s.c }; });
+
+            // 弹簧参数随距离变化
+            var t = Math.min(avgDist / 60, 1);   // 60px 为"满距离"
+            var k = 0.005 + 0.003 * t;            // 拉越远越硬
+            var damp = 0.9 - 0.16 * t;            // 拉越远阻尼越低（越浪）
+            var pos = 1;
+            var vel = -t * 0.8 - 0.1;             // 拉越远初始回弹速度越快
+
+            (function tick() {
+                vel = damp * (vel - k * pos);
+                pos += vel;
+
+                if (Math.abs(pos) < 0.005 && Math.abs(vel) < 0.05) { resetChars(); return; }
+
+                var p = Math.min(Math.abs(pos), 1);
+
+                for (var ci = 0; ci < CHAR_N; ci++) {
+                    var st = initStates[ci];
+                    var tx = st.tx * p;
+                    var ty = st.ty * p;
+                    var c = Math.round(26 + (st.c - 26) * p);
+                    charEls[ci].style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)';
+                    charEls[ci].style.color = 'rgb(' + c + ',' + c + ',' + c + ')';
+                }
+
+                requestAnimationFrame(tick);
+            })();
+        }
+
+        function onTitleDown(e) {
+            if (triggered) return;
+            resetChars();
+            var pos = getDragPos(e);
+            dragX = pos.x;
+            dragY = pos.y;
+            isDragging = true;
+            wasDragged = false;
+            wasEffectApplied = false;
+            e.preventDefault();
+        }
+
+        function onTitleMove(e) {
+            if (!isDragging || triggered) return;
+            e.preventDefault();
+            var pos = getDragPos(e);
+            var dx = pos.x - dragX;
+            var dy = pos.y - dragY;
+
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist <= DEAD_ZONE) return;
+            wasDragged = true;
+            wasEffectApplied = true;
+
+            var progress = Math.min(dist / MAX_DRAG, 1);
+            var eased = progress * progress * (3 - 2 * progress);
+
+            // 方向随实际拖拽
+            var angle = Math.atan2(dy, dx);
+            var totalSkew = eased * 14;
+            var skewX = totalSkew * Math.cos(angle);
+            var skewY = totalSkew * Math.sin(angle);
+
+            var totalTx = dx * 0.2;
+            var totalTy = dy * 0.2;
+
+            // 逐字符：越靠右的字母位移越大
+            for (var ci = 0; ci < CHAR_N; ci++) {
+                var factor = Math.pow(ci / (CHAR_N - 1), 1.3);
+                var cTx = totalTx * factor;
+                var cTy = totalTy * factor;
+                var cSkewX = skewX * factor;
+                var cSkewY = skewY * factor;
+                var c = Math.round(26 + 188 * eased * factor);
+
+                charEls[ci].style.transform = 'translate(' + cTx.toFixed(1) + 'px,' + cTy.toFixed(1) + 'px) skew(' + cSkewX.toFixed(1) + 'deg,' + cSkewY.toFixed(1) + 'deg)';
+                charEls[ci].style.color = 'rgb(' + c + ',' + c + ',' + c + ')';
+            }
+
+            // 只有往右下方拉到极限才触发彩蛋
+            if (dx > DEAD_ZONE && dy > DEAD_ZONE && progress >= 1) {
+                isDragging = false;
+                wasDragged = false;
+                wasEffectApplied = false;
+                resetChars();
+                reveal();
+            }
+        }
+
+        function onTitleUp(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            if (wasDragged && wasEffectApplied) {
+                window._dragSuppressClick = true;
+                jellyReset();
+            }
+        }
+
+        if (titleEl) {
+            titleEl.addEventListener('mousedown', onTitleDown);
+            titleEl.addEventListener('touchstart', onTitleDown, { passive: false });
+            document.addEventListener('mousemove', onTitleMove);
+            document.addEventListener('touchmove', onTitleMove, { passive: false });
+            document.addEventListener('mouseup', onTitleUp);
+            document.addEventListener('touchend', onTitleUp);
         }
     })();
     </script>
