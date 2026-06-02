@@ -54,6 +54,7 @@
         if (isOn) {
             isOn = false;
             sessionStorage.setItem('wander-mode', 'false');
+            if (window._resetWanderTitle) window._resetWanderTitle();
         }
     });
 
