@@ -52,6 +52,8 @@
             margin-bottom: 52px;
             color: var(--text-title);
             white-space: nowrap;
+            user-select: none;
+            -webkit-user-select: none;
         }
         h1 .char {
             display: inline-block;
@@ -515,7 +517,7 @@
             }
         }
 
-        // Q弹弹簧回弹——距离越远，弹得越浪
+        // Q弹弹簧回弹——距离越远，弹得越浪（标准弹簧模型）
         function jellyReset() {
             var states = [];
             var hasMotion = false;
@@ -538,26 +540,26 @@
             var avgDist = totalDist / CHAR_N;
             var initStates = states.map(function(s) { return { tx: s.tx, ty: s.ty, c: s.c }; });
 
-            // 弹簧参数随距离变化
-            var t = Math.min(avgDist / 60, 1);   // 60px 为"满距离"
-            var k = 0.005 + 0.003 * t;            // 拉越远越硬
-            var damp = 0.9 - 0.16 * t;            // 拉越远阻尼越低（越浪）
-            var pos = 1;
-            var vel = -t * 0.8 - 0.1;             // 拉越远初始回弹速度越快
+            // 弹簧参数随距离变化（标准 accel = -k*x - d*v 模型）
+            var t = Math.min(avgDist / 60, 1);
+            var k = 0.015 - 0.005 * t;        // 0.015→0.010，拉越远越软
+            var d = 0.08 - 0.06 * t;            // 0.08→0.02，拉越远阻尼越低
+            var pos = 1, vel = 0;
 
             (function tick() {
-                vel = damp * (vel - k * pos);
+                var accel = -k * pos - d * vel;
+                vel += accel;
                 pos += vel;
 
-                if (Math.abs(pos) < 0.005 && Math.abs(vel) < 0.05) { resetChars(); return; }
+                if (Math.abs(pos) < 0.002 && Math.abs(vel) < 0.005) { resetChars(); return; }
 
-                var p = Math.min(Math.abs(pos), 1);
+                var p = Math.min(Math.max(pos, -0.3), 1);  // 允许 30% 反向过冲
 
                 for (var ci = 0; ci < CHAR_N; ci++) {
                     var st = initStates[ci];
                     var tx = st.tx * p;
                     var ty = st.ty * p;
-                    var c = Math.round(26 + (st.c - 26) * p);
+                    var c = Math.round(26 + (st.c - 26) * Math.abs(p));
                     charEls[ci].style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)';
                     charEls[ci].style.color = 'rgb(' + c + ',' + c + ',' + c + ')';
                 }
@@ -575,7 +577,6 @@
             isDragging = true;
             wasDragged = false;
             wasEffectApplied = false;
-            e.preventDefault();
         }
 
         function onTitleMove(e) {
