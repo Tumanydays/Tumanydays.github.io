@@ -6,7 +6,7 @@
     <title>Tumanydays</title>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { height: 100%; }
@@ -17,20 +17,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 24px;
         }
-        .container {
-            text-align: center;
-            padding: 40px 32px;
+        .card {
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 52px 36px 44px;
+            background: var(--card-bg);
         }
         .message {
-            font-size: 0.95rem;
+            font-size: 1.15rem;
             font-weight: 300;
             color: var(--text-faint);
+            letter-spacing: 3px;
+            line-height: 2;
+            font-family: 'ZCOOL XiaoWei', serif;
+            text-align: center;
+        }
+        .whisper {
+            font-size: 0.82rem;
+            color: var(--text-faint);
+            font-weight: 300;
             letter-spacing: 2px;
-            line-height: 1.9;
+            margin-top: 36px;
+            font-family: 'ZCOOL XiaoWei', serif;
+            text-align: center;
+            line-height: 1.8;
         }
         #home-link {
-            margin-top: 56px;
+            margin-top: 32px;
+            text-align: center;
             opacity: 0;
             transition: opacity 2.5s ease;
         }
@@ -45,15 +63,17 @@
         #home-link a:hover { color: var(--hover); }
 
         @media (max-width: 600px) {
-            .message { font-size: 0.88rem; }
-            #home-link { margin-top: 48px; }
-            .container { padding: 32px 24px; }
+            .card { padding: 40px 24px 36px; }
+            .message { font-size: 1rem; }
+            .whisper { margin-top: 28px; font-size: 0.78rem; }
+            #home-link { margin-top: 24px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p class="message">又是一个没有知识存在的荒原呵</p>
+    <div class="card">
+        <p class="message">又是一个没有知识存在的荒原吗</p>
+        <p class="whisper">迷失域里会有出路，</p>
         <div id="home-link"><a href="index.html">Tumanydays</a></div>
     </div>
 
