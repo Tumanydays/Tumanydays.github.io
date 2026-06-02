@@ -2,8 +2,6 @@
    Tumanydays — 全站共享样式
    所有页面通过 <link> 引用此文件
    ═══════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap');
-
 /* ── 色彩变量 ── */
 :root {
     --bg: #fafafa;
