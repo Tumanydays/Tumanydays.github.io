@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>— Tumanydays</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: rgba(250,250,250,0.95);
+            font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+            color: var(--text);
+            line-height: 2;
+        }
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 20vh 24px 0;
+            text-align: right;
+        }
+        .line1 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--text);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .line1.show { opacity: 1; }
+        .line2 {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 2em;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .line2.show { opacity: 1; }
+        .fake-link {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
+            cursor: pointer;
+        }
+        .fake-link:hover { color: var(--hover); }
+
+        /* 揭晓卡片 */
+        #trick-card {
+            display: none;
+            margin-top: 48px;
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            line-height: 2.4;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+        #trick-card.show { opacity: 1; }
+
+        footer {
+            margin-top: 72px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--hover); }
+
+        @media (max-width: 500px) {
+            .container { padding: 15vh 20px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="line1" id="line1">你似乎来到了一片没有知识存在的荒原……</div>
+        <div class="line2" id="line2">一个<span class="fake-link" id="trick-link">入口</span>被发现了</div>
+
+        <div id="trick-card">很遗憾，这不是正确的入口</div>
+
+        <footer>
+            <a href="index.html">← 返回首页</a>
+        </footer>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            document.getElementById('line1').classList.add('show');
+        }, 50);
+        setTimeout(function() {
+            document.getElementById('line2').classList.add('show');
+        }, 3000);
+
+        document.getElementById('trick-link').addEventListener('click', function() {
+            var card = document.getElementById('trick-card');
+            card.style.display = 'block';
+            setTimeout(function() { card.classList.add('show'); }, 30);
+        });
+    </script>
+</body>
+</html>
