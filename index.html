@@ -456,35 +456,7 @@
             }
         });
 
-        // ── 触发方式二：连点 footer 两次 → 再点图片 ──
-        var step = 0, tapTimer;
-        var footer = document.querySelector('footer');
-        var imgLink = document.getElementById('image-spot');
-        if (footer) {
-            footer.addEventListener('click', function() {
-                if (triggered) return;
-                clearTimeout(tapTimer);
-                if (step === 0) {
-                    step = 1;
-                    tapTimer = setTimeout(function() { step = 0; }, 600);
-                } else if (step === 1) {
-                    step = 2;
-                    tapTimer = setTimeout(function() { step = 0; }, 2000);
-                }
-            });
-        }
-        if (imgLink) {
-            imgLink.addEventListener('click', function() {
-                if (triggered) return;
-                if (step === 2) {
-                    step = 0;
-                    clearTimeout(tapTimer);
-                    reveal();
-                }
-            });
-        }
-
-        // ── 触发方式三：拉扯标题（往右下方，像一根被拉紧的弦）──
+        // ── 触发方式二：拉扯标题（往右下方，像一根被拉紧的弦）──
         var titleEl = document.getElementById('site-title');
         // 将标题拆分为逐字符 span
         var charEls = [];
