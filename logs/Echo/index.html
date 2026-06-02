@@ -153,8 +153,36 @@
         // 渲染碎片墙（打乱顺序，每次刷新看到的排列不一样）
         var wall = document.getElementById("fragment-wall");
 
-        // Fisher-Yates 洗牌
+        // ═══ 网站自己拼一句碎片，混进去 ═══
+        var phrases = [];
+        fragments.forEach(function(f) {
+            f.text.forEach(function(line) {
+                var parts = line.split(/[，。、；：！？\s]+/);
+                parts.forEach(function(part) {
+                    part = part.trim();
+                    if (part.length >= 2 && part.length <= 10 && phrases.indexOf(part) === -1) {
+                        phrases.push(part);
+                    }
+                });
+            });
+        });
+        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        var ghostText = [];
+        var numPhrases = 2 + Math.floor(Math.random() * 2);
+        for (var gi = 0; gi < numPhrases; gi++) {
+            var picked = pick(phrases);
+            var attempts = 0;
+            while (ghostText.indexOf(picked) !== -1 && attempts < 10) {
+                picked = pick(phrases);
+                attempts++;
+            }
+            ghostText.push(picked);
+        }
+        var ghostFragment = { id: "ghost", text: [ghostText.join('')], source: "Tumanydays，刚刚" };
+
+        // Fisher-Yates 洗牌（含网站拼的碎片）
         var shuffled = fragments.slice();
+        shuffled.push(ghostFragment);
         for (var i = shuffled.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var tmp = shuffled[i];
