@@ -76,11 +76,19 @@
         .poem-body p {
             opacity: 0;
             transform: translateY(5px);
-            transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 1s ease var(--reveal-delay, 0s),
+                        transform 0.3s ease 0s,
+                        color 0.3s ease 0s;
         }
         .poem-body p.revealed {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* 指针滑过：短暂触感，像指尖划过水面 */
+        .poem-body p:hover {
+            color: var(--ink);
+            transform: translateY(0) scale(1.08);
         }
 
         /* 偶尔一行变轻 —— 让墙面有呼吸的节奏 */
@@ -168,7 +176,8 @@
         p.lines.forEach(function(line, i) {
             var para = document.createElement("p");
             para.textContent = line;
-            para.style.transitionDelay = (i * 0.12) + "s";
+            para.style.setProperty('--reveal-delay', (i * 0.12) + 's');
+
             body.appendChild(para);
         });
 
