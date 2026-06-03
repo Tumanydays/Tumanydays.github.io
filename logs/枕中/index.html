@@ -38,14 +38,6 @@
             width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(
-                ellipse at calc(50% - 105px) 210px,
-                transparent 0%,
-                transparent 35%,
-                rgba(0,0,0,0.012) 55%,
-                rgba(0,0,0,0.025) 75%,
-                rgba(0,0,0,0.04) 100%
-            );
         }
 
         /* ── 斗笠吊灯 ── */
@@ -55,7 +47,10 @@
             left: calc(50% - 105px);
             z-index: 1;
             pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
+        .lamp.show { opacity: 1; }
         .lamp-cord {
             width: 1px; height: 14px;
             background: #c8bca8; opacity: 0.3;
@@ -112,6 +107,29 @@
 <canvas id="rain-canvas"></canvas>
 
 <script>
+    // ═══ 灯位校准：定位到天花板横线左三分之一处 ═══
+    (function() {
+        var lamp = document.querySelector('.lamp');
+        var list = document.querySelector('.series-list');
+        var light = document.querySelector('.lighting');
+        if (!lamp || !list) return;
+        function positionLamp() {
+            var rect = list.getBoundingClientRect();
+            var lineY = rect.top + rect.height;
+            var cont = list.closest('.container');
+            var contRect = cont ? cont.getBoundingClientRect() : { left: 0 };
+            var thirdX = contRect.left + (rect.width / 3);
+            lamp.style.top = (lineY - 2) + 'px';
+            lamp.style.left = (thirdX) + 'px';
+            lamp.classList.add('show');
+            if (light) {
+                light.style.background = 'radial-gradient(ellipse at ' + thirdX + 'px ' + (lineY + 20) + 'px, transparent 0%, transparent 30%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.02) 70%, rgba(0,0,0,0.035) 100%)';
+            }
+        }
+        positionLamp();
+        window.addEventListener('resize', positionLamp);
+    })();
+
     // ═══ 窗外下雨（深色雨 + 地面溅落） ═══
     (function() {
         var c = document.getElementById('rain-canvas');
