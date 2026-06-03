@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1：公文写作 · 15种法定文种全貌 — 公学</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+        .back { font-size: 0.85rem; color: #999; text-decoration: none; margin-bottom: 48px; display: inline-block; }
+        .back:hover { color: #333; }
+        h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; line-height: 1.5; margin-bottom: 16px; color: #1a1a1a; }
+        .meta { font-size: 0.85rem; color: #999; margin-bottom: 48px; }
+        .meta span { margin-right: 16px; }
+        .intro { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 48px; padding-left: 16px; border-left: 2px solid #ddd; }
+        h2 { font-size: 1.25rem; font-weight: 500; margin-top: 56px; margin-bottom: 20px; color: #1a1a1a; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        h3 { font-size: 1.05rem; font-weight: 500; margin-top: 36px; margin-bottom: 14px; color: #333; }
+        h4 { font-size: 0.95rem; font-weight: 600; margin-top: 24px; margin-bottom: 10px; color: #444; }
+        p { font-size: 0.95rem; margin-bottom: 16px; color: #444; }
+        blockquote { margin: 24px 0; padding: 16px 20px; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #ccc; }
+        blockquote p { margin-bottom: 0; color: #555; }
+        strong { color: #1a1a1a; font-weight: 600; }
+        em { color: #c0392b; font-style: normal; font-weight: 600; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; line-height: 1.6; }
+        th { background: #f9f9f9; font-weight: 500; color: #555; font-size: 0.8rem; letter-spacing: 1px; }
+        tr:hover td { background: #fcfcfc; }
+        hr { border: none; border-top: 1px solid #e8e8e8; margin: 48px 0; }
+        .dot { display: block; width: 6px; height: 6px; background: #ccc; border-radius: 50%; margin: 40px auto; }
+        ul, ol { margin: 12px 0 20px 20px; font-size: 0.9rem; color: #555; line-height: 2; }
+        .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e8e8e8; text-align: center; }
+        .nav-bottom a { color: #999; text-decoration: none; font-size: 0.85rem; }
+        .nav-bottom a:hover { color: #333; }
+
+        /* 特殊样式 */
+        .red-box { margin: 20px 0; padding: 14px 18px; background: #fff5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #e0a0a0; }
+        .red-box p { margin-bottom: 6px; color: #555; }
+        .yellow-box { margin: 20px 0; padding: 14px 18px; background: #fffdf0; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #e8d070; }
+        .green-box { margin: 20px 0; padding: 14px 18px; background: #f5fff5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #a0d0a0; }
+        .blue-box { margin: 20px 0; padding: 14px 18px; background: #f5f8ff; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #a0b0d0; }
+        .qbox { margin: 12px 0; padding: 10px 16px; background: #f9f9f9; border-radius: 6px; font-size: 0.85rem; color: #666; border: 1px solid #eee; }
+        .qbox p { margin-bottom: 4px; color: #666; font-size: 0.85rem; }
+        .mnemonic { font-size: 1.05rem; text-align: center; color: #2c3e50; font-weight: 600; margin: 16px 0; padding: 12px; background: #f0f0f0; border-radius: 6px; letter-spacing: 1px; }
+        .section-counter { display: inline-block; background: #eee; color: #888; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+        .vocab-card { margin: 16px 0; padding: 16px 20px; background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; }
+        .vocab-card h4 { margin-top: 0; color: #1a1a1a; }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a class="back" href="../../index.html">← 公学</a>
+
+        <h1>Day 1：公文写作 · 15 种法定文种全貌</h1>
+
+        <div class="meta">
+            <span>公学 · 每日推送</span><span>2026年5月29日</span><span>Day 1 / 16</span><span>模块：公文写作</span>
+        </div>
+
+        <div class="intro">
+            <p><strong>为什么第一天是公文？</strong>回看那张模块权重表——公文写作占了你 25% 的备考精力，是绝对的「基本盘」。你报考的是<strong>文秘综合岗</strong>，考官对你在公文上的期待天然高于其他岗位。这块如果失分，比其他板块失分更致命。</p>
+            <p>今天的核心任务只有一个：<strong>看到任何一道题，能准确判断该用哪种文种。</strong>「判断」的意思是——不翻书、不犹豫、三秒出答案。这个标准不算高，但 15 种文种混在一起，考场上一紧张，错一个选项就是一两分。我们的目标是：<strong>公文板块拿满分。</strong></p>
+            <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">今日涵盖：15 种法定文种逐类击破 → 公文格式 18 要素 → 行文规则 → 公文拟制与办理 → 应用文练笔（通知）→ 全部自测题答案 | 下期预告：Day 2 公文格式深度 + 马哲唯物辩证法</p>
+        </div>
+
+        <!-- ==================== 第一部分 ==================== -->
+        <h2>第一部分：为什么要从「文种辨析」开始 <span class="section-counter">核心方法论</span></h2>
+
+        <h3>公文考什么——三块肉</h3>
+        <table>
+            <tr><th>考查维度</th><th>题型表现</th><th>难易</th><th>你的策略</th></tr>
+            <tr><td><strong>文种辨析</strong></td><td>判断/单选——给场景选文种，给文种判断正误</td><td>★☆☆</td><td>必须满分。靠口诀和场景记忆，不需要背诵法条原文</td></tr>
+            <tr><td><strong>格式规范</strong></td><td>单选/多选/判断——标题/主送/正文/落款的格式规则</td><td>★★☆</td><td>靠理解 + 反复默写。18 要素位置不能记串</td></tr>
+            <tr><td><strong>行文规则</strong></td><td>判断/单选——上行文/下行文规则、联合行文条件</td><td>★★☆</td><td>考点集中，几个「能不能」的问题反复考</td></tr>
+        </table>
+
+        <blockquote><p><strong>今天的优先级：文种辨析 ＞ 格式规范 ＞ 行文规则。</strong>先把文种辨析拿下——这是整张卷子里性价比最高的得分点。你花两小时背完 15 个文种的口诀，至少能锁死 4-6 分的单选题和 2-3 分的判断题。</p></blockquote>
+
+        <h3>《条例》的 15 种法定文种——先看全景</h3>
+        <p>《党政机关公文处理工作条例》（2012 年 4 月 16 日发布，2012 年 7 月 1 日起施行）是目前现行有效的公文处理依据。<strong>注意：「条例」而非「办法」——1996 年的《国家行政机关公文处理办法》和 1996 年的《中国共产党机关公文处理条例》均已废止，两规合一为现行的《条例》。</strong>考场有时会拿旧法规名称来坑你。</p>
+
+        <p>15 种法定文种，按行文方向分为三组：</p>
+        <table>
+            <tr><th>方向</th><th>包含文种</th><th>数量</th></tr>
+            <tr><td><strong>上行文</strong></td><td>请示、报告、议案</td><td>3 种</td></tr>
+            <tr><td><strong>平行文</strong></td><td>函</td><td>1 种</td></tr>
+            <tr><td><strong>下行文</strong></td><td>决议、决定、命令、公报、公告、通告、意见、通知、通报、批复、纪要</td><td>11 种</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️「意见」的方向陷阱：</strong>上述分组是按「通常方向」。但<strong>意见是 15 种文种中唯一可以多向行文的</strong>——用作下行文（上级提指导意见）、上行文（下级提建议性意见）、平行文（平级之间提参考意见）均可。考场最爱考：「意见只能作为下行文使用」→ <strong>错！</strong></p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第二部分 ==================== -->
+        <h2>第二部分：第一组——三个「定调子」的 <span class="section-counter">决议 · 决定 · 命令</span></h2>
+
+        <p>这三个文种是公文体系里「级别最高、分量最重」的三个。它们共同的特点是<strong>向下行文、具有权威性</strong>，但适用场景有清晰边界。</p>
+
+        <!-- 决议 -->
+        <div class="vocab-card">
+            <h4>1. 决议</h4>
+            <p><strong>定义：</strong>适用于会议讨论通过的重大决策事项。</p>
+            <p><strong>关键词：</strong><em>必经会议</em>。没有经过会议讨论通过的，不能叫决议。</p>
+            <p><strong>典型场景：</strong>党代会报告、人大会议通过的法律法规、全会通过的重要决定。</p>
+            <p><strong>例子：</strong>《中国共产党第二十次全国代表大会关于十九届中央委员会报告的决议》《XX市人民代表大会关于政府工作报告的决议》</p>
+            <p><strong>易错提醒：</strong>「经会议讨论通过」是决议的<strong>必要条件</strong>，但不是充分条件——会议讨论通过的工作报告也可以以<strong>纪要</strong>形式印发。决议侧重的是「决策事项」，而不是「会议记录」。</p>
+        </div>
+
+        <!-- 决定 -->
+        <div class="vocab-card">
+            <h4>2. 决定</h4>
+            <p><strong>定义：</strong>适用于对重要事项作出决策和部署、奖惩有关单位和人员、变更或者撤销下级机关不适当的决定事项。</p>
+            <p><strong>关键词：</strong>三用途——<strong>部署 + 奖惩 + 变更撤销</strong>。不一定开会。</p>
+            <p><strong>典型场景：</strong></p>
+            <ul>
+                <li>部署型：《国务院关于加快培育和发展战略性新兴产业的决定》</li>
+                <li>奖惩型：《XX市人民政府关于表彰2025年度先进工作者的决定》</li>
+                <li>变更型：《XX市人民政府关于废止部分规范性文件的决定》</li>
+            </ul>
+            <p><strong>易错提醒：</strong>同样是「表彰」，什么时候用<strong>决定</strong>、什么时候用<strong>命令</strong>、什么时候用<strong>通报</strong>？——</p>
+            <table>
+                <tr><th>表彰级别</th><th>使用文种</th><th>举例</th></tr>
+                <tr><td>国家级荣誉/勋章</td><td><strong>命令（令）</strong></td><td>国家主席签署主席令授予「共和国勋章」</td></tr>
+                <tr><td>省部级及以下表彰</td><td><strong>决定</strong></td><td>省政府表彰劳动模范、市政府表彰先进工作者</td></tr>
+                <tr><td>一般性好人好事</td><td><strong>通报</strong></td><td>某单位内部通报表扬见义勇为职工</td></tr>
+            </table>
+        </div>
+
+        <!-- 命令 -->
+        <div class="vocab-card">
+            <h4>3. 命令（令）</h4>
+            <p><strong>定义：</strong>适用于公布行政法规和规章、宣布施行重大强制性措施、批准授予和晋升衔级、嘉奖有关单位和人员。</p>
+            <p><strong>关键词：</strong><em>级别最高</em>——<strong>只有县级以上政府及其首脑</strong>才能使用命令。</p>
+            <p><strong>典型场景：</strong></p>
+            <ul>
+                <li>公布行政法规（总理签署国务院令公布《XXX条例》）</li>
+                <li>嘉奖（国家主席签署主席令授予荣誉称号）</li>
+                <li>军事机关发布军事命令</li>
+            </ul>
+            <p><strong>易错提醒：</strong>「任免」用的是<strong>通知</strong>，不是命令。命令中的「批准授予和晋升衔级」特指军衔、警衔等，普通干部的任职用<strong>通知</strong>（《关于XXX同志任职的通知》）。</p>
+        </div>
+
+        <div class="mnemonic">口诀：决必会，定可独，命最高</div>
+
+        <table>
+            <tr><th>维度</th><th>决议</th><th>决定</th><th>命令</th></tr>
+            <tr><td><strong>必经程序</strong></td><td>会议讨论通过</td><td>无强制要求</td><td>无强制要求</td></tr>
+            <tr><td><strong>使用层级</strong></td><td>各级机关均可</td><td>各级机关均可</td><td><strong>县级以上</strong></td></tr>
+            <tr><td><strong>可否用于奖惩</strong></td><td>一般不</td><td><strong>可以</strong>（常用）</td><td>可以（国家级）</td></tr>
+            <tr><td><strong>考场最常见坑</strong></td><td>和决定混淆</td><td>和命令混淆</td><td>和通知混淆（任免）</td></tr>
+        </table>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【判断】决定必须经过会议讨论通过。（ ）</p>
+            <p>2.【单选】某市委全会通过了《关于推进乡村全面振兴的实施意见》，应使用的文种是：A.决定 B.决议 C.命令 D.意见</p>
+            <p>3.【多选】下列事项中，可以使用命令（令）的有：A.公布行政法规 B.嘉奖省劳动模范 C.授予上将军衔 D.任免某市副市长</p>
+            <p>4.【判断】命令和决定都可以用于嘉奖有关单位和人员。（ ）</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.×（决定不需要会议讨论） 2.B（市委全会通过→决议。「全会通过」是决议的典型标识） 3.AC（B应为决定——省劳模是省部级表彰；D应为通知——普通干部任免用通知） 4.√（但嘉奖级别不同：命令用于国家级、决定用于省部级及以下）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第三部分 ==================== -->
+        <h2>第三部分：第二组——四个「告」字辈 <span class="section-counter">公报 · 公告 · 通告 · 通知</span></h2>
+
+        <p>这四个文种都与「告知」有关，但受众范围、发布载体、约束效力各有不同。其中<strong>公告 vs 通告</strong>是公文考试里出现频率最高的混淆对之一。</p>
+
+        <!-- 公报 -->
+        <div class="vocab-card">
+            <h4>4. 公报</h4>
+            <p><strong>定义：</strong>适用于公布重要决定或者重大事项。</p>
+            <p><strong>关键词：</strong><em>最高规格、党报党刊发布。</em>公报是 15 种文种中「最正式」的公布方式。</p>
+            <p><strong>典型场景：</strong>党的中央全会公报、联合公报（两国政府联合发布）、统计公报（国家统计局发布年度统计数据）。</p>
+            <p><strong>易错提醒：</strong>公报的使用频率极低——大部分考生在整个备考周期里遇不到一道公报的题。但一旦考到，往往是<strong>全会公报</strong>（如「二十届三中全会公报」）。记住：公报的「公」不是「公共」的「公」，是「公开」的「公」+「最高规格」——只有党和国家层面的大事才用公报。</p>
+        </div>
+
+        <!-- 公告 -->
+        <div class="vocab-card">
+            <h4>5. 公告</h4>
+            <p><strong>定义：</strong>适用于向国内外宣布重要事项或者法定事项。</p>
+            <p><strong>关键词：</strong><em>国内外、范围越大越好。</em>公告通过媒体或网络公开发布，不写主送机关。</p>
+            <p><strong>典型场景：</strong></p>
+            <ul>
+                <li>重要事项公告：全国人大常委会发布国家领导人选举结果公告</li>
+                <li>法定事项公告：法院公告（开庭/送达/执行）、专利局公告、商标局公告</li>
+                <li>涉外公告：外交部发布领事保护公告、国际招标公告</li>
+            </ul>
+            <p><strong>易错提醒：</strong>一般机关单位无权随意使用「公告」。公告的「公」是「公众」也是「公开」，但不是「公共厕所」的「公」——<strong>公告是大事专用</strong>。</p>
+        </div>
+
+        <!-- 通告 -->
+        <div class="vocab-card">
+            <h4>6. 通告</h4>
+            <p><strong>定义：</strong>适用于在一定范围内公布应当遵守或者周知的事项。</p>
+            <p><strong>关键词：</strong><em>一定范围、常有约束力。</em>通告可以通过张贴、媒体等方式发布。</p>
+            <p><strong>典型场景：</strong></p>
+            <ul>
+                <li>交通管制通告：「关于XX路施工期间临时交通管制的通告」</li>
+                <li>停水停电通告：「关于XX片区停水维修的通告」</li>
+                <li>安民告示：公安机关通缉令（通缉令本质上也是通告类）</li>
+            </ul>
+            <p><strong>易错提醒：</strong>通告和公告的区别是考场「送命题」。</p>
+        </div>
+
+        <!-- 通知 -->
+        <div class="vocab-card">
+            <h4>8. 通知</h4>
+            <p><strong>定义：</strong>适用于发布、传达要求下级机关执行和有关单位周知或者执行的事项，批转、转发公文。</p>
+            <p><strong>关键词：</strong><em>使用频率最高、下级机关、转发批转。</em>通知是 15 种文种中使用频率最高的文种。</p>
+            <p><strong>通知的四种常见类型：</strong></p>
+            <table>
+                <tr><th>类型</th><th>用途</th><th>例</th></tr>
+                <tr><td>发布性通知</td><td>印发本机关制定的规章/方案等</td><td>《关于印发〈XX管理办法〉的通知》</td></tr>
+                <tr><td>转发性通知</td><td>转发上级/同级/不相隶属机关的公文</td><td>《转发XX厅关于XX工作的通知》</td></tr>
+                <tr><td>指示性通知</td><td>向下级布置工作</td><td>《关于开展安全生产大检查的通知》</td></tr>
+                <tr><td>知照性通知</td><td>告知事项（会议/任免/机构调整等）</td><td>《关于召开XX会议的通知》、《关于XXX同志任职的通知》</td></tr>
+            </table>
+            <p><strong>易错提醒：</strong>批转 ≠ 转发。批转的对象是<strong>下级机关的来文</strong>（上级批准并转给其他下级），转发的对象是<strong>上级/同级/不相隶属机关的来文</strong>。例：<strong>《国务院批转建设部关于XX意见的通知》</strong>→ 建设部是国务院的下级；<strong>《省政府办公厅转发国务院办公厅关于XX的通知》</strong>→ 国务院办公厅是上级。考场上这两者混用的选项一定是错的。</p>
+        </div>
+
+        <h3>核心辨析：公告 vs 通告——考场「第一杀手」</h3>
+        <table>
+            <tr><th>维度</th><th>公告</th><th>通告</th></tr>
+            <tr><td><strong>发布范围</strong></td><td>国内外，范围越大越好</td><td>一定范围，越小越贴切</td></tr>
+            <tr><td><strong>发布机关级别</strong></td><td>高级别（全国人大/国务院/部委等）</td><td>各级机关均可</td></tr>
+            <tr><td><strong>内容性质</strong></td><td>告知性为主，无强制约束力</td><td>常含<strong>约束力</strong>（要求遵守/执行）</td></tr>
+            <tr><td><strong>发布方式</strong></td><td>媒体/网络发布，不张贴</td><td>可张贴，可在特定范围发布</td></tr>
+            <tr><td><strong>是否有主送机关</strong></td><td>无（公开发布）</td><td>一般无（泛行文）</td></tr>
+            <tr><td><strong>典型例子</strong></td><td>全国人大常委会公告、法院开庭公告</td><td>交通管制通告、停水停电通告</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 日常误用清单（考场常拿来当判断题的素材）：</strong></p>
+            <p>① 单位门口贴「招聘公告」→ <strong>错！</strong>应使用启事（非公文）或通知</p>
+            <p>② 小区贴「停水公告」→ <strong>错！</strong>应使用通告（一定范围内的周知事项）</p>
+            <p>③ 学校网站发「招生公告」→ <strong>错！</strong>应使用招生简章或通知</p>
+            <p>④ 微博/微信发布「放假公告」→ <strong>错！</strong>应使用通知</p>
+        </div>
+
+        <div class="mnemonic">口诀：公报最正式，公告国内外，通告贴墙上，通知发下级</div>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【判断】通告的发布范围比公告更广。（ ）</p>
+            <p>2.【单选】某小区物业管理处告知住户将于次日停水进行管道维修，应使用的文种是：A.公告 B.通告 C.通知 D.通报</p>
+            <p>3.【单选】「国务院关于表彰国家自然科学奖获得者的……」最可能使用的文种是：A.命令 B.决定 C.公报 D.通知</p>
+            <p>4.【多选】下列关于通知的说法正确的有：A.通知可用于批转下级机关公文 B.通知可用于任免人员 C.通知是使用频率最高的法定文种 D.通知只能用于下行文</p>
+            <p>5.【判断】公报和公告都是向国内外公布重大事项的公文文种，二者可以通用。（ ）</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.×（公告范围比通告更广） 2.B（小区范围内含有「应遵守」的事项→通告） 3.B（国家自然科学奖是国家级表彰→国务院用决定。不要被「国务院」迷惑——国务院签发的命令主要用于公布行政法规和授予国家勋章，一般国家级科技奖项的表彰用决定更为常见） 4.ABC（D错——通知也可以通过「转发」功能处理平行文和上行文的转发，但通知本身是下行方向） 5.×（公报是党报党刊发布、侧重国内重大决策；公告是向国内外宣布；不能通用）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第四部分 ==================== -->
+        <h2>第四部分：第三组——四个「报」字辈 <span class="section-counter">报告 · 请示 · 通报 · 批复</span></h2>
+
+        <p>这组是<strong>最容易在格式上出错</strong>的文种。尤其是<strong>报告和请示的混淆</strong>——在机关实际工作中也是高频错误，所以考场反复考。</p>
+
+        <!-- 报告 -->
+        <div class="vocab-card">
+            <h4>10. 报告</h4>
+            <p><strong>定义：</strong>适用于向上级机关汇报工作、反映情况，回复上级机关的询问。</p>
+            <p><strong>关键词：</strong><em>上行文、事后或事中行文、上级不必回复。</em></p>
+            <p><strong>报告的常见类型：</strong></p>
+            <table>
+                <tr><th>类型</th><th>用途</th><th>例</th></tr>
+                <tr><td>工作报告</td><td>汇报工作进展情况</td><td>《关于2025年粮食储备工作情况的报告》</td></tr>
+                <tr><td>情况报告</td><td>反映突发或重要情况</td><td>《关于XX仓库发生火情的报告》</td></tr>
+                <tr><td>答复报告</td><td>答复上级询问事项</td><td>《关于XX审计问题整改情况的报告》</td></tr>
+                <tr><td>报送报告</td><td>向上级报送文件/物件</td><td>《关于报送2025年度工作总结的报告》</td></tr>
+            </table>
+            <p><strong>致命红线：报告中<em>不得夹带请示事项</em>。</strong>如果你的正文末尾写了「妥否，请批示」「以上请示，请审批」，但标题用的是「报告」→ <strong>这是一份不规范公文，上级可以退回。</strong></p>
+        </div>
+
+        <!-- 请示 -->
+        <div class="vocab-card">
+            <h4>11. 请示</h4>
+            <p><strong>定义：</strong>适用于向上级机关请求指示、批准。</p>
+            <p><strong>关键词：</strong><em>上行文、事前行文、上级必须回复、一文一事。</em></p>
+            <p><strong>请示的两种类型：</strong></p>
+            <ul>
+                <li><strong>请求指示的请示：</strong>对政策不理解、遇新闻题不知道怎么办 → 请上级给政策</li>
+                <li><strong>请求批准的请示：</strong>机构调整、重大项目立项、经费申请 → 请上级审批同意</li>
+            </ul>
+            <p><strong>请示的硬性规则：</strong></p>
+            <ol>
+                <li><strong>一文一事</strong>——份请示只能写一件事。如果同时请示多件事，上级可能只能批其中一部分，进退两难</li>
+                <li><strong>主送一个上级机关</strong>——不能多头主送，否则多个上级的批复可能互相矛盾</li>
+                <li><strong>不得越级请示</strong>——一般不得越过直接上级向更高层级请示（特殊情况除外）</li>
+                <li><strong>不得抄送下级</strong>——请示在未获批复前，内容尚未生效，不得同时抄送下级机关</li>
+            </ol>
+        </div>
+
+        <!-- 请示 vs 报告对比 -->
+        <h3>请示 vs 报告——必须滚瓜烂熟的对比表</h3>
+        <table>
+            <tr><th>维度</th><th>请示</th><th>报告</th></tr>
+            <tr><td><strong>行文目的</strong></td><td>请求指示/批准（要上级做决定）</td><td>汇报工作/反映情况（让上级知情）</td></tr>
+            <tr><td><strong>行文时间</strong></td><td><strong>必须事前</strong>（先请示后干）</td><td>事中或事后（干完了/正在干→汇报）</td></tr>
+            <tr><td><strong>上级是否必须答复</strong></td><td><strong>是</strong>（必须批复）</td><td>否（可批复也可不批复）</td></tr>
+            <tr><td><strong>可否一文数事</strong></td><td><strong>否</strong>（一文一事）</td><td>可</td></tr>
+            <tr><td><strong>结尾用语</strong></td><td>妥否，请批复 / 以上请示，请审批</td><td>特此报告 / 以上报告，请审阅</td></tr>
+            <tr><td><strong>对上级的对应文种</strong></td><td>上级用<strong>批复</strong>回答</td><td>上级可批转/批示/不回复</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 考场最常见的陷阱题：</strong></p>
+            <p>「某市交通局向市政府提交了一份《关于申请增加年度养护经费的报告》，文末写有『妥否，请批示』。」→ 请判断这处公文处理是否正确。</p>
+            <p><strong>答案：不正确。</strong>该文实际上是请求批准的<strong>请示</strong>（请求增加经费 + 结尾用语「妥否，请批示」），但标题文种误用了「报告」。正确的做法是：标题改为《关于申请增加年度养护经费的<strong>请示</strong>》，正文结尾可以保留「妥否，请批示」。</p>
+        </div>
+
+        <!-- 通报 -->
+        <div class="vocab-card">
+            <h4>9. 通报</h4>
+            <p><strong>定义：</strong>适用于表彰先进、批评错误、传达重要精神和告知重要情况。</p>
+            <p><strong>关键词：</strong><em>下行文、三用途——表彰 + 批评 + 传达。</em>通报的核心特点是<strong>典型性</strong>和<strong>教育性</strong>——不是每件好事都发通报，而是<strong>有示范意义的典型事迹</strong>才通报。</p>
+            <p><strong>通报和通知的区别：</strong></p>
+            <table>
+                <tr><th></th><th>通报</th><th>通知</th></tr>
+                <tr><td>目的</td><td>教育、警示、传达精神</td><td>告知、布置、要求执行</td></tr>
+                <tr><td>事前/事后</td><td>事后（事情发生了才通报）</td><td>事前（提前告知）或事中</td></tr>
+                <tr><td>时效性</td><td>相对弱，重典型性</td><td>强，要求立即周知或执行</td></tr>
+            </table>
+            <p><strong>通报和决定的区别（表彰场景）：</strong>决定用于<strong>正式的、有实质奖励的</strong>表彰（授予称号、记功等）；通报用于<strong>精神层面的</strong>表彰或批评（通报表扬、通报批评）。前者物质+精神，后者纯精神。</p>
+        </div>
+
+        <!-- 批复 -->
+        <div class="vocab-card">
+            <h4>12. 批复</h4>
+            <p><strong>定义：</strong>适用于答复下级机关请示事项。</p>
+            <p><strong>关键词：</strong><em>被动行文、一对一、只答请示。</em>批复是 15 种文种中唯一的<strong>纯被动行文</strong>——没有下级请示，就没有上级批复。上级不能主动发一份「批复」。</p>
+            <p><strong>批复的标题格式：</strong>《XX关于[同意/不同意/原则同意]XXX的批复》。注意批复标题中需要包含<strong>表态</strong>（同意/不同意/原则同意），不是简单地写「关于XXX的批复」。</p>
+            <p><strong>易错提醒：</strong>批复 ≠ 批示。批示是领导在文件上写的批语，不是正式的公文文种。<strong>15 种法定文种里没有「批示」</strong>。考场如果出现「XX领导作出了重要批示」→ 那是领导行为，不是公文文种。</p>
+        </div>
+
+        <div class="mnemonic">口诀：报告不请示，请示必一文一事，通报要典型，批复只答请示</div>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【判断】报告中可以附带请示事项，以便上级一并处理。（ ）</p>
+            <p>2.【单选】某市交通局向市政府请求增加年度预算，应使用的文种是：A.报告 B.请示 C.函 D.申请</p>
+            <p>3.【判断】通报只可用于表彰先进，不可用于批评错误。（ ）</p>
+            <p>4.【单选】「国务院关于同意设立XX新区的……」文种应为：A.决定 B.批复 C.通知 D.意见</p>
+            <p>5.【多选】下列关于请示的说法，正确的有：A.请示必须一文一事 B.请示可以同时主送多个上级机关 C.请示不得越级行文（特殊情况除外）D.请示在未获批复前不得抄送下级机关</p>
+            <p>6.【判断】批复是主动行文，上级机关可以主动对下级作出批复。（ ）</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.×（报告不得夹带请示） 2.B（向上级请求批准 → 请示） 3.×（通报三用途：表彰/批评/传达） 4.B（国务院同意下级省政府的请示 → 批复。题干暗含了「下级省政府的请示在先」这一前提） 5.ACD（B错——请示只能主送一个上级机关，不能多头主送） 6.×（批复是被动行文，有请示才有批复）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第五部分 ==================== -->
+        <h2>第五部分：第四组——剩下的四个 <span class="section-counter">意见 · 议案 · 函 · 纪要</span></h2>
+
+        <!-- 意见 -->
+        <div class="vocab-card">
+            <h4>7. 意见</h4>
+            <p><strong>定义：</strong>适用于对重要问题提出见解和处理办法。</p>
+            <p><strong>关键词：</strong><em>多向行文——十五条中唯一可以上/下/平三个方向行文的文种。</em></p>
+            <table>
+                <tr><th>方向</th><th>用途</th><th>例</th></tr>
+                <tr><td><strong>下行意见</strong></td><td>上级对下级提出指导性意见</td><td>《国务院关于促进乡村产业振兴的指导意见》</td></tr>
+                <tr><td><strong>上行意见</strong></td><td>下级对上级提出建议性意见</td><td>《关于推进垃圾分类工作的意见》（报市政府）</td></tr>
+                <tr><td><strong>平行意见</strong></td><td>平级机关之间提出参考性意见</td><td>《关于XX规划方案的意见》（某局致另一局）</td></tr>
+            </table>
+            <p><strong>考场核心考点：</strong>「意见只能作为下行文使用」→ <strong>错误！</strong>「意见既可以用于上行文也可以用于下行文」→ <strong>正确。</strong>意见作为上行文时，应按请示性公文的程序和要求办理。</p>
+        </div>
+
+        <!-- 议案 -->
+        <div class="vocab-card">
+            <h4>13. 议案</h4>
+            <p><strong>定义：</strong>适用于各级人民政府按照法律程序向同级人民代表大会或者人民代表大会常务委员会提请审议事项。</p>
+            <p><strong>关键词：</strong><em>主体只能是政府。只有政府才能向人大提「议案」，人大代表提的叫「建议/提案」。</em></p>
+            <p><strong>典型场景：</strong>《国务院关于提请审议〈中华人民共和国XX法（草案）〉的议案》，市长向市人大提请审议市政府工作报告。</p>
+            <p><strong>易错提醒：</strong>①党代会用提案，不用议案。②法院/检察院向人大做工作报告，不用议案（因为他们不是政府）。③议案是一级政府的「专属权」，党委/人大本身不向自己提议案。</p>
+        </div>
+
+        <!-- 函 -->
+        <div class="vocab-card">
+            <h4>14. 函</h4>
+            <p><strong>定义：</strong>适用于不相隶属机关之间商洽工作、询问和答复问题、请求批准和答复审批事项。</p>
+            <p><strong>关键词：</strong><em>平行文种、不相隶属——不管级别高低，只要没有行政隶属关系，就用函。</em></p>
+            <p><strong>函的考场经典陷阱：</strong></p>
+            <table>
+                <tr><th>场景</th><th>正确文种</th><th>判断依据</th></tr>
+                <tr><td>市教育局向市财政局申请经费</td><td><strong>函</strong></td><td>两者平级、互不隶属（都用函）</td></tr>
+                <tr><td>市教育局向市政府申请经费</td><td><strong>请示</strong></td><td>市教育局是市政府的工作部门（隶属）</td></tr>
+                <tr><td>A公司致函B公司商洽合作</td><td><strong>函</strong></td><td>企业之间、不相隶属</td></tr>
+                <tr><td>某省厅向另一省厅询问政策</td><td><strong>函</strong></td><td>省厅之间平级、互不隶属</td></tr>
+            </table>
+            <p><strong>函的格式要点：</strong>函是平行文种——<strong>不写「此致敬礼」，结尾写「特此函告」「请函复」「特此函询」。</strong>函的标题一般为《XX关于XXX的函》，复函标题为《XX关于XXX的复函》。</p>
+        </div>
+
+        <!-- 纪要 -->
+        <div class="vocab-card">
+            <h4>15. 纪要</h4>
+            <p><strong>定义：</strong>适用于记载会议主要情况和议定事项。</p>
+            <p><strong>关键词：</strong><em>文种名称就叫「纪要」，不是「会议纪要」。</em>2012 年《条例》将旧《办法》中的「会议纪要」改称为「纪要」。</p>
+            <p><strong>标题格式：</strong>《XX纪要》，不加「会议」二字。例：《市长办公会议纪要》✅，《市长办公会会议纪要》❌。</p>
+            <p><strong>易错提醒：</strong>如果题目中出现了「会议纪要是法定公文文种之一」→ <strong>错误。</strong>现行《条例》规定的 15 种法定文种是「纪要」而非「会议纪要」。2012 年之前的旧规才叫「会议纪要」，现在废止了。</p>
+        </div>
+
+        <div class="mnemonic">口诀：意见多向，议案政府提人大，函给平级用，纪要记会议（不叫会议纪要）</div>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【单选】市公安局向市财政局请求追加辅警专项经费，应使用的文种是：A.请示 B.函 C.报告 D.申请</p>
+            <p>2.【判断】意见只能作为下行文使用。（ ）</p>
+            <p>3.【单选】以下关于议案的说法，正确的是：A.各级党委可以向人大提出议案 B.人大代表的个人建议也是议案 C.议案是人民政府向同级人大提请审议的专用文种 D.议案可以不经人大审议直接生效</p>
+            <p>4.【判断】「会议纪要」是现行《条例》规定的15种法定公文文种之一。（ ）</p>
+            <p>5.【判断】不相隶属机关之间请求批准事项，如果请求方级别较低，应当使用请示。（ ）</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.B（公安局与财政局平级、互不隶属 → 函） 2.×（意见可上行、下行、平行） 3.C（A错——党委不提议案；B错——人大代表提的是建议/提案；D错——议案必须经人大审议） 4.×（现行法定文种是「纪要」，不是「会议纪要」。2012年《条例》改了） 5.×（不相隶属，不论级别高低，一律用函。级别低的一方也不能用请示——请示只能用于有隶属关系的上下级之间）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第六部分 ==================== -->
+        <h2>第六部分：15 种文种全景总表 <span class="section-counter">终极大图</span></h2>
+
+        <table>
+            <tr><th>编号</th><th>文种</th><th>方向</th><th>一句话定义</th><th>考场核心考点</th></tr>
+            <tr><td>1</td><td><strong>决议</strong></td><td>下行</td><td>会议通过的重大决策事项</td><td>必经会议讨论 → 「全会通过」「大会批准」是标识词</td></tr>
+            <tr><td>2</td><td><strong>决定</strong></td><td>下行</td><td>重要事项部署 / 奖惩 / 变更撤销</td><td>三用途，不需开会；表彰用决定（省部级及以下）</td></tr>
+            <tr><td>3</td><td><strong>命令</strong></td><td>下行</td><td>公布法规 / 嘉奖 / 任免（限县级以上）</td><td>级别最高的下行文；任免干部用通知非命令</td></tr>
+            <tr><td>4</td><td><strong>公报</strong></td><td>下行</td><td>公布重要决定 / 重大事项</td><td>党报党刊发布；使用频率最低但规格最高</td></tr>
+            <tr><td>5</td><td><strong>公告</strong></td><td>下行</td><td>向国内外宣布重要 / 法定事项</td><td>大事专用；不张贴；和通告辨析是高频考点</td></tr>
+            <tr><td>6</td><td><strong>通告</strong></td><td>下行</td><td>一定范围内应遵守 / 周知的事项</td><td>常含约束力；可张贴；小范围用通告非公告</td></tr>
+            <tr><td>7</td><td><strong>意见</strong></td><td><strong>多向</strong></td><td>对重要问题提出见解和处理办法</td><td>唯一多向行文文种；「只能作下行文」是错误选项</td></tr>
+            <tr><td>8</td><td><strong>通知</strong></td><td>下行</td><td>发布 / 传达要求下级执行或周知</td><td>使用频率最高；任免用通知；批转vs转发有区别</td></tr>
+            <tr><td>9</td><td><strong>通报</strong></td><td>下行</td><td>表彰 / 批评 / 传达重要精神</td><td>三用途；典型性和教育性；区别于决定的「实质奖励」</td></tr>
+            <tr><td>10</td><td><strong>报告</strong></td><td>上行</td><td>汇报工作 / 反映情况 / 答复询问</td><td>不得夹带请示事项；上级不必回复；事后或事中行文</td></tr>
+            <tr><td>11</td><td><strong>请示</strong></td><td><strong>上行</strong></td><td>请求指示 / 批准</td><td>一文一事；事前行文；上级须批复；不得抄送下级</td></tr>
+            <tr><td>12</td><td><strong>批复</strong></td><td>下行</td><td>答复下级请示事项</td><td>被动行文；一对一；有请示才有批复；非「批示」</td></tr>
+            <tr><td>13</td><td><strong>议案</strong></td><td>上行</td><td>政府 → 同级人大提请审议</td><td>主体仅限各级人民政府；非人大代表的建议</td></tr>
+            <tr><td>14</td><td><strong>函</strong></td><td><strong>平行</strong></td><td>不相隶属机关商洽 / 询问 / 答复</td><td>不管级别高低、只看有无隶属；平级请求批准用函</td></tr>
+            <tr><td>15</td><td><strong>纪要</strong></td><td>下行</td><td>记载会议情况和议定事项</td><td>不叫「会议纪要」；2012年《条例》改了名称</td></tr>
+        </table>
+
+        <blockquote><p><strong>总口诀（四句全部背下来）：</strong><br>「决必会，定可独，命最高」｜「公报最正式，公告国内外，通告贴墙上，通知发下级」<br>「报告不请示，请示必一文一事，通报要典型，批复只答请示」<br>「意见多向，议案政府提人大，函给平级用，纪要记会议」</p></blockquote>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第七部分 ==================== -->
+        <h2>第七部分：公文格式速成 <span class="section-counter">18 要素 + 标题规则</span></h2>
+
+        <h3>公文的三大板块 · 18 个格式要素</h3>
+        <p>一份标准公文由<strong>版头、主体、版记</strong>三大板块构成，共 18 个格式要素。考场上不会让你默写全部 18 个，但会让你判断「以下属于版头要素的是」或者「成文日期属于哪个部分」。</p>
+
+        <table>
+            <tr><th>板块</th><th>包含要素</th><th>位置</th></tr>
+            <tr><td rowspan="6"><strong>版头</strong><br>（公文开头部分）</td><td>① 份号</td><td>左上角第一行（涉密公文才有）</td></tr>
+            <tr><td>② 密级和保密期限</td><td>份号下方（涉密公文才有）</td></tr>
+            <tr><td>③ 紧急程度</td><td>密级下方或右上角（紧急公文才有）</td></tr>
+            <tr><td>④ 发文机关标志</td><td>居中、红色大字（套红）——这就是俗称的「红头」</td></tr>
+            <tr><td>⑤ 发文字号</td><td>发文机关标志下方（格式：XX发〔2026〕X号）</td></tr>
+            <tr><td>⑥ 签发人</td><td>右上角（上行文必须有签发人姓名）</td></tr>
+            <tr><td rowspan="9"><strong>主体</strong><br>（公文核心部分）</td><td>⑦ 标题</td><td>红色分隔线下方居中</td></tr>
+            <tr><td>⑧ 主送机关</td><td>标题下方左侧顶格</td></tr>
+            <tr><td>⑨ 正文</td><td>主送机关下方</td></tr>
+            <tr><td>⑩ 附件说明</td><td>正文下方（如有附件）</td></tr>
+            <tr><td>⑪ 发文机关署名</td><td>正文右下方</td></tr>
+            <tr><td>⑫ 成文日期</td><td>署名下方（签发日期；联合行文以最后签发人日期为准）</td></tr>
+            <tr><td>⑬ 印章</td><td>盖在署名和日期上（「骑年盖月」——上沿压署名、下沿压日期）</td></tr>
+            <tr><td>⑭ 附注</td><td>成文日期下方（公文印发传达范围等说明）</td></tr>
+            <tr><td>⑮ 附件</td><td>正文之后、版记之前（附件是独立材料）</td></tr>
+            <tr><td rowspan="3"><strong>版记</strong><br>（公文末尾部分）</td><td>⑯ 抄送机关</td><td>版记第一条（除主送外需知晓/执行的机关）</td></tr>
+            <tr><td>⑰ 印发机关和印发日期</td><td>版记第二条</td></tr>
+            <tr><td>⑱ 页码</td><td>版心下方</td></tr>
+        </table>
+
+        <div class="yellow-box">
+            <p><strong>💡 记忆技巧——把公文想象成一封信：</strong></p>
+            <p>版头 = 信封和邮戳（谁发的、急不急、密不密）｜主体 = 信纸内容（标题=信件主题，正文=信的内容，署名+日期+印章 = 签名落款）｜版记 = 信封上的抄送名单和邮局戳记</p>
+        </div>
+
+        <h3>标题格式规则（必考！每份卷子至少一道）</h3>
+        <p><strong>标准格式：</strong></p>
+        <blockquote><p><strong>发文机关 + 关于 + 事由 + 的 + 文种</strong></p></blockquote>
+        <p>例：国务院 + 关于 + 表彰国家自然科学奖获得者 + 的 + 决定</p>
+
+        <h4>标题的硬性规则</h4>
+        <ol>
+            <li><strong>「关于」和「的」不可省略。</strong>「国务院关于XX的决定」✅，「国务院XX决定」❌（少了「关于」）</li>
+            <li><strong>标题中除法规、规章名称加书名号外，一般不用标点符号。</strong>「关于学习贯彻《信访工作条例》的通知」✅（条例名称用书名号是对的）。「关于做好防汛、防火、防暑工作的通知」❌（顿号应删除）</li>
+            <li><strong>标题可以分行排列，但不能把完整的词或词组拆开。</strong>「关｜于」不能分两行，「通知」不能单独一行</li>
+            <li><strong>三个机关以上联合行文时，标题中发文机关名称可以省略。</strong>如《关于XXX的通知》，而非把三四家单位全写标题里</li>
+        </ol>
+
+        <h4>成文日期规则</h4>
+        <ul>
+            <li>以<strong>负责人签发的日期</strong>为准</li>
+            <li>联合行文以<strong>最后一个签发机关负责人签发日期</strong>为准</li>
+            <li>电报以<strong>发出日期</strong>为准</li>
+            <li>成文日期用阿拉伯数字标注（如 2026年5月29日）</li>
+        </ul>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【判断】公文标题中除法规、规章名称加书名号外，一般不用标点符号。（ ）</p>
+            <p>2.【单选】公文成文日期的确定标准是：A.拟稿日期 B.核稿日期 C.负责人签发日期 D.印发日期</p>
+            <p>3.【判断】签发人标识只出现在上行文的版头中。（ ）</p>
+            <p>4.【判断】联合行文时，成文日期以第一个签发机关负责人签发的日期为准。（ ）</p>
+            <p>5.【多选】以下属于公文版头要素的有：A.发文字号 B.主送机关 C.份号 D.密级和保密期限</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.√ 2.C 3.√（签发人标识只有上行文才需要——下级向上级行文，必须签上签发人姓名以示负责） 4.×（最后一个签发人日期） 5.ACD（主送机关属于主体，不属于版头）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第八部分 ==================== -->
+        <h2>第八部分：行文规则速记 <span class="section-counter">常考 5 条硬规则</span></h2>
+
+        <p>行文规则的考点高度集中，以下 5 条是反复出现的：</p>
+
+        <div class="blue-box">
+            <p><strong>1. 上行文规则（最重要）：</strong></p>
+            <p>① 原则上主送一个上级机关——不能多头主送<br>
+            ② 党委、政府的部门向上级主管部门请示、报告重大事项，应当经本级党委、政府<strong>同意或者授权</strong><br>
+            ③ 不得以本机关名义向上级机关负责人报送公文（公文是机关对机关，不是个人对个人）<br>
+            ④ 受双重领导的机关向一个上级行文，必要时抄送另一个上级</p>
+        </div>
+
+        <div class="blue-box">
+            <p><strong>2. 下行文规则：</strong></p>
+            <p>① 重要下行文应当同时抄送发文机关的<strong>直接上级机关</strong><br>
+            ② 上级机关向受双重领导的下级机关行文，必要时抄送该下级机关的<strong>另一个上级机关</strong></p>
+        </div>
+
+        <div class="blue-box">
+            <p><strong>3. 联合行文规则：</strong></p>
+            <p>① 同级机关可以联合行文——<strong>不同级别的机关不能联合行文</strong><br>
+            ② 联合行文应当明确<strong>主办机关</strong><br>
+            ③ 联合行文时，发文机关标志可以用主办机关标志，也可以并用联署机关标志</p>
+        </div>
+
+        <div class="blue-box">
+            <p><strong>4. 不得越级行文（有例外）：</strong></p>
+            <p>一般情况下不得越级行文，但以下情况可以越级：①重大突发事件 ②直接的上级长期不作为 ③直接上下级之间有争议久拖不决 ④上级直接交办的事项需要直接报告 ⑤检举揭发直接上级。越级行文时一般应<strong>抄送被越过的机关</strong>。</p>
+        </div>
+
+        <div class="blue-box">
+            <p><strong>5. 其他重要规则：</strong></p>
+            <p>① 请示<strong>不得同时抄送下级机关</strong>（未批准前尚未生效）<br>
+            ② 上级机关负责人<strong>直接交办的事项</strong>，下级机关可以直接向该负责人报告<br>
+            ③ 同级党政、党政与其他同级机关可以联合行文</p>
+        </div>
+
+        <div class="qbox">
+            <p><strong>📝 自测题：</strong></p>
+            <p>1.【判断】请示事项在未获批复前，可以抄送下级机关以便提前准备。（ ）</p>
+            <p>2.【判断】市教育局和市财政局属于同级机关，可以联合行文。（ ）</p>
+            <p>3.【单选】以下哪种情况不允许越级行文：A.发生重大自然灾害 B.直接上级长期不作为 C.日常工作报告 D.检举揭发直接上级</p>
+            <p>4.【判断】党委、政府的部门向上级主管部门请示重大事项，可以不经本级党委、政府同意直接行文。（ ）</p>
+        </div>
+        <div class="green-box">
+            <p><strong>答案：</strong>1.×（请示未获批前不得抄送下级） 2.√（同级机关可以联合行文） 3.C（日常工作报告应逐级上报，不属于可以越级的情形） 4.×（应经本级党委、政府同意或授权）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第九部分 ==================== -->
+        <h2>第九部分：应用文练笔——写一则会议通知 <span class="section-counter">每日一练</span></h2>
+
+        <h3>题目</h3>
+        <p><strong>情景：</strong>你所在的办公室将于本周五（2026 年 6 月 2 日）下午 2:30 在公司 301 会议室召开 2026 年夏粮收购工作部署会，要求各仓储管理组负责人及财务科相关人员参会，会议将通报今年夏粮收购计划、部署各库点任务分工、明确收购质量标准。请以<strong>办公室名义</strong>拟一则会议通知。</p>
+
+        <h3>写作要求</h3>
+        <ol>
+            <li>格式完整：标题 → 主送机关 → 正文 → 落款</li>
+            <li>内容要素齐全：会议目的 + 时间 + 地点 + 参会人员 + 会议议题 + 会议要求</li>
+            <li>语言简洁：200-300 字</li>
+            <li>落款完整：发文机关 + 成文日期</li>
+        </ol>
+
+        <h3>写作指南：会议通知的「六要素」检查清单</h3>
+        <table>
+            <tr><th>要素</th><th>说明</th><th>本例应该写</th></tr>
+            <tr><td><strong>标题</strong></td><td>发文机关 + 关于 + 事由 + 的 + 通知</td><td>办公室关于召开2026年夏粮收购工作部署会的通知</td></tr>
+            <tr><td><strong>主送</strong></td><td>顶格、加冒号</td><td>各仓储管理组、财务科：</td></tr>
+            <tr><td><strong>会议目的</strong></td><td>为什么要开这个会（1句话）</td><td>为做好今年夏粮收购工作，确保收购任务有序推进……</td></tr>
+            <tr><td><strong>会议时间地点</strong></td><td>精确到分钟、房间号</td><td>2026年6月2日（周五）14:30，301会议室</td></tr>
+            <tr><td><strong>参会人员</strong></td><td>逐类列举，不遗漏</td><td>各仓储管理组负责人、财务科相关人员</td></tr>
+            <tr><td><strong>会议要求</strong></td><td>带什么材料？提前准备什么？准时与否？</td><td>提前准备各组收购计划数据、准时参会</td></tr>
+        </table>
+
+        <h3>参考范文</h3>
+        <div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+            <p style="text-align:center;font-size:1.05rem;font-weight:600;color:#1a1a1a;margin-bottom:24px;">办公室关于召开2026年夏粮收购工作部署会的通知</p>
+            <p style="color:#333;">各仓储管理组、财务科：</p>
+            <p style="text-indent:2em;color:#333;">为切实做好2026年夏粮收购工作，确保收购任务保质保量完成，经研究，决定召开夏粮收购工作部署会。现将有关事项通知如下：</p>
+            <p style="text-indent:2em;color:#333;">一、会议时间：2026年6月2日（星期五）14:30。</p>
+            <p style="text-indent:2em;color:#333;">二、会议地点：公司301会议室。</p>
+            <p style="text-indent:2em;color:#333;">三、参会人员：各仓储管理组负责人、财务科相关工作人员。</p>
+            <p style="text-indent:2em;color:#333;">四、会议内容：（一）通报2026年夏粮收购计划；（二）部署各库点任务分工；（三）明确夏粮收购质量标准和工作要求。</p>
+            <p style="text-indent:2em;color:#333;">五、有关要求：请各参会单位提前准备各组夏粮收购计划数据，并妥善安排工作，确保准时参会。</p>
+            <p style="text-align:right;margin-top:32px;color:#333;">办公室</p>
+            <p style="text-align:right;color:#333;">2026年5月29日</p>
+        </div>
+
+        <h3>评析——这道通知好在哪里</h3>
+        <table>
+            <tr><th>评分维度</th><th>得分点</th><th>本篇表现</th></tr>
+            <tr><td><strong>标题</strong>（1分）</td><td>发文机关+关于+事由+的+文种，六字不缺</td><td>✅ 标准格式</td></tr>
+            <tr><td><strong>主送</strong>（0.5分）</td><td>所有应参会单位都列到、顶格、加冒号</td><td>✅ 两个部门都写了</td></tr>
+            <tr><td><strong>会议目的</strong>（0.5分）</td><td>开头一句话交代开会理由</td><td>✅「为切实做好……」</td></tr>
+            <tr><td><strong>会议要素</strong>（2分）</td><td>时间（精确到分）、地点（精确到房间号）、参会人员、会议议题——四个都得有</td><td>✅ 全部覆盖</td></tr>
+            <tr><td><strong>会议要求</strong>（0.5分）</td><td>提前准备内容 + 准时参会</td><td>✅ 准备数据 + 准时参会</td></tr>
+            <tr><td><strong>落款</strong>（0.5分）</td><td>发文机关署名 + 成文日期</td><td>✅ 办公室 + 2026年5月29日</td></tr>
+        </table>
+
+        <div class="yellow-box">
+            <p><strong>📌 常见错误提醒（对照自查）：</strong></p>
+            <p>① 标题少了「关于」→ 扣分｜② 主送漏了某个应该参会的部门 → 扣分｜③ 时间只写日期不写几点几分 → 扣分｜④ 地点不写房间号 → 扣分｜⑤ 落款没有日期或日期用了汉字小写 → 扣分｜⑥ 结尾写了「此致敬礼」（通知不是信！）→ 扣分</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 第十部分 ==================== -->
+        <h2>第十部分：今日任务 <span class="section-counter">Day 1 作战清单</span></h2>
+
+        <table>
+            <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+            <tr><td rowspan="3"><strong>上午</strong></td><td>15 种文种逐个击破</td><td>读每个文种的卡片，理解定义 + 适用场景 + 易错点</td><td>1h</td></tr>
+            <tr><td>文种辨析对照默写</td><td>关书，白纸默写：15 种文种名称 → 行文方向 → 一句话定义。写不出来的翻书补，重复到全对</td><td>1h</td></tr>
+            <tr><td>今日自测题刷完</td><td>不看答案，独立完成全部 25 道自测题</td><td>0.5h</td></tr>
+            <tr><td rowspan="2"><strong>下午</strong></td><td>公文格式 18 要素</td><td>理解版头/主体/版记的划分 + 标题规则 + 成文日期规则</td><td>1h</td></tr>
+            <tr><td>应用文练笔</td><td>写会议通知。先自己写（20分钟），再对照范文逐项自查</td><td>1h</td></tr>
+            <tr><td rowspan="3"><strong>晚上</strong></td><td>错题整理</td><td>25 道自测题对答案，每道错题写一句话错因</td><td>20min</td></tr>
+            <tr><td>文种口诀默写</td><td>不看书。四句口诀完整默写 + 15 种文种方向默写</td><td>20min</td></tr>
+            <tr><td>回顾 + 明日预习</td><td>翻一遍今天的错题 + 看一眼明天学什么（公文格式深入 + 马哲）</td><td>20min</td></tr>
+        </table>
+
+        <blockquote><p><strong>下期预告（Day 2）：</strong>公文格式深度——版头/主体/版记 18 要素逐项拆解 + 公文改错 20 例 + 马哲·唯物辩证法（三大规律 + 五对范畴）+ 应用文练笔：写一封函</p></blockquote>
+
+        <hr>
+
+        <p style="text-align:center;font-size:0.8rem;color:#aaa;">推送日期：2026年5月29日 &nbsp;|&nbsp; Day 1 / 16 &nbsp;|&nbsp; 模块：公文写作 &nbsp;|&nbsp; 公学</p>
+
+        <div class="nav-bottom">
+            <a href="../../index.html">← 公学</a>
+            &nbsp;&nbsp;
+            <a href="../Day%202/index.html">Day 2 →</a>
+        </div>
+
+    </div>
+</body>
+</html>
