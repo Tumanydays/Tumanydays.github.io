@@ -7,6 +7,8 @@
    路径深度同 style.css
    ═══════════════════════════════════════════ */
 (function() {
+    // ═══ 迷失域可跳转页面列表（手动维护，新增页面需在此添加）═══
+    // 排除：secret.html（留言本）、entrance.html（假彩蛋）、404.html（自定义404）
     var pages = [
         '/',                          // 首页
         '/logs/',                     // 日志大厅
@@ -37,9 +39,10 @@
         '/images/'                    // 图片画廊
     ];
 
+    // ═══ 工具函数 ═══
     function inWander() { return sessionStorage.getItem('wander-mode') === 'true'; }
 
-    // 动态加载 ZCOOL XiaoWei 字体（全站统一，不依赖页面头部的 Google Fonts 链接）
+    // ═══ 动态加载 ZCOOL XiaoWei 字体 ═══（全站统一，不依赖页面头部的 Google Fonts 链接）
     if (!document.querySelector('link[href*="ZCOOL+XiaoWei"]')) {
         var fontLink = document.createElement('link');
         fontLink.rel = 'stylesheet';
@@ -47,7 +50,8 @@
         document.head.appendChild(fontLink);
     }
 
-    // 迷失域小纸条：30% 概率出现，最迟第三次翻页必定出现
+    // ═══ 胡诌句小纸条：生成与显示 ═══
+    // 30% 概率出现，第三次翻页必定出现
     var note = sessionStorage.getItem('wander-note');
     if (inWander() && !note) {
         var pool = ['此去经年', '良辰好景', '千种风情', '当时明月', '彩云归', '水穷处', '云起时', '倚危楼', '天际识归舟', '暮雨洒江天', '红衰翠减', '无语东流', '苒苒物华休', '争知我', '正恁凝愁', '拟把疏狂', '为伊消得', '人憔悴', '立尽斜阳', '黯黯生天际', '无言谁会', '怕上层楼', '聚散苦匆匆', '今年花胜去年红', '始共春风', '把酒祝东风', '离恨却如春草', '深闭门', '雨打梨花', '行也思君', '晓看天色', '旧游如梦', '断雁叫西风', '青山绿水', '白草红叶', '恨无穷', '伤流景', '往事后期空记省', '送尽黄昏', '灯影桨声', '孤光自照', '短发萧骚', '乾坤虽大', '难着许多愁', '寂寞无人见', '燕子楼空', '古今如梦', '夜茫茫', '重寻无处', '小舟从此逝', '江海寄余生', '烟柳断肠处'];
@@ -79,7 +83,8 @@
     }
     if (!inWander()) { sessionStorage.removeItem('wander-note'); sessionStorage.removeItem('wander-page'); }
 
-    // 注入隐形退出区域（固定尺寸，覆盖胡诌句）
+    // ═══ 隐形退出区域 ═══
+    // 260×44px 固定透明区域，覆盖胡诌句位置，点击即退出
     var exitEl = document.createElement('div');
     exitEl.id = 'wander-exit';
     exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;width:260px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
@@ -96,7 +101,8 @@
         }
     });
 
-    // 链接劫持（capture 阶段拦截）
+    // ═══ 链接劫持 ═══
+    // capture 阶段拦截，早于所有页面自身的点击监听器
     document.addEventListener('click', function(e) {
         if (!inWander()) return;
         var link = e.target.closest('a');
