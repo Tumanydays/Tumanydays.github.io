@@ -67,7 +67,12 @@
     if (inWander() && note) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
-        noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
+        noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;cursor:default;font-family:ZCOOL XiaoWei,serif;';
+        noteEl.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sessionStorage.setItem('wander-mode', 'false');
+            if (window._resetWanderTitle) window._resetWanderTitle();
+        });
         document.body.appendChild(noteEl);
         sessionStorage.removeItem('wander-note');
     }
