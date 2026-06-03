@@ -34,7 +34,24 @@
         .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
         .nav-bottom a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
         .nav-bottom a:hover { color: var(--hover); }
-        @media (max-width: 600px) { .container { padding: 32px 16px 64px; } h1 { font-size: 1.4rem; } table { font-size: 0.78rem; } th, td { padding: 8px; } }
+        
+        /* 系列导航 */
+        .series-nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .series-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+
+@media (max-width: 600px) { .container { padding: 32px 16px 64px; } h1 { font-size: 1.4rem; } table { font-size: 0.78rem; } th, td { padding: 8px; } }
     </style>
 </head>
 <body>
@@ -46,6 +63,8 @@
         <div class="intro">
             <p>Week 2 和 Week 3 是 CS50 的第一次「爬坡」。Week 2 把编译流程从黑箱变成白箱，引入数组和字符串，终结了「CS50 的 string 是魔法」的幻觉。Week 3 则是算法与复杂度的全面展开——Malan 会把学生叫上讲台，用真人演示排序，用横轴和纵轴画出算法效率的视觉直觉。这两周的内容叠加在一起，构成一个分水岭：在此之前你在学「怎么写」，在此之后你开始学「怎么想」。</p>
         </div>
+
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="week0-1.html" style="color:var(--text-dim);">Week 0 &amp; 1</a> &nbsp;·&nbsp; 下一篇：<a href="week4-5.html" style="color:var(--text-dim);">Week 4 &amp; 5</a></p>
 
         <!-- KEYWORDS -->
         <h2>🔑 关键词索引</h2>
@@ -660,6 +679,12 @@ person find(person phonebook[], int size, string target)
             &nbsp;·&nbsp;
             <a href="../../../../index.html">← 返回首页</a>
         </div>
+    <div class="series-nav">
+        <span class="prev"><a href="week0-1.html">← 上一篇：Week 0 & 1</a></span>
+        <span class="next"><a href="week4-5.html">下一篇：Week 4 & 5 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
+
     </div>
 <script src="../../../../wander-mode.js"></script>
 </body>

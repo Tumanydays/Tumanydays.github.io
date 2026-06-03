@@ -32,6 +32,23 @@ code{background:#f0f0f0;padding:1px 6px;border-radius:3px;font-size:.85rem;font-
 pre{background:#2d2d2d;color:#f8f8f2;padding:16px 20px;border-radius:6px;overflow-x:auto;font-size:.82rem;line-height:1.7;margin:16px 0 24px;font-family:"SF Mono","Menlo","Consolas",monospace}
 .nav-bottom{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);text-align:center}
 .nav-bottom a{color:var(--text-dim);text-decoration:none;font-size:.85rem}.nav-bottom a:hover{color:var(--text)}
+
+        /* 系列导航 */
+        .series-nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .series-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+
 @media(max-width:600px){.container{padding:32px 16px 64px}h1{font-size:1.4rem}table{font-size:.78rem}th,td{padding:8px}}
 </style>
 </head>
@@ -589,5 +606,10 @@ sqlite3 mydata.db
             &nbsp;·&nbsp;
             <a href="../../../../index.html">← 返回首页</a>
         </div>
-</div><script src="../../../../wander-mode.js"></script>
+</div>
+    <div class="series-nav">
+        <span class="prev"><a href="week4-5.html">← 上一篇：Week 4 & 5</a></span>
+        <span class="next"><a href="week8-10.html">下一篇：Week 8 & 10 →</a></span>
+    </div>
+<script src="../../../../wander-mode.js"></script>
 </body></html>

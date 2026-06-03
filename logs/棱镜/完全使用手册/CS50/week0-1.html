@@ -146,7 +146,24 @@
             font-size: 0.85rem;
         }
         .nav-bottom a:hover { color: var(--hover); }
-        @media (max-width: 600px) {
+        
+        /* 系列导航 */
+        .series-nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .series-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+
+@media (max-width: 600px) {
             .container { padding: 32px 16px 64px; }
             h1 { font-size: 1.4rem; }
             table { font-size: 0.78rem; }
@@ -167,6 +184,8 @@
         <div class="intro">
             <p>缘起：水母流星大人正在学习 C 语言，同时希望系统性地修读哈佛大学 David J. Malan 教授的 CS50 课程。这两份笔记以「逐课还原」为目标——不是大纲摘录，是跟着 Malan 的讲台走一遍。每一节都附带与 Python 的对照，因为水母流星大人已有 Python 基础。Week 0 是 Scratch（建立计算思维），Week 1 是 C 语言入门（你正在学的那部分）。</p>
         </div>
+
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">下一篇：<a href="week2-3.html" style="color:var(--text-dim);">Week 2 &amp; 3</a></p>
 
         <!-- ==================== KEYWORDS ==================== -->
         <h2>🔑 关键词索引</h2>
@@ -505,6 +524,11 @@ float average = (float) total / (float) count;
             &nbsp;·&nbsp;
             <a href="../../../../index.html">← 返回首页</a>
         </div>
+
+    <div class="series-nav">
+        <span class="next"><a href="week2-3.html">下一篇：Week 2 & 3 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
 
     </div>
 <script src="../../../../wander-mode.js"></script>
