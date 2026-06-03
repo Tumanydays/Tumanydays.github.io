@@ -128,6 +128,8 @@
         }
         function draw() {
             ctx.clearRect(0, 0, c.width, c.height);
+
+            // 雨
             ctx.strokeStyle = 'rgba(160,160,160,';
             ctx.lineWidth = 0.5;
             for (var i = 0; i < drops.length; i++) {
@@ -140,6 +142,26 @@
                 d.y += d.speed;
                 if (d.y > c.height) { d.y = -d.len; d.x = Math.random() * c.width; }
             }
+
+            // 窗框：极淡线条，不抢雨
+            ctx.globalAlpha = 0.2;
+            ctx.strokeStyle = 'rgba(180,180,180,1)';
+            ctx.lineWidth = 0.8;
+            var m = 20;
+            var w = c.width - m * 2;
+            var h = c.height - m * 2;
+            // 外框
+            ctx.strokeRect(m, m, w, h);
+            // 垂直中分线
+            ctx.beginPath();
+            ctx.moveTo(c.width / 2, m);
+            ctx.lineTo(c.width / 2, c.height - m);
+            ctx.stroke();
+            // 水平横框（约三分之一处）
+            ctx.beginPath();
+            ctx.moveTo(m, c.height * 0.38);
+            ctx.lineTo(c.width - m, c.height * 0.38);
+            ctx.stroke();
             requestAnimationFrame(draw);
         }
         draw();
