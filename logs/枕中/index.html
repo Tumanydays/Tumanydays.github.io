@@ -31,70 +31,69 @@
             letter-spacing: 3px;
         }
 
-        /* ── 一盏黄铜台灯 ── */
+        /* ── 光源覆盖 ── */
+        .lighting {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(
+                ellipse at calc(50% - 105px) 210px,
+                transparent 0%,
+                transparent 35%,
+                rgba(0,0,0,0.012) 55%,
+                rgba(0,0,0,0.025) 75%,
+                rgba(0,0,0,0.04) 100%
+            );
+        }
+
+        /* ── 斗笠吊灯 ── */
         .lamp {
             position: fixed;
-            bottom: 36px;
-            left: 28px;
+            top: 210px;
+            left: calc(50% - 105px);
             z-index: 1;
             pointer-events: none;
         }
-        .lamp-arm {
-            width: 2px; height: 26px;
-            background: #b8a88a; opacity: 0.55;
+        .lamp-cord {
+            width: 1px; height: 14px;
+            background: #c8bca8; opacity: 0.3;
+            margin: 0 auto;
+        }
+        .lamp-tip {
+            width: 4px; height: 3px;
+            background: rgba(200,188,168,0.3);
             margin: 0 auto; border-radius: 1px;
         }
-        .lamp-joint {
-            width: 10px; height: 3px;
-            background: #b8a88a; opacity: 0.45;
-            margin: -1px auto 0; border-radius: 2px;
-        }
-        .lamp-shade {
-            width: 40px; height: 0;
-            border-bottom: 18px solid #b8a88a;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            opacity: 0.45;
-            margin: 0 auto; position: relative;
+        .lamp-hat {
+            width: 38px; height: 0;
+            border-bottom: 18px solid rgba(200,188,168,0.2);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            margin: 0 auto;
         }
         .lamp-glow {
-            width: 44px; height: 28px;
-            background: radial-gradient(ellipse, rgba(184,168,138,0.13) 0%, rgba(184,168,138,0.04) 60%, transparent 80%);
+            width: 50px; height: 32px;
+            background: radial-gradient(ellipse, rgba(200,188,168,0.1) 0%, rgba(200,188,168,0.03) 60%, transparent 80%);
             border-radius: 50%;
-            margin: -20px auto 0;
-        }
-        .lamp-pool {
-            width: 52px; height: 16px;
-            background: radial-gradient(ellipse, rgba(184,168,138,0.08) 0%, transparent 70%);
-            margin: -8px auto 0;
-            transition: opacity 0.6s ease;
-        }
-        .lamp-base {
-            width: 28px; height: 4px;
-            background: #b8a88a; opacity: 0.4;
-            margin: 4px auto 0; border-radius: 2px;
+            margin: -14px auto 0;
         }
 
-        @media (max-width: 500px) {
-            .container { padding: 48px 20px 64px; }
-            .lamp { bottom: 24px; left: 20px; }
-            .lamp-shade { width: 32px; border-bottom-width: 14px; border-left-width: 4px; border-right-width: 4px; }
-            .lamp-glow { width: 36px; height: 22px; margin-top: -16px; }
-            .lamp-pool { width: 40px; }
-            .lamp-arm { height: 20px; }
-        }
+        @media (max-width: 700px) {
+            .lamp { left: calc(50% - 60px); }
         }
     </style>
 </head>
 <body>
 
+    <div class="lighting"></div>
+
     <div class="lamp">
-        <div class="lamp-arm"></div>
-        <div class="lamp-joint"></div>
-        <div class="lamp-shade"></div>
+        <div class="lamp-cord"></div>
+        <div class="lamp-tip"></div>
+        <div class="lamp-hat"></div>
         <div class="lamp-glow"></div>
-        <div class="lamp-pool"></div>
-        <div class="lamp-base"></div>
     </div>
 
     <div class="container">
@@ -203,8 +202,8 @@
                         var z = document.createElement('div');
                         z.textContent = 'z';
                         var size = 0.85 + idx * 0.22;
-                        var zBottom = 90 + idx * 18;
-                        var zLeft = 68 + idx * 18;
+                        var zBottom = 70 + idx * 18;
+                        var zLeft = 120 + idx * 18;
                         var phase = Math.random() * 6.28;
                         z.style.cssText = 'position:fixed;bottom:' + zBottom + 'px;left:' + zLeft + 'px;font-size:' + size + 'rem;color:#ccc;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s ease;';
                         document.body.appendChild(z);
