@@ -104,17 +104,19 @@
 <canvas id="rain-canvas"></canvas>
 
 <script>
-    // ═══ 窗外下雨（带溅落） ═══
+    // ═══ 窗外下雨（深色雨 + 地面溅落） ═══
     (function() {
         var c = document.getElementById('rain-canvas');
         if (!c) return;
         var ctx = c.getContext('2d');
         var drops = [];
         var splashes = [];
+        var groundY = 0;
         function resize() {
             c.style.cssText = 'position:fixed;top:0;right:0;width:40%;height:100%;z-index:0;pointer-events:none;';
             c.width = window.innerWidth * 0.4;
             c.height = window.innerHeight;
+            groundY = c.height - 16;
         }
         resize();
         window.addEventListener('resize', resize);
@@ -124,13 +126,21 @@
                 y: Math.random() * c.height,
                 len: 10 + Math.random() * 16,
                 speed: 4 + Math.random() * 4,
-                opacity: 0.12 + Math.random() * 0.15
+                opacity: 0.18 + Math.random() * 0.18
             });
         }
         function draw() {
             ctx.clearRect(0, 0, c.width, c.height);
+            // 地面
+            ctx.globalAlpha = 0.15;
+            ctx.strokeStyle = 'rgba(180,180,180,1)';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(0, groundY);
+            ctx.lineTo(c.width, groundY);
+            ctx.stroke();
             // 雨
-            ctx.strokeStyle = 'rgba(140,140,140,1)';
+            ctx.strokeStyle = 'rgba(120,120,120,1)';
             ctx.lineWidth = 0.6;
             for (var i = 0; i < drops.length; i++) {
                 var d = drops[i];
@@ -140,25 +150,25 @@
                 ctx.lineTo(d.x - 0.5, d.y + d.len);
                 ctx.stroke();
                 d.y += d.speed;
-                if (d.y > c.height) {
+                if (d.y > groundY) {
                     // 溅落
-                    splashes.push({ x: d.x, y: c.height - 4, life: 1 });
+                    splashes.push({ x: d.x, y: groundY - 2, life: 1 });
                     d.y = -d.len;
                     d.x = Math.random() * c.width;
                 }
             }
             // 溅落
-            ctx.strokeStyle = 'rgba(140,140,140,1)';
-            ctx.lineWidth = 0.4;
+            ctx.strokeStyle = 'rgba(120,120,120,1)';
+            ctx.lineWidth = 0.5;
             for (var i = splashes.length - 1; i >= 0; i--) {
                 var s = splashes[i];
-                ctx.globalAlpha = s.life * 0.25;
-                var spread = (1 - s.life) * 8;
+                ctx.globalAlpha = s.life * 0.3;
+                var spread = (1 - s.life) * 10;
                 ctx.beginPath();
                 ctx.moveTo(s.x - spread, s.y);
                 ctx.lineTo(s.x + spread, s.y);
                 ctx.stroke();
-                s.life -= 0.04;
+                s.life -= 0.035;
                 if (s.life <= 0) splashes.splice(i, 1);
             }
             requestAnimationFrame(draw);
