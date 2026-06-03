@@ -352,6 +352,11 @@
         var l = 80;
         var rads = [];
         var flutter = 0;
+        var dream = 0;        // 0=无, 1=边在抖, 2=点走神
+        var dreamN = 3;       // 做梦的多边形
+        var dreamE = 0;       // 做梦的边（仅 dream=1）
+        var dreamT = 0;       // 梦境计时
+        var dreamP = 0;       // 梦境相位
 
         p.setup = function() {
             var canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -397,9 +402,22 @@
             }
             for (var i = 3; i < 11; i++) {
                 p.fill(0, 0, 0.35);
-                dott(i, (11 - i) * t * speedMod);
+                dott(i, (11 - i) * t * speedMod, dream === 2 && dreamN === i);
             }
             p.pop();
+
+            // ── 首页梦见其他房间（极低概率，每次都不一样）──
+            if (!dream && Math.random() < 0.00014) {
+                dream = 1 + Math.floor(Math.random() * 2);
+                dreamN = 3 + Math.floor(Math.random() * 8);
+                dreamE = Math.floor(Math.random() * dreamN);
+                dreamT = 30 + Math.floor(Math.random() * 40);
+                dreamP = Math.random() * 6.28;
+            }
+            if (dream) {
+                dreamT--;
+                if (dreamT <= 0) { dream = 0; }
+            }
         };
 
         p.windowResized = function() {
@@ -410,19 +428,35 @@
             for (var i = 0; i < N; i++) {
                 p.push();
                 p.rotate(p.TWO_PI * i / N);
-                p.line(-l / 2, rads[N], l / 2, rads[N]);
+                if (dream === 1 && dreamN === N && i === dreamE) {
+                    // 梦见：一条边微微颤抖
+                    var wiggle = Math.sin(dreamP + dreamT * 0.3) * 6 * (dreamT / 70);
+                    p.line(-l / 2, rads[N], 0, rads[N] + wiggle);
+                    p.line(0, rads[N] + wiggle, l / 2, rads[N]);
+                } else {
+                    p.line(-l / 2, rads[N], l / 2, rads[N]);
+                }
                 p.pop();
             }
         }
 
-        function dott(N, q) {
+        function dott(N, q, isDreaming) {
             q = (q + 0.5 / N) % 1;
             var qq = (q * N) % 1;
             var rot = Math.floor(q * N);
+            var offX = 0, offY = 0;
+            if (isDreaming) {
+                // 梦见：圆点短暂偏离轨道，像走神
+                var drift = Math.sin(dreamP + dreamT * 0.2) * 12 * (dreamT / 70);
+                offX = Math.cos(dreamP + dreamT * 0.15) * drift;
+                offY = Math.sin(dreamP + dreamT * 0.25) * drift;
+            }
             p.push();
             p.rotate(p.TWO_PI * rot / N);
+            var bx = p.lerp(l / 2, -l / 2, qq);
+            var by = rads[N];
             p.noStroke();
-            p.ellipse(p.lerp(l / 2, -l / 2, qq), rads[N], l * 0.1, l * 0.1);
+            p.ellipse(bx + offX, by + offY, l * 0.1, l * 0.1);
             p.pop();
         }
     };
