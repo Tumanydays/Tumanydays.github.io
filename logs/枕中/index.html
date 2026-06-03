@@ -101,7 +101,7 @@
     </div>
 
 <script>
-    // ═══ 灯：点击整理房间 ═══
+    // ═══ 灯：点击整理房间，灯亮后她嘟囔一句 ═══
     (function() {
         var lamp = document.querySelector('.lamp');
         var cont = document.querySelector('.container');
@@ -109,6 +109,21 @@
         lamp.style.cursor = 'pointer';
         lamp.style.pointerEvents = 'auto';
         var glow = lamp.querySelector('.lamp-glow');
+
+        // 她半梦半醒时说的话（每次灯亮随机取一句）
+        var whispers = [
+            "还没睡啊",
+            "把门带上",
+            "外面下雨了",
+            "梦里见",
+            "茶凉了",
+            "今天月亮很好",
+            "信写了一半",
+            "你听到什么声音了吗",
+            "别开灯",
+            "我醒了一下"
+        ];
+
         lamp.addEventListener('click', function() {
             // 灯闪一下
             if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.35) 0%, rgba(212,197,160,0.12) 50%, transparent 70%)';
@@ -129,6 +144,20 @@
                 if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%)';
                 // 房间亮起
                 cont.style.opacity = '1';
+
+                // 她嘟囔了一句（3秒后消失）
+                var old = document.getElementById('whisper-msg');
+                if (old && old.parentNode) old.parentNode.removeChild(old);
+                var msg = document.createElement('div');
+                msg.id = 'whisper-msg';
+                msg.textContent = whispers[Math.floor(Math.random() * whispers.length)];
+                msg.style.cssText = 'position:fixed;bottom:36px;left:72px;font-size:0.72rem;color:#bbb;font-weight:300;letter-spacing:1.5px;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.6s ease;';
+                document.body.appendChild(msg);
+                requestAnimationFrame(function() { msg.style.opacity = '1'; });
+                setTimeout(function() {
+                    msg.style.opacity = '0';
+                    setTimeout(function() { if (msg.parentNode) msg.parentNode.removeChild(msg); }, 600);
+                }, 3000);
             }, 400);
         });
     })();
