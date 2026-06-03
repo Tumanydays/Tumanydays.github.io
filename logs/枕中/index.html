@@ -19,14 +19,78 @@
         .series-list a:hover .entry-title { color: var(--hover); }
         .entry-title { font-size: 0.95rem; color: var(--text); margin-bottom: 2px; }
         .entry-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
-        .tagline { text-align: center; color: var(--text-faint); font-size: 0.8rem; font-weight: 300; margin: 72px auto 0; letter-spacing: 2px; }
-        @media (max-width: 500px) { .container { padding: 48px 20px 64px; } }
+
+        /* ── 门框上的字 ── */
+        .inscription {
+            text-align: center;
+            color: var(--text-faint);
+            font-size: 0.72rem;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 3px;
+        }
+
+        /* ── 一盏不灭的灯 ── */
+        .lamp {
+            position: fixed;
+            bottom: 36px;
+            left: 28px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .lamp-shade {
+            width: 22px;
+            height: 11px;
+            background: #d4c5a0;
+            border-radius: 11px 11px 0 0;
+            margin: 0 auto;
+            opacity: 0.6;
+        }
+        .lamp-glow {
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%);
+            border-radius: 50%;
+            margin: -28px auto 0;
+        }
+        .lamp-stem {
+            width: 1px;
+            height: 24px;
+            background: #d4c5a0;
+            margin: -2px auto 0;
+            opacity: 0.5;
+        }
+        .lamp-base {
+            width: 14px;
+            height: 2px;
+            background: #d4c5a0;
+            margin: 0 auto;
+            border-radius: 1px;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 48px 20px 64px; }
+            .lamp { bottom: 24px; left: 20px; }
+            .lamp-shade { width: 18px; height: 9px; }
+            .lamp-glow { width: 28px; height: 28px; margin-top: -22px; }
+            .lamp-stem { height: 18px; }
+        }
     </style>
 </head>
 <body>
+
+    <div class="lamp">
+        <div class="lamp-shade"></div>
+        <div class="lamp-glow"></div>
+        <div class="lamp-stem"></div>
+        <div class="lamp-base"></div>
+    </div>
+
     <div class="container">
         <h1>枕中</h1>
         <p class="subtitle">—— 枕中人，不知梦也</p>
+        <p class="inscription">此处是吾乡</p>
         <ul class="series-list">
             <li>
                 <a href="公学/">
@@ -34,7 +98,6 @@
                 </a>
             </li>
         </ul>
-        <p class="tagline">— 此处且停，来日方长 —</p>
     </div>
 <script src="../../wander-mode.js"></script>
 </body>
