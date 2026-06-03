@@ -79,12 +79,13 @@
     </div>
 
     <script>
-        // 迷失域中：所有版本均可点击退出回家
+        // 迷失域中：三个版本，点击均可退出回家
         if (sessionStorage.getItem('wander-mode') === 'true') {
             var note = sessionStorage.getItem('wander-note');
             var msg = document.querySelector('.message');
             var whs = document.querySelector('.whisper');
             var link = document.querySelector('#home-link');
+            var card = document.querySelector('.card');
 
             function exitWander() {
                 sessionStorage.setItem('wander-mode', 'false');
@@ -94,18 +95,32 @@
             }
 
             if (note) {
+                // 版本一：胡诌句
                 msg.textContent = note;
                 whs.textContent = '—— Tumanydays，刚刚';
+                link.style.display = 'none';
+                msg.style.cursor = 'pointer';
+                whs.style.cursor = 'pointer';
+                msg.addEventListener('click', exitWander);
+                whs.addEventListener('click', exitWander);
+            } else if (Math.random() < 0.5) {
+                // 版本二：该往回走了
+                msg.textContent = '该往回走了';
+                whs.textContent = '—— 点击离开迷失域';
+                link.style.display = 'none';
+                msg.style.cursor = 'pointer';
+                whs.style.cursor = 'pointer';
+                msg.addEventListener('click', exitWander);
+                whs.addEventListener('click', exitWander);
+            } else {
+                // 版本三：正常文本 + Tumanydays 渐显
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', exitWander);
+                setTimeout(function() {
+                    if (link) link.classList.add('show');
+                }, 2500);
             }
-            // 无胡诌句时保留默认文本（又是一个没有知识存在的荒原吗 / 迷失域里会有出路：）
-            msg.style.cursor = 'pointer';
-            whs.style.cursor = 'pointer';
-            link.style.display = 'none';
-            msg.addEventListener('click', exitWander);
-            whs.addEventListener('click', exitWander);
-        }
-
-        if (document.getElementById('home-link')) {
+        } else if (document.getElementById('home-link')) {
             setTimeout(function() {
                 var el = document.getElementById('home-link');
                 if (el) el.classList.add('show');
