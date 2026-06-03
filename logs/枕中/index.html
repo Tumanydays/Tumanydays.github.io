@@ -9,14 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #2a2520; color: #ccc; line-height: 1.9; }
-        h1 { color: #ddd; }
-        .subtitle { color: #888; }
-        .series-list li { border-bottom-color: #3a3530; }
-        .entry-title { color: #ccc; }
-        .inscription { color: #666; }
-        .series-list a:hover .entry-title { color: #a09888; }
-        .door-entry { color: #bbb; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #f5f0e8; color: var(--text); line-height: 1.9; }
         .container { max-width: 680px; margin: 0 auto; padding: 80px 24px; }
         h1 { font-size: 1.4rem; font-weight: 400; letter-spacing: 4px; margin-bottom: 4px; color: var(--text-title); }
         .subtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 56px; }
@@ -125,7 +118,7 @@
             lamp.style.top = (lineY - 2) + 'px';
             lamp.style.left = (thirdX) + 'px';
             if (light) {
-                light.style.background = 'radial-gradient(ellipse 80% 70% at ' + thirdX + 'px ' + (lineY + 20) + 'px, rgba(245,235,215,0.18) 0%, rgba(245,235,215,0.08) 20%, rgba(245,235,215,0.03) 40%, transparent 55%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.2) 85%, rgba(0,0,0,0.32) 100%)';
+                light.style.background = 'radial-gradient(ellipse 80% 70% at ' + thirdX + 'px ' + (lineY + 20) + 'px, transparent 0%, transparent 40%, rgba(0,0,0,0.015) 60%, rgba(0,0,0,0.03) 80%, rgba(0,0,0,0.05) 100%)';
             }
         }
         positionLamp();
@@ -168,7 +161,7 @@
             ctx.lineTo(c.width, groundY);
             ctx.stroke();
             // 雨
-            ctx.strokeStyle = 'rgba(200,200,200,1)';
+            ctx.strokeStyle = 'rgba(120,120,120,1)';
             ctx.lineWidth = 0.6;
             for (var i = 0; i < drops.length; i++) {
                 var d = drops[i];
