@@ -34,9 +34,7 @@
         '/logs/棱镜/一些知识/从000000到FFFFFF：十六进制颜色码完全手册.html',
         '/logs/棱镜/一些知识/RSS完全了解指南：信息自主权的最后堡垒.html',
         '/logs/棱镜/一些知识/古旧铁轨与万国文字的车厢：ASCII与UTF-8编码的传承、困境与全球方案.html',
-        '/images/',                   // 图片画廊
-        '/secret.html',               // 留言本
-        '/entrance.html'              // 假彩蛋
+        '/images/'                    // 图片画廊
     ];
 
     function inWander() { return sessionStorage.getItem('wander-mode') === 'true'; }
