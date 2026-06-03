@@ -99,6 +99,40 @@
             </li>
         </ul>
     </div>
+
+<script>
+    // ═══ 灯：点击整理房间 ═══
+    (function() {
+        var lamp = document.querySelector('.lamp');
+        var cont = document.querySelector('.container');
+        if (!lamp || !cont) return;
+        lamp.style.cursor = 'pointer';
+        lamp.style.pointerEvents = 'auto';
+        var glow = lamp.querySelector('.lamp-glow');
+        lamp.addEventListener('click', function() {
+            // 灯闪一下
+            if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.35) 0%, rgba(212,197,160,0.12) 50%, transparent 70%)';
+            // 房间暗下
+            cont.style.transition = 'opacity 0.35s ease';
+            cont.style.opacity = '0.08';
+            setTimeout(function() {
+                // 整理：打乱列表顺序
+                var list = cont.querySelector('.series-list');
+                if (list) {
+                    var items = Array.prototype.slice.call(list.children);
+                    for (var i = items.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        list.appendChild(items[j]);
+                    }
+                }
+                // 灯恢复
+                if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%)';
+                // 房间亮起
+                cont.style.opacity = '1';
+            }, 400);
+        });
+    })();
+</script>
 <script src="../../wander-mode.js"></script>
 </body>
 </html>
