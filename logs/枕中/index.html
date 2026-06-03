@@ -90,7 +90,7 @@
     <div class="container">
         <h1>枕中</h1>
         <p class="subtitle">—— 枕中人，不知梦也</p>
-        <p class="inscription">此处是吾乡</p>
+        <p class="inscription">夜坐听风</p>
         <ul class="series-list">
             <li>
                 <a href="公学/">
@@ -153,16 +153,17 @@
         var sleeping = false;
         var spawnTimer = null;
 
+        var insc = document.querySelector('.inscription');
+
         function spawnZZZ() {
-            // 三个 z 一组依次弹出
             for (var zi = 0; zi < 3; zi++) {
                 (function(idx) {
                     setTimeout(function() {
                         var z = document.createElement('div');
                         z.textContent = 'z';
-                        var size = 0.6 + idx * 0.2;
+                        var size = 0.8 + idx * 0.2;
                         var zBottom = 70 + idx * 22;
-                        var zLeft = 56 + idx * 14;
+                        var zLeft = 50 + idx * 6;
                         var phase = Math.random() * 6.28;
                         z.style.cssText = 'position:fixed;bottom:' + zBottom + 'px;left:' + zLeft + 'px;font-size:' + size + 'rem;color:#ccc;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s ease;';
                         document.body.appendChild(z);
@@ -192,11 +193,11 @@
         lamp.addEventListener('click', function() {
             sleeping = !sleeping;
             if (sleeping) {
-                // 关灯睡觉：持续循环 zzz
+                if (insc) insc.textContent = '昼眠听雨';
                 spawnZZZ();
                 spawnTimer = setInterval(spawnZZZ, 3200);
             } else {
-                // 醒了：停止生成，页面上已有的 z 继续飘完
+                if (insc) insc.textContent = '夜坐听风';
                 if (spawnTimer) { clearInterval(spawnTimer); spawnTimer = null; }
             }
         });
