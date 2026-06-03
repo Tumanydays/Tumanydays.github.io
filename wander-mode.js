@@ -39,11 +39,11 @@
         '/entrance.html'              // 假彩蛋
     ];
 
-    var isOn = sessionStorage.getItem('wander-mode') === 'true';
+    function inWander() { return sessionStorage.getItem('wander-mode') === 'true'; }
 
     // 迷失域小纸条：进入时生成，首次翻页必定显示
     var note = sessionStorage.getItem('wander-note');
-    if (isOn && !note) {
+    if (inWander() && !note) {
         var pool = ['此去经年', '良辰好景', '千种风情', '当时明月', '彩云归', '水穷处', '云起时', '倚危楼', '天际识归舟', '暮雨洒江天', '红衰翠减', '无语东流', '苒苒物华休', '争知我', '正恁凝愁', '拟把疏狂', '为伊消得', '人憔悴', '立尽斜阳', '黯黯生天际', '无言谁会', '怕上层楼', '聚散苦匆匆', '今年花胜去年红', '始共春风', '把酒祝东风', '离恨却如春草', '深闭门', '雨打梨花', '行也思君', '晓看天色', '旧游如梦', '断雁叫西风', '青山绿水', '白草红叶', '恨无穷', '伤流景', '往事后期空记省', '送尽黄昏', '灯影桨声', '孤光自照', '短发萧骚', '乾坤虽大', '难着许多愁', '寂寞无人见', '燕子楼空', '古今如梦', '夜茫茫', '重寻无处', '小舟从此逝', '江海寄余生', '烟柳断肠处'];
         var picked = [];
         var n = 2 + Math.floor(Math.random() * 2);
@@ -56,14 +56,14 @@
         sessionStorage.setItem('wander-note', picked.join(' '));
         note = sessionStorage.getItem('wander-note');
     }
-    if (isOn && note) {
+    if (inWander() && note) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
-        noteEl.style.cssText = 'position:fixed;bottom:36px;right:16px;font-size:0.75rem;color:var(--text-faint);z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
+        noteEl.style.cssText = 'position:fixed;bottom:36px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
         document.body.appendChild(noteEl);
         sessionStorage.removeItem('wander-note');
     }
-    if (!isOn) sessionStorage.removeItem('wander-note');
+    if (!inWander()) sessionStorage.removeItem('wander-note');
 
     // 注入隐形退出按钮（右下角，完全不可见）
     var exitEl = document.createElement('div');
@@ -75,8 +75,7 @@
     // 单击退出
     exitEl.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (isOn) {
-            isOn = false;
+        if (inWander()) {
             sessionStorage.setItem('wander-mode', 'false');
             if (window._resetWanderTitle) window._resetWanderTitle();
         }
@@ -84,7 +83,7 @@
 
     // 链接劫持（capture 阶段拦截）
     document.addEventListener('click', function(e) {
-        if (!isOn) return;
+        if (!inWander()) return;
         var link = e.target.closest('a');
         if (link) {
             var href = link.getAttribute('href');
