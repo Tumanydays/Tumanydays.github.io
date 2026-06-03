@@ -623,6 +623,31 @@
                 wasEffectApplied = false;
                 resetChars();
                 sessionStorage.setItem('wander-mode', 'true');
+                // 迷失域入场：生成一句胡诌带走
+                if (typeof fragments !== 'undefined') {
+                    var pool = [];
+                    fragments.forEach(function(f) {
+                        f.text.forEach(function(line) {
+                            var parts = line.split(/[，。、；：！？\s]+/);
+                            parts.forEach(function(part) {
+                                part = part.trim();
+                                if (part.length >= 2 && part.length <= 10 && pool.indexOf(part) === -1) {
+                                    pool.push(part);
+                                }
+                            });
+                        });
+                    });
+                    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+                    var note = [];
+                    var n = 2 + Math.floor(Math.random() * 2);
+                    for (var hi = 0; hi < n; hi++) {
+                        var p = pick(pool);
+                        var tries = 0;
+                        while (note.indexOf(p) !== -1 && tries < 10) { p = pick(pool); tries++; }
+                        note.push(p);
+                    }
+                    sessionStorage.setItem('wander-note', note.join(' '));
+                }
                 shatterTitle();
                 return;
             }

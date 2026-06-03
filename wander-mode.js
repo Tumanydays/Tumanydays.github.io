@@ -41,6 +41,17 @@
 
     var isOn = sessionStorage.getItem('wander-mode') === 'true';
 
+    // 迷失域小纸条：50% 概率显示一次胡诌句
+    var note = sessionStorage.getItem('wander-note');
+    if (isOn && note && Math.random() < 0.5) {
+        var noteEl = document.createElement('div');
+        noteEl.textContent = note;
+        noteEl.style.cssText = 'position:fixed;bottom:36px;right:16px;font-size:0.72rem;color:var(--text-faint);z-index:9998;text-align:right;font-weight:300;letter-spacing:1.5px;line-height:1.7;pointer-events:none;';
+        document.body.appendChild(noteEl);
+        sessionStorage.removeItem('wander-note');
+    }
+    if (!isOn) sessionStorage.removeItem('wander-note');
+
     // 注入隐形退出按钮（右下角，完全不可见）
     var exitEl = document.createElement('div');
     exitEl.id = 'wander-exit';
