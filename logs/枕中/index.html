@@ -41,19 +41,6 @@
             pointer-events: none;
         }
 
-        /* ── 灯下几何微雕 ── */
-        #mini-p5 {
-            position: fixed;
-            z-index: 0;
-            pointer-events: none;
-            border-radius: 8px;
-        }
-        #mini-p5 canvas {
-            display: block;
-            border: none;
-            outline: none;
-        }
-
         /* ── 斗笠吊灯 ── */
         .lamp {
             position: fixed;
@@ -114,8 +101,6 @@
         </ul>
     </div>
 
-<div id="mini-p5"></div>
-
 <canvas id="rain-canvas"></canvas>
 
 <script>
@@ -139,82 +124,6 @@
         }
         positionLamp();
 
-        // 灯下几何微雕：定位
-        var mini = document.getElementById('mini-p5');
-        if (mini) {
-            var lx = parseInt(lamp.style.left);
-            var ly = parseInt(lamp.style.top);
-            mini.style.left = (lx - 116) + 'px';
-            mini.style.top = (ly + 40) + 'px';
-            mini.style.width = '270px';
-            mini.style.height = '270px';
-        }
-        window.addEventListener('resize', function() {
-            positionLamp();
-            if (mini) {
-                var lx2 = parseInt(lamp.style.left);
-                var ly2 = parseInt(lamp.style.top);
-                mini.style.left = (lx2 - 116) + 'px';
-                mini.style.top = (ly2 + 40) + 'px';
-            }
-        });
-    })();
-
-    // ═══ 灯下几何微雕（移植首页动画，去惊动去梦境） ═══
-    (function() {
-        var container = document.getElementById('mini-p5');
-        if (!container) return;
-        var sketch = function(p) {
-            var t, speed = 2e-5;
-            var l = 50;
-            var rads = [];
-            p.setup = function() {
-                var canvas = p.createCanvas(270, 270);
-                canvas.parent('mini-p5');
-                p.colorMode(p.HSB, 1);
-                p.strokeWeight(0.4);
-                for (var i = 3; i < 11; i++) {
-                    rads[i] = l / (2 * p.tan(p.PI / i));
-                }
-            };
-            p.draw = function() {
-                t = speed * p.millis();
-                p.background(0, 0, 0.96);
-                p.push();
-                p.translate(135, 135);
-                var s = p.min(270, 270) / 500;
-                p.scale(s);
-                for (var i = 10; i > 2; i--) {
-                    var b = p.map(i, 3, 11, 0.7, 0.85);
-                    p.stroke(0, 0, b);
-                    poly(i);
-                }
-                for (var i = 3; i < 11; i++) {
-                    p.fill(0, 0, 0.32);
-                    dott(i, (11 - i) * t);
-                }
-                p.pop();
-            };
-            function poly(N) {
-                for (var i = 0; i < N; i++) {
-                    p.push();
-                    p.rotate(p.TWO_PI * i / N);
-                    p.line(-l / 2, rads[N], l / 2, rads[N]);
-                    p.pop();
-                }
-            }
-            function dott(N, q) {
-                q = (q + 0.5 / N) % 1;
-                var qq = (q * N) % 1;
-                var rot = Math.floor(q * N);
-                p.push();
-                p.rotate(p.TWO_PI * rot / N);
-                p.noStroke();
-                p.ellipse(p.lerp(l / 2, -l / 2, qq), rads[N], l * 0.1, l * 0.1);
-                p.pop();
-            }
-        };
-        new p5(sketch);
     })();
 
     // ═══ 窗外下雨（深色雨 + 地面溅落） ═══
