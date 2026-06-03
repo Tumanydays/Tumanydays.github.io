@@ -140,18 +140,18 @@
         if (mini) {
             var lx = parseInt(lamp.style.left);
             var ly = parseInt(lamp.style.top);
-            mini.style.left = (lx - 80) + 'px';
-            mini.style.top = (ly + 50) + 'px';
-            mini.style.width = '160px';
-            mini.style.height = '160px';
+            mini.style.left = (lx - 150) + 'px';
+            mini.style.top = (ly + 60) + 'px';
+            mini.style.width = '300px';
+            mini.style.height = '300px';
         }
         window.addEventListener('resize', function() {
             positionLamp();
             if (mini) {
                 var lx2 = parseInt(lamp.style.left);
                 var ly2 = parseInt(lamp.style.top);
-                mini.style.left = (lx2 - 80) + 'px';
-                mini.style.top = (ly2 + 50) + 'px';
+                mini.style.left = (lx2 - 150) + 'px';
+                mini.style.top = (ly2 + 60) + 'px';
             }
         });
     })();
@@ -162,10 +162,10 @@
         if (!container) return;
         var sketch = function(p) {
             var t, speed = 2e-5;
-            var l = 25;
+            var l = 50;
             var rads = [];
             p.setup = function() {
-                var canvas = p.createCanvas(160, 160);
+                var canvas = p.createCanvas(300, 300);
                 canvas.parent('mini-p5');
                 p.colorMode(p.HSB, 1);
                 p.strokeWeight(0.5);
@@ -177,8 +177,8 @@
                 t = speed * p.millis();
                 p.background(245, 240, 232, 20);
                 p.push();
-                p.translate(80, 80);
-                var s = p.min(160, 160) / 180;
+                p.translate(150, 150);
+                var s = p.min(300, 300) / 180;
                 p.scale(s);
                 for (var i = 10; i > 2; i--) {
                     var b = p.map(i, 3, 11, 0.78, 0.92);
