@@ -67,22 +67,16 @@
     if (inWander() && note) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
-        noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;cursor:default;font-family:ZCOOL XiaoWei,serif;';
-        noteEl.addEventListener('click', function(e) {
-            e.stopPropagation();
-            sessionStorage.setItem('wander-mode', 'false');
-            if (window._resetWanderTitle) window._resetWanderTitle();
-        });
+        noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
         document.body.appendChild(noteEl);
         sessionStorage.removeItem('wander-note');
     }
     if (!inWander()) sessionStorage.removeItem('wander-note');
 
-    // 注入隐形退出按钮（右下角，完全不可见）
+    // 注入隐形退出区域（固定尺寸，覆盖胡诌句）
     var exitEl = document.createElement('div');
     exitEl.id = 'wander-exit';
-    exitEl.textContent = '迷失域';
-    exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.6rem;color:transparent;z-index:9999;cursor:default;user-select:none;pointer-events:auto;';
+    exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;width:260px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
     document.body.appendChild(exitEl);
 
     // 单击退出
