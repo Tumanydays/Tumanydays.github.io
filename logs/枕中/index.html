@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>枕中 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <link rel="stylesheet" href="../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            color: var(--text-title);
+        }
+        .subtitle {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            margin-bottom: 56px;
+        }
+        .divider {
+            color: var(--text-faint);
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            margin: 40px auto 48px;
+            text-align: center;
+        }
+        .article-list { list-style: none; }
+        .article-list li {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+        .article-list a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            display: block;
+        }
+        .article-list a:hover { color: var(--hover); }
+        .article-date {
+            font-size: 0.75rem;
+            color: var(--text-faint);
+            margin-top: 4px;
+        }
+        .tagline {
+            text-align: center;
+            color: var(--text-faint);
+            font-size: 0.8rem;
+            font-weight: 300;
+            margin: 72px auto 0;
+            letter-spacing: 2px;
+        }
+        @media (max-width: 500px) {
+            .container { padding: 48px 20px 64px; }
+            h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>枕中</h1>
+        <p class="subtitle">—— 枕中之人，不知梦也</p>
+        <p class="divider">· · ·</p>
+        <ul class="article-list" id="article-list">
+            <!-- 暂无文章 -->
+        </ul>
+        <p class="tagline">— 此处且停，来日方长 —</p>
+    </div>
+<script src="../../wander-mode.js"></script>
+</body>
+</html>
