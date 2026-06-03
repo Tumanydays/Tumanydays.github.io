@@ -111,11 +111,6 @@
                     <div class="entry-title door-entry">一扇通往书桌的门</div>
                 </a>
             </li>
-            <li>
-                <a href="综合知识/">
-                    <div class="entry-title door-entry">关于夏天的那场考试</div>
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -149,17 +144,17 @@
         if (mini) {
             var lx = parseInt(lamp.style.left);
             var ly = parseInt(lamp.style.top);
-            mini.style.left = (lx - 91) + 'px';
+            mini.style.left = (lx - 116) + 'px';
             mini.style.top = (ly + 40) + 'px';
-            mini.style.width = '220px';
-            mini.style.height = '220px';
+            mini.style.width = '270px';
+            mini.style.height = '270px';
         }
         window.addEventListener('resize', function() {
             positionLamp();
             if (mini) {
                 var lx2 = parseInt(lamp.style.left);
                 var ly2 = parseInt(lamp.style.top);
-                mini.style.left = (lx2 - 91) + 'px';
+                mini.style.left = (lx2 - 116) + 'px';
                 mini.style.top = (ly2 + 40) + 'px';
             }
         });
@@ -174,7 +169,7 @@
             var l = 50;
             var rads = [];
             p.setup = function() {
-                var canvas = p.createCanvas(220, 220);
+                var canvas = p.createCanvas(270, 270);
                 canvas.parent('mini-p5');
                 p.colorMode(p.HSB, 1);
                 p.strokeWeight(0.4);
@@ -184,10 +179,10 @@
             };
             p.draw = function() {
                 t = speed * p.millis();
-                p.background(0.103, 0.053, 0.961);
+                p.background(0, 0, 0.96);
                 p.push();
-                p.translate(110, 110);
-                var s = p.min(220, 220) / 500;
+                p.translate(135, 135);
+                var s = p.min(270, 270) / 500;
                 p.scale(s);
                 for (var i = 10; i > 2; i--) {
                     var b = p.map(i, 3, 11, 0.7, 0.85);
