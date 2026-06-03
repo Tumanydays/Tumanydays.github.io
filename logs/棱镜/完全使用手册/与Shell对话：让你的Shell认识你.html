@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 Shell 对话：让你的 Shell 认识你 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: var(--bg); color: var(--text); line-height: 1.9; }
+        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+        .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 48px; display: inline-block; }
+        .back:hover { color: var(--hover); }
+        h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; line-height: 1.5; margin-bottom: 16px; color: var(--text-title); }
+        .meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
+        .meta span { margin-right: 16px; }
+        .intro { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 48px; padding-left: 16px; border-left: 2px solid #ddd; }
+        h2 { font-size: 1.25rem; font-weight: 500; margin-top: 56px; margin-bottom: 20px; color: var(--text-title); letter-spacing: 1px; }
+        h3 { font-size: 1.05rem; font-weight: 500; margin-top: 36px; margin-bottom: 14px; color: var(--text); }
+        p { font-size: 0.95rem; margin-bottom: 16px; color: var(--text); }
+        blockquote { margin: 24px 0; padding: 16px 20px; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #ccc; }
+        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote code { font-size: 0.82rem; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; line-height: 1.6; }
+        th { background: #f9f9f9; font-weight: 500; color: #555; font-size: 0.8rem; letter-spacing: 1px; }
+        tr:hover td { background: #fcfcfc; }
+        ul, ol { margin: 12px 0 20px 20px; font-size: 0.9rem; color: #555; line-height: 2; }
+        li { margin-bottom: 4px; }
+        li strong { color: var(--text); }
+        code { font-family: "SF Mono", "JetBrains Mono", monospace; font-size: 0.82rem; background: var(--code-bg); padding: 2px 6px; border-radius: 3px; color: var(--code-text); }
+        pre { background: #f5f5f5; padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 20px 0 24px; font-size: 0.82rem; line-height: 1.6; }
+        pre code { background: none; padding: 0; border-radius: 0; color: var(--text); }
+        .cmd-output { color: #888; }
+        hr { border: none; border-top: 1px solid #e8e8e8; margin: 48px 0; }
+        .dot { display: block; width: 6px; height: 6px; background: #ccc; border-radius: 50%; margin: 40px auto; }
+        .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
+        .nav-bottom a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
+        .nav-bottom a:hover { color: var(--hover); }
+        .series-nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; }
+        .series-nav a { color: var(--text-dim); text-decoration: none; }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+        details { margin: 16px 0 20px; }
+        details summary { cursor: pointer; font-size: 0.9rem; color: var(--hover); margin-bottom: 8px; }
+        details summary:hover { opacity: 0.8; }
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a class="back" href="index.html">← 完全使用手册</a>
+
+    <h1>与 Shell 对话 · 让你的 Shell 认识你</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月3日 &nbsp;·&nbsp; <a href="../../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>这是《与 Shell 对话》系列的第五篇。前四篇你在学"Shell 能做什么"——操作文件、搜索内容、串管道、管理系统。这一篇反过来：让 Shell 记住你的习惯、缩短你的操作路径、把重复劳动变成一次按键。<strong>学完这篇，你的终端环境将是独一无二的——完全按照你的节奏工作的工具。</strong></p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="与Shell对话：面向系统的操作.html" style="color:var(--text-dim);">面向系统的操作</a> &nbsp;·&nbsp; 下一篇：<a href="与Shell对话：从命令到脚本.html" style="color:var(--text-dim);">从命令到脚本</a></p>
+    </div>
+
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>别名（alias）</strong></td><td>给一个长命令起一个短名字——<code>alias ll='ls -la'</code>，以后打 ll 就行</td></tr>
+        <tr><td><strong>Shell 函数</strong></td><td>比别名更灵活——可以接收参数、包含多行逻辑，像一段小程序</td></tr>
+        <tr><td><strong>环境变量</strong></td><td>Shell 中的全局配置变量——<code>PATH</code> 决定去哪找程序，<code>HOME</code> 知道你家在哪</td></tr>
+        <tr><td><strong>export</strong></td><td>把变量传递给子进程——不加 export 的话，变量只属于当前 Shell</td></tr>
+        <tr><td><strong>PATH</strong></td><td>最重要的环境变量——告诉 Shell "去这些目录找可执行程序"</td></tr>
+        <tr><td><strong>.zshrc</strong></td><td>zsh 的配置文件——每次打开终端时自动加载，别名和环境变量写在这里才持久</td></tr>
+        <tr><td><strong>source</strong></td><td>重新加载配置文件——改完 .zshrc 后不用关终端，<code>source ~/.zshrc</code> 即刻生效</td></tr>
+        <tr><td><strong>Ctrl+R</strong></td><td>搜索命令历史——输入几个字符就能找回以前敲过的任何命令</td></tr>
+        <tr><td><strong><code>!!</code></strong></td><td>快捷操作：重复上一条命令。忘了加 sudo？<code>sudo !!</code></td></tr>
+        <tr><td><strong>dotfile</strong></td><td>以 <code>.</code> 开头的配置文件——默认隐藏，ls -a 才能看见</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 一、别名 ═══════ -->
+
+    <h2>一、别名——给命令起更短的名字</h2>
+
+    <p>在前面的文章中，你一直在用 <code>ls -la</code> 这个组合。如果每次都要打完整的 <code>ls -la</code>，很快你会觉得烦。别名的意义就在于此。</p>
+
+    <h3>1.1 查看已有的别名</h3>
+
+    <pre><code>alias                         # 列出当前所有别名
+<span class="cmd-output">ll='ls -lh'
+la='ls -la'
+...</span></code></pre>
+
+    <p>你的 Mac 上可能已经有几个预设别名了（macOS 默认会给 <code>ls</code> 加上颜色等）。试试看——你会发现终端已经替你省了些事。</p>
+
+    <h3>1.2 创建自己的别名</h3>
+
+    <pre><code>alias ll='ls -la'              # 以后打 ll 就等于 ls -la
+alias gnight='pkill caffeinate 2>/dev/null; pmset sleepnow'  # 一键睡眠（完整版）
+
+# 安全别名——给危险命令加一道确认
+alias rm='rm -i'                # 每次 rm 都先问你确认
+alias cp='cp -i'                # 覆盖文件前询问
+alias mv='mv -i'                # 移动覆盖前询问</code></pre>
+
+    <p>试试在终端里输入这些别名，然后测试它们的效果：</p>
+
+    <pre><code>alias ll='ls -la'              # 创建
+ll ~/Desktop                    # 测试——效果等同 ls -la ~/Desktop
+unalias ll                      # 删除别名
+ll ~/Desktop                    # 现在报错了——command not found</code></pre>
+
+    <p>不过这里有一个问题：在当前终端创建的别名，新开一个窗口就没了。<strong>别名的"持久化"需要写进配置文件（.zshrc），</strong> 这篇后面会讲。</p>
+
+    <blockquote><p>别名看似简单，但它体现了一种思维方式：<strong>留意重复劳动。</strong> 如果你发现自己每天要打好几遍同样的长命令——那就是一个创建别名的信号。不要忍着，花 5 秒钟设个别名。</p></blockquote>
+
+    <h3>1.3 别名的局限</h3>
+
+    <p>别名只能做一件事：把一串文字替换成另一串文字。如果你想在命令的中途插入参数——比如 <code>cd 某个新建的文件夹</code> 这种场景——别名就做不到了。这时候需要函数。</p>
+
+    <span class="dot"></span>
+
+    <h2>二、Shell 函数——当别名不够用时</h2>
+
+    <p>函数和别名的区别：<strong>别名是文字替换，函数是真正的程序逻辑。</strong> 函数可以接收参数、包含多行逻辑、使用变量。</p>
+
+    <h3>2.1 最简单的函数</h3>
+
+    <pre><code># 定义一个函数——"创建目录并走进去"
+mcd() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+# 使用
+mcd ~/Desktop/新文件夹         # 创建并进入
+pwd
+<span class="cmd-output">/Users/aodesai/Desktop/新文件夹</span></code></pre>
+
+    <p>这里的 <code>$1</code> 是函数的第一个参数（你把文件夹名传给它）。<code>$2</code> 是第二个，依此类推。</p>
+
+    <h3>2.2 几个实用的 Shell 函数</h3>
+
+    <p>把这些加入你的 <code>.zshrc</code>，终端会变得顺手很多：</p>
+
+    <pre><code># 回到上一级并查看目录内容
+up() {
+    cd ..
+    ls
+}
+
+# 快速打开一个文件，如果不存在则创建
+note() {
+    touch "$1"
+    open "$1"
+}
+
+# 按文件名搜索历史命令（比 Ctrl+R 更直接）
+h() {
+    history | grep "$1" | head -20
+}
+
+# 用 VS Code 打开文件
+# 不传参数时打开当前目录
+# 函数名用 vsc 而非 code——避免和 VS Code 自带的 code 命令行工具冲突
+vsc() {
+    if [ -z "$1" ]; then
+        open -a "Visual Studio Code" .
+    else
+        open -a "Visual Studio Code" "$1"
+    fi
+}</code></pre>
+
+
+    <blockquote><p>函数 vs 别名的选择原则：<strong>如果只是给命令加固定选项 → 别名。如果需要处理参数、条件判断 → 函数。</strong> 你的 <code>gnight</code> 别名（杀掉 caffeinate 然后睡眠）用别名就够了，因为它只是把两件事按顺序做。但上面的 <code>vsc</code> 函数——"没有参数时打开当前目录，有参数时打开指定文件"——就需要函数。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 三、环境变量 ═══════ -->
+
+    <h2>三、环境变量——Shell 知道的事</h2>
+
+    <p>每次你打开终端，Shell 会记住一些关于你的信息——你的用户名、你的家目录、去哪找程序。这些信息存储在一组"变量"里，你可以查看和修改它们。</p>
+
+    <h3>3.1 查看环境变量</h3>
+
+    <pre><code>echo "$HOME"                  # 你的家目录
+<span class="cmd-output">/Users/aodesai</span>
+
+echo "$USER"                  # 你的用户名
+<span class="cmd-output">aodesai</span>
+
+echo "$SHELL"                 # 你用的 Shell
+<span class="cmd-output">/bin/zsh</span>
+
+echo "$PATH"                  # 最重要的变量——去哪找程序
+<span class="cmd-output">/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:...</span></code></pre>
+
+    <p>变量名前加 <code>$</code> 表示"取这个变量的值"。<code>PATH</code> 和 <code>HOME</code> 是系统设置的，<code>$</code> 是约定俗成的标记。</p>
+
+    <p>用 <code>env</code> 查看所有环境变量（输出很长，建议 <code>env | less</code> 或 <code>env | grep 关键词</code>）：</p>
+
+    <pre><code>env | grep "PATH"             # 只看 PATH 相关的变量
+env | wc -l                   # 你的 Shell 里有多少个环境变量</code></pre>
+
+    <h3>3.2 PATH——最重要的环境变量</h3>
+
+    <p><code>PATH</code> 决定了当你输入一个命令时，Shell 去哪找对应的程序。它是一组目录路径，用 <code>:</code> 分隔：</p>
+
+    <pre><code>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</code></pre>
+
+    <p>当你输入 <code>ls</code>，Shell 按顺序查找这些目录：先找 <code>/opt/homebrew/bin/ls</code>，没有就找 <code>/usr/local/bin/ls</code>，再找 <code>/usr/bin/ls</code>……直到找到为止。第一个找到的被执行。</p>
+
+    <p>为什么这个顺序重要？因为 Homebrew（你的 <code>brew</code> 命令）安装的程序在 <code>/opt/homebrew/bin</code> 里。如果 <code>/usr/bin</code> 排在前面，系统自带的旧版本会覆盖 Homebrew 安装的新版本。</p>
+
+    <h3>3.3 设置自己的变量</h3>
+
+    <pre><code># 不加 export：变量只在当前 Shell 有效
+MY_VAR="你好"
+echo "$MY_VAR"                # 输出"你好"
+bash -c 'echo "$MY_VAR"'      # 新开的子 Shell 中为空——没传过去
+
+# 加 export：变量会传给子 Shell
+export MY_VAR="你好"
+bash -c 'echo "$MY_VAR"'      # 输出"你好"——传过去了</code></pre>
+
+    <p>日常使用中，几乎所有的变量都需要 <code>export</code>——除非你明确知道它只在当前 Shell 内使用。所以习惯直接写 <code>export 变量名=值</code>。</p>
+
+    <h3>3.4 修改 PATH</h3>
+
+    <p>当你安装了一个新的命令行工具，有时需要把它的目录加到 PATH 中。在 <code>.zshrc</code> 里加一行：</p>
+
+    <pre><code>export PATH="$HOME/我的脚本:$PATH"</code></pre>
+
+    <p>这行代码的意思是：让 Shell 优先在 <code>~/我的脚本</code> 目录里找程序，找不到时再走原来的 PATH。<code>$PATH</code> 引用了原来的值并加在后面——这是一种"追加但不覆盖"的模式。</p>
+
+    <blockquote><p>如果你发现终端提示 <code>command not found</code> 但你明明装了这个程序——<strong>先查 PATH。</strong> 大多数"安装后找不到命令"的问题，不是因为没装好，而是因为安装程序没有自动把它的路径加到 PATH 里。你自己加上就行。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 四、.zshrc ═══════ -->
+
+    <h2>四、.zshrc——你的终端配置文件</h2>
+
+    <p>以上所有配置——别名、函数、环境变量——如果你只在终端里输入，它们只对当前会话有效。关掉终端就没了。<code>.zshrc</code> 就是让它们"永久有效"的地方。</p>
+
+    <h3>4.1 什么是 .zshrc</h3>
+
+    <p><code>.zshrc</code> 是 zsh 的配置文件，放在你的家目录下（<code>~/.zshrc</code>）。每当你<strong>打开一个新的终端窗口</strong>，zsh 会自动读取这个文件里的内容，执行里面的命令。</p>
+
+    <p>文件名以 <code>.</code> 开头，意味着它在访达里默认不可见——但你用 <code>ls -a</code> 或 <code>cat ~/.zshrc</code> 就能看到它。</p>
+
+    <pre><code>cat ~/.zshrc                  # 看看你当前配置了什么</code></pre>
+
+    <p>你之前添加的 <code>alias gnight=...</code> 就在里面。</p>
+
+    <h3>4.2 编辑 .zshrc 的最佳实践</h3>
+
+    <p>不要用 TextEdit（文本编辑）打开它——它会自动换行和加格式。用终端编辑器：</p>
+
+    <pre><code>open -a "Visual Studio Code" ~/.zshrc   # 用 VS Code 打开
+nano ~/.zshrc                             # 或者用终端内置编辑器 nano</code></pre>
+
+    <p>在 <code>.zshrc</code> 里，建议按这个顺序组织内容：</p>
+
+    <pre><code># 1. 环境变量（放最前面）
+export PATH="$HOME/bin:$PATH"
+export EDITOR="nano"      # 默认编辑器（git commit 等会用它）
+
+# 2. 别名
+alias ll='ls -la'
+alias gnight='pkill caffeinate 2>/dev/null; pmset sleepnow'
+alias rm='rm -i'
+
+# 3. 函数
+mcd() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+h() {
+    history | grep "$1"
+}
+
+# 用 VS Code 打开文件。函数名用 vsc 而非 code，
+# 避免与 VS Code 自带的 code 命令行工具冲突
+vsc() {
+    if [ -z "$1" ]; then
+        open -a "Visual Studio Code" .
+    else
+        open -a "Visual Studio Code" "$1"
+    fi
+}</code></pre>
+
+    <h3>4.3 让修改生效</h3>
+
+    <p>改完 .zshrc 后，新开的终端窗口会自动加载新配置。如果想让当前窗口也生效：</p>
+
+    <pre><code>source ~/.zshrc               # 重新加载配置文件</code></pre>
+
+    <p><code>source</code> 命令在当前 Shell 中逐行执行指定文件的内容——相当于"假装我又读了一遍配置文件"。</p>
+
+    <h3>4.4 ⚠️ 一个安全习惯</h3>
+
+    <p>改 .zshrc 之前，建议先备份：</p>
+
+    <pre><code>cp ~/.zshrc ~/.zshrc.backup   # 改之前备份
+# ... 编辑修改 ...
+# 如果改出问题，恢复：
+cp ~/.zshrc.backup ~/.zshrc</code></pre>
+
+    <p>最常见的 .zshrc 问题是语法错误——比如引号没成对、括号没闭合。如果改完后所有新终端都打不开了……别慌，用 <code>/bin/zsh</code> 启动一个纯净的 Shell，然后用 <code>cp 备份回来</code> 恢复。</p>
+
+    <blockquote><p>.zshrc 是你的"终端记忆体"。每一次你配置进去的东西，都在减小你未来重复劳动的量。花 10 分钟配置好别名和常用变量，未来一年省下的是几个小时甚至几十个小时的反复输入。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 五、历史记录 ═══════ -->
+
+    <h2>五、历史记录——你的记忆外挂</h2>
+
+    <p>你敲过的每一条命令，Shell 都记录了下来。用好历史记录，你基本不需要重复输入任何命令。</p>
+
+    <h3>5.1 查看历史</h3>
+
+    <pre><code>history                       # 列出最近的所有命令
+history | tail -20            # 只看最近 20 条
+history | grep "ssh"          # 搜索历史中带 ssh 的命令</code></pre>
+
+    <p>用 <code>history</code> 配合 <code>grep</code> 是找回"我上周用过一条长命令但忘了具体是什么"的最佳方式。</p>
+
+    <h3>5.2 最重要的快捷键——Ctrl+R</h3>
+
+    <p>这是你可能用得最多的快捷键之一：</p>
+
+    <pre><code># 按 Ctrl+R 后输入关键词，Shell 会实时搜索你的历史
+# 假设你敲过：find ~/Desktop -name "*.md" -type f | wc -l
+
+# 按 Ctrl+R
+# 反向搜索命令历史：
+# 输入 "find"（或者 "md"、"Desktop" 等关键词）
+# Shell 实时展示匹配的最近一条命令
+# 继续按 Ctrl+R 看更早的匹配
+# 找到后按回车执行，或按 → 编辑</code></pre>
+
+    <p>这和 <code>history | grep</code> 效果相似，但 Ctrl+R 是交互式的——输入字母实时匹配，不需要额外敲管道和 grep。</p>
+
+    <h3>5.3 快捷操作</h3>
+
+    <table>
+        <tr><th>操作</th><th>效果</th><th>示例</th></tr>
+        <tr><td><code>!!</code></td><td>重复上一条命令</td><td><code>sudo !!</code> = 用 sudo 再执行一次</td></tr>
+        <tr><td><code>!$</code></td><td>上一条命令的最后一个参数</td><td>刚刚 <code>cat 很长的文件名.txt</code> → 现在 <code>rm !$</code></td></tr>
+        <tr><td><code>!n</code></td><td>执行历史中第 n 条命令</td><td>看到 <code>history</code> 里 1234 是你想要的 → <code>!1234</code></td></tr>
+        <tr><td><code>!字符串</code></td><td>执行最近一条以该字符串开头的命令</td><td><code>!cat</code> → 执行最近一次 cat 命令</td></tr>
+        <tr><td><code>↑ ↓</code></td><td>逐条翻阅历史</td><td>按 ↑ 回到上一条，继续按 ↑ 回到更早</td></tr>
+    </table>
+
+    <p>最常用的是 <code>sudo !!</code>——你敲了一条命令，提示"权限不够"，这时输入 <code>sudo !!</code> 就行了。</p>
+
+    <h3>5.4 历史记录的持久性</h3>
+
+    <p>历史记录存储在 <code>~/.zsh_history</code> 文件中。关掉终端再打开，历史不会丢失。<code>history</code> 命令能看到所有会话的记录。</p>
+
+    <pre><code>wc -l ~/.zsh_history          # 你的历史记录里有多少条命令</code></pre>
+
+    <p>默认的 zsh 会保存最近 2000 条命令。如果你觉得不够，可以在 <code>.zshrc</code> 里修改：</p>
+
+    <pre><code>export HISTSIZE=5000           # 内存中保留的命令数
+export SAVEHIST=5000           # 文件中保存的命令数</code></pre>
+
+    <blockquote><p>关于历史记录的一个小建议：<strong>不要怕敲错命令。</strong> 敲错了删掉重来——这条"错误命令"也被记录下来了。没关系，Ctrl+R 只会匹配关键词，你不会因为打错过就被污染。真正的好习惯是：<strong>遇到一条复杂的命令，只要它成功运行了，就值得在评论区写一句注释</strong>——以备以后查阅历史记录时能看懂它。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 综合练习 ══════ -->
+
+    <h2>六、综合练习——打造你的终端环境</h2>
+
+    <p>这个练习和前几篇不同——它不是一次性的，而是你终端配置的起点。做完后你的 Shell 会"记住"你。</p>
+
+    <h3>任务一：检查你现在的配置</h3>
+    <p>看看当前 .zshrc 里有什么，看看你的 PATH 里有哪些目录。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>cat ~/.zshrc
+echo "$PATH" | tr ':' '\n'      # 把 PATH 按 : 换行显示，一目了然
+# tr 是"字符替换"命令，这里把 : 替换成换行符 \n</code></pre>
+    </details>
+
+    <h3>任务二：备份并添加常用别名</h3>
+    <p>备份当前 .zshrc，然后添加一批你用得到的别名。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 先备份
+cp ~/.zshrc ~/.zshrc.backup.$(date "+%Y%m%d")
+
+# 用 VS Code 打开编辑
+open -a "Visual Studio Code" ~/.zshrc
+
+# 在文件末尾添加下面几行：
+# alias ll='ls -la'
+# alias ..='cd ..'
+# alias gnight='pkill caffeinate 2>/dev/null; pmset sleepnow'
+# alias rm='rm -i'
+
+# 保存，然后加载
+source ~/.zshrc</code></pre>    </details>
+
+    <h3>任务三：添加一个实用函数</h3>
+    <p>在 .zshrc 里添加 <code>mcd</code> 函数——创建目录并走进去。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 在 .zshrc 末尾加：
+# mcd() {
+#     mkdir -p "$1"
+#     cd "$1"
+# }
+
+source ~/.zshrc
+mcd ~/Desktop/test-mcd          # 测试
+pwd                             # 应该显示在 test-mcd 里
+rmdir ~/Desktop/test-mcd        # 清理</code></pre>
+    </details>
+
+    <h3>任务四：试试 Ctrl+R</h3>
+    <p>按 <code>Ctrl+R</code>，输入你之前用过的一个命令的一部分（比如 <code>grep</code> 或 <code>sleep</code>），找到一条历史命令并执行。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 按 Ctrl+R
+# 输入: grep
+# 看到匹配的命令出现后，按回车执行
+# 或者按 → 编辑后再执行</code></pre>
+    </details>
+
+    <h3>任务五：用 !! 重试</h3>
+    <p>随便敲一条命令，然后用 <code>!!</code> 或 <code>sudo !!</code> 重试它。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>echo "测试"               # 随便执行一条命令
+!!                          # 再次执行上一条
+sudo !!                     # 如果需要，用 sudo 重试</code></pre>
+    </details>
+
+    <blockquote><p>到现在为止，你已经从"被动的命令使用者"变成了"主动的环境构建者"。配置 .zshrc 是你终端生涯的一个里程碑——它意味着你不再接受默认设置，而是让工具适应你。后续每当你发现一个重复动作，都可以回到 .zshrc 添一笔。它永远跟着你，越用越顺手。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 总结 ══════ -->
+
+    <h2>📌 本篇核心命令速查</h2>
+
+    <table>
+        <tr><th>名称</th><th>作用</th><th>最常用法</th></tr>
+        <tr><td><code>alias</code></td><td>创建/查看别名</td><td><code>alias 名字='命令'</code> <code>alias</code>（查看全部）</td></tr>
+        <tr><td><code>unalias</code></td><td>删除别名</td><td><code>unalias 名字</code></td></tr>
+        <tr><td><code>export</code></td><td>设置环境变量（传给予进程）</td><td><code>export 变量名=值</code></td></tr>
+        <tr><td><code>env</code></td><td>查看所有环境变量</td><td><code>env \| grep 关键词</code></td></tr>
+        <tr><td><code>echo $变量</code></td><td>查看单个变量的值</td><td><code>echo "$PATH"</code></td></tr>
+        <tr><td><code>source</code></td><td>重新加载配置文件</td><td><code>source ~/.zshrc</code></td></tr>
+        <tr><td><code>history</code></td><td>查看命令历史</td><td><code>history \| grep 关键词</code></td></tr>
+        <tr><td><code>Ctrl+R</code></td><td>交互式搜索历史</td><td>按 Ctrl+R → 输入关键词</td></tr>
+        <tr><td><code>!!</code></td><td>重复上一条命令</td><td><code>sudo !!</code></td></tr>
+        <tr><td><code>!$</code></td><td>上一条命令的最后一个参数</td><td><code>cat 文件 !$</code></td></tr>
+    </table>
+
+    <hr>
+
+    <h2>📝 待延伸线索</h2>
+    <ul>
+        <li><strong>macOS 的 launchd 环境变量加载问题</strong>——桌面应用（如 VS Code）和终端的环境变量可能不同，因为 launchd 不读 .zshrc</li>
+        <li><strong>oh-my-zsh / zsh 插件系统</strong>——一个社区维护的 zsh 配置框架，内置数百个插件和主题，大幅降低配置门槛</li>
+        <li><strong>fish / bash 等其他 Shell</strong>——zsh 不是唯一的选择，fish 的自动补全对初学者更友好</li>
+        <li><strong>.zshenv vs .zprofile vs .zshrc</strong>——zsh 有多个配置文件，分别在登录 Shell、交互式 Shell、脚本中加载</li>
+        <li><strong>alias vs shell function 的性能差异</strong>——别名比函数略快，但差距微乎其微</li>
+        <li><strong>zsh 的全局别名</strong>——<code>alias -g</code> 可以在命令的任何位置展开，不限于开头</li>
+        <li><strong>变量的引号陷阱</strong>——<code>$变量</code> vs <code>"$变量"</code> vs <code>'$变量'</code> 的差异：引号决定变量是否展开</li>
+        <li><strong>set / unset</strong>——不通过 export 直接设置 Shell 内部变量的方式</li>
+    </ul>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年6月3日 &nbsp;|&nbsp; 补充整理：知白</p>
+
+    <div class="nav-bottom">
+        <a href="index.html">← 返回一些知识</a>
+        &nbsp;·&nbsp;
+        <a href="../../../index.html">← 返回首页</a>
+    </div>
+
+    <div class="series-nav">
+        <span class="prev"><a href="与Shell对话：面向系统的操作.html">← 上一篇：面向系统的操作</a></span>
+        <span class="next"><a href="与Shell对话：从命令到脚本.html">下一篇：从命令到脚本 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
+
+</div>
+
+<script src="../../../progress-bar.js"></script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>

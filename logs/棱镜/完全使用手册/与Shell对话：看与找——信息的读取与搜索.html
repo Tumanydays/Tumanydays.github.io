@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 Shell 对话：看与找——信息的读取与搜索 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        .back {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: var(--hover); }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: var(--text-title);
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+
+        .intro {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: var(--text-title);
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote code { font-size: 0.82rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+
+        ul, ol {
+            margin: 12px 0 20px 20px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 2;
+        }
+        li { margin-bottom: 4px; }
+        li strong { color: var(--text); }
+
+        code {
+            font-family: "SF Mono", "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--code-text);
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0 24px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: var(--text);
+        }
+        .cmd-output { color: #888; }
+        details { margin: 16px 0 20px; }
+        details summary { cursor: pointer; font-size: 0.9rem; color: var(--hover); margin-bottom: 8px; }
+        details summary:hover { opacity: 0.8; }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: var(--hover); }
+
+        .series-nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .series-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a class="back" href="index.html">← 完全使用手册</a>
+
+    <h1>与 Shell 对话 · 看与找<br>信息的读取与搜索</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月3日 &nbsp;·&nbsp; <a href="../../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>这是《与 Shell 对话》系列的第二篇。第一篇教会了你导航文件系统、操作文件。现在你知道了文件放在哪里——但还不知道怎么读里面的内容、怎么从一堆文件里找到你需要的那个。这就是这篇要解决的问题。<strong>看完这篇，你将能：查看任意文件的内容、在大量文件中搜索特定文字、使用终端找到电脑上的任何东西。</strong></p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="与Shell对话：终端是你的新桌面.html" style="color:var(--text-dim);">终端是你的新桌面</a> &nbsp;·&nbsp; 下一篇：<a href="与Shell对话：流水线与重定向.html" style="color:var(--text-dim);">流水线与重定向</a></p>
+    </div>
+
+    <!-- ═══ 关键词索引 ═══ -->
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>cat</strong></td><td>把文件内容打印到屏幕——全量输出，适合短文件</td></tr>
+        <tr><td><strong>less</strong></td><td>分页查看文件——看长文件时用它，可以上下翻、可以搜索</td></tr>
+        <tr><td><strong>head / tail</strong></td><td>只看文件的开头或末尾几行。<code>tail -f</code> 能实时追踪日志</td></tr>
+        <tr><td><strong>grep</strong></td><td>在文件内容中搜索指定的文字——终端里最强大的搜索工具</td></tr>
+        <tr><td><strong>正则表达式</strong></td><td>一种描述「字符模式」的语言，<code>^</code> <code>$</code> <code>.</code> 这些符号不是乱码，是逻辑</td></tr>
+        <tr><td><strong>find</strong></td><td>按名字/类型/大小/时间搜索文件——精确但语法稍绕</td></tr>
+        <tr><td><strong>mdfind</strong></td><td>macOS 的 Spotlight 搜索——用终端调出你平时在访达里搜东西的能力</td></tr>
+        <tr><td><strong>file</strong></td><td>检测一个文件到底是什么类型——不信任文件后缀时用它</td></tr>
+        <tr><td><strong>wc</strong></td><td>统计文件的行数、词数、字节数——Word Count</td></tr>
+        <tr><td><strong>du / df</strong></td><td><code>du</code> 看文件夹占多大空间，<code>df</code> 看硬盘还剩多少空间</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 正文 ═══════ -->
+
+    <h2>一、看文件内容——从 cat 到 less 到 tail</h2>
+
+    <p>第一篇里你用 <code>ls</code> 看到了文件名，用 <code>cat</code> 看了练习文件的内容。这一节把所有「看内容」的命令串起来，让你知道什么时候该用哪一个。</p>
+
+    <h3>1.1 cat——全量输出，适合短文件</h3>
+
+    <pre><code>cat 文件名               # 把文件内容全部打印到屏幕
+cat -n 文件名             # 显示行号
+cat 文件1 文件2           # 把多个文件的内容连在一起输出</code></pre>
+
+    <p><code>cat</code> = Concatenate（连接）。它原本的设计意图是把多个文件的内容串起来输出。但对于终端初学者来说，它的主要用途是「看一眼这个文件里有什么」。</p>
+
+    <p>想试试的话，找一个小文件试一下：</p>
+
+    <pre><code>cat ~/.zshrc         # 看看你的 shell 配置文件（很短的）
+cat -n ~/.zshrc      # 带行号再看一遍</code></pre>
+
+    <p><code>cat</code> 的极限：如果文件超过一屏，内容会快速滚过屏幕。这不是 bug，它就是设计成这样的——把内容"倒"到屏幕上。你需要的是下面这个命令。</p>
+
+    <blockquote><p>「cat 适合看短文件，less 适合看长文件」——把这个口诀记住。用错了会有点狼狈：一个 2000 行的日志文件 <code>cat</code> 出来，内容从你眼前飞过，什么都看不到。</p></blockquote>
+
+    <h3>1.2 less——长文件的正确打开方式</h3>
+
+    <pre><code>less 文件名              # 分页查看文件</code></pre>
+
+    <p><code>less</code> 一次只显示一屏内容，按空格翻到下一屏。<strong>这是终端里「看长东西」的标准方式。</strong></p>
+
+    <p>进入 less 后的操作键：</p>
+
+    <table>
+        <tr><th>按键</th><th>效果</th><th>备注</th></tr>
+        <tr><td><strong>空格</strong> 或 <code>f</code></td><td>向下翻一屏</td><td>最常用的翻页方式</td></tr>
+        <tr><td><code>b</code></td><td>向上翻一屏</td><td>看过头了往回翻</td></tr>
+        <tr><td><strong>↑ ↓</strong></td><td>逐行上下滚动</td><td>翻过头几行时用</td></tr>
+        <tr><td><code>/关键词</code></td><td>在文件内搜索</td><td>输入 <code>/</code> 后打字，回车搜索，<code>n</code> 跳到下一个，<code>N</code> 跳回上一个</td></tr>
+        <tr><td><code>g</code></td><td>跳到文件开头</td><td>Go to start</td></tr>
+        <tr><td><code>G</code></td><td>跳到文件末尾</td><td>Go to end</td></tr>
+        <tr><td><code>=</code></td><td>显示当前位置在文件中的百分比</td><td>看进度</td></tr>
+        <tr><td><strong><code>q</code></strong></td><td>退出 less</td><td>不退出你就卡在这儿了</td></tr>
+    </table>
+
+    <p>试一下：</p>
+
+    <pre><code>less /etc/passwd       # Mac 的用户账户文件，看看里面是什么
+# 进入 less 后：按空格翻页，按 / 搜索你的用户名，按 q 退出</code></pre>
+
+    <p><strong>less 不只是用来读文件的。</strong> 很多命令的输出也可以「管道」给 less——这个管道符号 <code>|</code> 下一篇会详细讲，但你可以先试一下：</p>
+
+    <pre><code>ls -la /System/Library | less
+# ls -la 的输出很长，但通过管道送给 less 后，就可以翻页看了</code></pre>
+
+    <p>还记得上一篇的 <code>man</code> 命令吗？<code>man ls</code> 打开的手册页就是通过 less 显示的——所以翻页和退出的操作一模一样。</p>
+
+    <blockquote><p><code>more</code> 是早于 <code>less</code> 的翻页工具。less 在功能上是 more 的超集（所以有个玩笑：less is more）。你现在只需要 less，不需要 more。</p></blockquote>
+
+    <h3>1.3 head 和 tail——只看头尾</h3>
+
+    <p><code>head</code> 只看文件开头，<code>tail</code> 只看文件末尾：</p>
+
+    <pre><code>head 文件名              # 默认显示前 10 行
+head -n 20 文件名        # 显示前 20 行
+
+tail 文件名              # 默认显示后 10 行
+tail -n 20 文件名        # 显示后 20 行</code></pre>
+
+    <p>试一下：</p>
+
+    <pre><code>head -n 5 ~/.zshrc      # 看配置文件的前 5 行
+tail -n 5 ~/.zshrc      # 看配置文件的最后 5 行</code></pre>
+
+    <p>看起来很简单，但 <code>tail</code> 有一个绝招——<code>-f</code>（follow）模式：</p>
+
+    <pre><code>tail -f 文件名           # 持续跟踪文件末尾，新内容实时显示</code></pre>
+
+    <p>这是系统管理员最常用的命令之一。当某个程序在写日志文件时，<code>tail -f</code> 让你实时看到新写入的每一行。按 <code>Ctrl + C</code> 退出跟踪。</p>
+
+    <pre><code># 尝试跟踪系统日志（需要退出时按 Ctrl + C）
+# 注意：如果你的 Mac 提示 Permission denied，说明该文件需要
+# 管理员权限才能读取——这是正常的，换一个你权限内的文件试
+tail -f /var/log/system.log</code></pre>
+
+    <blockquote><p><code>tail -f</code> 的场景：你下载一个大文件，想看进度日志有没有更新；你在调试程序，想实时看错误输出；服务器出了问题，你 SSH 上去 <code>tail -f /var/log/nginx/error.log</code> 看最新报错。以后你会有无数次用到它。</p>
+    <p>但注意：<code>tail -f</code> 一旦运行就<strong>一直占用终端</strong>，不会自动退出。每次有新内容追加到文件末尾，它就会立即显示出来。想停止时按 <code>Ctrl + C</code>。这不是卡住了——它是在等你按停止。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 第二章 ══════ -->
+
+    <h2>二、搜索大师 grep</h2>
+
+    <p><code>grep</code> 是终端世界里最重要的命令之一。它的工作极其单纯：<strong>在文件内容中搜索指定的文字，把匹配到的行打印出来。</strong></p>
+
+    <p>它的名字源自一个古老的行编辑器命令 <code>g/re/p</code>：Global Regular Expression Print。但你不需要记住这个——你只需要知道它怎么用。</p>
+
+    <h3>2.1 基础用法</h3>
+
+    <pre><code>grep "关键词" 文件名           # 在文件中搜索，显示包含关键词的行
+grep -i "关键词" 文件名         # 忽略大小写
+grep -n "关键词" 文件名         # 同时显示行号
+grep -c "关键词" 文件名         # 只统计匹配的行数，不显示内容
+grep -v "关键词" 文件名         # 反向匹配——显示不包含关键词的行</code></pre>
+
+    <p>grep 默认会在匹配的文字上加颜色高亮（在大多数 Mac 上已经是彩色的）。如果你的终端没显示颜色，可以主动加上：</p>
+
+    <pre><code>grep --color=auto "关键词" 文件名   # 带颜色高亮显示匹配文字</code></pre>
+
+    <p>试一下：</p>
+
+    <pre><code>grep "export" ~/.zshrc         # 看看配置文件里有哪些 export 语句
+grep -n "PATH" ~/.zshrc        # 带行号看 PATH 相关设置
+grep -c "alias" ~/.zshrc       # 统计你设了多少个别名
+grep -v "^#" ~/.zshrc          # 不看注释行（排除以 # 开头的行），只看有效配置</code></pre>
+
+    <h3>2.2 跨越多个文件搜索</h3>
+
+    <p>当你不知道关键词在哪个文件中——或者想在所有文件里搜索时，<code>-r</code>（recursive，递归）搜索整个目录：</p>
+
+    <pre><code>grep -r "关键文字" ~/Desktop/领域      # 在 Desktop/领域 里搜索
+grep -ri "terminal" ~/Desktop          # 递归 + 忽略大小写
+grep -rl "TODO" ~/Desktop              # -l 只显示包含匹配的文件名，不显示内容
+grep -rL "TODO" ~/Desktop              # -L 只显示不包含匹配的文件名（反向的 -l）
+grep -rn "sleepnow" ~/Desktop          # 递归 + 显示行号</code></pre>
+
+    <p>在实际使用中，这几个选项可以任意组合。最常用的组合是 <code>grep -rin "文字" 目录</code>——递归、忽略大小写、显示行号、在一个目录里搜。</p>
+
+    <blockquote><p>一个经常被混淆的点：<code>grep</code> 搜索的是<strong>文件内容</strong>，而不是文件名。想搜索文件名要用 <code>find</code> 或 <code>mdfind</code>（下一节）。<code>grep "python" 文件</code> 是找文件里写了「python」这个单词的行；<code>find . -name "*python*"</code> 是找名字里带「python」的文件。两者完全不同。</p></blockquote>
+
+    <h3>2.3 grep 与管道——现在开始值得先看一眼</h3>
+
+    <p>上一篇提到管道 <code>|</code> 可以把一个命令的输出传给另一个命令。grep 是管道最经典的搭档：</p>
+
+    <pre><code>history | grep "ssh"              # 在命令历史中搜索所有带 ssh 的命令
+ls -la ~/Desktop | grep "2026"    # 只显示 Desktop 里日期含 2026 的文件</code></pre>
+
+    <p>这是 grep 的真正威力所在——它不只能搜索文件，还能搜索任何命令的输出。第三篇会系统讲管道，但现在先记住这种模式：<code>命令 | grep 关键词</code>。</p>
+
+    <h3>2.4 正则的第一次接触——grep 的搜索语言</h3>
+
+    <p>grep 搜索时，<code>"关键词"</code> 里的内容不只是普通文字——它可以包含一些特殊符号来表示模式。这叫<strong>正则表达式（Regular Expression，简称 regex）</strong>。以下是三个最基础的：</p>
+
+    <table>
+        <tr><th>符号</th><th>含义</th><th>例子</th><th>匹配什么</th></tr>
+        <tr><td><code>^</code></td><td>行首</td><td><code>grep "^export" 文件</code></td><td>以 export 开头的行</td></tr>
+        <tr><td><code>$</code></td><td>行尾</td><td><code>grep "true$" 文件</code></td><td>以 true 结尾的行</td></tr>
+        <tr><td><code>.</code></td><td>任意一个字符</td><td><code>grep "c.t" 文件</code></td><td>cat、cut、cot 都匹配——中间任意一字</td></tr>
+    </table>
+
+    <pre><code># 在配置文件里试试正则
+grep "^#" ~/.zshrc           # 所有以 # 开头的行（注释）
+grep -v "^#" ~/.zshrc        # 所有不以 # 开头的行（有效配置）
+grep -v "^$" ~/.zshrc        # 排除空行（更干净的版本：有效行 + 非空）</code></pre>
+
+    <p>正则表达式是整个系列里最值得单独深入的话题。这篇只是让你知道它的存在——符号不是乱码，是逻辑。后面我们会专门展开。</p>
+
+    <blockquote><p>grep 默认使用<strong>基础正则（BRE）</strong>，有些符号（如 <code>+</code> <code>?</code> <code>{}</code>）需要用 <code>\</code> 转义才能使用。加上 <code>-E</code> 选项可以切换到<strong>扩展正则（ERE）</strong>，更接近你学到的标准正则。现在你只需要知道：当你的正则不按预期工作时，试试 <code>grep -E</code>。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 第三章 ══════ -->
+
+    <h2>三、搜索文件——find 和 mdfind</h2>
+
+    <p>grep 搜索的是文件<strong>内容</strong>。那文件<strong>名</strong>呢？你想找到一个叫"笔记"的文件但不记得它在哪——这时用 <code>find</code> 或 <code>mdfind</code>。</p>
+
+    <h3>3.1 find——精准但语法绕</h3>
+
+    <pre><code>find 起点目录 -name "文件名"     # 按名字查找</code></pre>
+
+    <p><code>find</code> 的第一参数是<strong>从哪开始找</strong>，然后才是条件。</p>
+
+    <pre><code>find ~/Desktop -name "*.md"                      # Desktop 下所有 .md 文件
+find ~/Desktop -name "*笔记*"                     # 名字里带"笔记"的文件
+find ~/Desktop -name "*.md" -type f              # 只看文件（不包含文件夹）
+find ~/Desktop -name "*.md" -type f -size +1M    # 只找大于 1MB 的 .md 文件
+find ~/Desktop -name "*.md" -type d              # 找名字以 .md 结尾的文件夹</code></pre>
+
+    <p>常用的 <code>-type</code> 选项：</p>
+
+    <table>
+        <tr><th>类型</th><th>含义</th></tr>
+        <tr><td><code>-type f</code></td><td>只找文件（file）</td></tr>
+        <tr><td><code>-type d</code></td><td>只找文件夹（directory）</td></tr>
+        <tr><td><code>-type l</code></td><td>只找符号链接（link）</td></tr>
+    </table>
+
+    <p>常用的 <code>-name</code> 选项支持通配符——和第一篇学的完全一样：<code>*</code> 匹配任意字符，<code>?</code> 匹配单个字符。</p>
+
+    <blockquote><p><code>find</code> 的搜索范围由你指定的起点决定。不给起点默认为当前目录（<code>.</code>）。<code>find ~</code> 会搜索整个用户文件夹——范围越大越慢。尽量把搜索范围收窄，比如从 <code>~/Desktop</code> 而不是 <code>/</code> 开始找。</p></blockquote>
+
+    <h3>3.2 ⚠️ find 的 -delete 必须小心</h3>
+
+    <p><code>find</code> 可以找到文件后直接删除：</p>
+
+    <pre><code>find ~/Desktop -name "*.tmp" -delete    # 删除所有 .tmp 文件（⚠️ 谨慎！）</code></pre>
+
+    <p>和 <code>rm</code> 一样，<code>find -delete</code> 不会进废纸篓。<strong>永远先用不带 -delete 的版本跑一遍，确认找到的是你想删的东西，再加 -delete。</strong></p>
+
+    <pre><code># 安全做法：先看找到什么
+find ~/Desktop -name "*.tmp"
+# 确认无误后，再删
+find ~/Desktop -name "*.tmp" -delete</code></pre>
+
+    <h3>3.3 mdfind——macOS 的 Spotlight 搜索</h3>
+
+    <p><code>find</code> 很强大，但它的语法对初学者来说有点绕。如果你只是想快速找到文件，macOS 提供了一个更友好的方式——<code>mdfind</code>，它调用的是你平时在访达右上角搜索时用的 Spotlight 索引。</p>
+
+    <pre><code>mdfind 关键词              # 搜索所有包含该关键词的文件
+mdfind -name 文件名         # 按文件名搜索
+mdfind -onlyin 目录 关键词  # 只在指定目录内搜索</code></pre>
+
+    <p>试一下：</p>
+
+    <pre><code>mdfind 睡眠                  # 搜索所有包含"睡眠"的文件（不限文件名和内容）
+mdfind -name "pmset"         # 搜索文件名带 pmset 的文件
+mdfind -onlyin ~/Desktop 终端  # 只在桌面范围内搜索"终端"</code></pre>
+
+    <p><code>mdfind</code> 比 <code>find</code> 快的多——因为它不是实时遍历文件系统，而是查预先建好的索引。代价是新创建的文件可能不会立刻出现在结果中（索引有延迟）。</p>
+
+    <table>
+        <tr><th>场景</th><th>用 find</th><th>用 mdfind</th></tr>
+        <tr><td>按文件名搜索</td><td>✅ <code>find ~ -name "*.md"</code></td><td>✅ <code>mdfind -name ".md"</code></td></tr>
+        <tr><td>按文件内容搜索</td><td>搭配 grep 使用</td><td>✅ 直接 <code>mdfind 关键词</code></td></tr>
+        <tr><td>按大小/时间搜索</td><td>✅ 支持 <code>-size</code> <code>-mtime</code></td><td>❌ 不支持（需配合其他工具）</td></tr>
+        <tr><td>刚创建的文件</td><td>✅ 立刻能找到</td><td>⚠️ 可能需等索引更新</td></tr>
+    </table>
+
+    <blockquote><p>一个实用原则：日常随便找文件用 <code>mdfind</code>（快、简单）；需要精确条件或要处理刚创建的文件用 <code>find</code>。两个都学会，看场景选。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 第四章 ══════ -->
+
+    <h2>四、了解你的文件——类型、大小、用量</h2>
+
+    <p>这一节是几个独立的小工具，各自回答一个问题。</p>
+
+    <h3>4.1 file——它是什么类型的文件</h3>
+
+    <p>文件后缀（.jpg、.pdf、.doc）可以被随意更改，不靠谱。<code>file</code> 命令通过读取文件的<strong>头部特征字节</strong>来判断真实类型：</p>
+
+    <pre><code>file ~/Desktop/图片.png      # 检测文件类型
+<span class="cmd-output">图片.png: PNG image data, 800 x 600, 8-bit/color RGBA, non-interlaced</span>
+
+file /usr/bin/grep           # 连可执行文件类型也能检测
+<span class="cmd-output">/usr/bin/grep: Mach-O 64-bit executable x86_64</span></code></pre>
+
+    <p><code>file</code> 不讲界面语言——它输出的是文件格式的标准名称，不一定是中文。但信息足够精确：分辨率、颜色深度、编码格式都会显示。</p>
+
+    <h3>4.2 wc——数一数</h3>
+
+    <p><code>wc</code> = Word Count。统计文件有多少行、多少词、多少字节：</p>
+
+    <pre><code>wc ~/.zshrc                     # 行数、词数、字节数
+wc -l ~/.zshrc                  # 只看行数
+wc -c ~/.zshrc                  # 只看字节数（约等于文件大小）</code></pre>
+
+    <p>一个非常实用的组合——配合第一篇的 <code>ls</code> 和通配符，可以快速了解一个目录下的文件数量：</p>
+
+    <pre><code>ls ~/Desktop | wc -l            # 桌面上有多少个文件和文件夹
+ls ~/Desktop/领域 | wc -l       # Desktop/领域 里有多少东西</code></pre>
+
+    <h3>4.3 du——看看占了多少空间</h3>
+
+    <p><code>du</code> = Disk Usage。计算文件夹或文件占用了多少磁盘空间：</p>
+
+    <pre><code>du -sh ~/Desktop                # Desktop 总占用了多大空间（-s 汇总，-h 人类可读）
+du -sh ~/Downloads
+du -sh ~/Desktop/*              # Desktop 里每个项目分别占多大</code></pre>
+
+    <p>不加 <code>-s</code> 会递归显示每一级子文件夹的大小——输出非常长。<code>du -sh</code> 是日常最常用的组合，记住它：</p>
+
+    <table>
+        <tr><th>组合</th><th>含义</th></tr>
+        <tr><td><code>du -sh 目录</code></td><td>只看该目录的总大小（汇总 + 人类可读）</td></tr>
+        <tr><td><code>du -sh 目录/*</code></td><td>看该目录下一级各项目的大小</td></tr>
+        <tr><td><code>du -h 目录</code></td><td>递归查看每一级（通常输出太长，配合 less 使用）</td></tr>
+    </table>
+
+    <h3>4.4 df——硬盘还剩多少</h3>
+
+    <p><code>df</code> = Disk Free。查看整个硬盘的容量、已用空间、可用空间：</p>
+
+    <pre><code>df -h                           # 人类可读格式显示所有挂载卷的空间
+df -h /                         # 只看主硬盘</code></pre>
+
+    <p>输出示例：</p>
+
+    <pre><code>df -h /
+<span class="cmd-output">Filesystem     Size   Used  Avail Capacity  Mounted on
+/dev/disk1s1  494Gi  420Gi   70Gi    86%    /</span></code></pre>
+
+    <p>从左到右：总容量、已用、可用、使用百分比、挂载点。</p>
+
+    <blockquote><p>三个实用场景：买新电脑前用 <code>df -h</code> 看还剩多少空间；感觉电脑变慢时用 <code>du -sh ~/Downloads</code> 看是不是下载文件夹塞满了；要备份之前用 <code>du -sh ~/Desktop  ~/Documents</code> 先估个大小。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 综合练习 ══════ -->
+
+    <h2>五、综合练习——用学过的命令调查你的电脑</h2>
+
+    <p>从第一篇到这第二篇，你已经学了系统中最重要的操作和搜索命令。这个练习没有固定的"正确答案"——它是一个探索任务，用你学过的命令去了解你的电脑。</p>
+
+    <p>在开始之前，先创建本次练习用的文件夹：</p>
+
+    <pre><code>mkdir -p ~/Desktop/终端练习/文档
+cd ~/Desktop/终端练习/文档
+touch 日记_2026年6月.txt 日记_2026年5月.txt 读书笔记.md 购物清单.txt</code></pre>
+
+    <p>现在开始——每个任务都留了操作空间，先自己试，再看下面的参考命令：</p>
+
+    <h3>任务一：这个文件夹里有什么</h3>
+    <p>用第一篇学到的命令，看看这个文件夹里有哪些文件、各自多大、什么时候创建的。</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code>ls -la ~/Desktop/终端练习/文档
+ls -lh ~/Desktop/终端练习/文档</code></pre>
+    </details>
+
+    <h3>任务二：看看文件的开头和结尾</h3>
+    <p>这些文件都是空的（刚创建的）。但你可以用 <code>head</code> 和 <code>tail</code> 来验证它们确实没内容——<code>wc -l</code> 也可以。</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code># 多文件的组合用法
+wc -l ~/Desktop/终端练习/文档/*
+head -n 1 ~/Desktop/终端练习/文档/*</code></pre>
+    </details>
+
+    <h3>任务三：找一篇真正有内容的文件来探索</h3>
+    <p>空文件没啥好查的。用 <code>mdfind</code> 或 <code>find</code> 在你的电脑上找到一篇你写过的 .md 文件：</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code># 方法一：用 mdfind 快速搜
+mdfind -onlyin ~/Desktop ".md"
+
+# 方法二：用 find 精准搜
+find ~/Desktop -name "*.md"
+
+# 选一个你找到的 .md 文件，把路径记下来，接下来我们用这个文件练习</code></pre>
+    </details>
+
+    <h3>任务四：用 less 读这个文件</h3>
+    <p>找到文件后，用 less 打开它，在文件内搜索一个你记得出现过的词：</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code>less ~/Desktop/领域/你的文件.md    # 把路径换成你找到的文件
+
+# 在 less 里面：
+#   空格    → 翻下一页
+#   /关键词  → 搜索
+#   n       → 跳到下一个匹配
+#   N       → 跳回上一个匹配
+#   q       → 退出</code></pre>
+    </details>
+
+    <h3>任务五：用 grep 在那个文件里搜索</h3>
+    <p>退出 less 后，用 grep 在同一个文件中搜索同一个词，看看 grep 给的行号和在 less 里搜到的位置是否对应得上：</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code>grep -n "关键词" ~/Desktop/领域/你的文件.md
+
+# 再试试忽略大小写
+grep -in "关键词" ~/Desktop/领域/你的文件.md</code></pre>
+    </details>
+
+    <h3>任务六：算算这个文件夹占了多少空间</h3>
+    <p>用 du 和 df 了解一下磁盘占用：</p>
+
+    <details>
+    <summary style="cursor:pointer;color:var(--hover);font-size:0.9rem;margin-bottom:12px;">👆 查看参考命令</summary>
+    <pre><code># 练习文件夹占多大
+du -sh ~/Desktop/终端练习
+
+# 你整个桌面占多大
+du -sh ~/Desktop
+
+# 主硬盘还剩多少
+df -h /</code></pre>
+    </details>
+
+    <h3>任务七：清理</h3>
+    <p>和第一篇一样，练习完清除痕迹：</p>
+
+    <pre><code>rm -rf ~/Desktop/终端练习</code></pre>
+
+    <blockquote><p>这个练习的精髓不在于每一步都做对——而在于你开始把命令组合起来用。第一篇学的导航 + 本篇学的查看和搜索，这就是真正的终端工作流。下一篇讲管道后，这些命令还能串成更强大的链条。</p></blockquote>
+
+    <h2>📌 本篇核心命令速查</h2>
+
+    <table>
+        <tr><th>命令</th><th>作用</th><th>最常用法</th></tr>
+        <tr><td><code>cat</code></td><td>输出文件内容到屏幕</td><td><code>cat 文件</code>（短文件） <code>cat -n 文件</code>（带行号）</td></tr>
+        <tr><td><code>less</code></td><td>分页查看文件</td><td><code>less 文件</code> → 空格翻页，/<code>关键词</code>搜索，q 退出</td></tr>
+        <tr><td><code>head</code></td><td>看文件开头几行</td><td><code>head -n 20 文件</code></td></tr>
+        <tr><td><code>tail</code></td><td>看文件末尾几行</td><td><code>tail -n 20 文件</code> <code>tail -f 文件</code>（实时追踪）</td></tr>
+        <tr><td><code>grep</code></td><td>在内容中搜索文字</td><td><code>grep -rin "文字" 目录</code> <code>命令 | grep 文字</code></td></tr>
+        <tr><td><code>find</code></td><td>按条件搜索文件</td><td><code>find 目录 -name "模式" -type f</code></td></tr>
+        <tr><td><code>mdfind</code></td><td>Spotlight 快速搜索</td><td><code>mdfind 关键词</code> <code>mdfind -onlyin 目录 关键词</code></td></tr>
+        <tr><td><code>file</code></td><td>检测文件真实类型</td><td><code>file 文件</code></td></tr>
+        <tr><td><code>wc</code></td><td>统计行数</td><td><code>wc -l 文件</code> <code>ls | wc -l</code>（数文件数量）</td></tr>
+        <tr><td><code>du</code></td><td>查看磁盘用量</td><td><code>du -sh 目录</code></td></tr>
+        <tr><td><code>df</code></td><td>查看可用空间</td><td><code>df -h</code></td></tr>
+    </table>
+
+    <hr>
+
+    <h2>📝 待延伸线索</h2>
+    <p>本篇提到了但未深入展开的方向，后续篇章会覆盖：</p>
+    <ul>
+        <li><strong>管道 <code>|</code> 的深入使用</strong>——把命令串成流水线的完整思路，见第三篇</li>
+        <li><strong>正则表达式进阶</strong>——<code>+</code> <code>?</code> <code>{}</code> <code>[]</code> <code>\d</code> <code>\w</code>，以及 grep -E 扩展正则</li>
+        <li><strong><code>grep -A</code> <code>-B</code> <code>-C</code></strong>——匹配行前后各显示几行，看上下文时非常有用</li>
+        <li><strong><code>find -exec</code></strong>——对找到的每个文件执行一条命令，<code>find . -name "*.png" -exec cp {} ~/备份 \;</code></li>
+        <li><strong>less 的快捷键进阶</strong>——<code>v</code> 用编辑器打开当前文件，<code>:n</code> 切到下一个文件</li>
+        <li><strong><code>locate</code></strong>——基于数据库的快速文件搜索（macOS 默认未启用，需手动配置）</li>
+        <li><strong><code>sort</code> 和 <code>uniq</code></strong>——排序与去重，和管道搭配使用才发挥威力，见第三篇</li>
+        <li><strong>关于 <code>grep -E</code> 到底要不要加</strong>——扩展正则 vs 基础正则的差异来源：1970 年代的古老命令遗留</li>
+    </ul>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年6月3日 &nbsp;|&nbsp; 补充整理：知白</p>
+
+    <div class="nav-bottom">
+        <a href="index.html">← 返回一些知识</a>
+        &nbsp;·&nbsp;
+        <a href="../../../index.html">← 返回首页</a>
+    </div>
+
+    <div class="series-nav">
+        <span class="prev"><a href="与Shell对话：终端是你的新桌面.html">← 上一篇：终端是你的新桌面</a></span>
+        <span class="next"><a href="与Shell对话：流水线与重定向.html">下一篇：流水线与重定向 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
+
+</div>
+
+<script src="../../../progress-bar.js"></script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>

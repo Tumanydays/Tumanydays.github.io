@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 Shell 对话：流水线与重定向 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+        }
+
+        .back {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 48px;
+            display: inline-block;
+        }
+        .back:hover { color: var(--hover); }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: var(--text-title);
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 48px;
+        }
+        .meta span { margin-right: 16px; }
+
+        .intro {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 48px;
+            padding-left: 16px;
+            border-left: 2px solid #ddd;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            color: var(--text-title);
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        blockquote {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid #ccc;
+        }
+        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote code { font-size: 0.82rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 28px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        th {
+            background: #f9f9f9;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        tr:hover td { background: #fcfcfc; }
+
+        ul, ol {
+            margin: 12px 0 20px 20px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 2;
+        }
+        li { margin-bottom: 4px; }
+        li strong { color: var(--text); }
+
+        code {
+            font-family: "SF Mono", "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--code-text);
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 16px 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0 24px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: var(--text);
+        }
+
+        .cmd-output { color: #888; }
+        .stream-diagram {
+            font-family: "SF Mono", "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            line-height: 2;
+            color: var(--text);
+            margin: 20px 0 24px;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 6px;
+        }
+        .stream-diagram .arrow { color: var(--code-text); font-weight: 600; }
+        .stream-diagram .label { color: var(--ink); font-weight: 500; }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 48px 0;
+        }
+        .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+
+        .nav-bottom {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .nav-bottom a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-bottom a:hover { color: var(--hover); }
+
+        .series-nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .series-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+
+        details { margin: 16px 0 20px; }
+        details summary { cursor: pointer; font-size: 0.9rem; color: var(--hover); margin-bottom: 8px; }
+        details summary:hover { opacity: 0.8; }
+
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a class="back" href="index.html">← 完全使用手册</a>
+
+    <h1>与 Shell 对话 · 流水线与重定向</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月3日 &nbsp;·&nbsp; <a href="../../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>这是《与 Shell 对话》系列的第三篇。前两篇你学会了操作文件和搜索内容——每个命令都是独立使用的。但终端的真正威力来自<strong>把命令串起来</strong>。一篇的核心是两个符号：<code>|</code>（管道）和 <code>></code>（重定向）。</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="与Shell对话：看与找——信息的读取与搜索.html" style="color:var(--text-dim);">看与找——信息的读取与搜索</a> &nbsp;·&nbsp; 下一篇：<a href="与Shell对话：面向系统的操作.html" style="color:var(--text-dim);">面向系统的操作</a></p>
+    </div>
+
+    <!-- ═══ 关键词索引 ═══ -->
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>标准输入（stdin）</strong></td><td>编号 0，命令默认的输入来源——通常是你的键盘</td></tr>
+        <tr><td><strong>标准输出（stdout）</strong></td><td>编号 1，命令的正常输出目的地——通常是屏幕</td></tr>
+        <tr><td><strong>标准错误（stderr）</strong></td><td>编号 2，命令的错误信息通道——也默认去屏幕，但可以单独处理</td></tr>
+        <tr><td><strong>重定向 <code>></code></strong></td><td>把命令的输出从屏幕转到文件里——<code>ls > 清单.txt</code> 会把结果存下来</td></tr>
+        <tr><td><strong>追加 <code>>></code></strong></td><td>和 <code>></code> 一样，但不覆盖已有内容，而是追加到文件末尾</td></tr>
+        <tr><td><strong>管道 <code>|</code></strong></td><td>把左边命令的输出接到右边命令的输入——<code>A | B</code>，A 的结果变成 B 的处理对象</td></tr>
+        <tr><td><strong><code>/dev/null</code></strong></td><td>Unix 的"黑洞"——任何扔进去的东西都会消失，用于丢弃不需要的输出</td></tr>
+        <tr><td><strong>sort</strong></td><td>排序——<code>sort -h</code> 按人类可读数字排序，<code>sort -n</code> 按数值排序</td></tr>
+        <tr><td><strong>uniq</strong></td><td>去重——去掉相邻的重复行，通常和 sort 配合使用</td></tr>
+        <tr><td><strong>tee</strong></td><td>T 型管道——把输出同时送到屏幕和文件，像三通水管</td></tr>
+        <tr><td><strong>xargs</strong></td><td>把管道送来的内容转换成命令的参数——"从流水线上拿起每个零件，交给下一个机器处理"</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 正文 ═══════ -->
+
+    <h2>一、标准流——被忽视的核心概念</h2>
+
+    <p>在你输入一个命令并按回车之后，Shell 会创建三个"通道"，连接你的命令和外界：</p>
+
+    <div class="stream-diagram">
+        键盘 ──→ <span class="label">[stdin  (0)]</span> ──→ 命令 ──→ <span class="label">[stdout (1)]</span> ──→ 屏幕
+                                      命令 ──→ <span class="label">[stderr (2)]</span> ──→ 屏幕
+    </div>
+
+    <table>
+        <tr><th>通道</th><th>编号</th><th>默认来源/去向</th><th>拿它做什么</th></tr>
+        <tr><td><strong>标准输入（stdin）</strong></td><td>0</td><td>你的键盘</td><td>命令读入的数据</td></tr>
+        <tr><td><strong>标准输出（stdout）</strong></td><td>1</td><td>屏幕</td><td>命令的<strong>正常</strong>输出</td></tr>
+        <tr><td><strong>标准错误（stderr）</strong></td><td>2</td><td>屏幕</td><td>命令的<strong>错误</strong>信息</td></tr>
+    </table>
+
+    <p>说人话就是：每个命令都有两个"出口"（正常结果和错误消息），默认都送到屏幕让你看到。而当你学会了重定向和管道，你就可以改变这些通道的方向——把结果存到文件里、把错误丢弃掉、把输出喂给另一个命令。</p>
+
+    <p>为什么编号重要？因为重定向时你会在符号前面写编号：<code>2>&amp;1</code> 的意思是"把 2 号通道（stderr）塞进 1 号通道（stdout）"。不写编号时默认操作的是 stdout。</p>
+
+    <blockquote><p>理解标准流是打通终端任督二脉的关键。它解释了为什么 <code>ls 不存在的文件</code> 的错误消息和正常输出走的是不同的管子——这也是为什么你可以把正常结果保存到文件，同时让错误还在屏幕上显示的底层原因。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>二、重定向——让输出去该去的地方</h2>
+
+    <h3>2.1 把输出存到文件：<code>></code></h3>
+
+    <pre><code>ls -la ~/Desktop > 桌面清单.txt    # 将 ls 的输出存入文件（不显示在屏幕）
+cat 桌面清单.txt                    # 验证——文件里确实有内容</code></pre>
+
+    <p><code>></code> 的意思是：把 stdout 从"屏幕"转向"文件"。</p>
+
+    <p><strong>⚠️ <code>></code> 会覆盖文件的已有内容。</strong> 如果文件原来有内容，使用 <code>></code> 后原有内容会丢失。</p>
+
+    <pre><code>echo "第一行" > 测试.txt    # 创建文件，写入"第一行"
+echo "第二行" > 测试.txt    # 覆盖！现在文件里只有"第二行"，第一行没了</code></pre>
+
+    <p>这里的 <code>echo</code> 命令很简单——它把后面跟着的文字打印到屏幕。<code>echo "第一行"</code> 会输出「第一行」三个字。配上重定向 <code>></code>，文字就不去屏幕、直接存入文件了。可以把 echo 理解为后续所有重定向和管道练习的「人工输入源」。</p>
+
+    <h3>2.2 追加到文件末尾：<code>>></code></h3>
+
+    <pre><code>echo "第一行" >> 测试.txt    # 写入"第一行"
+echo "第二行" >> 测试.txt    # 追加！文件现在有两行</code></pre>
+
+    <p><code>>></code> 和 <code>></code> 的唯一区别：<code>>></code> 不覆盖，追加到末尾。想保留历史记录时用它。</p>
+
+    <h3>2.3 处理错误消息：<code>2></code> 和 <code>2>&amp;1</code></h3>
+
+    <pre><code>ls 存在的文件 不存在的文件 > 结果.txt
+    # stdout 去了文件，stderr 仍然在屏幕上显示
+
+ls 存在的文件 不存在的文件 > 结果.txt 2> 错误.txt
+    # stdout → 结果.txt，stderr → 错误.txt，屏幕干干净净
+
+ls 存在的文件 不存在的文件 &> 全部.txt
+    # stdout 和 stderr 合并进同一个文件（&> 是简写）
+
+ls 存在的文件 不存在的文件 > 全部.txt 2>&1
+    # 更传统的写法：先把 stdout 指向文件，再把 stderr 指向 stdout</code></pre>
+
+    <p>初学时最常用的组合是 <code>2>/dev/null</code>——把错误消息丢进黑洞：</p>
+
+    <pre><code>grep -r "某个关键词" ~/Desktop 2>/dev/null
+    # 搜索桌面上的文件，忽略所有"权限不够"之类的错误提示</code></pre>
+
+    <blockquote><p><code>/dev/null</code> 是 Unix 里的一个特殊文件。任何写入它的内容都会被系统丢弃，读它则什么也读不到。它的用途就是"我不在乎这个输出，别给我看"。在搜索时屏蔽大量权限错误是最常见的用法。</p></blockquote>
+
+    <h3>2.4 重定向速查表</h3>
+
+    <table>
+        <tr><th>写法</th><th>含义</th></tr>
+        <tr><td><code>命令 > 文件</code></td><td>stdout → 文件（覆盖）</td></tr>
+        <tr><td><code>命令 >> 文件</code></td><td>stdout → 文件（追加）</td></tr>
+        <tr><td><code>命令 2> 文件</code></td><td>stderr → 文件（覆盖）</td></tr>
+        <tr><td><code>命令 &> 文件</code></td><td>stdout + stderr → 同一文件</td></tr>
+        <tr><td><code>命令 > 文件 2>&1</code></td><td>同上，传统写法</td></tr>
+        <tr><td><code>命令 2>/dev/null</code></td><td>丢弃 stderr（只看正常输出）</td></tr>
+        <tr><td><code>命令 > /dev/null 2>&1</code></td><td>丢弃所有输出（全静默模式）</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <h2>三、管道——终端的组合性</h2>
+
+    <p>重定向是在命令和文件之间搬运数据。管道是在<strong>命令和命令</strong>之间搬运数据：</p>
+
+    <div class="stream-diagram">
+        命令A ──→ <span class="arrow">|</span> ──→ 命令B ──→ 屏幕
+    </div>
+
+    <pre><code>命令A | 命令B    # 命令A 的输出 = 命令B 的输入</code></pre>
+
+    <p>管道的哲学：<strong>每个命令只做一件事，但你可以自由组合它们。</strong> ls 只管列文件，wc 只管数行数——但 <code>ls | wc -l</code> 就变成了"数一数有多少文件"。</p>
+
+    <p>前两篇里你已经用过几次管道了（<code>ls | less</code>、<code>history | grep</code>）。现在是时候正式理解它：</p>
+
+    <pre><code># 简单管道：两个命令
+ls ~/Desktop | wc -l            # 桌面上有多少项目？
+grep -r "TODO" ~/Desktop | wc -l  # 桌面文件里有多少个 TODO？
+
+# 三级管道：三个命令串起来
+ls -la ~/Desktop | grep "^-" | wc -l  # 桌面上的文件（不含文件夹）有多少个？
+#          ls 列出来  →  grep 只保留文件行  →  wc 数一数
+# 注意 grep "^-" 中的 ^ 是行首（第二篇学过的正则），- 是字面量。
+# ls -la 输出中普通文件的第一个字符是 -，所以 "^-" 匹配以 - 开头的行。
+
+# 四级管道：串四个命令
+history | grep "ssh" | grep -v "scp" | head -10
+# 历史记录 → 只保留带 ssh 的 → 去掉带 scp 的 → 只看前 10 条</code></pre>
+
+    <blockquote><p>这就是"Unix 哲学"在终端里的具体体现：<strong>每个命令做好一件事，然后用管道组合成新的工具。</strong> 你不需要一个叫"统计桌面文件数量"的程序——你把 <code>ls</code> 和 <code>wc</code> 用管道连起来就行了。你自己"发明"了这个工具。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 经典管线 ══════ -->
+
+    <h2>四、经典管线实战</h2>
+
+    <p>以下是你在日常使用中最常遇到的管道组合。每个都是 <code>命令1 | 命令2 | 命令3...</code> 的结构。</p>
+
+    <h3>4.1 数东西——<code>ls | wc -l</code></h3>
+
+    <pre><code># 数文件
+ls ~/Desktop | wc -l                # 桌面上有多少项目
+ls ~/Downloads | wc -l             # 下载文件夹里有多少文件
+find ~/Desktop -name "*.md" | wc -l  # 桌面上有多少 Markdown 文件</code></pre>
+
+    <p>这是最简单的管道组合，但你每天都会用到。如果发现结果比预期多了一个——那是因为 <code>ls | wc -l</code> 可能会受到换行符的影响。不用担心，这个误差很小。</p>
+
+    <h3>4.2 在命令历史中搜索——<code>history | grep</code></h3>
+
+    <pre><code>history | grep "ssh"              # 之前用过的所有 ssh 命令
+history | grep "pmset"            # 之前用过的电源管理命令
+history | grep "brew install"     # 用 Homebrew 装过哪些东西</code></pre>
+
+    <p><code>history</code> 命令列出你用过的所有命令记录。和 grep 组合后，你可以在历史中快速找到"我记得我上周敲过一条很长的命令，但我忘了是什么"——这是终端使用中最实用的场景之一。</p>
+
+    <h3>4.3 排序——<code>du | sort -h</code></h3>
+
+    <p><code>sort</code> 命令按字母或数字排序行：</p>
+
+    <pre><code>du -sh ~/Desktop/*                # 看桌面上一级各项目的大小
+du -sh ~/Desktop/* | sort -h       # 按大小从小到大排列（-h 理解 K/M/G）
+du -sh ~/Desktop/* | sort -hr      # 按大小从大到小排列（-r 是倒序）
+
+# 显示最大的 5 个
+du -sh ~/Desktop/* | sort -hr | head -5
+
+# 找最大的文件——在整个用户文件夹里
+du -sh ~/* | sort -hr | head -10</code></pre>
+
+    <p><code>sort</code> 的常用选项：</p>
+    <table>
+        <tr><th>选项</th><th>含义</th><th>场景</th></tr>
+        <tr><td><code>sort -n</code></td><td>按数值排序</td><td>数字排序而不是字典序（10 会排在 2 后面）</td></tr>
+        <tr><td><code>sort -h</code></td><td>按人类可读数字排序</td><td>理解 1K、2M、3G 这样的单位</td></tr>
+        <tr><td><code>sort -r</code></td><td>倒序排列</td><td>最大的在前</td></tr>
+        <tr><td><code>sort -t, -k2</code></td><td>按逗号分隔的第二列排序</td><td>处理表格数据时</td></tr>
+    </table>
+
+    <h3>4.4 去重——<code>sort | uniq</code></h3>
+
+    <p><code>uniq</code> 去掉相邻的重复行。但实际数据中重复行往往不相邻，所以先 <code>sort</code> 再 <code>uniq</code> 是标准组合：</p>
+
+    <pre><code># 先用 echo 和重定向创建一个样本文件（刚学的技能！）
+echo "成功" >> 操作日志.txt
+echo "成功" >> 操作日志.txt
+echo "失败" >> 操作日志.txt
+echo "成功" >> 操作日志.txt
+
+# 现在看看这个文件
+cat 操作日志.txt
+
+# 去重
+sort 操作日志.txt | uniq            # 去重后的结果
+sort 操作日志.txt | uniq -c          # 每种状态出现了几次
+sort 操作日志.txt | uniq -d          # 只显示重复的行
+
+# 清理
+rm 操作日志.txt</code></pre>
+
+    <p>一个更实用的例子——找出桌面上所有文件的扩展名并统计频率：</p>
+
+    <pre><code>ls -la ~/Desktop | grep "^-" | awk '{print $NF}' | grep -o '\.[^.]*$' | sort | uniq -c | sort -rn</code></pre>
+
+    <p>这很长——但它的意思是：列出桌面文件 → 只看文件（不是文件夹）→ 提取最后一列（文件名）→ 只保留扩展名 → 排序 → 统计每种多少个 → 按数量倒序。你不需要记住它，只需要知道管道可以这样一层层组合。</p>
+
+    <h3>4.5 分页查看长输出——<code>| less</code></h3>
+
+    <p>任何输出太长时，送到 less 里翻页查看：</p>
+
+    <pre><code>history | less                     # 命令历史太长，翻页看
+ls -laR ~/Desktop | less            # 递归列出桌面所有文件，翻页看
+find ~ -name "*.md" | less          # 找到所有 .md 文件，翻页看</code></pre>
+
+    <p>在 less 里的操作和第二篇学的一模一样：空格翻页，<code>/</code> 搜索，<code>q</code> 退出。</p>
+
+    <blockquote><p>这五种管线模式——数、搜、排、去重、翻页——覆盖了日常终端使用中 90% 的管道场景。不用背，用的时候回来查。敲多了自然就记住了。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ tee 与 xargs ══════ -->
+
+    <h2>五、tee 与 xargs——两个特别的管道搭档</h2>
+
+    <h3>5.1 tee——既看又存</h3>
+
+    <p><code>tee</code> 的名字来自 T 型三通水管——它把输出同时送到两个地方：屏幕 和 文件。</p>
+
+    <pre><code>ls ~/Desktop | tee 桌面清单.txt
+    # 结果同时在屏幕上显示，又存进了文件
+
+ls ~/Desktop | tee -a 桌面清单.txt
+    # -a 追加模式（不覆盖已有内容）
+
+# 实际场景：你想看 find 的结果，又想把它存下来
+find ~/Desktop -name "*.md" | tee markdown文件清单.txt | wc -l
+    # 结果：屏幕显示文件列表，清单存到了文件，wc 数了数量</code></pre>
+
+    <p><code>tee</code> 的实际使用场景：你正在跑一个重要命令，输出很长，你想一边看结果一边把它存下来。或者你想在管道中间"偷看一眼"当前的数据流长什么样。</p>
+
+    <h3>5.2 xargs——从流水线到参数</h3>
+
+    <p>前面所有管道的组合中，右边的命令（如 <code>wc</code>、<code>grep</code>、<code>sort</code>）都接受从 stdin 读数据。但有些命令不接受 stdin——它们只接受参数。<code>xargs</code> 就是中间的桥梁：它把左边送来的每一行数据，转换成右边命令的参数。</p>
+
+    <pre><code># find 找到文件，xargs 把文件名作为参数传给 rm
+find ~/Desktop -name "*.tmp" | xargs rm
+# 等价于：rm 文件1.tmp 文件2.tmp 文件3.tmp ...
+
+# 更安全的做法——先看看 xargs 会做什么
+find ~/Desktop -name "*.tmp" | xargs echo
+# xargs echo 会列出所有找到的文件——不会删除，只是打印
+
+# 一个实用的例子——统计多个文件的总行数
+find ~/Desktop -name "*.md" | xargs wc -l
+# wc -l 可以接受多个文件参数，xargs 帮它把所有文件名传过去</code></pre>
+
+    <p>xargs 的常用选项：</p>
+    <table>
+        <tr><th>选项</th><th>含义</th><th>示例</th></tr>
+        <tr><td><code>-n 1</code></td><td>每次只传一个参数</td><td><code>xargs -n 1 echo</code>——每行单独处理</td></tr>
+        <tr><td><code>-p</code></td><td>执行前询问确认</td><td><code>xargs -p rm</code>——安全的 rm</td></tr>
+        <tr><td><code>-0</code></td><td>用空字符分隔（配合 find -print0）</td><td>处理文件名中有空格的情况</td></tr>
+    </table>
+
+    <blockquote><p>xargs 配合 <code>find -delete</code> 和 <code>rm</code> 时特别危险——因为你要删除的文件列表来自另一个命令的输出，你无法预判它会找到什么。<strong>永远先用 <code>| xargs echo</code> 看看 xargs 会拼出什么命令，确认无误后再去掉 echo。</strong> 这是一个让你在终端里安全活到老的习惯。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 综合练习 ══════ -->
+
+    <h2>六、综合练习——用管道搭建你的第一个"工具"</h2>
+
+    <p>这个练习和之前不同——它没有目录结构要创建，直接用你电脑上的真实文件。每一个任务都是一个你可以重复使用的"工具"。</p>
+
+    <h3>任务一：桌面速查表</h3>
+    <p>用一条命令查看桌面上的所有项目，统计数量，同时把清单保存到文件。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>ls ~/Desktop | tee ~/Desktop/桌面清单.txt | wc -l</code></pre>
+    </details>
+
+    <h3>任务二：找大文件</h3>
+    <p>在桌面上找出最大的 5 个项目。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>du -sh ~/Desktop/* | sort -hr | head -5</code></pre>
+    </details>
+
+    <h3>任务三：搜索并统计</h3>
+    <p>在桌面的 .md 文件中搜索"终端"这个词，统计出现了多少次（注意区分大小写）。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>grep -rin "终端" ~/Desktop/领域 | wc -l
+# 看看具体哪些文件包含
+grep -rl "终端" ~/Desktop/领域</code></pre>
+    </details>
+
+    <h3>任务四：命令历史分析</h3>
+    <p>查看你最常用的 10 条命令是什么。</p>
+    <p>这一步需要用到 <code>awk</code>——一个文本处理工具，它的作用是提取每一行的第 2 列（即命令的名字，因为 <code>history</code> 的输出格式是"编号 命令 参数"）。你不会 <code>awk</code> 完全没关系——这里只需要看懂管道的链条结构就行：</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
+# 解读这个管道的每一段：
+# history       → 列出所有命令记录
+# awk '{print}' → 只保留"命令名字"那一列（去掉编号和参数）
+# sort          → 排序，让相同的命令排在一起
+# uniq -c       → 去重，同时统计每种命令出现多少次
+# sort -rn      → 按数字倒序排列（最常用的排最前）
+# head -10      → 只看前 10 条</code></pre>
+    </details>
+
+    <h3>任务五：多重过滤</h3>
+    <p>在 ~/.zshrc 中找到所有不是注释、也不是空行的有效配置行，统计有多少行。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code>grep -v "^#" ~/.zshrc | grep -v "^$" | wc -l
+# 先去注释行，再去空行，然后数剩下的</code></pre>
+    </details>
+
+    <blockquote><p>到这里，你已经可以用终端做一件很"新潮"的事了——你不再依赖专门的应用来统计数据、分析文件和查看系统。一条几十个字的命令，就能完成一个专用小工具的工作。这就是管道的魔力。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 总结 ══════ -->
+
+    <h2>📌 本篇核心命令速查</h2>
+
+    <table>
+        <tr><th>符号/命令</th><th>作用</th><th>最常用法</th></tr>
+        <tr><td><code>></code></td><td>重定向 stdout 到文件（覆盖）</td><td><code>命令 > 文件</code></td></tr>
+        <tr><td><code>>></code></td><td>重定向 stdout 到文件（追加）</td><td><code>命令 >> 文件</code></td></tr>
+        <tr><td><code>2></code></td><td>重定向 stderr 到文件</td><td><code>命令 2> 错误文件</code></td></tr>
+        <tr><td><code>&></code></td><td>重定向 stdout + stderr 到同一文件</td><td><code>命令 &> 文件</code></td></tr>
+        <tr><td><code>2>/dev/null</code></td><td>丢弃错误消息</td><td><code>grep -r ... 2>/dev/null</code></td></tr>
+        <tr><td><code>|</code></td><td>管道——前一个命令的输出 → 后一个命令的输入</td><td><code>A | B | C</code></td></tr>
+        <tr><td><code>sort</code></td><td>排序</td><td><code>sort -h</code>（人类可读） <code>sort -n</code>（数值） <code>sort -r</code>（倒序）</td></tr>
+        <tr><td><code>uniq</code></td><td>去重（需先 sort）</td><td><code>sort 文件 \| uniq -c</code>（统计）</td></tr>
+        <tr><td><code>tee</code></td><td>同时输出到屏幕和文件</td><td><code>命令 | tee 文件</code> <code>tee -a</code>（追加）</td></tr>
+        <tr><td><code>xargs</code></td><td>将 stdin 转为命令参数</td><td><code>find ... | xargs 命令</code> <code>xargs -p</code>（确认模式）</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>📝 待延伸线索</h2>
+    <ul>
+        <li><strong>进程替换 <code><()</code></strong>——把命令的输出伪装成一个文件，让不接受管道但接受文件的命令使用</li>
+        <li><strong>xargs 的安全边界</strong>——当文件名包含空格时用 <code>-0</code> 和 <code>find -print0</code> 防止参数分割错误</li>
+        <li><strong>管道与子 Shell</strong>——管道两边的命令在子 Shell 中执行，变量赋值可能不生效</li>
+        <li><strong>重定向的顺序陷阱</strong>——<code>> 文件 2>&1</code> 和 <code>2>&1 > 文件</code> 效果完全不同，顺序有讲究</li>
+        <li><strong>here document <code><<</code></strong>——在终端中直接输入多行文本，<code>cat << EOF ... EOF</code></li>
+        <li><strong><code>awk</code> 和 <code>sed</code></strong>——处理文本的两大神器，分别擅长列处理和行处理</li>
+        <li><strong>管道 vs 重定向的组合</strong>——<code>命令1 | 命令2 > 文件 2>/dev/null</code> 这种混合写法</li>
+        <li><strong>named pipe（FIFO）</strong>——用文件系统创建的管道，可以让不相关的进程通过文件通信</li>
+    </ul>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年6月3日 &nbsp;|&nbsp; 补充整理：知白</p>
+
+    <div class="nav-bottom">
+        <a href="index.html">← 返回一些知识</a>
+        &nbsp;·&nbsp;
+        <a href="../../../index.html">← 返回首页</a>
+    </div>
+
+    <div class="series-nav">
+        <span class="prev"><a href="与Shell对话：看与找——信息的读取与搜索.html">← 上一篇：看与找</a></span>
+        <span class="next"><a href="与Shell对话：面向系统的操作.html">下一篇：面向系统的操作 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
+
+</div>
+
+<script src="../../../progress-bar.js"></script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 Shell 对话：遇到问题怎么办 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: var(--bg); color: var(--text); line-height: 1.9; }
+        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+        .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 48px; display: inline-block; }
+        .back:hover { color: var(--hover); }
+        h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; line-height: 1.5; margin-bottom: 16px; color: var(--text-title); }
+        .meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
+        .meta span { margin-right: 16px; }
+        .intro { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 48px; padding-left: 16px; border-left: 2px solid #ddd; }
+        h2 { font-size: 1.45rem; font-weight: 500; margin-top: 56px; margin-bottom: 20px; color: var(--text-title); letter-spacing: 1px; }
+        h3 { font-size: 1.05rem; font-weight: 500; margin-top: 36px; margin-bottom: 14px; color: var(--text); }
+        p { font-size: 0.95rem; margin-bottom: 16px; color: var(--text); }
+        blockquote { margin: 24px 0; padding: 16px 20px; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #ccc; }
+        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote code { font-size: 0.82rem; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; line-height: 1.6; }
+        th { background: #f9f9f9; font-weight: 500; color: #555; font-size: 0.8rem; letter-spacing: 1px; }
+        tr:hover td { background: #fcfcfc; }
+        ul, ol { margin: 12px 0 20px 20px; font-size: 0.9rem; color: #555; line-height: 2; }
+        li { margin-bottom: 4px; }
+        li strong { color: var(--text); }
+        code { font-family: "SF Mono", "JetBrains Mono", monospace; font-size: 0.82rem; background: var(--code-bg); padding: 2px 6px; border-radius: 3px; color: var(--code-text); }
+        pre { background: #f5f5f5; padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 20px 0 24px; font-size: 0.82rem; line-height: 1.6; }
+        pre code { background: none; padding: 0; border-radius: 0; color: var(--text); }
+        .cmd-output { color: #888; }
+        .errblock { background: #fff5f5; border-left: 3px solid #e74c3c; padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.85rem; }
+        .errblock code { background: #ffe8e8; }
+        hr { border: none; border-top: 1px solid #e8e8e8; margin: 48px 0; }
+        .dot { display: block; width: 6px; height: 6px; background: #ccc; border-radius: 50%; margin: 40px auto; }
+        .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
+        .nav-bottom a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
+        .nav-bottom a:hover { color: var(--hover); }
+        .series-nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; }
+        .series-nav a { color: var(--text-dim); text-decoration: none; }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .cat-table { font-size: 0.82rem; }
+        .cat-table th { background: #f0f0f0; font-weight: 600; }
+        .cat-table td:first-child { font-weight: 500; white-space: nowrap; }
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a class="back" href="index.html">← 完全使用手册</a>
+
+    <h1>与 Shell 对话 · 遇到问题怎么办<br>故障排除与全系列速查</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月3日 &nbsp;·&nbsp; <a href="../../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>这是《与 Shell 对话》系列的最后一篇。前六篇你学会了操作文件、搜索内容、串管道、管系统、配别名、写脚本。但无论学了多少，总会遇到问题：命令找不到、权限不够、终端突然打不开了。这篇教你<strong>自己解决问题</strong>——读懂错误信息、用终端内置的帮助系统、修复常见故障。文末附全系列所有命令的速查总表。</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="与Shell对话：从命令到脚本.html" style="color:var(--text-dim);">从命令到脚本</a> &nbsp;·&nbsp; 系列终篇</p>
+    </div>
+
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>错误诊断</strong></td><td>看终端的报错信息来推断问题——它虽然看起来吓人，但信息量很大</td></tr>
+        <tr><td><strong>man</strong></td><td>终端内置的完整使用手册——每个命令都有，看完能懂一切选项</td></tr>
+        <tr><td><strong><code>--help</code></strong></td><td>命令自带的快速帮助——比 man 短，只看常用用法</td></tr>
+        <tr><td><strong>which / type</strong></td><td>找出一个命令究竟来自哪里——是别名、内置命令、还是某个路径下的程序</td></tr>
+        <tr><td><strong>whatis / apropos</strong></td><td><code>whatis</code> 一句话描述命令，<code>apropos</code> 用关键词搜索所有手册页</td></tr>
+        <tr><td><strong><code>$?</code></strong></td><td>上一条命令的退出码——0 是成功，非 0 是失败，数值告诉你失败类型</td></tr>
+        <tr><td><strong>PATH 修复</strong></td><td>大部分 "command not found" 问题的根源——PATH 里没有包含该命令的目录</td></tr>
+        <tr><td><strong>安全模式恢复</strong></td><td>.zshrc 改坏了导致终端打不开时的自救方法——用 /bin/zsh 绕过配置</td></tr>
+        <tr><td><strong>trash</strong></td><td>把文件移到废纸篓而不是直接删除——给自己一个后悔的机会</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <h2>一、读懂错误信息</h2>
+
+    <p>终端报错看起来冷冰冰，但它们其实非常精确。以下是你在 Mac 上最常见的五种错误，每一句都告诉你具体是什么问题。</p>
+
+    <h3>1.1 command not found（命令找不到）</h3>
+
+    <div class="errblock">
+    <code>zsh: command not found: xxx</code>
+    </div>
+
+    <p>这是最常见的错误。它只有三个可能的原因：</p>
+    <ul>
+        <li><strong>拼写错了</strong>——<code>sl</code> 不是 <code>ls</code>，<code>gpre</code> 不是 <code>grep</code>。先检查键盘</li>
+        <li><strong>没安装</strong>——比如你打了 <code>python</code> 但 Mac 上没有（需安装 Python）。用 <code>brew install xxx</code> 安装</li>
+        <li><strong>装了但 PATH 里没有</strong>——安装了程序但 Shell 不知道去哪找它。见本章第四节</li>
+    </ul>
+
+    <h3>1.2 No such file or directory（文件不存在）</h3>
+
+    <div class="errblock">
+    <code>cat: 不存在的文件.txt: No such file or directory</code>
+    </div>
+
+    <p>你给了一个路径，但这个路径下没有这个文件。检查：</p>
+    <ul>
+        <li><strong>路径写对了没有</strong>——用 <code>ls 路径</code> 看看那个位置到底有什么</li>
+        <li><strong>当前目录是不是你想象的位置</strong>——用 <code>pwd</code> 确认你在哪</li>
+        <li><strong>文件名大小写</strong>——Mac 的默认文件系统是大小写不敏感的，但某些情况下（如 USB 驱动器）大小写敏感</li>
+    </ul>
+
+    <p>调试技巧：用 <code>ls</code> 看路径，确认后再替换到命令中。你不是记忆力不够——你只是没先看一眼。</p>
+
+    <h3>1.3 Permission denied（权限不足）</h3>
+
+    <div class="errblock">
+    <code>zsh: permission denied: ./脚本.sh</code>
+    </div>
+
+    <p>你想直接运行一个文件，但它没有执行权限。修复：</p>
+    <pre><code>chmod +x 脚本.sh
+./脚本.sh</code></pre>
+
+    <p>如果是 <code>sudo: 命令: command not found</code> —— 注意：<code>sudo</code> 不会自动让"找不到的命令"变得找得到。你需要先确保命令在 PATH 中。</p>
+
+    <p>如果是 "Operation not permitted" 而不是 "Permission denied"——这是 macOS 的 SIP（系统完整性保护）或完全磁盘访问权限的限制。需要在「系统设置 → 隐私与安全性」中授予终端相应的权限。</p>
+
+    <h3>1.4 命令没有输出（但也没报错）</h3>
+
+    <pre><code>grep "某个词" ~/Desktop/*
+# 没有输出，没有报错，直接回到提示符</code></pre>
+
+    <p>这通常不是错误——而是命令<strong>没有找到匹配</strong>。grep 没有找到包含"某个词"的行，所以它什么都没打印。试试 <code>echo $?</code>，如果结果是 1 而不是 0，就确认了"没有匹配"。</p>
+
+    <blockquote><p>终端的错误信息虽然简短，但每一条都是精确的。遇到报错不要慌——先<strong>完整读一遍报错内容</strong>，而不是只看红色的部分。很多时候问题就写在字面上：比如 <code>No such file or directory</code> 已经把问题说得不能再清楚了。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>二、求助——终端自带的帮助系统</h2>
+
+    <p>遇到不认识或不记得用法的命令时，不需要上网搜索——终端自己有完整的手册。</p>
+
+    <h3>2.1 man——完整的说明书</h3>
+
+    <pre><code>man ls                    # 看 ls 的完整手册
+man grep                  # 看 grep 的完整手册</code></pre>
+
+    <p>在 man 页面里，和 less 的操作完全一样：空格翻页，<code>/关键词</code> 搜索，<code>q</code> 退出。</p>
+
+    <h3>2.2 --help——快速用法摘要</h3>
+
+    <p>大部分命令支持 <code>--help</code> 或 <code>-h</code> 选项，显示简短的用法说明，比 man 快得多：</p>
+
+    <pre><code>grep --help               # 快速查看 grep 的用法
+chmod --help              # chmod 的选项大全</code></pre>
+
+    <p>注意：并非所有命令都支持 <code>--help</code>。macOS 的 BSD 版工具中有些只接受 <code>man</code>。不支持的话就用 <code>man 命令</code>。</p>
+
+    <h3>2.3 whatis——一句话总结</h3>
+
+    <pre><code>whatis ls                 # 一句话告诉你 ls 是什么
+<span class="cmd-output">ls(1)                     - list directory contents</span>
+
+whatis grep
+<span class="cmd-output">grep(1)                   - search a file for a pattern</span></code></pre>
+
+    <h3>2.4 apropos——不记得命令名时</h3>
+
+    <p>你知道想做什么，但不记得对应的命令叫什么——用 <code>apropos</code> 搜索所有手册的描述：</p>
+
+    <pre><code>apropos "copy"            # 搜索描述中包含 copy 的命令
+<span class="cmd-output">cp(1)                     - copy files
+rsync(1)                  - remote copy
+dd(1)                     - convert and copy a file</span>
+
+apropos "compress"        # 搜索压缩相关的命令</code></pre>
+
+    <h3>2.5 which 和 type——这个命令从哪来的</h3>
+
+    <pre><code>which ls                  # ls 这个程序在哪个目录
+<span class="cmd-output">/bin/ls</span>
+
+which -a echo             # 如果同一个命令有多个版本（-a 显示全部）
+<span class="cmd-output">/bin/echo</span>
+
+type ls                   # Shell 告诉我 ls 是什么
+<span class="cmd-output">ls is /bin/ls</span>
+
+type gnight               # 别名或函数也会显示
+<span class="cmd-output">gnight is an alias for pkill caffeinate 2>/dev/null; pmset sleepnow</span>
+
+type cd                   # 内置命令
+<span class="cmd-output">cd is a shell builtin</span></code></pre>
+
+    <p>当"命令找不到"时，<code>which</code> 和 <code>type</code> 是最直接的诊断工具——它们告诉你 Shell 到底有没有这个命令、从哪找。</p>
+
+    <blockquote><p>这五个命令构成了一个完整的求助链条：<code>apropos</code> 搜索命令 → <code>whatis</code> 确认 → <code>man</code> 看详情 → <code>which/type</code> 定位来源 → <code>--help</code> 快速参考。遇到不认识的命令，走一遍这个流程，基本都能搞懂。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>三、退出码——命令成功了吗</h2>
+
+    <p>每条命令执行结束后都会返回一个数字给系统，叫<strong>退出码（exit code）</strong>。你可以用 <code>$?</code> 查看上一条命令的退出码：</p>
+
+    <pre><code>ls ~/Desktop              # 执行一条成功的命令
+echo $?
+<span class="cmd-output">0</span>                          # 0 = 成功
+
+ls /不存在的目录           # 执行一条失败的命令
+echo $?
+<span class="cmd-output">1</span>                          # 非 0 = 失败</code></pre>
+
+    <p>退出码的真正用途是在脚本中判断上一步是否成功：</p>
+
+    <pre><code>#!/bin/zsh
+grep -q "某个配置" ~/.zshrc
+# $? 现在是上一条命令（grep）的退出码
+
+if [ $? -eq 0 ]; then
+    echo "✅ 配置已存在"
+else
+    echo "❌ 配置不存在，正在添加……"
+    echo "某个配置" >> ~/.zshrc
+fi</code></pre>
+
+    <p><code>&&</code> 和 <code>||</code> 也是基于退出码工作的，你现在可以理解它们为什么这样设计了——<code>&&</code> 只有当左边返回 0 （成功）时才执行右边，<code>||</code> 只有当左边返回非 0 （失败）时才执行右边。</p>
+
+    <span class="dot"></span>
+
+    <h2>四、常见问题与修复</h2>
+
+    <h3>4.1 "command not found" 终极排查流程</h3>
+
+    <p>遇到命令找不到，按这个顺序检查：</p>
+
+    <pre><code># 步骤 1：这个命令是否真的存在？
+which 命令名               # 返回路径 → 存在。什么也不返回 → 不存在
+
+# 步骤 2：如果存在，PATH 里有没有它的目录？
+echo "$PATH" | tr ':' '\n'  # 把 PATH 分行显示，看它的目录在不在里面
+
+# 步骤 3：如果不在，把它所在的目录加到 PATH
+# 在 .zshrc 里加一行：
+export PATH="/某个/目录:$PATH"
+source ~/.zshrc</code></pre>
+
+    <p>最常见的场景：你刚用 Homebrew 安装了 <code>wget</code>（或任何工具），输入 <code>wget</code> 时提示 command not found。这说明 brew 安装成功了，但它的 bin 目录（<code>/opt/homebrew/bin</code>）没有在 PATH 中。检查 <code>echo $PATH</code> 是否包含 <code>/opt/homebrew/bin</code>，如果不包含，加到 .zshrc 里。</p>
+
+    <h3>4.2 Terminal 打不开了——.zshrc 改坏了</h3>
+
+    <p>如果你改了 .zshrc 后新终端一打开就闪退或报错，别慌。macOS 提供了一个安全措施——按住 <code>Shift</code> 键启动终端可以跳过 .zshrc。如果不行，用替代方案：</p>
+
+    <p><strong>方案一：你有备份</strong>（第五篇建议过，希望你做了）：</p>
+
+    <pre><code>/bin/zsh --no-rcs            # 启动不带配置的纯净 zsh
+cp ~/.zshrc.backup ~/.zshrc   # 从备份恢复
+exit                           # 退出纯净，重新打开终端</code></pre>
+
+    <p><strong>方案二：你没有备份</strong>（没关系，现在做还来得及）：</p>
+
+    <pre><code>/bin/zsh --no-rcs            # 启动纯净模式
+cd ~
+mv .zshrc .zshrc.坏掉的       # 把坏的配置移走
+# 现在新开一个终端窗口就能正常打开了
+# 以后可以慢慢从 .zshrc.坏掉的 里提取有用的部分</code></pre>
+
+    <p>另外，按住 <code>Shift</code> 键打开「终端.app」也可以跳过 .zshrc。如果「终端.app」点不开，从「访达 → 应用程序 → 实用工具」中找到它也能打开。</p>
+
+    <h3>4.3 brew 命令找不到</h3>
+
+    <pre><code># Homebrew 安装在 /opt/homebrew/bin/brew（Apple Silicon Mac）
+# 如果 brew 报 command not found，先试试完整路径：
+/opt/homebrew/bin/brew --version
+
+# 如果能用，只是 PATH 的问题——在 .zshrc 里加：
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+source ~/.zshrc</code></pre>
+
+    <h3>4.4 "Operation not permitted" 或文件无法访问</h3>
+
+    <p>较新的 macOS 版本（Ventura 及以后）对终端访问某些目录有严格的限制。如果终端提示没有权限访问桌面、文档、下载等文件夹：</p>
+
+    <ol>
+    <li>打开「系统设置 → 隐私与安全性 → 完全磁盘访问权限」</li>
+    <li>确保「终端」在列表中且开关已打开</li>
+    <li>如果没有，点 + 号添加「终端.app」（在 /Applications/Utilities/ 里）</li>
+    </ol>
+
+    <h3>4.5 文件误删了——给自己一个后悔的机会</h3>
+
+    <p><code>rm</code> 删除的文件不进废纸篓。建议安装 <code>trash</code> 命令代替 <code>rm</code>：</p>
+
+    <pre><code>brew install trash         # 安装 trash 命令
+trash 文件                  # 把文件移到废纸篓（而不是直接删除）
+
+# 然后创建一个别名：
+alias rm='trash'           # 以后打 rm 等于移到废纸篓
+# 注意：这只在交互式终端有效，脚本里的 rm 仍然是原始的 rm</code></pre>
+
+    <p>如果你已经用 <code>rm</code> 删了重要文件：<strong>立即停止使用电脑</strong>，用数据恢复工具（如 TestDisk、Disk Drill）尝试恢复。但成功率取决于你是否继续向硬盘写入新数据。</p>
+
+    <blockquote><p>大多数"终端问题"可以归结为三类：路径不对（检查 pwd）、权限不够（检查 chmod/sudo）、程序找不到（检查 PATH）。先把这三个地方查一遍，能解决 90% 的问题。剩下的 10% 用 <code>man</code> 和 Google 解决。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <h2>五、全系列命令速查总表</h2>
+
+    <p>以下按功能分类汇总了本系列涉及的所有命令，方便日后查阅。</p>
+
+    <h3>5.1 文件导航</h3>
+    <table class="cat-table">
+        <tr><th>命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>pwd</code></td><td>显示当前目录</td><td>第一篇</td></tr>
+        <tr><td><code>ls</code></td><td>列出目录内容</td><td>第一篇</td></tr>
+        <tr><td><code>cd</code></td><td>切换目录</td><td>第一篇</td></tr>
+        <tr><td><code>find</code></td><td>按条件搜索文件</td><td>第二篇</td></tr>
+        <tr><td><code>mdfind</code></td><td>Spotlight 搜索</td><td>第二篇</td></tr>
+        <tr><td><code>open</code></td><td>用默认程序打开文件/目录/URL</td><td>第一篇</td></tr>
+        <tr><td><code>basename</code></td><td>从路径中提取文件名</td><td>第六篇</td></tr>
+        <tr><td><code>dirname</code></td><td>从路径中提取目录部分</td><td>第六篇</td></tr>
+    </table>
+
+    <h3>5.2 文件操作</h3>
+    <table class="cat-table">
+        <tr><th>命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>cp</code></td><td>复制文件或目录（-r 递归）</td><td>第一篇</td></tr>
+        <tr><td><code>mv</code></td><td>移动或重命名</td><td>第一篇</td></tr>
+        <tr><td><code>rm</code></td><td>删除（不进废纸篓）</td><td>第一篇</td></tr>
+        <tr><td><code>mkdir</code></td><td>创建目录（-p 创建中间层级）</td><td>第一篇</td></tr>
+        <tr><td><code>touch</code></td><td>创建空文件或更新修改时间</td><td>第一篇</td></tr>
+        <tr><td><code>file</code></td><td>检测文件真实类型</td><td>第二篇</td></tr>
+        <tr><td><code>du</code></td><td>查看磁盘用量（-sh 汇总人类可读）</td><td>第二篇</td></tr>
+        <tr><td><code>df</code></td><td>查看磁盘剩余空间（-h）</td><td>第二篇</td></tr>
+        <tr><td><code>wc</code></td><td>统计行数/词数/字节数（-l）</td><td>第二篇</td></tr>
+        <tr><td><code>trash</code></td><td>移到废纸篓（需 brew install）</td><td>第七篇</td></tr>
+    </table>
+
+    <h3>5.3 内容查看与搜索</h3>
+    <table class="cat-table">
+        <tr><th>命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>cat</code></td><td>输出文件内容到屏幕（短文件）</td><td>第二篇</td></tr>
+        <tr><td><code>less</code></td><td>分页查看（长文件）</td><td>第二篇</td></tr>
+        <tr><td><code>head</code></td><td>看文件开头几行（-n）</td><td>第二篇</td></tr>
+        <tr><td><code>tail</code></td><td>看文件末尾几行 / 实时追踪（-f）</td><td>第二篇</td></tr>
+        <tr><td><code>grep</code></td><td>在内容中搜索（-rin / -v / -c / -l / -L）</td><td>第二篇</td></tr>
+        <tr><td><code>sort</code></td><td>排序（-n / -h / -r / -k）</td><td>第三篇</td></tr>
+        <tr><td><code>uniq</code></td><td>去重并统计（-c）</td><td>第三篇</td></tr>
+    </table>
+
+    <h3>5.4 重定向与管道</h3>
+    <table class="cat-table">
+        <tr><th>符号/命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>></code></td><td>stdout → 文件（覆盖）</td><td>第三篇</td></tr>
+        <tr><td><code>>></code></td><td>stdout → 文件（追加）</td><td>第三篇</td></tr>
+        <tr><td><code>2></code></td><td>stderr → 文件</td><td>第三篇</td></tr>
+        <tr><td><code>&></code></td><td>stdout + stderr → 同一文件</td><td>第三篇</td></tr>
+        <tr><td><code>2>&1</code></td><td>stderr → stdout 所在位置</td><td>第三篇</td></tr>
+        <tr><td><code>|</code></td><td>管道：前命令的 stdout → 后命令的 stdin</td><td>第三篇</td></tr>
+        <tr><td><code>tee</code></td><td>同时输出到屏幕和文件</td><td>第三篇</td></tr>
+        <tr><td><code>xargs</code></td><td>将 stdin 转为命令参数</td><td>第三篇</td></tr>
+    </table>
+
+    <h3>5.5 进程与系统</h3>
+    <table class="cat-table">
+        <tr><th>命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>ps</code></td><td>查看进程快照（aux）</td><td>第四篇</td></tr>
+        <tr><td><code>top</code></td><td>实时进程监控（按 q 退出）</td><td>第四篇</td></tr>
+        <tr><td><code>kill</code></td><td>按 PID 终止进程（-9 强制）</td><td>第四篇</td></tr>
+        <tr><td><code>pkill</code></td><td>按名字终止进程</td><td>第四篇</td></tr>
+        <tr><td><code>jobs / fg / bg</code></td><td>前后台作业管理</td><td>第四篇</td></tr>
+        <tr><td><code>nohup</code></td><td>关闭终端后继续运行</td><td>第四篇</td></tr>
+        <tr><td><code>caffeinate</code></td><td>阻止自动睡眠（macOS 特有）</td><td>第四篇</td></tr>
+        <tr><td><code>chmod</code></td><td>修改文件权限（+x / 755 / 644）</td><td>第四篇</td></tr>
+        <tr><td><code>sudo</code></td><td>超级用户执行</td><td>第四篇</td></tr>
+        <tr><td><code>whoami / id</code></td><td>查看当前用户身份</td><td>第四篇</td></tr>
+        <tr><td><code>sw_vers</code></td><td>查看 macOS 版本</td><td>第四篇</td></tr>
+        <tr><td><code>uname</code></td><td>查看系统内核信息（-a）</td><td>第四篇</td></tr>
+        <tr><td><code>uptime</code></td><td>查看运行时长</td><td>第四篇</td></tr>
+        <tr><td><code>date / cal</code></td><td>查看日期和日历</td><td>第四篇</td></tr>
+        <tr><td><code>sysctl</code></td><td>查看硬件信息（hw.memsize / hw.ncpu）</td><td>第四篇</td></tr>
+        <tr><td><code>pmset</code></td><td>电源管理（sleepnow）</td><td>外传</td></tr>
+    </table>
+
+    <h3>5.6 macOS 特有</h3>
+    <table class="cat-table">
+        <tr><th>命令</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>pbcopy / pbpaste</code></td><td>终端与系统剪贴板交互</td><td>第四篇</td></tr>
+        <tr><td><code>say</code></td><td>文字转语音</td><td>第四篇</td></tr>
+        <tr><td><code>defaults</code></td><td>读写系统隐藏设置</td><td>第四篇</td></tr>
+        <tr><td><code>open</code></td><td>从终端打开任何东西</td><td>第一篇</td></tr>
+        <tr><td><code>mdfind</code></td><td>Spotlight 搜索命令版</td><td>第二篇</td></tr>
+    </table>
+
+    <h3>5.7 Shell 配置与别名</h3>
+    <table class="cat-table">
+        <tr><th>命令/操作</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>alias</code></td><td>查看/创建别名</td><td>第五篇</td></tr>
+        <tr><td><code>unalias</code></td><td>删除别名</td><td>第五篇</td></tr>
+        <tr><td><code>export</code></td><td>设置环境变量（传给予进程）</td><td>第五篇</td></tr>
+        <tr><td><code>source</code></td><td>重新加载配置文件</td><td>第五篇</td></tr>
+        <tr><td><code>env</code></td><td>查看所有环境变量</td><td>第五篇</td></tr>
+        <tr><td><code>history</code></td><td>查看命令历史</td><td>第五篇</td></tr>
+        <tr><td><code>echo $变量</code></td><td>查看单个变量值</td><td>第三篇</td></tr>
+    </table>
+
+    <h3>5.8 脚本语法</h3>
+    <table class="cat-table">
+        <tr><th>语法</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>#!/bin/zsh</code></td><td>Shebang——指定解释器</td><td>第六篇</td></tr>
+        <tr><td><code>$(命令)</code></td><td>命令替换</td><td>第六篇</td></tr>
+        <tr><td><code>$1 $2 $@ $#</code></td><td>脚本参数</td><td>第六篇</td></tr>
+        <tr><td><code>${1:-默认值}</code></td><td>参数默认值</td><td>第六篇</td></tr>
+        <tr><td><code>[ 条件 ]</code></td><td>条件判断</td><td>第六篇</td></tr>
+        <tr><td><code>if/then/elif/else/fi</code></td><td>分支结构</td><td>第六篇</td></tr>
+        <tr><td><code>for/do/done</code></td><td>遍历循环</td><td>第六篇</td></tr>
+        <tr><td><code>while/do/done</code></td><td>条件循环</td><td>第六篇</td></tr>
+        <tr><td><code>set -x / set +x</code></td><td>调试模式开关</td><td>第六篇</td></tr>
+        <tr><td><code>exit n</code></td><td>以指定退出码终结</td><td>第六篇</td></tr>
+        <tr><td><code>$(( ))</code></td><td>算术运算</td><td>第六篇</td></tr>
+        <tr><td><code>$?</code></td><td>上条命令的退出码</td><td>第六篇</td></tr>
+    </table>
+
+    <h3>5.9 快捷键</h3>
+    <table class="cat-table">
+        <tr><th>快捷键</th><th>作用</th><th>来自</th></tr>
+        <tr><td><code>Tab</code></td><td>自动补全命令/路径</td><td>第一篇</td></tr>
+        <tr><td><code>↑ ↓</code></td><td>翻查命令历史</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + C</code></td><td>终止当前命令</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + D</code></td><td>退出 Shell / EOF</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + A / E</code></td><td>光标到行首/行尾</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + U / W</code></td><td>删到行首 / 删一个词</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + L</code></td><td>清屏</td><td>第一篇</td></tr>
+        <tr><td><code>Ctrl + R</code></td><td>交互式搜索命令历史</td><td>第五篇</td></tr>
+        <tr><td><code>Ctrl + Z</code></td><td>暂停当前命令（放到后台）</td><td>第四篇</td></tr>
+        <tr><td><code>!!</code></td><td>重复上一条命令</td><td>第五篇</td></tr>
+        <tr><td><code>!$</code></td><td>上条命令的最后一个参数</td><td>第五篇</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <h2>六、进一步学习的路径</h2>
+
+    <p>这个系列覆盖了终端使用的核心能力。如果你还想深入，以下方向值得探索：</p>
+
+    <table>
+        <tr><th>方向</th><th>为何值得学</th><th>起步建议</th></tr>
+        <tr><td><strong>正则表达式</strong></td><td>grep、sed、awk、脚本中的文本处理核心技能</td><td>先学好 grep 的 -E 模式，然后学 sed 替换</td></tr>
+        <tr><td><strong>sed 和 awk</strong></td><td>文本处理的终极利器——一个按行处理，一个按列处理</td><td>先学 sed 替换（s/旧/新/），再学 awk 列提取</td></tr>
+        <tr><td><strong>git 版本控制</strong></td><td>管理代码和文档的版本历史，终端的杀手级应用</td><td>学完基本的 commit/push/pull 就够日常用</td></tr>
+        <tr><td><strong>Homebrew 打包</strong></td><td>写自己的 brew formula，让任何人都能安装你的脚本</td><td>现在就可以用 brew 安装几乎所有开源工具</td></tr>
+        <tr><td><strong>tmux / screen</strong></td><td>终端复用器——一个窗口开多个会话，SSH 不断线</td><td>先装 tmux，学基本的新建/切换/分离</td></tr>
+        <tr><td><strong>网络工具</strong></td><td>curl、ping、ssh、scp——终端里的网络操作</td><td>从 curl 开始，它可以下载文件和调用 API</td></tr>
+    </table>
+
+    <blockquote>
+    <p><strong>系列回顾</strong></p>
+    <p>七篇笔记，从打开终端窗口到写自己的脚本。如果按顺序读下来，你已经掌握了 macOS 终端最核心的能力：操作文件（第一篇）、搜索内容（第二篇）、管道组合（第三篇）、管理系统（第四篇）、配置环境（第五篇）、编写脚本（第六篇）、解决问题（第七篇）。</p>
+    <p>但这只是一个开始。终端不是"学会"的——它是"用会"的。真正熟练的标志不是你记住了多少命令，而是遇到一个重复劳动时，你下意识地想："这能不能用一个命令搞定？"<p>
+    <p>终端最大的魅力在于：<strong>你的效率提升没有上限。</strong> 每次学到一个新技巧，过去的很多操作就又多了一种更快的做法。这七篇笔记放在这里，任何时候想回查都可以翻回来。祝你用得愉快。</p>
+    </blockquote>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.85rem;color:var(--text-dim);">
+    《与 Shell 对话》系列 · 终篇<br>
+    对话日期：2026年6月3日 &nbsp;|&nbsp; 补充整理：知白
+    </p>
+
+    <div class="nav-bottom">
+        <a href="index.html">← 返回一些知识</a>
+        &nbsp;·&nbsp;
+        <a href="../../../index.html">← 返回首页</a>
+    </div>
+
+    <div class="series-nav">
+        <span class="prev"><a href="与Shell对话：从命令到脚本.html">← 上一篇：从命令到脚本</a></span>
+        <span style="color:var(--text-dim);">🏁 系列终点</span>
+        <div style="clear:both;"></div>
+    </div>
+
+</div>
+
+<script src="../../../progress-bar.js"></script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>

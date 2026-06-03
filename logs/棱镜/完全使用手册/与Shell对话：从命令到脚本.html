@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 Shell 对话：从命令到脚本 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: var(--bg); color: var(--text); line-height: 1.9; }
+        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+        .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 48px; display: inline-block; }
+        .back:hover { color: var(--hover); }
+        h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; line-height: 1.5; margin-bottom: 16px; color: var(--text-title); }
+        .meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
+        .meta span { margin-right: 16px; }
+        .intro { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 48px; padding-left: 16px; border-left: 2px solid #ddd; }
+        h2 { font-size: 1.25rem; font-weight: 500; margin-top: 56px; margin-bottom: 20px; color: var(--text-title); letter-spacing: 1px; }
+        h3 { font-size: 1.05rem; font-weight: 500; margin-top: 36px; margin-bottom: 14px; color: var(--text); }
+        p { font-size: 0.95rem; margin-bottom: 16px; color: var(--text); }
+        blockquote { margin: 24px 0; padding: 16px 20px; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; color: #555; border-left: 3px solid #ccc; }
+        blockquote p { margin-bottom: 0; color: #555; }
+        blockquote code { font-size: 0.82rem; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e8e8e8; vertical-align: top; line-height: 1.6; }
+        th { background: #f9f9f9; font-weight: 500; color: #555; font-size: 0.8rem; letter-spacing: 1px; }
+        tr:hover td { background: #fcfcfc; }
+        ul, ol { margin: 12px 0 20px 20px; font-size: 0.9rem; color: #555; line-height: 2; }
+        li { margin-bottom: 4px; }
+        li strong { color: var(--text); }
+        code { font-family: "SF Mono", "JetBrains Mono", monospace; font-size: 0.82rem; background: var(--code-bg); padding: 2px 6px; border-radius: 3px; color: var(--code-text); }
+        pre { background: #f5f5f5; padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 20px 0 24px; font-size: 0.82rem; line-height: 1.6; }
+        pre code { background: none; padding: 0; border-radius: 0; color: var(--text); }
+        pre .script-comment { color: #888; font-style: italic; }
+        .cmd-output { color: #888; }
+        hr { border: none; border-top: 1px solid #e8e8e8; margin: 48px 0; }
+        .dot { display: block; width: 6px; height: 6px; background: #ccc; border-radius: 50%; margin: 40px auto; }
+        .nav-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
+        .nav-bottom a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
+        .nav-bottom a:hover { color: var(--hover); }
+        .series-nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; }
+        .series-nav a { color: var(--text-dim); text-decoration: none; }
+        .series-nav a:hover { color: var(--hover); }
+        .series-nav .prev { float: left; }
+        .series-nav .next { float: right; }
+        details { margin: 16px 0 20px; }
+        details summary { cursor: pointer; font-size: 0.9rem; color: var(--hover); margin-bottom: 8px; }
+        details summary:hover { opacity: 0.8; }
+        @media (max-width: 600px) {
+            .container { padding: 32px 16px 64px; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+            pre { font-size: 0.75rem; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a class="back" href="index.html">← 完全使用手册</a>
+
+    <h1>与 Shell 对话 · 从命令到脚本</h1>
+
+    <div class="meta">
+        <span>棱镜</span><span>2026年6月3日 &nbsp;·&nbsp; <a href="../../index.html">日志</a></span>
+    </div>
+
+    <div class="intro">
+        <p>这是《与 Shell 对话》系列的第六篇。前五篇你学会了一系列独立的命令——操作文件、搜索内容、串管道、管理系统、配置别名。脚本就是把学过的命令<strong>写进一个文件</strong>，让电脑替你按顺序执行。你不需要是"程序员"才能写脚本——你只需要把已经会用的命令整理起来。<strong>学完这篇，你将能创建自己的工具，让重复劳动变成一次回车。</strong></p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--text-faint);">上一篇：<a href="与Shell对话：让你的Shell认识你.html" style="color:var(--text-dim);">让你的 Shell 认识你</a> &nbsp;·&nbsp; 下一篇：<a href="与Shell对话：遇到问题怎么办.html" style="color:var(--text-dim);">遇到问题怎么办</a></p>
+    </div>
+
+    <h2>🔑 关键词索引</h2>
+    <table>
+        <tr><th>关键词</th><th>一句话说明</th></tr>
+        <tr><td><strong>脚本（Script）</strong></td><td>存着一串命令的文本文件——运行它等于逐条执行里面的命令</td></tr>
+        <tr><td><strong>Shebang</strong></td><td>脚本的第一行 <code>#!/bin/zsh</code>——告诉系统用什么解释器来执行这个文件</td></tr>
+        <tr><td><strong>命令替换 <code>$()</code></strong></td><td>把命令的输出存到变量里——<code>files=$(ls)</code> 让 files 等于 ls 的结果</td></tr>
+        <tr><td><strong>条件判断 <code>if</code></strong></td><td>让脚本根据条件做不同的事——如果文件存在就怎样，不存在就怎样</td></tr>
+        <tr><td><strong>循环 <code>for</code></strong></td><td>对一组东西重复做同一件事——对每个 .md 文件都执行一次操作</td></tr>
+        <tr><td><strong><code>$1</code> <code>$2</code> <code>$@</code></strong></td><td>脚本接收的参数——<code>$1</code> 是第一个参数，<code>$@</code> 是所有参数</td></tr>
+        <tr><td><strong><code>$?</code></strong></td><td>上一条命令的退出码——0 表示成功，非 0 表示出错</td></tr>
+        <tr><td><strong><code>exit</code></strong></td><td>脚本主动结束——<code>exit 0</code> 表示成功退出，<code>exit 1</code> 表示出错</td></tr>
+        <tr><td><strong>可执行权限</strong></td><td>文件需要 <code>chmod +x</code> 才能像程序一样直接运行</td></tr>
+        <tr><td><strong>调试模式 <code>set -x</code></strong></td><td>让 Shell 在执行每条命令前先打印它——找 bug 的利器</td></tr>
+    </table>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 一、脚本是什么 ═══════ -->
+
+    <h2>一、脚本是什么——把命令写进文件</h2>
+
+    <p>你在终端里逐条输入命令。脚本就是把这些命令存到一个文件里，然后让 Shell 替你一条条执行。</p>
+
+    <h3>1.1 你的第一个脚本</h3>
+
+    <p>创建一个文件，写上你熟悉的命令：</p>
+
+    <pre><code># 用 echo 创建一个简单脚本（以后你会用编辑器写）
+echo '#!/bin/zsh' > ~/Desktop/hello.sh
+echo 'echo "你好，终端！"' >> ~/Desktop/hello.sh
+echo 'echo "现在是 $(date)"' >> ~/Desktop/hello.sh
+echo 'echo "你的家目录是 $HOME"' >> ~/Desktop/hello.sh
+
+# 查看文件内容
+cat ~/Desktop/hello.sh</code></pre>
+
+    <p>现在你有两种方式运行它：</p>
+
+    <pre><code># 方式一：直接把文件交给 zsh 解释器（不需要执行权限）
+zsh ~/Desktop/hello.sh
+
+# 方式二：先加执行权限，然后直接运行（需要 chmod +x）
+chmod +x ~/Desktop/hello.sh
+~/Desktop/hello.sh            # 或者 ./hello.sh（如果当前在 Desktop 里）</code></pre>
+
+    <p>输出：</p>
+
+    <pre><code><span class="cmd-output">你好，终端！
+现在是 2026年 6月 3日 星期四 10:30:00 CST
+你的家目录是 /Users/aodesai</span></code></pre>
+
+    <h3>1.2 shebang——第一行的秘密</h3>
+
+    <p>脚本的第一行 <code>#!/bin/zsh</code> 叫 shebang（念作"希帮"）。它告诉系统：<strong>用 /bin/zsh 这个程序来执行这个文件。</strong></p>
+
+    <p>如果你写 <code>#!/bin/bash</code>，就会用 bash 执行。如果你写 <code>#!/usr/bin/env python3</code>，就会用 Python 执行。shebang 决定了脚本用什么语言写的。</p>
+
+    <p>这个系列的脚本都用 <code>#!/bin/zsh</code>，因为你的 Mac 默认 Shell 是 zsh。</p>
+
+    <h3>1.3 命名与放置</h3>
+
+    <table>
+        <tr><th>规则</th><th>说明</th></tr>
+        <tr><td>.sh 后缀</td><td>约定俗成，不是必须——但加了便于识别</td></tr>
+        <tr><td>放到 ~/bin/ 或 ~/Desktop/</td><td>随便放，但放 ~/bin/ 里并加入 PATH 后可以在任何位置直接调用</td></tr>
+        <tr><td>先加执行权限</td><td><code>chmod +x 脚本.sh</code></td></tr>
+        <tr><td>用 ./ 运行</td><td>当前目录下的脚本要加 <code>./</code>——<code>./脚本.sh</code></td></tr>
+    </table>
+
+    <blockquote><p>为什么当前目录的脚本要加 <code>./</code>？因为 Shell 只在 PATH 里列出的目录中找命令。当前目录（<code>.</code>）一般不在 PATH 中——这是安全设计，防止你 <code>cd</code> 到一个陌生目录后不小心运行了里面的恶意脚本。用 <code>./</code> 明确地说"我就是想运行当前目录的这个文件"。</p></blockquote>
+
+    <h3>1.4 ⚠️ 一个重要区别：别名在脚本中无效</h3>
+
+    <p>第五篇里你配置了一些别名（如 <code>alias rm='rm -i'</code>）。这些别名在<strong>终端中交互式输入时</strong>有效，但在<strong>脚本文件中</strong>无效——因为脚本启动的是一个新的非交互式 Shell，不会读取 .zshrc。</p>
+
+    <pre><code>#!/bin/zsh
+# 即使你在 .zshrc 里设了 alias rm='rm -i'
+# 下面的 rm 也不会询问确认——脚本中的 rm 是原始的 rm
+rm 文件.txt</code></pre>
+
+    <p>这意味着脚本中写命令时，必须写完整的、原始的版本。<code>rm</code> 就是 <code>rm</code>，不会自动变成 <code>rm -i</code>。<code>ls</code> 就是 <code>ls</code>，不会自动变成带颜色的版本。如果你需要脚本中的某个命令带特定选项，在脚本里<strong>显式写出来</strong>。</p>
+
+    <pre><code>#!/bin/zsh
+# ✅ 正确：在脚本中显式写选项
+rm -f 临时文件.tmp
+ls -la ~/Desktop</code></pre>
+
+    <p>这不是 bug——是设计。脚本需要在可预测的环境中运行，不依赖任何人的个性化配置。你在终端里用的别名是给你自己省事的，脚本的行为是写给所有人看的。</p>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 二、变量 ═══════ -->
+
+    <h2>二、变量——让脚本记住东西</h2>
+
+    <p>变量在第五篇（环境变量）已经接触过。在脚本里，变量的用法更灵活。</p>
+
+    <h3>2.1 脚本内变量</h3>
+
+    <pre><code>#!/bin/zsh
+# 设置变量（等号两边不能有空格！）
+name="水母流星"
+count=42
+
+# 使用变量
+echo "你好，$name"
+echo "计数：$count"
+
+# 字符串拼接
+greeting="你好，${name}！今天第${count}次见面"
+echo "$greeting"</code></pre>
+
+    <p>${} 和 $ 的区别：花括号明确标出变量名的边界。<code>${name}！</code> 中 Shell 能正确识别变量名是 <code>name</code> 而不是 <code>name！</code>。不加花括号时，如果变量名后面紧跟字母或数字，Shell 可能认错。</p>
+
+    <h3>2.2 命令替换——把命令的结果存进变量</h3>
+
+    <pre><code>#!/bin/zsh
+# 把命令的输出存到变量中
+today=$(date "+%Y-%m-%d")
+files=$(ls ~/Desktop | wc -l)
+current_dir=$(pwd)
+
+echo "今天是 $today"
+echo "桌面上有 $files 个项目"
+echo "当前在 $current_dir"</code></pre>
+
+    <p><code>$(命令)</code> 语法会先执行括号内的命令，然后把它的输出字符串赋给变量。这是脚本中最常用的技巧之一——让脚本知道"当前状态是什么"。</p>
+
+    <p>也可以用反引号 <code>`命令`</code> 实现同样的效果，但 <code>$()</code> 更清晰且可以嵌套，建议始终用 <code>$()</code>。</p>
+
+    <blockquote><p>常见的反直觉点：<code>count=$(ls | wc -l)</code> 中，变量的值是<strong>字符串</strong>不是数字。虽然在 zsh 中它可以参与算术运算，但本质上它是字符 "42" 而不是数字 42。脚本中几乎所有变量都是字符串——这是 Shell 脚本和"真正的编程语言"的一个重要区别。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 三、条件判断 ═══════ -->
+
+    <h2>三、条件判断——让脚本做决定</h2>
+
+    <p>没有条件判断的脚本只是"按顺序执行一遍"。有了 <code>if</code>，脚本可以根据不同情况走不同的路。</p>
+
+    <h3>3.1 if 的基本结构</h3>
+
+    <pre><code>#!/bin/zsh
+
+if [ 条件 ]; then
+    # 条件为真时执行
+    echo "条件成立"
+fi</code></pre>
+
+    <p><code>[ 条件 ]</code> 中的方括号是 <code>test</code> 命令的简写形式。<strong>注意方括号前后必须有空格。</strong> <code>[ 条件 ]</code> 是语法，<code>[条件]</code> 是错误。</p>
+
+    <h3>3.2 常用的条件类型</h3>
+
+    <table>
+        <tr><th>条件</th><th>为真的情况</th><th>示例</th></tr>
+        <tr><td><code>[ -f 文件 ]</code></td><td>文件存在且是普通文件</td><td><code>[ -f ~/.zshrc ]</code></td></tr>
+        <tr><td><code>[ -d 目录 ]</code></td><td>目录存在</td><td><code>[ -d ~/Desktop ]</code></td></tr>
+        <tr><td><code>[ -e 路径 ]</code></td><td>路径存在（不限类型）</td><td><code>[ -e ~/Desktop ]</code></td></tr>
+        <tr><td><code>[ "$a" = "$b" ]</code></td><td>两个字符串相等</td><td><code>[ "$name" = "知白" ]</code></td></tr>
+        <tr><td><code>[ "$a" != "$b" ]</code></td><td>两个字符串不等</td><td><code>[ "$name" != "知白" ]</code></td></tr>
+        <tr><td><code>[ "$a" -eq "$b" ]</code></td><td>两个数字相等</td><td><code>[ "$count" -eq 42 ]</code></td></tr>
+        <tr><td><code>[ "$a" -lt "$b" ]</code></td><td>数字 a 小于 b</td><td><code>[ "$age" -lt 18 ]</code></td></tr>
+        <tr><td><code>[ -z "$a" ]</code></td><td>变量 a 是空字符串</td><td><code>[ -z "$name" ]</code></td></tr>
+    </table>
+
+    <p>多个条件组合：<code>[ 条件1 -a 条件2 ]</code>（并且）或 <code>[ 条件1 -o 条件2 ]</code>（或者）。</p>
+
+    <pre><code>#!/bin/zsh
+
+file="$1"   # 脚本的第一个参数
+
+if [ -f "$file" ]; then
+    echo "✅ 文件存在：$file"
+    echo "它的大小是：$(wc -c < "$file") 字节"
+elif [ -d "$file" ]; then
+    echo "📁 这是一个目录：$file"
+    echo "里面的文件数量：$(ls "$file" | wc -l)"
+else
+    echo "❌ 文件不存在：$file"
+fi</code></pre>
+
+    <p>把这个脚本保存为 <code>check.sh</code>，<code>chmod +x check.sh</code>，然后运行 <code>./check.sh ~/.zshrc</code>——它会告诉你文件是否存在、是文件还是目录。</p>
+
+    <blockquote><p>关于 <code>$file</code> 两边的引号：在 <code>[ -f "$file" ]</code> 中加引号是必须的。如果 <code>$file</code> 包含空格（比如 "我的笔记.md"），不加引号的条件会变成 <code>[ -f 我的 笔记.md ]</code>，Shell 会把它当成四个参数而不是一个文件名。引号让空格被正确识别为文件名的一部分。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 四、循环 ═══════ -->
+
+    <h2>四、循环——批量做同一件事</h2>
+
+    <p>循环让你对一批文件或数据逐一执行相同的操作。</p>
+
+    <h3>4.1 for 循环——遍历一组东西</h3>
+
+    <pre><code>#!/bin/zsh
+
+# 最简单的 for 循环——遍历一个列表
+for name in Alice Bob Charlie; do
+    echo "你好，$name"
+done
+
+# 更实用的例子——遍历当前目录下的所有 .md 文件
+for file in *.md; do
+    echo "找到 Markdown 文件：$file"
+    echo "行数：$(wc -l < "$file")"
+    echo "---"
+done</code></pre>
+
+    <p><code>for 变量 in 列表; do ... done</code> 是基本结构。<code>列表</code> 可以是直接写的（如 <code>Alice Bob Charlie</code>），也可以是通配符展开的结果（如 <code>*.md</code>），也可以是命令替换的输出（如 <code>$(ls)</code>）。</p>
+
+    <pre><code>#!/bin/zsh
+
+# 备份指定目录下的所有 .jpg 文件
+backup_dir="$HOME/Desktop/图片备份"
+mkdir -p "$backup_dir"
+
+for file in *.jpg; do
+    echo "备份：$file"
+    cp "$file" "$backup_dir/"
+done
+
+echo "✅ 备份完成，共备份了 $(ls "$backup_dir" | wc -l) 个文件"</code></pre>
+
+    <h3>4.2 while 循环——在条件满足期间持续执行</h3>
+
+    <pre><code>#!/bin/zsh
+
+# while 循环：当条件为真时重复执行
+count=1
+while [ "$count" -le 5 ]; do
+    echo "第 $count 次"
+    count=$((count + 1))    # $(( )) 是算术运算
+done
+
+# 更实用的例子：逐行读取文件
+while read line; do
+    echo "读取到：$line"
+done < ~/.zshrc</code></pre>
+
+    <p><code>$(( ))</code> 是 zsh 的算术运算语法。<code>$((count + 1))</code> 会做数字加法，然后把结果赋给变量。</p>
+
+    <p>while 配合重定向 <code>< 文件</code> 可以逐行读取文件——这是脚本中处理配置文件、日志文件的常用模式。</p>
+
+    <blockquote><p>for 和 while 的选择：<strong>如果你知道要对谁做循环（一组文件）→ for。如果你在等某个条件发生（比如计数器到某个值、读文件到末尾）→ while。</strong> 日常脚本中 for 的使用频率远高于 while。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 五、脚本参数与退出码 ═══════ -->
+
+    <h2>五、脚本的专业化——参数、退出码和调试</h2>
+
+    <p>前面的例子已经在用 <code>$1</code> 了。这一节系统梳理脚本的输入输出机制。</p>
+
+    <h3>5.1 接收参数</h3>
+
+    <pre><code>#!/bin/zsh
+echo "脚本名：$0"           # 脚本自己的名字
+echo "第一个参数：$1"        # 第一个参数
+echo "第二个参数：$2"        # 第二个参数
+echo "参数总数：$#"          # 参数个数
+echo "所有参数：$@"          # 所有参数组成的列表</code></pre>
+
+    <p>实际脚本中，常先用 <code>$#</code> 检查参数数量是否足够，避免用户忘记传参：</p>
+
+    <pre><code>#!/bin/zsh
+if [ "$#" -lt 1 ]; then
+    echo "❌ 用法：$0 文件名" >&2
+    exit 1
+fi
+
+file="$1"
+echo "要处理的文件：$file"</code></pre>
+
+    <p>保存为 <code>args.sh</code>，运行 <code>./args.sh 苹果 香蕉 橘子</code>，输出：</p>
+
+    <pre><code><span class="cmd-output">脚本名：./args.sh
+第一个参数：苹果
+第二个参数：香蕉
+参数总数：3
+所有参数：苹果 香蕉 橘子</span></code></pre>
+
+    <h3>5.2 退出码</h3>
+
+    <p>每条命令执行后都会返回一个数字给系统——0 表示成功，非 0 表示出错。脚本也可以用 <code>exit</code> 主动设定退出码：</p>
+
+    <pre><code>#!/bin/zsh
+
+if [ -f "$1" ]; then
+    echo "文件存在"
+    exit 0          # 成功退出
+else
+    echo "文件不存在" >&2   # 错误消息输出到 stderr
+    exit 1          # 失败退出
+fi</code></pre>
+
+    <p>退出码可以被脚本的调用者检查。<code>&&</code> 和 <code>||</code> 就是基于退出码工作的——只有左边退出码为 0 时 <code>&&</code> 才执行右边。</p>
+
+    <h3>5.3 调试模式——set -x</h3>
+
+    <p>当脚本不按预期工作时，在脚本开头加一行 <code>set -x</code>：</p>
+
+    <pre><code>#!/bin/zsh
+set -x                # 开启调试模式
+
+file="$1"
+if [ -f "$file" ]; then
+    echo "存在"
+fi
+
+set +x                # 关闭调试模式</code></pre>
+
+    <p>运行后，Shell 会在执行每条命令前把它打印到屏幕上（前面带 <code>+</code> 号），让你看到变量展开后的真实值、条件判断走了哪条路。</p>
+
+    <blockquote><p>调试模式是排查脚本问题的第一工具。比瞪着眼看代码快得多。看到 <code>+ file=''</code> 你就知道变量为什么是空的了——你忘了传参数。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ═══════ 六、第一个实用脚本 ═══════ -->
+
+    <h2>六、第一个实用脚本——桌面备份工具</h2>
+
+    <p>把以上所有概念串起来，写一个真正有用的脚本。这个脚本会把桌面上的重要文件备份到一个带日期的文件夹中。</p>
+
+    <pre><code>#!/bin/zsh
+
+# ═══════════════════════════════════════
+# 桌面备份脚本
+# 用法：./backup.sh [来源目录] [目标目录]
+#   来源目录：要备份的文件夹（默认 ~/Desktop）
+#   目标目录：备份存放位置（默认 ~/Desktop/备份）
+# ═══════════════════════════════════════
+
+# --- 参数处理 ---
+source_dir="${1:-$HOME/Desktop}"     # 默认备份桌面
+backup_dir="${2:-$HOME/Desktop/备份}" # 默认放在桌面的"备份"文件夹
+
+# --- 检查来源目录是否存在 ---
+if [ ! -d "$source_dir" ]; then
+    echo "❌ 错误：来源目录不存在：$source_dir" >&2
+    exit 1
+fi
+
+# --- 创建带日期的备份目录 ---
+today=$(date "+%Y-%m-%d")
+target="$backup_dir/备份_$today"
+mkdir -p "$target"
+
+echo "📦 开始备份：$source_dir"
+echo "📂 目标位置：$target"
+echo ""
+
+# --- 备份所有 .md 和 .txt 文件 ---
+count=0
+for file in "$source_dir"/*.md "$source_dir"/*.txt; do
+    if [ -f "$file" ]; then
+        cp "$file" "$target/"
+        echo "  ✅ 已备份：$(basename "$file")"
+        count=$((count + 1))
+    fi
+done
+
+# --- 统计结果 ---
+echo ""
+if [ "$count" -eq 0 ]; then
+    echo "⚠️  没有找到 .md 或 .txt 文件"
+    rmdir "$target" 2>/dev/null   # 空目录删掉
+else
+    echo "✅ 备份完成！共 $count 个文件"
+    echo "📂 打开备份文件夹：$target"
+    open "$target"
+fi
+
+exit 0</code></pre>
+
+    <p>把这个脚本保存为 <code>~/Desktop/backup.sh</code>，然后：</p>
+
+    <pre><code>chmod +x ~/Desktop/backup.sh
+~/Desktop/backup.sh                 # 备份桌面上的 .md 和 .txt 文件
+~/Desktop/backup.sh ~/Downloads     # 备份下载文件夹里的文件</code></pre>
+
+    <p>脚本中用到了 <code>basename "$file"</code>——它从完整路径中提取文件名部分。例如 <code>basename "/Users/aodesai/Desktop/日记.md"</code> 返回 <code>日记.md</code>。搭配它的还有 <code>dirname</code>（提取目录部分），它们是脚本中处理路径时的标配工具。</p>
+
+    <p>这个脚本包含了本篇学到的几乎所有概念：</p>
+    <ul>
+        <li><strong>Shebang</strong>——<code>#!/bin/zsh</code></li>
+        <li><strong>变量</strong>——<code>source_dir</code>、<code>backup_dir</code>、<code>today</code></li>
+        <li><strong>参数默认值</strong>——<code>${1:-默认值}</code></li>
+        <li><strong>条件判断</strong>——检查目录是否存在、文件是否存在、判断计数</li>
+        <li><strong>循环</strong>——遍历所有匹配的文件</li>
+        <li><strong>命令替换</strong>——<code>$(date)</code>、<code>$(basename "$file")</code></li>
+        <li><strong>退出码</strong>——目录不存在时 <code>exit 1</code>，一切正常时 <code>exit 0</code></li>
+        <li><strong>stderr 重定向</strong>——<code>&gt;&amp;2</code></li>
+    </ul>
+
+    <blockquote><p>这个脚本不是终点——它是你可以持续改进的起点。你可以给它添加更多文件类型、压缩备份包、只备份今天修改过的文件、删除超过 30 天的旧备份……每个改动的想法都是一个学习的机会。脚本是活的工具，不是一次性的作业。</p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 综合练习 ══════ -->
+
+    <h2>七、综合练习——写你自己的脚本</h2>
+
+    <h3>任务一：写一个"文件查找器"脚本</h3>
+    <p>创建一个脚本，接收一个文件名模式（如 <code>*.md</code>），在桌面范围内搜索匹配的文件，显示每个文件的大小和行数。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 保存为 finder.sh
+#!/bin/zsh
+pattern="$1"
+echo "搜索模式：$pattern"
+echo "---"
+for file in "$HOME/Desktop"/$pattern; do
+    if [ -f "$file" ]; then
+        size=$(du -sh "$file")
+        lines=$(wc -l < "$file")
+        echo "$(basename "$file")  |  大小：$size  |  行数：$lines"
+    fi
+done
+# du -sh 的输出自带大小信息和文件名（如 "4.0K 文件.md"），
+# 这里直接显示就行。如果你只想看大小不看名字，可以用 cut
+# 处理，但 cut 我们还没学——先这样用着。</code></pre>
+    </details>
+
+    <h3>任务二：写一个"系统速查"脚本</h3>
+    <p>创建一个脚本，运行后一次性显示：用户名、系统版本、运行时间、内存大小、桌面文件数。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 保存为 sysinfo.sh
+#!/bin/zsh
+echo "═══════════════════════════"
+echo "  系统速查"
+echo "═══════════════════════════"
+echo "用户：$(whoami)"
+echo "系统：$(sw_vers -productVersion)"
+echo "运行时长：$(uptime | grep -o 'up .*' | head -1)"
+echo "CPU 核心：$(sysctl -n hw.ncpu)"
+echo "桌面文件：$(ls ~/Desktop | wc -l) 个项目"
+echo "═══════════════════════════"
+# 提示：如果想看内存大小，可以用 sysctl -n hw.memsize，
+# 但它的输出是以字节为单位的纯数字（如 17179869184），
+# 需要换算成 GB（除以 1073741824），这超出了本篇范围。
+# 以后学了 bc 或 python 可以完成换算。</code></pre>
+    </details>
+
+    <h3>任务三：让脚本可以随处运行</h3>
+    <p>把你写的脚本放到 <code>~/bin/</code> 目录（需要自己创建），然后把该目录加入 PATH。</p>
+
+    <details>
+    <summary>👆 查看参考命令</summary>
+    <pre><code># 创建 ~/bin 目录
+mkdir -p ~/bin
+
+# 把脚本移进去
+cp ~/Desktop/backup.sh ~/bin/
+
+# 在 .zshrc 中添加一行
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# 现在可以在任何位置直接运行了
+backup.sh</code></pre>
+    </details>
+
+    <blockquote><p>当你开始在 <code>~/bin</code> 里存放自己写的脚本时，你就真正成了终端的主人。你不再只是使用别人写的命令——你在创造自己的命令。写脚本的能力会把计算机操作的自由度提升一个层级：<strong>任何重复劳动，都可以变成一个脚本。</strong></p></blockquote>
+
+    <span class="dot"></span>
+
+    <!-- ══════ 总结 ══════ -->
+
+    <h2>📌 本篇核心语法速查</h2>
+
+    <table>
+        <tr><th>语法</th><th>含义</th><th>示例</th></tr>
+        <tr><td><code>#!/bin/zsh</code></td><td>Shebang——用 zsh 解释器执行</td><td>脚本第一行</td></tr>
+        <tr><td><code>变量="值"</code></td><td>给变量赋值（等号前后无空格）</td><td><code>name="知白"</code></td></tr>
+        <tr><td><code>$变量</code></td><td>取变量的值</td><td><code>echo "$name"</code></td></tr>
+        <tr><td><code>$(命令)</code></td><td>命令替换——把命令输出赋给变量</td><td><code>today=$(date)</code></td></tr>
+        <tr><td><code>$1 $2 ... $@</code></td><td>脚本参数</td><td><code>file="$1"</code></td></tr>
+        <tr><td><code>${1:-默认值}</code></td><td>参数默认值</td><td><code>dir="${1:-$HOME}"</code></td></tr>
+        <tr><td><code>[ 条件 ]</code></td><td>条件判断（前后有空格！）</td><td><code>[ -f "$file" ]</code></td></tr>
+        <tr><td><code>if ... then ... elif ... else ... fi</code></td><td>分支结构</td><td>if/then/elif/else/fi</td></tr>
+        <tr><td><code>for var in 列表; do ... done</code></td><td>遍历循环</td><td><code>for f in *.md; do</code></td></tr>
+        <tr><td><code>while 条件; do ... done</code></td><td>条件循环</td><td><code>while [ $n -le 5 ]</code></td></tr>
+        <tr><td><code>exit n</code></td><td>以退出码 n 结束脚本</td><td><code>exit 0</code>（成功）<code>exit 1</code>（错误）</td></tr>
+        <tr><td><code>set -x / set +x</code></td><td>开启/关闭调试模式</td><td>脚本开头加 <code>set -x</code></td></tr>
+        <tr><td><code>$(( ))</code></td><td>算术运算</td><td><code>n=$((n + 1))</code></td></tr>
+        <tr><td><code>$?</code></td><td>上一条命令的退出码</td><td>后面常用 <code>if [ $? -eq 0 ]</code></td></tr>
+    </table>
+
+    <hr>
+
+    <h2>📝 待延伸线索</h2>
+    <ul>
+        <li><strong><code>set -e</code> 安全模式</strong>——脚本中任何命令失败立即退出，避免"失败后继续执行"的连锁错误</li>
+        <li><strong><code>trap</code> 捕获信号</strong>——让脚本在收到 Ctrl+C 或退出时执行清理操作（如删除临时文件）</li>
+        <li><strong><code>case</code> 分支</strong>——多条件匹配的简洁写法，适合处理命令行选项</li>
+        <li><strong>变量引号的深度陷阱</strong>——什么时候必须加、什么时候可以不加、不加的后果是什么</li>
+        <li><strong><code>local</code> 变量作用域</strong>——函数内部用 <code>local</code> 声明变量，避免污染全局命名空间</li>
+        <li><strong><code>read</code> 与交互式脚本</strong>——让脚本向用户提问、接收输入</li>
+        <li><strong>cron / launchd 定时任务</strong>——让脚本在每天固定时间自动运行，实现真正的自动化</li>
+        <li><strong><code>rsync</code> 增量备份</strong>——只复制变化的部分，比 <code>cp</code> 聪明得多的备份工具</li>
+    </ul>
+
+    <hr>
+
+    <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">对话日期：2026年6月3日 &nbsp;|&nbsp; 补充整理：知白</p>
+
+    <div class="nav-bottom">
+        <a href="index.html">← 返回一些知识</a>
+        &nbsp;·&nbsp;
+        <a href="../../../index.html">← 返回首页</a>
+    </div>
+
+    <div class="series-nav">
+        <span class="prev"><a href="与Shell对话：让你的Shell认识你.html">← 上一篇：让你的 Shell 认识你</a></span>
+        <span class="next"><a href="与Shell对话：遇到问题怎么办.html">下一篇：遇到问题怎么办 →</a></span>
+        <div style="clear:both;"></div>
+    </div>
+
+</div>
+
+<script src="../../../progress-bar.js"></script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完全使用手册 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: var(--bg); color: var(--text); line-height: 1.9; }
+        .container { max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+        .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 16px; display: inline-block; }
+        .back:hover { color: var(--hover); }
+        h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: var(--text-title); }
+        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
+        .series-list { list-style: none; }
+        .series-list li { border-bottom: 1px solid #eee; padding: 18px 0; }
+        .series-list a { text-decoration: none; display: block; }
+        .series-list a:hover .entry-title { color: var(--hover); }
+        .entry-title { font-size: 0.95rem; color: var(--text); margin-bottom: 2px; }
+        .entry-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+        footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-dim); }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--hover); }
+        @media (max-width: 500px) { .container { padding: 32px 16px 64px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="../index.html">← 棱镜</a>
+        <h1>完全使用手册</h1>
+        <p class="subtitle">技术工具的完整操作指南</p>
+        <ul class="series-list">
+            <li>
+                <a href="与Shell对话：终端是你的新桌面.html">
+                    <div class="entry-title">与 Shell 对话 · 终端是你的新桌面</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第一篇——从零理解终端是什么、怎么导航文件系统、如何操作文件。包含完整的新手练习</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：看与找——信息的读取与搜索.html">
+                    <div class="entry-title">与 Shell 对话 · 看与找——信息的读取与搜索</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第二篇——文件内容查看（cat/less/head/tail）、内容搜索 grep、文件名搜索 find/mdfind、文件类型与大小 du/df/wc/file</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：流水线与重定向.html">
+                    <div class="entry-title">与 Shell 对话 · 流水线与重定向</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第三篇——标准流的概念、重定向（> >> 2> &>）、管道 |、sort/uniq 排序去重、tee 分流、xargs 参数转换、6 个综合练习</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：面向系统的操作.html">
+                    <div class="entry-title">与 Shell 对话 · 面向系统的操作</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第四篇——进程管理（ps/top/kill）、前后台运行、nohup/caffeinate 持久化、权限模型（chmod/sudo）、系统信息（sw_vers/uptime）、macOS 工具箱（pbcopy/say/defaults）</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：让你的Shell认识你.html">
+                    <div class="entry-title">与 Shell 对话 · 让你的 Shell 认识你</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第五篇——别名（alias）、Shell 函数、环境变量（PATH/export）、.zshrc 配置管理、历史记录（Ctrl+R/!!/!$）</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：从命令到脚本.html">
+                    <div class="entry-title">与 Shell 对话 · 从命令到脚本</div>
+                    <div class="entry-desc">《与 Shell 对话》系列第六篇——脚本基础（shebang/权限/执行）、变量与命令替换、条件判断 if/elif/else、for/while 循环、参数处理与退出码、桌面备份脚本实战</div>
+                </a>
+            </li>
+            <li>
+                <a href="与Shell对话：遇到问题怎么办.html">
+                    <div class="entry-title">与 Shell 对话 · 遇到问题怎么办</div>
+                    <div class="entry-desc">《与 Shell 对话》系列最终篇——错误信息解读、帮助系统（man/whatis/apropos/which/type）、退出码、常见故障排查、全系列命令速查总表（90+ 条）、进一步学习路径</div>
+                </a>
+            </li>
+        </ul>
+        <footer>
+            <a href="../index.html">← 返回棱镜</a>
+            &nbsp;·&nbsp;
+            <a href="../../index.html">← 返回首页</a>
+        </footer>
+    </div>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>
