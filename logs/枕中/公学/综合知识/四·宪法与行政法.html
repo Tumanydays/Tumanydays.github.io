@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4：宪法与行政法 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+    <style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 4：宪法与行政法</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月1日</span><span>Day 4 / 16</span><span>模块：法律常识</span>
+</div>
+
+<div class="intro">
+    <p><strong>今天开始法律。</strong>在所有的公基板块里，法律是你需要「从零搭建框架」的地方。但好消息是：法律的考点高度集中、重复率极高。宪法每年就考那些——国体政体、公民权利、人大职权。行政法每年也就考那些——行政复议找哪个机关、行政处罚谁设定、行政诉讼告谁。题型不是让你背法条，是让你判断对错、选对机关。</p>
+    <p><strong>今天的策略：</strong>不钻法条原文，用<strong>表格 + 口诀 + 流程图</strong>建立识别框架。看到一个选项能判断对错，看到一个场景知道找哪个机关复议——这就是法律板块的目标。绝不死记硬背。</p>
+    <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">核心板块：法律常识 | 推送日：Day 4 | 下次预告：Day 5 法律②——民法典与刑法</p>
+</div>
+
+<!-- ==================== 上半场：宪法 ==================== -->
+<h2>上半场：宪法</h2>
+
+<h3>一、为什么宪法不难——抓住三条线</h3>
+<p>宪法内容看起来多，但归纳起来就<strong>三条线</strong>：</p>
+<table>
+    <tr><th>线</th><th>内容</th><th>考场出现形式</th></tr>
+    <tr><td><strong>线一：国家是「什么」</strong></td><td>国体、政体、基本制度（经济/政治/文化）</td><td>判断题——「我国的国体是……」</td></tr>
+    <tr><td><strong>线二：人民有「什么」</strong></td><td>公民的基本权利与义务</td><td>单选/多选——哪项属于政治权利？</td></tr>
+    <tr><td><strong>线三：谁管「什么」</strong></td><td>国家机关的职权划分</td><td>单选——谁有权修改宪法？谁有权解释宪法？</td></tr>
+</table>
+
+<h3>二、国体、政体、基本制度——三个「根概念」</h3>
+
+<table>
+    <tr><th>概念</th><th>宪法原文</th><th>一句话理解</th></tr>
+    <tr><td><strong>国体</strong></td><td>中华人民共和国是工人阶级领导的、以工农联盟为基础的<strong>人民民主专政</strong>的社会主义国家</td><td>谁是主人——人民</td></tr>
+    <tr><td><strong>政体（根本政治制度）</strong></td><td><strong>人民代表大会制度</strong></td><td>怎么管事——通过人大</td></tr>
+    <tr><td><strong>基本政治制度</strong></td><td>①中国共产党领导的多党合作和政治协商制度<br>②民族区域自治制度<br>③基层群众自治制度</td><td>政协 + 民族自治 + 村居委会</td></tr>
+    <tr><td><strong>基本经济制度</strong></td><td>公有制为主体、多种所有制经济共同发展；按劳分配为主体、多种分配方式并存；社会主义市场经济体制</td><td>公+多、劳+多、市场</td></tr>
+</table>
+
+<div class="red-box">
+    <p><strong>⚠️ 考场最高频陷阱：</strong><br>
+    ①「我国的国体是人民代表大会制度」→ <strong>❌</strong>（人民代表大会制度是<strong>政体</strong>，不是国体。国体是人民民主专政）<br>
+    ②「我国的根本政治制度是人民民主专政」→ <strong>❌</strong>（反过来了）<br>
+    ③「基层群众自治制度是我国的基本政治制度之一」→ <strong>✅</strong>（正确）</p>
+</div>
+
+<div class="mnemonic">核心概念口诀：国体是人民民主专政（谁当家），政体是人民代表大会制度（怎么当家），政体=根本政治制度，政协/民族/基层=基本政治制度</div>
+
+<h3>三、公民的基本权利——每年至少 2 道</h3>
+
+<table>
+    <tr><th>权利类别</th><th>具体内容</th><th>考场考点</th></tr>
+    <tr><td><strong>平等权</strong></td><td>法律面前人人平等</td><td>包括<strong>立法平等</strong>吗？→ 不包括！立法平等是原则，但不是宪法意义上的平等权内容（考题会在这里挖坑）</td></tr>
+    <tr><td><strong>政治权利和自由</strong></td><td>①选举权和被选举权（年满18周岁+未被剥夺政治权利）<br>②言论、出版、集会、结社、游行、示威的自由</td><td><strong>最常考的一组。</strong>注意：<em>罢工自由</em>不在我国宪法规定之内（1975/1978宪法有，1982宪法删除了）</td></tr>
+    <tr><td><strong>宗教信仰自由</strong></td><td>信或不信、信什么、何时信——自由</td><td>宗教事务不受<strong>外国势力</strong>支配（不是「不受任何支配」）</td></tr>
+    <tr><td><strong>人身自由</strong></td><td>①人身自由不受侵犯（非经检察院批准/法院决定+公安机关执行，不受逮捕）<br>②人格尊严不受侵犯<br>③住宅不受侵犯<br>④通信自由和通信秘密</td><td>逮捕的三个主体：检察院<strong>批准</strong>或法院<strong>决定</strong>，公安机关<strong>执行</strong>。缺一不可</td></tr>
+    <tr><td><strong>社会经济权利</strong></td><td>劳动权、休息权、物质帮助权（年老/疾病/丧失劳动能力）、财产权</td><td>休息权的主体是<strong>劳动者</strong>，不是所有人</td></tr>
+    <tr><td><strong>文化教育权利</strong></td><td>受教育权、科研/文艺创作自由</td><td>受教育既是权利也是<strong>义务</strong></td></tr>
+    <tr><td><strong>监督权</strong></td><td>批评、建议、申诉、控告、检举</td><td>不得<strong>捏造或歪曲事实</strong>进行诬告陷害</td></tr>
+</table>
+
+<div class="yellow-box">
+    <p><strong>💡 公民权利的数字记忆法：</strong>7 大类权利——平等 + 政治 + 宗教 + 人身(4小项) + 社会经济(4小项) + 文化教育 + 监督。其中「人身自由」的 4 小项（人身/人格/住宅/通信）和「社会经济」的 4 小项（劳动/休息/物质帮助/财产）常混合出多选。</p>
+</div>
+
+<h3>四、国家机关——谁管什么</h3>
+
+<p>这是宪法里最容易出单选题的部分。你把下面这张表看透，宪法 40% 的选择题就解决了。</p>
+
+<table>
+    <tr><th>国家机关</th><th>性质</th><th>核心职权（只列考场最高频的）</th></tr>
+    <tr><td><strong>全国人大</strong></td><td>最高国家权力机关</td><td>①<strong>修改</strong>宪法（全体代表 2/3 以上通过）<br>②<strong>制定和修改</strong>基本法律<br>③选举/罢免国家主席、中央军委主席、国家监委主任、最高法院长、最高检检察长<br>④审查和批准国民经济和社会发展计划<br>⑤<strong>决定战争和和平</strong></td></tr>
+    <tr><td><strong>全国人大常委会</strong></td><td>全国人大的常设机关</td><td>①<strong>解释</strong>宪法、监督宪法实施<br>②制定和修改非基本法律<br>③<strong>解释</strong>法律<br>④在全国人大闭会期间，审查和批准国民经济和社会发展计划的部分调整方案<br>⑤<strong>决定战争状态的宣布</strong>（在全国人大闭会期间，如遇武装侵犯）<br>⑥决定全国总动员或局部动员</td></tr>
+    <tr><td><strong>国家主席</strong></td><td>国家元首</td><td>①公布法律（主席令）<br>②任免国务院总理、副总理等<br>③授予国家勋章和荣誉称号<br>④<strong>宣布战争状态</strong>、发布动员令<br>⑤代表国家进行国事活动、接受外国使节</td></tr>
+    <tr><td><strong>国务院</strong></td><td>最高国家行政机关<br>（中央人民政府）</td><td>①制定<strong>行政法规</strong>（国务院令）<br>②编制和执行国民经济和社会发展计划<br>③领导和管理经济、城乡建设、科教文卫等<br>④批准省/自治区/直辖市的区域划分</td></tr>
+    <tr><td><strong>国家监察委员会</strong></td><td>最高国家监察机关</td><td>对所有行使公权力的公职人员进行监督</td></tr>
+    <tr><td><strong>最高人民法院</strong></td><td>最高审判机关</td><td>审理案件+监督地方各级法院（上下级是<strong>监督</strong>关系，不是领导关系）</td></tr>
+    <tr><td><strong>最高人民检察院</strong></td><td>最高检察机关<br>（法律监督机关）</td><td>提起公诉+法律监督（上下级是<strong>领导</strong>关系——和法院不同）</td></tr>
+</table>
+
+<div class="red-box">
+    <p><strong>⚠️ 全宪法最容易考的 4 组对比：</strong><br>
+    ① 修改宪法 = <strong>全国人大</strong>（不是常委会！常委会只能<strong>解释</strong>宪法）<br>
+    ② 制定基本法律 = <strong>全国人大</strong>；制定其他法律 = <strong>全国人大常委会</strong><br>
+    ③ 决定战争和和平 = <strong>全国人大</strong>；宣布战争状态 = <strong>国家主席</strong>（注意「决定」和「宣布」是不同的主体）<br>
+    ④ 法院上下级 = <strong>监督</strong>关系；检察院上下级 = <strong>领导</strong>关系（这个经常互换来坑你）</p>
+</div>
+
+<div class="qbox">
+    <p><strong>📝 自测：</strong><br>1.【判断】我国的国体是人民代表大会制度。（×——国体是人民民主专政，人大制度是政体）<br>2.【单选】有权修改宪法的是：A.全国人大常委会 B.全国人大 C.国务院 D.国家主席 → <strong>B</strong><br>3.【判断】宪法修正案由全国人大常委会以全体代表的 2/3 以上多数通过。（×——是全国人大，不是常委会）<br>4.【单选】我国的根本政治制度是：A.人民民主专政 B.人民代表大会制度 C.多党合作制度 D.民族区域自治 → <strong>B</strong><br>5.【判断】我国公民享有罢工自由。（×——1982年宪法未规定罢工自由）<br>6.【单选】决定战争和和平的机关是：A.国家主席 B.全国人大 C.全国人大常委会 D.中央军委 → <strong>B</strong></p>
+</div>
+
+<!-- ===== 新增：宪法修改程序 + 公民义务 + 特别行政区 ===== -->
+<h3>四（附）：宪法修改程序、公民义务与特别行政区</h3>
+
+<h4>宪法修改程序——一道必定会出的题</h4>
+<table>
+    <tr><th>环节</th><th>主体</th><th>关键要求</th></tr>
+    <tr><td><strong>提案（提议）</strong></td><td>全国人大常委会 <strong>或</strong> 1/5 以上全国人大代表</td><td>两者之一即可启动</td></tr>
+    <tr><td><strong>通过</strong></td><td>全国人大</td><td>全体代表的 <strong>2/3 以上多数</strong></td></tr>
+    <tr><td><strong>公布</strong></td><td>全国人大<strong>主席团</strong></td><td>宪法修正案由人大主席团公布，<em>不是</em>由国家主席公布</td></tr>
+</table>
+<div class="red-box">
+    <p><strong>⚠️ 三个致命陷阱：</strong><br>
+    ①「宪法修正案由国家主席公布」→ <strong>❌</strong>（国家主席公布的是法律，宪法修正案由人大<strong>主席团</strong>公布）<br>
+    ②「1/5 以上全国人大常委会组成人员可以提议修改宪法」→ <strong>❌</strong>（是 1/5 以上「全国人大代表」，不是常委会组成人员）<br>
+    ③「宪法修改需要全国人大全体代表的 1/2 以上多数通过」→ <strong>❌</strong>（是 <strong>2/3</strong> 以上多数，比普通法律的过半数要求更高）</p>
+</div>
+
+<h4>公民基本义务——与权利同等重要</h4>
+<table>
+    <tr><th>义务</th><th>考场关键词</th></tr>
+    <tr><td>① 维护国家统一和全国各民族团结</td><td>——</td></tr>
+    <tr><td>② 遵守宪法和法律</td><td>最基本的义务</td></tr>
+    <tr><td>③ 维护祖国的安全、荣誉和利益</td><td>——</td></tr>
+    <tr><td>④ 依法服兵役和参加民兵组织</td><td>「依法」——不是所有人都必须</td></tr>
+    <tr><td>⑤ 依法纳税</td><td>——</td></tr>
+    <tr><td>⑥ <strong>劳动 + 受教育</strong></td><td>这对既是权利也是义务——<strong>常考多选</strong></td></tr>
+</table>
+
+<h4>特别行政区——一国两制</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>高度自治权</strong></td><td>行政管理权、立法权、独立的司法权和终审权。但<em>不享有外交权和国防权</em></td></tr>
+    <tr><td><strong>制度安排</strong></td><td>不实行社会主义制度，保持原有资本主义制度和生活方式，<strong>五十年不变</strong></td></tr>
+</table>
+
+<div class="qbox">
+    <p><strong>📝 自测：</strong><br>7.【判断】宪法修正案由国家主席公布。（×——由全国人大主席团公布）<br>8.【判断】1/5 以上全国人大代表可以提议修改宪法。（√）<br>9.【多选】以下既是公民权利又是公民义务的有：A.劳动 B.受教育 C.服兵役 D.纳税 → <strong>AB</strong><br>10.【判断】特别行政区享有独立的外交权。（×——外交权属中央）</p>
+</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 下半场：行政法 ==================== -->
+<h2>下半场：行政法</h2>
+
+<h3>五、行政法的核心逻辑——一条线串起五个概念</h3>
+
+<p>行政法看起来庞杂，核心就围绕一个逻辑链：<strong>行政机关做了什么（行政行为）→ 给了你什么（许可）→ 罚了你什么（处罚）→ 强制你干什么（强制）→ 不服怎么办（复议/诉讼）</strong>。把这个链条画出来，行政法的框架就立住了。</p>
+
+<div class="flow-chart">
+    <span class="node">行政行为</span><span class="arrow">→</span><span class="node">行政许可</span><span class="arrow">→</span><span class="node">行政处罚</span><span class="arrow">→</span><span class="node">行政强制</span><span class="arrow">→</span><span class="node red">行政复议</span><span class="arrow">→</span><span class="node red">行政诉讼</span>
+</div>
+
+<h3>六、行政行为——一张分类表</h3>
+<table>
+    <tr><th>分类维度</th><th>类型</th><th>定义</th><th>举例</th></tr>
+    <tr><td rowspan="2"><strong>按是否针对特定对象</strong></td><td>抽象行政行为</td><td>针对<strong>不特定</strong>对象、可<strong>反复适用</strong></td><td>制定行政法规/规章/规范性文件</td></tr>
+    <tr><td>具体行政行为</td><td>针对<strong>特定</strong>对象、一次性的</td><td>罚款、吊销执照、发放许可证</td></tr>
+    <tr><td rowspan="2"><strong>按是否需要申请</strong></td><td>依职权行政行为</td><td>行政机关主动作出</td><td>行政处罚、行政强制</td></tr>
+    <tr><td>依申请行政行为</td><td>须当事人申请</td><td>行政许可、行政确认</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 抽象 vs 具体——考场关键区分：</strong>行政复议和行政诉讼只审查<strong>具体行政行为</strong>（部分情况下可附带审查抽象行政行为）。「对行政法规、规章不服不能直接起诉」——这是考场的高频判断句。</p></div>
+
+<h3>七、行政许可——谁可以设定许可？</h3>
+
+<p><strong>行政许可的设定权</strong>是一个高频考点——不是谁都能随便设许可的。</p>
+<table>
+    <tr><th>规范级别</th><th>可以设定许可吗？</th><th>条件</th></tr>
+    <tr><td><strong>法律</strong></td><td>✅ 可以</td><td>无限制</td></tr>
+    <tr><td><strong>行政法规</strong></td><td>✅ 可以</td><td>法律未设定的，行政法规可以设定</td></tr>
+    <tr><td><strong>地方性法规</strong></td><td>✅ 可以</td><td>法律/行政法规未设定的，省/自治区/直辖市人大的地方性法规可以设定</td></tr>
+    <tr><td><strong>省级政府规章</strong></td><td>⚠️ 临时性许可</td><td>可设<strong>临时性</strong>许可，实施满一年需继续的→提请本级人大制定地方性法规</td></tr>
+    <tr><td><strong>部门规章</strong></td><td>❌ <strong>不能</strong></td><td>国务院部门规章<strong>不得设定</strong>行政许可</td></tr>
+    <tr><td><strong>市级政府规章</strong></td><td>❌ <strong>不能</strong></td><td>市级政府规章不得设定行政许可</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 这个考点几乎是每年必出一道：</strong>「部门规章可以设定行政许可」→ <strong>❌</strong>。记住：部门规章和市级政府规章<strong>绝对不能</strong>设许可。省级政府规章只能设<strong>临时性</strong>的。</p></div>
+
+<h3>八、行政处罚——种类 + 设定权（超级高频）</h3>
+
+<h4>行政处罚的种类（2021 年修订后新增了 5 类）</h4>
+<table>
+    <tr><th>类别</th><th>具体内容</th><th>口诀</th></tr>
+    <tr><td>名誉罚</td><td><strong>警告</strong>、通报批评</td><td rowspan="6"><strong>「警、款、暂、吊、拘、降、没、限、关、他」</strong>（十字口诀涵盖全部）</td></tr>
+    <tr><td>财产罚</td><td><strong>罚款</strong>、没收违法所得、没收非法财物</td></tr>
+    <tr><td>资格罚</td><td><strong>暂扣</strong>许可证件、<strong>吊销</strong>许可证件、降低资质等级</td></tr>
+    <tr><td>行为罚</td><td>限制开展生产经营活动、责令停产停业、责令关闭、限制从业</td></tr>
+    <tr><td>人身罚</td><td><strong>行政拘留</strong></td></tr>
+    <tr><td>兜底</td><td>法律、行政法规规定的其他行政处罚</td></tr>
+</table>
+
+<h4>行政处罚的设定权——谁能设什么罚？</h4>
+<table>
+    <tr><th>规范级别</th><th>可以设定哪些处罚</th></tr>
+    <tr><td><strong>法律</strong></td><td>所有种类，包括<strong>行政拘留</strong></td></tr>
+    <tr><td><strong>行政法规</strong></td><td>除<strong>限制人身自由</strong>以外的所有种类（行政拘留只有法律能设）</td></tr>
+    <tr><td><strong>地方性法规</strong></td><td>除限制人身自由、<strong>吊销营业执照</strong>以外的处罚（吊销营业执照只有法律/行政法规能设）</td></tr>
+    <tr><td><strong>规章</strong></td><td>只能设定<strong>警告、通报批评、一定数额的罚款</strong>（罚款限额由国务院或省级人大规定）</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 行政处罚设定权的「禁区」记忆：</strong><br>① 限制人身自由的处罚 → 只能<strong>法律</strong>设定<br>② 吊销营业执照 → 只能<strong>法律、行政法规</strong>设定（地方法规不能）<br>③ 部门规章可以设的只有：警告、通报批评、一定数额罚款</p></div>
+
+<div class="yellow-box"><p><strong>💡 行政处罚和行政许可设定权对比记忆：</strong>一句话——「规章在许可领域几乎什么都不能设；在处罚领域还能设警告+罚款」。行政许可领域只有省级政府规章能设临时许可，处罚领域部门规章至少能设警告和罚款。两个易混。</p></div>
+
+<h3>九、行政强制——措施 vs 执行</h3>
+
+<table>
+    <tr><th></th><th>行政强制措施</th><th>行政强制执行</th></tr>
+    <tr><td><strong>目的</strong></td><td>制止违法、防止证据灭失、控制危险</td><td>迫使履行<strong>已经生效</strong>的行政决定</td></tr>
+    <tr><td><strong>阶段</strong></td><td><strong>事前/事中</strong>（临时性、预防性）</td><td><strong>事后</strong>（当事人不履行→强制执行）</td></tr>
+    <tr><td><strong>典型例子</strong></td><td>查封场所、扣押财物、冻结存款、限制人身自由（强制醒酒/强制戒毒）</td><td>强制拆除违建、划拨存款、拍卖查封财产、加处罚款或滞纳金</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 考场区分技巧：</strong>问自己——「这个动作是为了<strong>调查/控制现场</strong>，还是为了<strong>执行一个已经生效的处罚决定</strong>？」前者是措施，后者是执行。如「城管暂扣摊贩三轮车（为了制止继续占道）」= 措施；「法院强制拆除违法建筑（已经下了处罚决定，当事人不拆）」= 执行。</p></div>
+
+<h3>十、行政复议——找谁复议？（全行政法最重要的表）</h3>
+
+<p>行政复议考的就是一件事——<strong>对谁的行为不服，找谁复议。</strong>这是行政法中出现频率最高的考点。</p>
+
+<table>
+    <tr><th>被申请的是谁</th><th>复议机关（找谁）</th><th>记忆线索</th></tr>
+    <tr><td>县级以上政府<strong>工作部门</strong></td><td><strong>本级政府</strong> 或 <strong>上一级主管部门</strong>（二选一，申请人选）</td><td>「部门→政府或上级」</td></tr>
+    <tr><td>地方<strong>各级政府</strong>（如县政府、市政府）</td><td><strong>上一级政府</strong></td><td>「府→上府」</td></tr>
+    <tr><td><strong>省部级</strong>单位（省政府/国务院部门）</td><td><strong>原机关自己</strong>（对复议结果不服→起诉或申请国务院裁决）</td><td>「省部→自己」（自己复议自己，然后可走诉讼或找国务院）</td></tr>
+    <tr><td><strong>派出机构</strong>（如派出所、市场监管所）</td><td><strong>派出它的机关</strong> 或 该机关的<strong>上一级机关</strong></td><td>「派出机构→爹或爹的爹」</td></tr>
+    <tr><td><strong>垂直领导</strong>机关（海关/金融/国税/外汇管理）</td><td><strong>上一级主管部门</strong>（只有一个选择）</td><td>「垂直→只找上级」（不找本级政府）</td></tr>
+    <tr><td>两个以上机关<strong>共同</strong>作出的行为</td><td><strong>共同上一级</strong></td><td>「共同→共上级」</td></tr>
+    <tr><td>已被<strong>撤销</strong>的机关（其行为时存在的）</td><td><strong>继续行使其职权</strong>的机关的上一级</td><td>「撤销→继受者的上级」</td></tr>
+</table>
+
+<div class="mnemonic">复议机关总口诀：部门府或上、府找上一府、省部自己来、派出爹或爷、垂直只找上、共同找共上</div>
+
+<h4>行政复议的其他核心考点</h4>
+<table>
+    <tr><th>考点</th><th>规则</th></tr>
+    <tr><td><strong>申请期限</strong></td><td>知道该行政行为之日起<strong>60日</strong>内。法律超过 60 日的除外（可以更长，不能更短）</td></tr>
+    <tr><td><strong>复议不停止执行</strong></td><td>原则：复议期间<strong>不停止</strong>原行政行为的执行。例外：被申请人认为需要/复议机关认为需要/申请人申请+复议机关认为合理/法律规定</td></tr>
+    <tr><td><strong>复议和诉讼的关系</strong></td><td>大多数案件——先复议再诉讼，或直接诉讼（二选一）。但<strong>复议前置</strong>的例外：对国务院部门或省部级政府的具体行政行为不服→必须先复议（原机关），不服复议结果再诉讼或申请国务院裁决。以及自然资源权属确认等少数情形</td></tr>
+    <tr><td><strong>赔偿</strong></td><td>复议机关在复议中可一并处理赔偿请求</td></tr>
+</table>
+
+<h3>十一、行政诉讼——告谁？去哪告？</h3>
+
+<table>
+    <tr><th>考点</th><th>规则</th></tr>
+    <tr><td><strong>被告确定</strong></td><td>①直接起诉——作出行为的机关是被告<br>②经过复议——复议维持→原机关+复议机关是共同被告；复议改变→复议机关是被告；复议不作为→选原机关或复议机关</td></tr>
+    <tr><td><strong>管辖法院</strong></td><td>一般：<strong>被告所在地</strong>法院。经复议的案件：原机关所在地或复议机关所在地法院均可<br>限制人身自由的：被告所在地或<strong>原告所在地</strong>法院均可</td></tr>
+    <tr><td><strong>起诉期限</strong></td><td>知道行政行为之日起<strong>6 个月</strong>内。经过复议的：收到复议决定之日起<strong>15 日</strong>内</td></tr>
+    <tr><td><strong>举证责任</strong></td><td><strong>被告</strong>（行政机关）承担举证责任——证明其行政行为合法</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 行政法最易混的两个数字——刻在脑子里：</strong><br>① 行政复议申请期限 = <strong>60 日</strong><br>② 行政诉讼起诉期限 = <strong>6 个月</strong><br>③ 经复议后的起诉期限 = <strong>15 日</strong><br>④ 这三个数字经常在选项里互换，混淆你。60日→复议，6个月→诉讼，15日→复议后再诉讼</p></div>
+
+<div class="qbox">
+    <p><strong>📝 自测：</strong><br>1.【判断】行政复议申请期限最长为 60 日，法律不得规定更长的期限。（×——法律可以规定更长的期限，但不得少于 60 日）<br>2.【单选】对A县市场监管局罚款决定不服，应向（ ）申请行政复议：A.仅A县政府 B.仅市市场监管局 C.A县政府或市市场监管局 D.省市场监管局 → <strong>C</strong><br>3.【单选】对B市公安局的行政拘留决定不服，应向（ ）申请行政复议：A.仅B市政府 B.仅省公安厅 C.B市政府或省公安厅 D.B市政府和省公安厅 → <strong>C</strong>（公安局是政府工作部门→「部门→政府或上级」）<br>4.【判断】规章可以设定行政拘留。（×——限制人身自由的处罚只有法律能设定）<br>5.【单选】暂时性查封经营场所属于：A.行政处罚 B.行政强制措施 C.行政强制执行 D.行政许可 → <strong>B</strong><br>6.【判断】行政诉讼的起诉期限是知道行政行为之日起 60 日内。（×——是 6 个月。60 日是复议期限）</p>
+</div>
+
+<!-- ===== 新增：处罚程序 + 诉讼受案范围 + 赔偿 + 数字总表 ===== -->
+<h3>十二、行政处罚的程序——简易、一般与听证</h3>
+<table>
+    <tr><th>程序</th><th>适用条件</th><th>特点</th></tr>
+    <tr><td><strong>简易程序</strong></td><td>违法事实确凿、有法定依据 + <strong>对公民 200 元以下、对单位 3000 元以下</strong>罚款或警告</td><td>当场作出、当场送达</td></tr>
+    <tr><td><strong>一般程序</strong></td><td>简易程序以外的所有情形</td><td>立案→调查→告知→决定→送达</td></tr>
+    <tr><td><strong>听证程序</strong></td><td>拟作出<strong>较大数额罚款、吊销许可证件、责令停产停业等</strong>较重处罚前</td><td>当事人有权申请听证。行政机关<strong>必须告知</strong>听证权利；当事人不申请的，不组织听证（听证不是必须举行的）</td></tr>
+</table>
+<div class="yellow-box"><p><strong>💡 听证记忆技巧：</strong>不是所有处罚都要听证——只有<strong>较重</strong>的处罚（大额罚款、吊证、停产停业）才有听证。关键是：行政机关必须<strong>告知</strong>当事人有申请听证的权利，但不主动举行——要当事人申请才开。</p></div>
+
+<h3>十三、行政诉讼的受案范围——什么能告、什么不能告</h3>
+<table>
+    <tr><th>可以告（受理）</th><th>不能告（不受理）</th></tr>
+    <tr><td>对行政处罚不服</td><td><strong>国防、外交</strong>等国家行为</td></tr>
+    <tr><td>对行政强制措施和强制执行不服</td><td>行政法规、规章或行政机关制定、发布的<strong>具有普遍约束力</strong>的决定、命令（抽象行政行为）</td></tr>
+    <tr><td>对行政许可不服（撤销/不予许可等）</td><td>行政机关对工作人员的<strong>奖惩、任免</strong>等内部决定</td></tr>
+    <tr><td>对自然资源所有权或使用权的确认决定不服</td><td>法律规定由行政机关<strong>最终裁决</strong>的</td></tr>
+    <tr><td>认为行政机关侵犯经营自主权</td><td>——</td></tr>
+    <tr><td>认为行政机关没有依法支付抚恤金、低保或社保待遇</td><td>——</td></tr>
+    <tr><td>认为行政机关不履行、不予答复法定职责（不作为）</td><td>——</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 不能告的核心辨别：</strong>①「对行政法规不满」→ 不能直接告（抽象行为）②「被单位开除了」→ 不能告（内部人事行为，走人事仲裁等其他渠道）③「认为某条法规不合法」→ 不能直接告，但可以对依据该法规作出的<strong>具体行政行为</strong>提起诉讼，同时<strong>附带请求审查</strong>该法规。</p></div>
+
+<h3>十四、国家赔偿——基本框架</h3>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>赔偿范围</strong></td><td>行政机关及其工作人员在行使行政职权时侵犯人身权、财产权→受害人有权取得赔偿</td></tr>
+    <tr><td><strong>赔偿义务机关</strong></td><td>① 单个机关侵权→该机关赔；② 共同侵权→共同赔偿义务机关；③ 经复议的→最初造成侵权的机关赔（复议加重损害的，复议机关对加重部分赔）</td></tr>
+    <tr><td><strong>赔偿方式</strong></td><td>以<strong>支付赔偿金</strong>为主，能返还财产或恢复原状的，返还财产或恢复原状</td></tr>
+    <tr><td><strong>追偿</strong></td><td>赔偿义务机关赔偿后，应当向有<strong>故意或重大过失</strong>的工作人员追偿</td></tr>
+</table>
+
+<h3>十五、行政法核心数字一表打尽</h3>
+<table>
+    <tr><th>事项</th><th>数字</th><th>说明</th></tr>
+    <tr><td>行政复议申请期限</td><td><strong>60 日</strong></td><td>从知道该行政行为之日起算</td></tr>
+    <tr><td>行政复议审理期限</td><td><strong>60 日</strong>（可延长 30 日）</td><td>从受理申请之日起算</td></tr>
+    <tr><td>行政诉讼起诉期限</td><td><strong>6 个月</strong></td><td>从知道行政行为之日起算</td></tr>
+    <tr><td>经复议后起诉期限</td><td><strong>15 日</strong></td><td>从收到复议决定书之日起算</td></tr>
+    <tr><td>行政诉讼一审审限</td><td><strong>6 个月</strong></td><td>从立案之日起算（可延长）</td></tr>
+    <tr><td>行政处罚简易程序罚款上限</td><td>公民<strong>200 元</strong> / 单位<strong>3000 元</strong></td><td>只有低于此额才能走简易程序</td></tr>
+    <tr><td>行政处罚追诉时效</td><td><strong>2 年</strong></td><td>违法行为在 2 年内未被发现→不再处罚（法律另有规定除外）</td></tr>
+    <tr><td>治安管理处罚追诉时效</td><td><strong>6 个月</strong></td><td>违反治安管理行为在 6 个月内未被发现→不再处罚</td></tr>
+    <tr><td>行政强制措施期限</td><td>一般<strong>30 日</strong>（可延长 30 日）</td><td>查封、扣押的期限</td></tr>
+    <tr><td>国家赔偿请求时效</td><td><strong>2 年</strong></td><td>从知道或应当知道侵权行为之日起算</td></tr>
+</table>
+<div class="mnemonic">行政法数字口诀：复议60申60审、诉讼6月起15复；简易200+3000、追诉2年治6月；查封30加30、赔偿请求2年满</div>
+
+<div class="qbox">
+    <p><strong>📝 自测：</strong><br>7.【判断】行政处罚中，拟作出吊销许可证件的处罚前，当事人有权申请听证。（√）<br>8.【单选】对行政法规不服，能直接提起行政诉讼吗？A.能 B.不能 → <strong>B</strong>（抽象行政行为不可直接诉）<br>9.【判断】国家赔偿以支付赔偿金为主要方式。（√）<br>10.【单选】行政处罚简易程序对公民的罚款上限是：A.50元 B.100元 C.200元 D.500元 → <strong>C</strong></p>
+</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 应用文练笔 ==================== -->
+<h2>应用文练笔：写一份报告</h2>
+
+<h3>题目情景</h3>
+<p>某市粮食和物资储备局于 2026 年 5 月组织开展了全市地方储备粮库存专项检查，共检查库点 32 个，涉及储备粮 15.6 万吨。检查发现：总体库存数量真实、质量良好，但存在个别库点温湿度记录不规范、消防器材过期未更换、部分储备粮轮换计划执行滞后等问题，已责令限期整改。请以<strong>市粮食和物资储备局名义</strong>向<strong>市政府</strong>拟一份检查情况报告。</p>
+
+<h3>报告的格式拆解——和请示的根本区别</h3>
+<table>
+    <tr><th>要素</th><th>报告的写法</th><th>vs 请示的区别</th></tr>
+    <tr><td><strong>标题</strong></td><td>XX关于XXX的报告</td><td>格式一样，文种不同（报告 vs 请示）</td></tr>
+    <tr><td><strong>主送</strong></td><td>上级机关（可一个可多个，一般一个）</td><td>请示只能一个主送</td></tr>
+    <tr><td><strong>开头</strong></td><td>报告的目的/依据/背景——「根据……，现将……报告如下」</td><td>请示开头是请示理由</td></tr>
+    <tr><td><strong>正文</strong></td><td>陈述事实——做了什么、发现了什么、结果如何。可以分项汇报</td><td>请示正文是请求事项</td></tr>
+    <tr><td><strong>结尾</strong></td><td><strong>「特此报告」</strong>或「以上报告，请审阅」<br>注意：报告结尾<strong>不要求上级批复</strong></td><td>请示结尾是「妥否，请批复」——必须等批复</td></tr>
+    <tr><td><strong>附件</strong></td><td>如有统计数据可附</td><td>同</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 报告最致命的错误——就是昨天改错题反复练的那个：</strong>报告结尾不能写「妥否，请批复」「以上报告，请审批」。报告是汇报完了就完了——上级看不看、批不批，不关你结尾的事。如果你需要上级批，请用请示。</p></div>
+
+<h3>参考范文</h3>
+<div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+    <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text-title);margin-bottom:24px;">市粮食和物资储备局<br>关于全市地方储备粮库存专项检查情况的报告</p>
+    <p style="color:var(--text);">市政府：</p>
+    <p style="text-indent:2em;color:var(--text);">为加强地方储备粮管理，确保库存粮食数量真实、质量良好、储存安全，根据《粮食流通管理条例》有关规定及年度工作安排，我局于2026年5月15日至25日组织开展了全市地方储备粮库存专项检查。现将有关情况报告如下：</p>
+    <p style="text-indent:2em;color:var(--text);">一、检查基本情况。本次检查覆盖全市12个县（市、区）共32个库点，涉及储备粮15.6万吨，其中稻谷9.2万吨、小麦4.8万吨、玉米1.6万吨。检查组采取实物丈量、账实核对、质量抽检等方式，逐库逐仓核查。</p>
+    <p style="text-indent:2em;color:var(--text);">二、检查结果。从检查情况看，全市地方储备粮库存总体数量真实、质量良好，未发现擅自动用、亏库短量等重大问题。粮食宜存率达到98.3%，符合国家规定标准。</p>
+    <p style="text-indent:2em;color:var(--text);">三、发现的主要问题。一是部分库点温湿度记录不规范，个别仓库通风除湿不及时；二是3个库点消防器材已过有效期未及时更换，存在安全隐患；三是部分县（市、区）储备粮轮换计划执行进度滞后，全年轮换任务完成率仅为62%。</p>
+    <p style="text-indent:2em;color:var(--text);">四、整改措施。对检查中发现的问题，已当场下达限期整改通知书7份，要求各相关单位于6月30日前完成整改并书面报送整改结果。对轮换任务滞后的县（市、区），我局已约谈相关负责人并督促加快进度。</p>
+    <p style="text-indent:2em;color:var(--text);">特此报告。</p>
+    <p style="text-align:right;margin-top:32px;color:var(--text);">市粮食和物资储备局</p>
+    <p style="text-align:right;color:var(--text);">2026年6月1日</p>
+</div>
+
+<h3>本篇评分要点</h3>
+<table>
+    <tr><th>维度</th><th>得分关键</th><th>本篇表现</th></tr>
+    <tr><td><strong>标题</strong></td><td>发文机关+关于+事由+的+报告</td><td>✅</td></tr>
+    <tr><td><strong>开头</strong></td><td>报告目的 + 依据（法律法规/工作安排）</td><td>✅ 《粮食流通管理条例》+ 年度工作安排</td></tr>
+    <tr><td><strong>正文结构</strong></td><td>分项报告：基本情况→结果→问题→整改，逻辑递进</td><td>✅ 四段结构清晰</td></tr>
+    <tr><td><strong>数据支撑</strong></td><td>不笼统——多少库点、多少吨粮、什么品种、合格率多少</td><td>✅ 32库点/15.6万吨/三大品种/98.3%宜存率/62%轮换率</td></tr>
+    <tr><td><strong>不回避问题</strong></td><td>既报喜也报忧——检查报告必须列出问题</td><td>✅ 三个具体问题</td></tr>
+    <tr><td><strong>整改闭环</strong></td><td>有问题必须有整改措施和时限</td><td>✅ 限期整改 + 约谈 + 书面报送结果</td></tr>
+    <tr><td><strong>结尾</strong></td><td>「特此报告」——不写「妥否，请批复」</td><td>✅</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 今日任务 ==================== -->
+<h2>今日任务</h2>
+
+<table>
+    <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+    <tr><td rowspan="2"><strong>上午</strong></td><td>宪法</td><td>三条线——国体→公民权利→国家机关→修宪程序→义务→特别行政区。重点：4组对比 + 修宪三环节 + 权利/义务双重属性</td><td>1.5h</td></tr>
+    <tr><td>行政法（上）</td><td>行为分类→许可设定权→处罚（种类+设定权+程序）→强制（措施vs执行）。重点死磕处罚设定权禁区</td><td>1h</td></tr>
+    <tr><td rowspan="2"><strong>下午</strong></td><td>行政法（下）+ 自测</td><td>复议机关7情形全背→诉讼（被告/管辖/期限/举证/受案范围）→赔偿。宪法10道 + 行政法10道自测独立完成</td><td>1h</td></tr>
+    <tr><td>应用文练笔</td><td>写报告——先自己写（20分钟）。写完后对照范文逐项检查：开头有目的和依据吗？正文分项了吗？有数据吗？结尾是「特此报告」而不是「妥否，请批复」吗？</td><td>1.5h</td></tr>
+    <tr><td rowspan="2"><strong>晚上</strong></td><td>回顾 Day 1-4</td><td>①文种口诀 ②改错口诀 ③复议机关口诀+行政法数字口诀 ④国家机关4组对比默写 ⑤处罚设定权禁区默写</td><td>0.5h</td></tr>
+    <tr><td>明日预习</td><td>瞄一眼 Day 5：民法典（总则/物权/合同效力/侵权责任）+ 刑法（犯罪构成/正当防卫/故意犯罪形态/罪名）</td><td>0.5h</td></tr>
+</table>
+
+<blockquote><p><strong>下期预告（Day 5）：</strong>法律②——民法典与刑法。民法典：总则（民事行为能力/宣告失踪死亡/诉讼时效）+ 物权 + 合同效力 + 侵权责任。刑法：犯罪构成四要件 + 正当防卫与紧急避险 + 故意犯罪形态 + 常见罪名辨析。应用文练笔：写一份纪要。</p><p style="font-size:0.85rem;color:var(--text-dim);">今日新增：宪法修改程序（提案/通过/公布+三大陷阱）、公民义务清单、特别行政区、行政处罚程序（简易/一般/听证）、诉讼受案范围（可告/不可告）、国家赔偿框架、行政法核心数字一表（10项+口诀）、自测题扩至10道。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月1日 &nbsp;|&nbsp; Day 4 / 16 &nbsp;|&nbsp; 模块：法律常识 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="三·公文改错与习近平新时代中国特色社会主义思想.html">← 上一篇</a></span>
+            <span class="next"><a href="五·民法典与刑法.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

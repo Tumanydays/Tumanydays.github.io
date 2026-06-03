@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 14：应试策略 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+<style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 14：应试策略</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月11日</span><span>Day 14 / 16</span><span>第二阶段 · 应试策略</span>
+</div>
+
+<div class="intro">
+    <p><strong>学了 13 天，今天是纯技术课。</strong>知识你已经有了。今天只回答一个问题：怎么把已经有的知识变成分数。120 分钟怎么分、什么题先做、不会的怎么蒙、写到一半卡住了怎么办、考前一天晚上做什么——全在这份策略里。</p>
+    <p style="margin-top:8px;font-size:.82rem;color:var(--text-dim);">今日专题：时间分配 + 做题顺序 + 蒙题技巧 + 心态管理 + 考前清单 | 明日：Day 15 考前最后一推</p>
+</div>
+
+<!-- ==================== 一、时间分配 ==================== -->
+<h2>一、120 分钟作战地图</h2>
+
+<p>以下按推测的题型结构（判断+单选+多选+可能的应用文写作）分配。如果你的卷子题型不同，按比例调整。</p>
+
+<table>
+    <tr><th>阶段</th><th>题型</th><th>题量</th><th>分配时间</th><th>节奏</th></tr>
+    <tr><td><strong>第一轮</strong></td><td>判断题</td><td>约 20-30 题</td><td><strong>10-15 分钟</strong></td><td>快速扫——判断题不要纠结。对就是对错就是错，10 秒一题</td></tr>
+    <tr><td><strong>第二轮</strong></td><td>单选题</td><td>约 30-40 题</td><td><strong>45-55 分钟</strong></td><td>主体得分区。每题 1-1.5 分钟。不会的先选一个标记下来，全部做完再回来</td></tr>
+    <tr><td><strong>第三轮</strong></td><td>多选题</td><td>约 5-10 题</td><td><strong>10-15 分钟</strong></td><td>耗时间不耗分——少选多选都零分。不确定的选项一律不选。宁少勿多</td></tr>
+    <tr><td><strong>第四轮</strong></td><td>应用文写作(如出)</td><td>1 题</td><td><strong>20-25 分钟</strong></td><td>5分钟搭框架→15分钟写→5分钟检查格式。用 13 天练的骨架直接套</td></tr>
+    <tr><td><strong>第五轮</strong></td><td>检查 + 回补</td><td>—</td><td><strong>10-15 分钟</strong></td><td>①先检查答题卡有没有涂错位 ②回看标记的不会的题——能琢磨出来的琢磨，琢磨不出来的用蒙题技巧</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚡ 铁律一：做完 > 做对。</strong>120 分钟你必须把卷子做完。一道单选题纠结 3 分钟——错了最多 1.5 分。但后面三道单选题你根本没时间看——损失 4.5 分。前者是你主动放弃的分，后者是你被迫损失的分。哪一个更多？先跑完，再回头看。</p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 二、做题顺序 ==================== -->
+<h2>二、做题顺序——先吃肉后啃骨头</h2>
+
+<blockquote><p><strong>核心原则：从你最擅长的开始，把确定能拿的分先锁死。不要在难度高的题型上消耗开局士气。</strong></p></blockquote>
+
+<h3>推荐顺序：判断 → 单选 → 多选 → 写作 → 回补</h3>
+
+<ol>
+    <li><strong>判断题（10-15 分钟）</strong>——难度最低，上手最快。做完判断，你已经拿了 20+ 分，心态稳了。</li>
+    <li><strong>单选题（45-55 分钟）</strong>——分数大头。遇到完全没见过的，凭所学框架排除两个错误明显的选项，在剩余两个中选。</li>
+    <li><strong>多选题（10-15 分钟）</strong>——放在倒数第二。因为多选规则是少选多选都零分，风险最高。<em>不确定的选项绝对不选。</em>宁可少选丢分，也不要多选归零。</li>
+    <li><strong>写作（20-25 分钟）</strong>——如果出。5 分钟在草稿纸上画骨架（标题 + 分几段 + 每段主题句），15 分钟写，5 分钟逐项检查格式。</li>
+    <li><strong>检查（最后 10-15 分钟）</strong>——先查答题卡是否涂对位、有没有漏题。不要轻易改答案——第一直觉通常更准。除非你百分之百确定自己第一次做错了。</li>
+</ol>
+
+<div class="yellow-box"><p><strong>💡 关于「先做公文题」：</strong>如果有公文改错题或公文判断题——优先做。公文题是你花了 13 天练得最多的板块，做起来最快，得分率最高。把这些题放在一开始做可以打开状态。</p></div>
+
+<!-- ===== 新增：填空+判断简析+案例分析 ===== -->
+<h3>补充题型应对——如果出你没想到的</h3>
+
+<h4>填空题</h4>
+<ul>
+    <li>先看空格前后的语境——空格前面是「被称为」还是「是指」？后者通常要填一个定义。</li>
+    <li>数字类的空——如果是时限/年龄/比例，直接回想 Day 9 数字专题。</li>
+    <li>人名类的空——科技成就对应科学家、文学对应作者。不会写名字的写简称或通假——尽量不要空着。</li>
+</ul>
+
+<h4>判断简析题</h4>
+<ul>
+    <li>两步：①先判断正误 ②写简短的说明（1-2 句话指出为什么对/为什么错）。</li>
+    <li>说明部分只要点出<strong>关键原因</strong>即可——把正确表述写出来就行，不需要长篇论证。</li>
+    <li>如果是法律题：写出正确的法条或制度名称。如果是政治题：写出正确的哲学原理或政策表述。</li>
+</ul>
+
+<h4>案例分析题（含材料评价分析）</h4>
+<ul>
+    <li>三步走：①找出材料中的<strong>事实</strong>（发生了什么）→ ②对应<strong>知识点</strong>（涉及哪个法律/政策/原理）→ ③给出<strong>结论</strong>或建议。</li>
+    <li>答案结构：结论前置。先写「XX的行为构成XX」或「该做法违反了XX规定」，再展开分析。</li>
+    <li>法律类案例：重点抓主体身份（国家工作人员？普通公民？）和行为性质（故意？过失？）。这两点锁死，答案就对了一半。</li>
+</ul>
+
+<span class="dot"></span>
+
+<!-- ==================== 三、蒙题技巧 ==================== -->
+<h2>三、蒙题技巧——不会做的题用什么逻辑猜</h2>
+
+<p>以下技巧只适用于「完全不会、只能蒙」的题。如果你有哪怕 30% 的把握，按自己的判断选，不要迷信技巧。</p>
+
+<h3>判断题</h3>
+<table>
+    <tr><th>技巧</th><th>应用</th></tr>
+    <tr><td><strong>绝对化表述警惕</strong></td><td>题干含「一律」「全部」「绝对」「只能」「必须」→ <em>大概率×</em>。因为法律和哲学里很少有绝对规则，总有例外</td></tr>
+    <tr><td><strong>「正确废话」倾向√</strong></td><td>题干是教科书式的正面表述，措辞严谨、无绝对化词 → 大概率√。如「实践是检验真理的唯一标准」</td></tr>
+    <tr><td><strong>新旧说法的陷阱</strong></td><td>如果你知道一个概念最近改过（如「小康社会→现代化国家」「会议纪要→纪要」「10岁→8岁」），题干用旧说法→ 直接×</td></tr>
+</table>
+
+<h3>单选题</h3>
+<table>
+    <tr><th>技巧</th><th>应用</th></tr>
+    <tr><td><strong>排除法</strong></td><td>四个选项里通常有两个明显错误。排除后二选一——正确率从 25% 升到 50%</td></tr>
+    <tr><td><strong>反常识法</strong></td><td>对一个完全陌生的知识点，看起来最像「教材原话」的、措辞最严谨不夸张的 → 通常是对的。太夸张的 → 通常是干扰项</td></tr>
+    <tr><td><strong>数字类辨析</strong></td><td>选项里出现多个数字——回想 Day 9 数字专题。如「行政复议申请期限」四个选项：15日 / 30日 / 60日 / 6个月 → 60日。Day 9 刷过 100+ 个数字，这种题不该丢</td></tr>
+    <tr><td><strong>概念互换排查</strong></td><td>选项把 A 概念的定义安到 B 概念头上——回想 Day 10 辨析专题。这种「张冠李戴」的选项直接排除</td></tr>
+</table>
+
+<h3>多选题</h3>
+<table>
+    <tr><th>技巧</th><th>应用</th></tr>
+    <tr><td><strong>宁少勿多</strong></td><td>不确定的选项<em>一律不选</em>。少选只是不得全分，多选+错选归零。保底比归零强</td></tr>
+    <tr><td><strong>「标准套餐」法</strong></td><td>一组固定搭配——如「教育+科技+人才」是二十大标准套餐、中国式现代化五个特征不能缺标准的表述。熟悉的标准套餐不会拆出错误选项</td></tr>
+    <tr><td><strong>排除绝对化</strong></td><td>选项中出现绝对化表述且与其他选项逻辑冲突 → 先排除这个</td></tr>
+</table>
+
+<h4>分模块蒙题规律</h4>
+<table>
+    <tr><th>模块</th><th>规律</th></tr>
+    <tr><td><strong>法律题</strong></td><td>选项中出现「应当」和「可以」互换 → 往往是陷阱。题干问「正确的表述」→ 排除含绝对化词的选项。刑法题：涉及刑事年龄的把数字精确到 Day 9 那张表</td></tr>
+    <tr><td><strong>政治题</strong></td><td>题干含「根本」「最本质」「最大」「首次」→ 回想标准表述。新旧表述互换是常见干扰（旧矛盾/旧四个全面/旧会议纪要名称）</td></tr>
+    <tr><td><strong>公文题</strong></td><td>文种题看场景关键词（「会议通过」=决议/「平级」=函）。格式题看标点（六角括号/1.不是1、/附件不加书名号）。改错题用改错四步法从头扫到尾</td></tr>
+    <tr><td><strong>经济题</strong></td><td>概念题：GDP按国土/财政=政府/货币=央行。工具类归属题：一个一个对照 Day 9 表排除</td></tr>
+    <tr><td><strong>省情科技题</strong></td><td>四川类：最高/最大/最早/唯一——这些「最」字表述要么是贡嘎山/三星堆/羌族/交子。科技类：带「首次」的表述需要精确匹配（嫦娥六号=首次月背）</td></tr>
+</table>
+
+<h4>写作题临场三不慌</h4>
+<ul>
+    <li><strong>文种没见过？</strong>→ 用万能标题公式：发文机关+关于+动词+事由+的+文种。格式套用同类文种（上行→请示/报告格式。下行→通知/通报格式。平行→函格式）。</li>
+    <li><strong>写了一半发现写偏了？</strong>→ 不要划掉。在下一段自然把话题拉回来，用「需要强调的是……」「此外值得注意的是……」这样的过渡句拐回来。卷面划一大片比写偏更扣分。</li>
+    <li><strong>时间不够写不完了？</strong>→ 先把标题、分段小标题、落款写完。这三个是格式分，即使正文只写了一部分，格式完整至少能拿到基础分。</li>
+</ul>
+
+<h4>答题卡填涂四检查</h4>
+<ol>
+    <li>个人信息：姓名、准考证号——填了没有？数字对了吗？</li>
+    <li>题号对应：做到第 30 题 → 答题卡第 30 题位置涂了没有？<strong>跳题之后回来最容易涂错位。</strong></li>
+    <li>涂写清晰：2B 铅笔涂的方块够黑够满吗？不够黑可能读不出来。</li>
+    <li>修改干净：改答案时原选项擦干净了吗？留残影可能被判多选。</li>
+</ol>
+
+<div class="mnemonic">蒙题总原则：判断=绝对化多判×。单选=排除两个剩下猜。多选=不确定的坚决不选。写作=格式分先拿、内容分再补。</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 四、心态管理 ==================== -->
+<h2>四、心态管理——从开考到交卷</h2>
+
+<h3>开考前 10 分钟</h3>
+<ul>
+    <li>深呼吸三次。检查笔（2 支黑笔 + 2B 铅笔 + 橡皮）。把准考证、身份证放在桌子右上角。</li>
+    <li>脑子里过一遍：15 文种口诀 + 改错四步法 + 复议机关口诀 + 数字三个核心区分（60日/6个月/15日）。</li>
+</ul>
+
+<h3>开考后 10 分钟</h3>
+<ul>
+    <li>先花 <strong>1 分钟</strong>快速翻一遍整张卷子——看清题型、题量、有没有写作题。知道战场长什么样就不会慌。</li>
+    <li>从第 1 题开始做。一口气做下去——不要在第一道不会的题停住。会做的先全做了。</li>
+</ul>
+
+<h3>中途卡壳</h3>
+<ul>
+    <li>一道题超过 90 秒还没思路 → <strong>标记、跳过。</strong>在题号旁边画个圈，做完一轮回来再看。</li>
+    <li>连续遇到不会的题 → 不是你的问题，是卷子那段刚好出到了你的盲区。跳过，下一段你会找回节奏。</li>
+</ul>
+
+<h3>时间紧张</h3>
+<ul>
+    <li>如果还剩 15 分钟、还有 10+ 道题没做 → <strong>停止逐题做，切换成快速扫题模式。</strong>每道题最多 30 秒——能判断的直接选，不能判断的迅速用排除法蒙一个。先确保每道题都有一个答案。</li>
+</ul>
+
+<h3>考完交卷</h3>
+<ul>
+    <li>检查答题卡涂写是否完整。所有题都答了吗？个人信息填对了吗？</li>
+    <li>交卷后不要对答案。别人的答案跟你不一样，不一定是你错。立即离开考场区域。</li>
+</ul>
+
+<h3>考场应急——环境问题</h3>
+<ul>
+    <li><strong>邻座抖腿/翻卷子声音大？</strong>→ 把椅子挪远一点。戴上耳塞（如果考场允许）。把注意力集中在自己的呼吸和笔尖上。</li>
+    <li><strong>监考老师老在你旁边站着？</strong>→ 不是在看你的答案——他们只是按规定轮岗。继续做题。</li>
+    <li><strong>空调太冷/太热？</strong>→ 多带一件薄外套。宁可脱也不要冻着。</li>
+    <li><strong>突然想上厕所？</strong>→ 举手请示。不要忍——膀胱紧张会影响大脑判断。去一次厕所最多 5 分钟，但忍两个小时会让你在最后 30 分钟状态崩溃。</li>
+</ul>
+
+<h3>考前 60 分钟精细时间线</h3>
+<table>
+    <tr><th>时间</th><th>做什么</th></tr>
+    <tr><td>考前 60 分钟</td><td>出门前最后检查：身份证+准考证+笔+橡皮+手表。吃早饭（鸡蛋/牛奶/面包——蛋白质+碳水，不吃太饱）</td></tr>
+    <tr><td>考前 45 分钟</td><td>到达考场外围。找好考场位置、确认厕所位置</td></tr>
+    <tr><td>考前 30 分钟</td><td>进入考场大楼。交出手机等电子设备。去一次洗手间</td></tr>
+    <tr><td>考前 15 分钟</td><td>进入考场教室。把证件放在桌上。翻一下公文卡+政治卡——只翻这两张，别的不要看</td></tr>
+    <tr><td>考前 5 分钟</td><td>收回资料。深呼吸三次。脑子里过一遍：文种口诀+复议机关口诀+数字三核心(60日/6月/15日)。准备开战</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 五、考场物品 ==================== -->
+<h2>五、考场物品清单</h2>
+
+<table>
+    <tr><th>物品</th><th>数量</th><th>注意</th></tr>
+    <tr><td>身份证</td><td>1</td><td>原件，在有效期内</td></tr>
+    <tr><td>准考证</td><td>2 份</td><td>多打一份备用，放不同地方</td></tr>
+    <tr><td>黑色签字笔</td><td>2-3 支</td><td>同款同色，提前试写</td></tr>
+    <tr><td>2B 铅笔</td><td>2 支</td><td>提前削好或自动铅笔+备用笔芯</td></tr>
+    <tr><td>橡皮</td><td>1</td><td>干净好用</td></tr>
+    <tr><td>手表</td><td>1</td><td>非电子表（如考场有时钟则不需要）</td></tr>
+    <tr><td>透明笔袋</td><td>1</td><td>装所有文具</td></tr>
+    <tr><td>水</td><td>1</td><td>带瓶水放地上，渴了喝一口。不要放桌上</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 六、考前最后48小时节奏 ==================== -->
+<h2>六、考前最后 48 小时节奏</h2>
+
+<table>
+    <tr><th>时间</th><th>做什么</th><th>不做什么</th></tr>
+    <tr><td><strong>Day 15</strong><br>（考前一天）</td><td>上午：刷 7 张速记卡（20 分钟）+ 应用文格式默写。下午：放松——看书、散步。晚上：7 张速记卡再刷一遍 + 物品准备。早睡（最晚 10:30）</td><td>不刷新模拟题。不看新的知识点。不喝咖啡/茶（影响睡眠）</td></tr>
+    <tr><td><strong>Day 16</strong><br>（考试当天）</td><td>提前 45 分钟到考场。早饭吃蛋白质（鸡蛋/牛奶），不吃太饱。进考场前翻一遍速记卡的公文卡和政治卡——只翻这两张。进考场后：深呼吸、放好证件、准备作战</td><td>不跟其他考生讨论考点。不临时翻生疏的资料。不喝太多水（避免频繁上厕所）</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚡ 考前最后一句话：</strong>你学了 14 天——不是「突击」了 14 天。公文从 15 种文种分不清到能默写 13 种文体格式。法律从零到能背诵复议机关、民事责任年龄、刑罚种类。时政从碎片到一张完整时间线。这些都是真的。你走进考场时带进去的不是运气——是 14 天每天 6 小时的积累。坐下来，翻开卷子，从第 1 题开始做。你已经准备好了。</p></div>
+
+<span class="dot"></span>
+
+<h2>今日任务</h2>
+<table>
+    <tr><th>时段</th><th>任务</th><th>预计</th></tr>
+    <tr><td><strong>上午</strong></td><td>读策略 + 模拟走一遍。按时间分配方案在脑子里模拟一遍 120 分钟流程——第一轮做什么、卡壳怎么办、还剩 15 分钟怎么办</td><td>0.5h</td></tr>
+    <tr><td><strong>下午</strong></td><td>7 张速记卡刷一遍（20 分钟）+ 应用文 4 种结尾默写 + 物品准备（准考证/身份证/笔）</td><td>1h</td></tr>
+    <tr><td><strong>晚上</strong></td><td>7 张速记卡再刷一遍 + 早睡（10:30 前）</td><td>0.5h</td></tr>
+</table>
+
+<blockquote><p><strong>明日预告（Day 15）：</strong>考前最后一推——最精简版速记 + 考前提醒。只有考前一小时能看完的体量。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月11日 &nbsp;|&nbsp; Day 14 / 16 &nbsp;|&nbsp; 第二阶段 · 应试策略 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="十三·终极速记卡.html">← 上一篇</a></span>
+            <span class="next"><a href="十五·考前最后一推.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

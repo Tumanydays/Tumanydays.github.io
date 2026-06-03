@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 6：经济管理与国情省情 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+<style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 6：经济管理与国情省情</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月3日</span><span>Day 6 / 16</span><span>模块：经济管理 + 国情省情</span>
+</div>
+
+<div class="intro">
+    <p><strong>法律两天结束了。今天切换节奏。</strong>经济和省情在《综合知识》里分值不算最高，但考点集中、容易拿分。经济只记概念框架——不需要你会算GDP，只需要你知道GDP到底是什么、CPI涨了意味着什么。省情靠你的文史底子——四川的地理、历史、文化，你本来就是四川人，这些内容有一半你已经有概念了，另一半只是系统化。</p>
+    <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">核心板块：经济管理 + 国情省情 | 推送日：Day 6 | 下次预告：Day 7 科技文化 + 时事 + 职测速览 + 第一阶段总结</p>
+</div>
+
+<!-- ==================== 经济常识 ==================== -->
+<h2>上半场：经济常识</h2>
+
+<h3>一、宏观经济核心概念——GDP / CPI / 失业 / 财政 / 货币</h3>
+
+<h4>GDP——国内生产总值</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>定义</strong></td><td>一定时期内<strong>一国境内</strong>生产的全部<strong>最终产品</strong>和服务的市场价值</td></tr>
+    <tr><td><strong>三个关键限定</strong></td><td>①「一国境内」——不管生产者是本国人还是外国人，只要在本国国土上就计入。这和 GNP（国民生产总值）不同，GNP 按<strong>国民</strong>算，不管在哪里生产<br>②「最终产品」——中间产品不重复计算（如用于生产面包的面粉）。③「市场价值」——非市场交易不计入（家务劳动不计入）</td></tr>
+    <tr><td><strong>名义 GDP vs 实际 GDP</strong></td><td>名义=当年价格算；实际=剔除价格变动的「真实」增长（用不变价格算）</td></tr>
+</table>
+
+<h4>CPI——居民消费价格指数（通货膨胀的晴雨表）</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>定义</strong></td><td>反映<strong>居民家庭</strong>购买的消费品和服务<strong>价格水平变动</strong>的指标</td></tr>
+    <tr><td><strong>作用</strong></td><td>衡量<strong>通货膨胀</strong>。CPI 上涨 → 购买力下降 → 通货膨胀；CPI 下降 → 通货紧缩</td></tr>
+    <tr><td><strong>局限性</strong></td><td>只反映<strong>消费品</strong>价格，不反映投资品（房产/股票）价格变动</td></tr>
+</table>
+
+<h4>通货膨胀与通货紧缩</h4>
+<table>
+    <tr><th></th><th>通货膨胀</th><th>通货紧缩</th></tr>
+    <tr><td><strong>表现</strong></td><td>货币贬值、物价<strong>持续上涨</strong></td><td>货币升值、物价<strong>持续下跌</strong></td></tr>
+    <tr><td><strong>影响</strong></td><td>储蓄缩水，债权人受损、债务人受益</td><td>企业利润下降、失业增加</td></tr>
+    <tr><td><strong>对策</strong></td><td>紧缩货币政策（提高利率/提高准备金率）</td><td>扩张货币政策（降低利率/降准）</td></tr>
+</table>
+
+<h4>财政政策 vs 货币政策——宏观管理的两只手</h4>
+<table>
+    <tr><th></th><th>财政政策</th><th>货币政策</th></tr>
+    <tr><td><strong>制定主体</strong></td><td><strong>政府</strong>（财政部/国务院）</td><td><strong>中央银行</strong>（中国人民银行）</td></tr>
+    <tr><td><strong>核心工具</strong></td><td>①税收（提高/降低）②政府支出（增加/减少）③国债</td><td>①利率 ②存款准备金率 ③公开市场操作 ④再贴现率</td></tr>
+    <tr><td><strong>扩张</strong>（刺激经济）</td><td>减税 + 增加政府支出</td><td>降息 + 降准 + 买入国债（放水）</td></tr>
+    <tr><td><strong>紧缩</strong>（遏制过热）</td><td>加税 + 减少政府支出</td><td>加息 + 提准 + 卖出国债（收水）</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 考场混淆点：</strong>①「存款准备金率」是<strong>货币政策</strong>工具，不是财政政策。②扩张财政 + 扩张货币 = 「双宽松」。③财政政策工具中不包括利率——利率归央行管。</p></div>
+
+<h4>其他宏观经济指标速览</h4>
+<table>
+    <tr><th>指标</th><th>含义</th><th>考场关键词</th></tr>
+    <tr><td><strong>基尼系数</strong></td><td>衡量<strong>收入分配差距</strong>。0-1 之间，越大越不平等</td><td>0.4 是国际警戒线</td></tr>
+    <tr><td><strong>恩格尔系数</strong></td><td>食品支出占家庭消费总支出的比重。越高→越穷</td><td>衡量<strong>生活水平</strong>的指标</td></tr>
+    <tr><td><strong>失业率</strong></td><td>失业人口/劳动力人口</td><td>三种失业：摩擦性/结构性/周期性</td></tr>
+    <tr><td><strong>PPI</strong></td><td>工业生产者出厂价格指数</td><td>反映<strong>生产端</strong>价格变动</td></tr>
+    <tr><td><strong>外汇储备</strong></td><td>一国持有的外汇资产</td><td>用于国际支付和稳定汇率</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>1.【单选】GDP核算的是：A.一国境内全部生产 B.本国国民的全部生产 C.一国境内最终产品和服务 D.本国国民的最终产品和服务 → <strong>C</strong><br>2.【判断】降低存款准备金率属于扩张性财政政策。（×——属于货币政策）<br>3.【单选】恩格尔系数越小说明：A.越穷 B.越富 C.收入差距越大 D.失业率越高 → <strong>B</strong>（恩格尔系数=食品支出占比，越小=越有钱）</p></div>
+
+<h3>二、微观经济核心概念——供需 / 市场类型 / 弹性</h3>
+
+<h4>供给与需求——市场价格的基础</h4>
+<table>
+    <tr><th>概念</th><th>规律</th><th>影响价格方向</th></tr>
+    <tr><td><strong>需求</strong></td><td>价格上升→需求量下降（需求定律）</td><td rowspan="2">供需同时增加→价格不定；需求增+供给不变→价格涨；供给增+需求不变→价格跌</td></tr>
+    <tr><td><strong>供给</strong></td><td>价格上升→供给量增加</td></tr>
+    <tr><td><strong>均衡价格</strong></td><td colspan="2">供给=需求时的价格。政府干预（最高限价/最低限价）会打破均衡</td></tr>
+</table>
+
+<h4>四种市场类型——每场考试至少一道</h4>
+<table>
+    <tr><th>类型</th><th>厂商数量</th><th>产品差异</th><th>进入壁垒</th><th>典型例子</th></tr>
+    <tr><td><strong>完全竞争</strong></td><td>极多</td><td>无差异（同质）</td><td>无</td><td>农产品市场（小麦/大米）</td></tr>
+    <tr><td><strong>垄断竞争</strong></td><td>很多</td><td>有差异（品牌/质量）</td><td>低</td><td>餐饮/服装/日用消费品</td></tr>
+    <tr><td><strong>寡头垄断</strong></td><td>少数几家</td><td>可能有差异</td><td>高</td><td>电信/石油/航空</td></tr>
+    <tr><td><strong>完全垄断</strong></td><td><strong>一家</strong></td><td>无替代品</td><td>极高</td><td>自来水/电网（自然垄断）</td></tr>
+</table>
+
+<div class="yellow-box"><p><strong>💡 市场类型辨析口诀：</strong>「完全竞争无差异，垄断竞争有品牌，寡头几家相互盯，完全垄断只一家。」看到题干描述中有「少数几家大企业、相互紧盯价格决策」→ 寡头。</p></div>
+
+<h4>需求弹性——一个补充概念</h4>
+<table>
+    <tr><th>类型</th><th>含义</th><th>典型商品</th></tr>
+    <tr><td><strong>富有弹性</strong></td><td>价格变动一点→需求量变动很多</td><td>奢侈品、可选消费品（豪车/旅游）</td></tr>
+    <tr><td><strong>缺乏弹性</strong></td><td>价格变动很多→需求量变动很少</td><td><strong>必需品</strong>（粮食/食盐/药品）</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>4.【单选】中国电信行业属于哪种市场类型？A.完全竞争 B.垄断竞争 C.寡头垄断 D.完全垄断 → <strong>C</strong>（移动/联通/电信三家主导→寡头）<br>5.【判断】粮食这类必需品的需求价格弹性通常较大。（×——必需品缺乏弹性，价格涨也得买）<br>6.【单选】农产品市场最接近：A.完全竞争 B.垄断竞争 C.寡头 D.完全垄断 → <strong>A</strong></p></div>
+
+<!-- ===== 新增：货币层次 + 外部性 + 机会成本 ===== -->
+<h4>M0 / M1 / M2——货币的三个层次</h4>
+<table>
+    <tr><th>层次</th><th>包含内容</th><th>通俗理解</th></tr>
+    <tr><td><strong>M0</strong></td><td><strong>流通中的现金</strong>（纸币+硬币）</td><td>你口袋里的钱</td></tr>
+    <tr><td><strong>M1</strong>（狭义货币）</td><td>M0 + <strong>活期存款</strong></td><td>口袋里的 + 随时可取的</td></tr>
+    <tr><td><strong>M2</strong>（广义货币）</td><td>M1 + 定期存款 + 储蓄存款 + 其他存款</td><td>社会上几乎所有「钱」</td></tr>
+</table>
+
+<h4>外部性与公共物品——市场失灵</h4>
+<table>
+    <tr><th>概念</th><th>含义</th><th>举例</th></tr>
+    <tr><td><strong>正外部性</strong></td><td>行为给他人带来<strong>好处</strong>，自己未获补偿</td><td>打疫苗保护周边人群；养蜂授粉</td></tr>
+    <tr><td><strong>负外部性</strong></td><td>行为给他人带来<strong>损害</strong>，自己未承担成本</td><td>工厂排污；开车堵路</td></tr>
+    <tr><td><strong>公共物品</strong></td><td><strong>非竞争+非排他</strong>——市场不愿提供，需政府供给</td><td>国防、灯塔、路灯</td></tr>
+</table>
+
+<h4>机会成本与边际效用递减</h4>
+<table>
+    <tr><th>概念</th><th>核心</th></tr>
+    <tr><td><strong>机会成本</strong></td><td>做一件事而<strong>放弃</strong>的其他选择中<strong>价值最高</strong>的那个。例：用周末刷题 → 放弃了休息或社交——放弃项中价值最高的就是刷题的机会成本</td></tr>
+    <tr><td><strong>边际效用递减</strong></td><td>每多消费一单位，增加的满足感<strong>越来越少</strong>。第一杯水解渴，第五杯水不想喝</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>7.【单选】狭义货币M1等于：A.流通中的现金 B.现金+活期存款 C.现金+定期存款 D.活期+定期存款 → <strong>B</strong><br>8.【判断】公共物品具有竞争性和排他性。（×——非竞争+非排他）</p></div>
+
+<h3>三、管理常识</h3>
+
+<h4>行政职能与公共管理</h4>
+<table>
+    <tr><th>考点</th><th>核心内容</th></tr>
+    <tr><td><strong>行政职能</strong></td><td>计划→组织→领导→协调→控制。这是行政管理的基本职能链条<br>「计划」排在第一位——凡事预则立</td></tr>
+    <tr><td><strong>政府经济职能</strong></td><td>宏观调控、市场监管、公共服务、社会管理、环境保护</td></tr>
+    <tr><td><strong>公共管理</strong></td><td>以政府为核心、以公共利益为目标、以公共权力为基础的管理活动。新公共管理运动强调<strong>效率、市场化、顾客导向</strong></td></tr>
+    <tr><td><strong>组织结构的类型</strong></td><td>直线制（最简单）、职能制、直线-职能制（最常见）、矩阵制（项目型）、事业部制</td></tr>
+</table>
+
+<h4>决策理论——赫伯特·西蒙</h4>
+<blockquote><p><strong>西蒙（Herbert Simon）提出了「有限理性」决策模型。</strong>他认为管理者不是「完全理性」的——不可能掌握所有信息、比较所有方案。所以实际决策是<strong>「满意化」</strong>而非「最优化」。这是管理学核心考点。</p></blockquote>
+
+<h4>管理学三大古典理论</h4>
+<table>
+    <tr><th>理论</th><th>代表人物</th><th>核心主张</th></tr>
+    <tr><td><strong>科学管理</strong></td><td>泰勒（Taylor）</td><td>用科学方法研究工人的操作，找出<strong>「最佳工作方式」</strong>，提高效率。核心：标准化、计件工资、工时研究</td></tr>
+    <tr><td><strong>一般管理</strong></td><td>法约尔（Fayol）</td><td>提出管理的<strong>五项职能</strong>（计划/组织/指挥/协调/控制）和<strong>14 条管理原则</strong>。侧重管理者的视角，而非工人</td></tr>
+    <tr><td><strong>官僚制</strong></td><td>韦伯（Weber）</td><td>理想的组织形式——<strong>层级分明、分工明确、按章办事、非人格化</strong>。不是贬义的「官僚」，是中性的组织形式</td></tr>
+</table>
+
+<h4>激励理论——马斯洛与赫茨伯格</h4>
+<table>
+    <tr><th>理论</th><th>核心内容</th></tr>
+    <tr><td><strong>马斯洛需求层次</strong></td><td>五个层次从低到高：<strong>生理 → 安全 → 社交 → 尊重 → 自我实现</strong>。低层次满足后才追求高层次。管理启示：先涨工资（生理），再给荣誉（尊重）</td></tr>
+    <tr><td><strong>赫茨伯格双因素</strong></td><td><strong>保健因素</strong>（工资/工作环境/人际）——不满足就不满，满足了也不会很满意<br><strong>激励因素</strong>（成就/认可/成长）——满足了才能真正激励人。管理启示：涨工资只能消除不满，给成就才能激发动力</td></tr>
+</table>
+
+<h4>PDCA 循环与目标管理</h4>
+<table>
+    <tr><th>工具</th><th>内容</th></tr>
+    <tr><td><strong>PDCA</strong></td><td>Plan（计划）→ Do（执行）→ Check（检查）→ Act（改进）。循环往复、螺旋上升。又称<strong>戴明环</strong></td></tr>
+    <tr><td><strong>目标管理</strong></td><td>德鲁克（Drucker）提出——上下级<strong>共同制定目标</strong>，以目标完成情况作为考核标准。核心：自我控制、参与管理</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>9.【判断】西蒙认为管理者在决策中能够做到完全理性。（×——有限理性，满意而非最优）<br>10.【单选】科学管理理论的代表人物是：A.法约尔 B.韦伯 C.泰勒 D.德鲁克 → <strong>C</strong><br>11.【判断】马斯洛需求层次中，自我实现是最高层次的需要。（√）<br>12.【单选】PDCA 循环中的 C 代表：A.控制 B.检查 C.协调 D.改进 → <strong>B</strong>（Check=检查）</p></div>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>7.【判断】西蒙认为管理者在决策中能够做到完全理性。（×——有限理性，决策是满意化而非最优化）<br>8.【单选】行政管理的基本职能链条中排第一位的是：A.组织 B.领导 C.计划 D.控制 → <strong>C</strong></p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 国情省情 ==================== -->
+<h2>下半场：国情省情</h2>
+
+<h3>四、中国国情速览</h3>
+
+<h4>地理</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>位置与面积</strong></td><td>亚洲东部、太平洋西岸。陆地面积约 <strong>960 万</strong>平方公里，世界<strong>第三</strong>（仅次于俄罗斯、加拿大）</td></tr>
+    <tr><td><strong>陆上邻国</strong></td><td>14 个——朝/俄/蒙/哈/吉/塔/阿/巴/印/尼/不/缅/老/越（口诀：「朝俄蒙哈吉塔阿，巴印尼不缅老越」）</td></tr>
+    <tr><td><strong>三级行政区划</strong></td><td>省（自治区/直辖市/特别行政区）→ 县（市/自治县）→ 乡（镇/民族乡）</td></tr>
+    <tr><td><strong>四大高原</strong></td><td>青藏（最高）、内蒙古（最平坦）、黄土（水土流失）、云贵（喀斯特）</td></tr>
+    <tr><td><strong>四大盆地</strong></td><td>塔里木（最大）、准噶尔（第二大）、柴达木（最高）、<strong>四川盆地</strong></td></tr>
+    <tr><td><strong>三大平原</strong></td><td>东北平原（最大）、华北平原、长江中下游平原</td></tr>
+</table>
+
+<h4>人口与民族</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>人口</strong></td><td>世界人口最多的国家（约14亿）。东部稠密、西部稀疏——<strong>「胡焕庸线」</strong>（黑河—腾冲线）以东占 90% 以上</td></tr>
+    <tr><td><strong>民族构成</strong></td><td><strong>56 个民族</strong>，汉族约占 91%。人口超百万的少数民族有 18 个（壮族最多→约 1900 万）</td></tr>
+    <tr><td><strong>民族分布特点</strong></td><td><strong>大杂居、小聚居、交错居住</strong></td></tr>
+    <tr><td><strong>五大自治区</strong></td><td>内蒙古（1947 最早）、新疆（1955 面积最大）、广西（壮族）、宁夏（回族）、西藏（1965 面积第二大）</td></tr>
+</table>
+
+<h3>五、四川省情——你的主场</h3>
+
+<h4>地理——「天府之国」</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>位置</strong></td><td>中国西南部、长江上游。面积 48.6 万平方公里（全国第五位）</td></tr>
+    <tr><td><strong>地形</strong></td><td>西部<strong>高原山地</strong>（川西高原：甘孜/阿坝）、东部<strong>盆地</strong>（四川盆地——紫色盆地）</td></tr>
+    <tr><td><strong>河流</strong></td><td><strong>长江</strong>及其支流（<strong>金沙江/雅砻江/大渡河/岷江/嘉陵江</strong>）。<strong>都江堰</strong>——世界文化遗产，战国李冰父子修建</td></tr>
+    <tr><td><strong>气候</strong></td><td>亚热带季风气候。东部盆地温暖湿润（多雾），西部高原寒冷干燥</td></tr>
+    <tr><td><strong>最高点</strong></td><td><strong>贡嘎山</strong>（7556米，位于甘孜州，有「蜀山之王」之称）</td></tr>
+    <tr><td><strong>自然遗产</strong></td><td>九寨沟（世界自然遗产）、黄龙、大熊猫栖息地（卧龙/四姑娘山/夹金山脉——横跨4市州12县）</td></tr>
+</table>
+
+<h4>历史——「巴蜀古国」</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>古蜀文明</strong></td><td><strong>三星堆</strong>（广汉，距今约 4800-2600 年）、<strong>金沙遗址</strong>（成都，距今约 3000 年）——出土青铜面具/太阳神鸟金饰等</td></tr>
+    <tr><td><strong>三国</strong></td><td>蜀汉政权（刘备/诸葛亮）定都<strong>成都</strong></td></tr>
+    <tr><td><strong>唐代</strong></td><td>成都为「<strong>扬一益二</strong>」的益州所在地——唐代经济第二大城市（仅次于扬州）</td></tr>
+    <tr><td><strong>宋代</strong></td><td>四川出现世界上最早的纸币——<strong>「交子」</strong></td></tr>
+    <tr><td><strong>抗战时期</strong></td><td>重庆为陪都（1997 年之前属四川，后直辖）</td></tr>
+    <tr><td><strong>行政区划</strong></td><td>1997 年重庆直辖之前：四川 = 21 个地市州；之后：18 个地级市 + 3 个自治州</td></tr>
+</table>
+
+<h4>经济与文化</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>特色农业</strong></td><td>「天府粮仓」——全国重要粮食（水稻/小麦/玉米）和生猪生产基地。油菜籽产量全国第一</td></tr>
+    <tr><td><strong>支柱产业</strong></td><td>电子信息、装备制造、先进材料、能源化工、食品饮料——「5+1」现代产业体系</td></tr>
+    <tr><td><strong>经济区域</strong></td><td>成都平原经济区（核心）、川南经济区、川东北经济区、攀西经济区、川西北生态示范区</td></tr>
+    <tr><td><strong>成渝双城经济圈</strong></td><td>2020 年上升为国家战略。以成都、重庆为核心，打造全国第四经济增长极</td></tr>
+    <tr><td><strong>文化符号</strong></td><td>川剧变脸、蜀绣、竹编、川菜（一菜一格、百菜百味）、盖碗茶</td></tr>
+    <tr><td><strong>文化与历史名人</strong></td><td>司马相如（辞赋）、扬雄（辞赋/哲学）、李白（出生地江油）、苏轼（眉山人）、郭沫若（乐山人）、巴金（成都人）、张大千（内江人）</td></tr>
+</table>
+
+<div class="yellow-box"><p><strong>💡 四川名人记忆法：</strong>汉代→司马相如、扬雄。唐代→李白（江油）。宋代→「三苏」苏洵苏轼苏辙（眉山）。近现代→郭沫若（乐山）、巴金（成都）、张大千（内江）。三星堆→广汉。太阳神鸟金饰→成都金沙遗址。</p></div>
+
+<h4>四川行政区划与经济区划详表</h4>
+<table>
+    <tr><th>类别</th><th>名称</th><th>说明</th></tr>
+    <tr><td rowspan="5"><strong>五大经济区</strong></td><td><strong>成都平原经济区</strong></td><td>成都/德阳/绵阳/遂宁/乐山/眉山/雅安/资阳——核心区，GDP 占全省一半以上</td></tr>
+    <tr><td><strong>川南经济区</strong></td><td>自贡/泸州/内江/宜宾——白酒（五粮液/泸州老窖）+ 临港经济</td></tr>
+    <tr><td><strong>川东北经济区</strong></td><td>广元/南充/达州/广安/巴中——天然气化工/农产品加工</td></tr>
+    <tr><td><strong>攀西经济区</strong></td><td>攀枝花（钢铁/钒钛）+ 凉山（西昌卫星发射中心/彝族聚集区）</td></tr>
+    <tr><td><strong>川西北生态示范区</strong></td><td>甘孜 + 阿坝（藏族羌族自治州）——生态保护为主，旅游业</td></tr>
+    <tr><td rowspan="3"><strong>三个自治州</strong></td><td>阿坝藏族羌族自治州（汶川/九寨沟所在）</td><td rowspan="3">全省 21 个市（州）：18 个地级市 + 3 个自治州</td></tr>
+    <tr><td>甘孜藏族自治州（康定/稻城亚丁/贡嘎山）</td></tr>
+    <tr><td>凉山彝族自治州（西昌/卫星发射中心）</td></tr>
+</table>
+
+<h4>四川——更多考点碎片</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>四川简称</strong></td><td><strong>川</strong> 或 <strong>蜀</strong></td></tr>
+    <tr><td><strong>省会</strong></td><td>成都（别称<strong>蓉城</strong>、<strong>锦城</strong>）</td></tr>
+    <tr><td><strong>省花</strong></td><td><strong>杜鹃花</strong></td></tr>
+    <tr><td><strong>省树</strong></td><td><strong>桢楠</strong></td></tr>
+    <tr><td><strong>人口</strong></td><td>约 8400 万，全国<strong>第五</strong></td></tr>
+    <tr><td><strong>少数民族</strong></td><td>全国<strong>第二大藏族聚居区、最大彝族聚居区、唯一羌族聚居区</strong></td></tr>
+    <tr><td><strong>世界遗产</strong></td><td>九寨沟、黄龙、大熊猫栖息地（自然遗产）；青城山-都江堰（文化遗产）；峨眉山-乐山大佛（文化与自然双重遗产）</td></tr>
+    <tr><td><strong>成渝双城经济圈</strong></td><td>2020 年上升为国家战略——定位：全国<strong>第四增长极</strong>（前三个：京津冀/长三角/粤港澳）</td></tr>
+    <tr><td><strong>天府粮仓</strong></td><td>四川省重点打造——水稻/油菜/生猪三大优势产业带</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>13.【判断】四川盆地是中国四大盆地中面积最大的。（×——塔里木盆地最大）<br>14.【单选】世界上最早的纸币「交子」出现于：A.唐代 B.宋代 C.元代 D.明代 → <strong>B</strong><br>15.【单选】四川的最高峰是：A.四姑娘山 B.峨眉山 C.贡嘎山 D.青城山 → <strong>C</strong><br>16.【判断】李冰父子修建都江堰是在战国时期。（√）<br>17.【判断】四川是全国唯一的羌族聚居区。（√）<br>18.【单选】四川的省花是：A.牡丹 B.芙蓉 C.杜鹃花 D.梅花 → <strong>C</strong></p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 应用文 ==================== -->
+<h2>应用文练笔：写一份情况通报</h2>
+
+<h3>题目情景</h3>
+<p>某市安全生产委员会办公室于 2026 年 5 月对全市工矿企业进行了安全生产专项检查，共检查企业 86 家。检查结果：大部分企业安全生产状况良好，但发现 3 家企业存在重大安全隐患（消防通道堵塞、危化品存储不规范、特种设备未年检），已责令停产整改。请以<strong>市安全生产委员会办公室名义</strong>向<strong>各县（市、区）安委会、各相关企业</strong>拟一份检查情况通报，既要通报问题提出批评，也要明确整改要求。</p>
+
+<h3>通报的格式要点</h3>
+<table>
+    <tr><th>要素</th><th>写法</th></tr>
+    <tr><td><strong>标题</strong></td><td>XX关于XXX的通报。通报有三种：表彰通报/批评通报/情况通报。此题属于<strong>情况通报+批评</strong>结合</td></tr>
+    <tr><td><strong>主送</strong></td><td>可多可泛——「各县（市、区）安委会，各相关企业：」</td></tr>
+    <tr><td><strong>开头</strong></td><td>通报的背景（何时做了何事）</td></tr>
+    <tr><td><strong>正文</strong></td><td>三段式——①总体情况（肯定好的）②存在问题（具体、点名或不点名地批评）③整改要求（限期+后续措施）<br>特点：<strong>先肯定后批评，批评具体化</strong></td></tr>
+    <tr><td><strong>结尾</strong></td><td>「特此通报」或自然收束。不写「妥否，请批复」（那不是通报的结尾）</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 通报和通知的区别再强调一次：</strong>通知是<strong>事前</strong>（让你去做什么），通报是<strong>事后</strong>（告诉你发生了什么+警示或教育）。题干如果是「检查完了，把结果通报给大家」→ 通报。昨天那个会议通知是「要开会了，通知大家来」→ 通知。</p></div>
+
+<h3>参考范文</h3>
+<div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+    <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text-title);margin-bottom:24px;">市安全生产委员会办公室<br>关于全市工矿企业安全生产专项检查情况的通报</p>
+    <p style="color:var(--text);">各县（市、区）安委会，各相关企业：</p>
+    <p style="text-indent:2em;color:var(--text);">为进一步压实安全生产责任，排查治理事故隐患，市安委会办公室于2026年5月15日至31日对全市86家工矿企业开展了安全生产专项检查。现将有关情况通报如下：</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>一、总体情况</strong></p>
+    <p style="text-indent:2em;color:var(--text);">从检查情况看，大多数企业能够落实安全生产主体责任，安全管理制度较为健全，隐患排查治理基本到位。其中，XX矿业有限公司、XX制造有限公司等12家企业安全生产标准化建设成效突出，予以通报表扬。</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>二、存在的主要问题</strong></p>
+    <p style="text-indent:2em;color:var(--text);">检查中发现3家企业存在重大安全隐患：XX化工有限公司危化品存储不符合规范要求，未落实双人双锁管理制度；XX建材有限公司生产车间消防通道严重堵塞，消防器材超过有效期未更换；XX机械有限公司特种设备超期未年检，部分起重设备安全装置失效。上述3家企业已当场责令停产整改。</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>三、下一步工作要求</strong></p>
+    <p style="text-indent:2em;color:var(--text);">（一）被通报批评的3家企业须于6月15日前完成全部隐患整改，经属地应急管理部门验收合格后书面报告市安委办，验收不合格的不得恢复生产。（二）各县（市、区）安委会对本次通报的问题要举一反三，于6月30日前对本辖区同类企业开展一次全覆盖排查，排查结果书面报送市安委办。（三）各企业要对照本次通报的问题清单全面开展自查自纠，切实消除安全盲区，确保安全生产形势持续稳定。</p>
+    <p style="text-indent:2em;color:var(--text);">特此通报。</p>
+    <p style="text-align:right;margin-top:32px;color:var(--text);">市安全生产委员会办公室</p>
+    <p style="text-align:right;color:var(--text);">2026年6月3日</p>
+</div>
+
+<h3>本篇评分要点</h3>
+<table>
+    <tr><th>维度</th><th>得分关键</th><th>本篇表现</th></tr>
+    <tr><td><strong>标题</strong></td><td>发文机关+关于+事由+的+通报</td><td>✅</td></tr>
+    <tr><td><strong>结构</strong></td><td>总体→问题→要求，三段递进。先肯定后批评</td><td>✅ 总体+表扬 12 家→点名批评 3 家→整改要求</td></tr>
+    <tr><td><strong>问题具体化</strong></td><td>点名或不点名地指出具体问题。不是笼统写「存在安全隐患」</td><td>✅ 三个企业+三个具体问题（危化品/消防/特种设备）</td></tr>
+    <tr><td><strong>整改闭环</strong></td><td>限期+验收+报告——要求具体、可执行、有后果</td><td>✅ 6月15日前+验收合格回复+不合格不得复产</td></tr>
+    <tr><td><strong>教育性</strong></td><td>通报的后期作用——举一反三、警示全行业</td><td>✅ 各辖区全覆盖排查+自查自纠</td></tr>
+    <tr><td><strong>结尾</strong></td><td>「特此通报」</td><td>✅</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 今日任务 ==================== -->
+<h2>今日任务</h2>
+
+<table>
+    <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+    <tr><td rowspan="2"><strong>上午</strong></td><td>经济常识</td><td>GDP→CPI→通胀/通缩→财政vs货币政策→M0/M1/M2→市场类型→外部性→机会成本/边际效用</td><td>1.5h</td></tr>
+    <tr><td>管理 + 国情</td><td>古典三理论（泰勒/法约尔/韦伯）→西蒙有限理性→激励理论（马斯洛+赫茨伯格）→PDCA→目标管理。中国地理/人口/民族速览</td><td>1h</td></tr>
+    <tr><td rowspan="2"><strong>下午</strong></td><td>四川省情</td><td>地理（地形/河流/贡嘎山/都江堰/世界遗产）→历史（三星堆/交子/益州）→五大经济区+三自治州→成渝双城经济圈→文化名人→省花省树</td><td>1h</td></tr>
+    <tr><td>应用文练笔</td><td>写通报。检查：结构「总体→问题→要求」三段式吗？问题具体化了吗？整改有期限和验收吗？结尾是「特此通报」吗？</td><td>1h</td></tr>
+    <tr><td rowspan="2"><strong>晚上</strong></td><td>自测 + 回顾</td><td>经济/管理/省情 18 道自测独立完成。回顾：市场类型四种默写 + 四川省情核心数据默写 + 管理学三大古典理论默写</td><td>0.5h</td></tr>
+    <tr><td>明日预习</td><td>瞄一眼 Day 7：科技文化+时事+职测。第一阶段收官日，之后进入第二阶段冲刺</td><td>0.5h</td></tr>
+</table>
+
+<blockquote><p><strong>下期预告（Day 7）：</strong>科技文化常识 + 时事知识 + 职测速览。科技：近一年重大成就 + 理化生基础。文化：中国古代文学/历史/传统文化。时事：二十大 + 2025-2026 重大政策串讲。职测：言语理解 + 判断推理速览。Day 7 是第一阶段最后一天。</p><p style="font-size:0.85rem;color:var(--text-dim);">今日新增：货币三层次M0/M1/M2、外部性与公共物品、机会成本与边际效用、管理学三大古典理论（泰勒/法约尔/韦伯）、马斯洛需求层次与赫茨伯格双因素、PDCA循环与目标管理、四川五大经济区+三自治州详表、省花省树/人口/少数民族/世界遗产等碎片考点、自测题扩至 18 道。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月3日 &nbsp;|&nbsp; Day 6 / 16 &nbsp;|&nbsp; 模块：经济管理 + 国情省情 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="五·民法典与刑法.html">← 上一篇</a></span>
+            <span class="next"><a href="七·科技文化与时事职测.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

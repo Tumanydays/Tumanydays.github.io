@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 11：应用文写作专题 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+<style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 11：应用文写作专题</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月8日</span><span>Day 11 / 16</span><span>第二阶段 · 写作专题</span>
+</div>
+
+<div class="intro">
+    <p><strong>13 种高频文体（10 种法定公文 + 3 种事务文书），每种一张格式骨架。</strong>今天的目标不是写——是<em>看</em>和<em>记</em>。把每种文种的标题格式、正文结构、落款要求刻在脑子里，上考场之后，一看题干就知道这个文种该怎么搭架子。13 种文体覆盖下行（通知/通报/批复/决定）、上行（请示/报告）、平行（函）、纪要、简报、意见——是《综合知识》最可能考到的写作方向。</p>
+    <p>每种文种的骨架包含三个必须记住的信息：<strong>标题怎么写 / 正文分几段 / 结尾用什么。</strong></p>
+    <p style="margin-top:8px;font-size:.82rem;color:var(--text-dim);">今日专题：10 种高频应用文格式全覆盖 | 明日：Day 12 时政专题</p>
+</div>
+
+<!-- ==================== 下行文 ==================== -->
+<h2>一、下行文——4 种</h2>
+
+<!-- 通知 -->
+<h3><span class="wen-tag tag-down">下行</span> ① 通知</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX（发文机关）关于召开XX会议（/开展XX工作/印发XX方案）的通知
+    <div class="lbl">【主送】</div>XX单位、XX部门：（可多点）
+    <div class="lbl">【开头】</div>为……（目的），根据……（依据），现就有关事项通知如下：
+    <div class="lbl">【正文】</div>分条列出：一、事项一 二、事项二 三、事项三。每条写清楚「做什么、怎么做、什么时间完成」
+    <div class="lbl">【结尾】</div>特此通知（或自然收束）
+    <div class="lbl">【落款】</div>发文机关署名 + 成文日期（阿拉伯数字）
+</div>
+<blockquote><p><strong>致命错误：</strong>①标题缺「关于」 ②内容模糊——通知要让人知道「要做什么」 ③把通知和通报搞混——通知=事前布置，通报=事后告知</p></blockquote>
+
+<!-- 通报 -->
+<h3><span class="wen-tag tag-down">下行</span> ② 通报</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于XXX（情况/表彰/批评）的通报
+    <div class="lbl">【主送】</div>可多点
+    <div class="lbl">【开头】</div>为……（背景），……（何时做了何事）。现将有关情况通报如下：
+    <div class="lbl">【正文】</div>1. 总体情况（好的先说）→ 2. 存在问题（具体、可点名）→ 3. 下一步要求（限期+措施）
+    <div class="lbl">【结尾】</div>特此通报
+    <div class="lbl">【落款】</div>发文机关署名 + 成文日期
+</div>
+<blockquote><p><strong>致命错误：</strong>①只有批评没有「总体情况」的肯定部分——通报要先说好的再说问题 ②问题笼统——必须具体到人/事/数据 ③结尾写了「妥否请批复」——那是请示的结尾</p></blockquote>
+
+<!-- 批复 -->
+<h3><span class="wen-tag tag-down">下行</span> ③ 批复</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于<strong>同意</strong>（/不同意/原则同意）XXX的批复
+    <div class="lbl">【主送】</div>来文请示的单位（单一）
+    <div class="lbl">【开头】</div>你单位《关于XXX的请示》（XX〔2026〕X号）收悉。经研究，现批复如下：
+    <div class="lbl">【正文】</div>先表态（同意/不同意/原则同意）→ 再提要求（如同意：须注意什么；如不同意：说明理由或替代方案）
+    <div class="lbl">【结尾】</div>此复（或自然收束）
+    <div class="lbl">【落款】</div>发文机关署名 + 成文日期
+</div>
+<blockquote><p><strong>致命错误：</strong>①没有引用对方来文的标题和文号——批复的第一句必须引用请示 ②标题里没写表态（「关于XXX的批复」→ 缺表态词。应写「同意/不同意/原则同意」）</p></blockquote>
+
+<!-- 决定 -->
+<h3><span class="wen-tag tag-down">下行</span> ④ 决定（表彰型）</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于表彰XXX的决定
+    <div class="lbl">【主送】</div>可多点或泛称
+    <div class="lbl">【开头】</div>背景 + 事迹概述（1-2句话）——「为表彰先进，树立典型，……决定：」
+    <div class="lbl">【正文】</div>1. 表彰名单及荣誉称号 2. 希望与号召（希望受表彰者……号召大家……）
+    <div class="lbl">【结尾】</div>自然收束（不写「特此决定」）
+    <div class="lbl">【落款】</div>发文机关署名 + 成文日期
+</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 上行文 ==================== -->
+<h2>二、上行文——2 种</h2>
+
+<!-- 请示 -->
+<h3><span class="wen-tag tag-up">上行</span> ⑤ 请示</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于XXX（请求事项）的请示
+    <div class="lbl">【主送】</div><em>只写一个</em>上级（绝对不多写）
+    <div class="lbl">【开头】</div>请示理由——为什么需要上级批？写客观事实+政策依据+紧迫性。例：「……存在安全隐患，消防部门已下达整改通知……根据XX规定……」
+    <div class="lbl">【正文】</div>请示事项——具体、可操作、数字精确。分项列出：一要钱多少、二要批什么。如果涉及经费：逐项列出费用构成
+    <div class="lbl">【结尾】</div><strong>妥否，请批复</strong>（不写「请批示」——批示不是公文用语）
+    <div class="lbl">【落款】</div>署名 + 日期 + <em>附注：联系人姓名和电话</em>
+</div>
+<blockquote><p><strong>致命错误：</strong>①一文多事 ②主送两个上级 ③结尾写成「妥否请批示」 ④缺附注联系人电话 ⑤标题写成了「报告」</p></blockquote>
+
+<!-- 报告 -->
+<h3><span class="wen-tag tag-up">上行</span> ⑥ 报告</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于XXX（工作情况/检查情况/整改情况）的报告
+    <div class="lbl">【主送】</div>上级机关（通常一个）
+    <div class="lbl">【开头】</div>报告的目的和依据——「根据……要求/安排，……现将有关情况报告如下：」
+    <div class="lbl">【正文】</div>一、基本情况 二、主要做法或检查结果 三、存在问题 四、下一步措施（或整改情况）
+    <div class="lbl">【结尾】</div><strong>特此报告</strong>（绝不写「妥否请批复」——报告不要求上级回复）
+    <div class="lbl">【落款】</div>署名 + 日期
+</div>
+<blockquote><p><strong>致命错误：</strong>①结尾夹带「妥否请批复」——标题是「报告」但结尾求批复=必错 ②只有成绩没有问题——工作/检查报告必须有「存在问题」部分 ③笼统写「存在一些问题」——要具体</p></blockquote>
+
+<span class="dot"></span>
+
+<!-- ==================== 平行文 ==================== -->
+<h2>三、平行文——1 种</h2>
+
+<!-- 函 -->
+<h3><span class="wen-tag tag-level">平行</span> ⑦ 函</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于商请（/询问/告知）XXX的函
+    <div class="lbl">【主送】</div>对方单位（点对点）
+    <div class="lbl">【开头】</div>说明来意——「为……，现函请贵单位……」<strong>语气平等</strong>，不卑不亢
+    <div class="lbl">【正文】</div>具体事项 + 理由 + 附件说明。商洽函要写「请贵单位予以支持」；询问函要写「请函告」
+    <div class="lbl">【结尾】</div>「敬请函复为盼」/「特此函告」——<em>绝不写「此致敬礼」</em>
+    <div class="lbl">【落款】</div>署名 + 日期
+</div>
+<blockquote><p><strong>致命错误：</strong>①结尾写「此致敬礼」→ 函不是私人信件 ②用了「妥否请批复」→ 那是请示的结尾 ③语气像命令下级——函是平行关系，要客气</p></blockquote>
+
+<span class="dot"></span>
+
+<!-- ==================== 纪要 + 简报 ==================== -->
+<h2>四、纪要 + 事务文书——2 种</h2>
+
+<!-- 纪要 -->
+<h3><span class="wen-tag tag-down">下行</span> ⑧ 纪要</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX纪要（<em>不加「会议」二字</em>）
+    <div class="lbl">【开头】</div>时间 + 地点 + 主持人/召集人 + 会议名称 + 参会单位——五要素。「2026年X月X日，XX在XX会议室主持召开XX会议。XX、XX等单位负责同志参加。现将会议情况纪要如下：」
+    <div class="lbl">【正文】</div>三段式——一、会议听取了什么 二、会议讨论了/分析了什么 三、会议决定/部署了什么（核心=议定事项，不是流水账，是结论和分工）
+    <div class="lbl">【结尾】</div>自然收束，不写「特此纪要」
+    <div class="lbl">【落款】</div>署名 + 日期。一般不盖章
+</div>
+
+<!-- 简报 -->
+<h3><span class="wen-tag tag-down">事务</span> ⑨ 简报</h3>
+<div class="skeleton">
+    <div class="lbl">【版头】</div>简报名称 + 第X期 + 编发单位 + 日期（四要素）
+    <div class="lbl">【标题】</div>提炼主题——简明有力的一句话
+    <div class="lbl">【正文】</div>导语式开头（1-2句交代背景/目的/总体成效）→ 分条列出做了什么（每条配数据）→ 最后一句：下一步打算
+    <div class="lbl">【版记】</div>报：XX（上级） / 发：XX（下级和相关单位）
+</div>
+<blockquote><p><strong>致命错误：</strong>①没有数据——简报的生命是数据。每条必须有数字 ②没有「报/发」范围 ③正文写成流水账——简报要有提炼</p></blockquote>
+
+<span class="dot"></span>
+
+<!-- ==================== 意见 ==================== -->
+<h2>五、多向行文——1 种</h2>
+
+<!-- 意见 -->
+<h3><span class="wen-tag tag-level">多向</span> ⑩ 意见</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX关于XXX（促进/推进/加强XXX工作）的意见
+    <div class="lbl">【主送】</div>根据方向定——下行意见写下级、上行意见写上级、平行意见写平级
+    <div class="lbl">【开头】</div>目的+依据——「为……，根据……，现提出如下意见：」
+    <div class="lbl">【正文】</div>分条列出见解和办法——每条=「是什么+为什么+怎么做」。可以分大标题+小条目
+    <div class="lbl">【结尾】</div>自然收束或「以上意见，请结合实际认真贯彻落实」（下行）/「以上意见，供参考」（上行或平行）
+    <div class="lbl">【落款】</div>署名 + 日期
+</div>
+<blockquote><p><strong>致命错误：</strong>①意见当成了请示或通知来写——意见重在「提出见解和办法」，不是请示也不是命令 ②只有看法没有具体办法——意见必须有「怎么做的建议」</p></blockquote>
+
+<!-- ===== 新增：事务文书补充 ===== -->
+<h2>六、事务文书补充——3 种非公文但常考</h2>
+
+<h3>⑪ 计划（工作方案）</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX单位2026年XXX工作计划（/XXX工作方案）
+    <div class="lbl">【开头】</div>指导思想或工作目标（1段）——「为……，结合……实际，制定本计划。」
+    <div class="lbl">【正文】</div>① 目标任务（量化）→ ② 实施步骤（分阶段，每阶段做什么）→ ③ 保障措施（组织/经费/制度）
+    <div class="lbl">【结尾】</div>落款：制定单位 + 日期
+</div>
+
+<h3>⑫ 总结</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>XX单位2025年XXX工作总结
+    <div class="lbl">【开头】</div>总体概述——「2025年，……取得了……成效。现将全年工作总结如下：」
+    <div class="lbl">【正文】</div>① 主要成绩与做法（数据说话）→ ② 存在的问题与不足 → ③ 经验体会 → ④ 下一年工作打算
+    <div class="lbl">【结尾】</div>落款 + 日期
+</div>
+
+<h3>⑬ 调查报告</h3>
+<div class="skeleton">
+    <div class="lbl">【标题】</div>关于XXX（问题/现象）的调查报告（也可用双标题：主标题揭示主题+副标题「——关于XXX的调查」）
+    <div class="lbl">【开头】</div>调查背景——何时/何地/对谁/用什么方法/为了什么目的做了调查
+    <div class="lbl">【正文】</div>① 基本情况（摆事实+数据）→ ② 问题分析（原因+影响）→ ③ 对策建议（每条建议=具体+可操作）
+    <div class="lbl">【结尾】</div>落款：调查单位/调查人 + 日期
+</div>
+
+<span class="dot"></span>
+
+<!-- ===== 新增：标题公式 + 结尾速查 ===== -->
+<h2>七、万能标题公式与结尾速查</h2>
+
+<h3>标题万能公式</h3>
+<blockquote><p><strong>发文机关 + 关于 + 动词（召开/开展/申请/报送/表彰/推进）+ 事由 + 的 + 文种</strong></p></blockquote>
+<p>把这个公式拆开，任何应用文的标题都能套进去。只需要填两个空：<strong>动词</strong>和<strong>事由</strong>。</p>
+<ul>
+    <li>通知→召开/开展/印发：<em>XX关于召开XX会议的通知</em></li>
+    <li>请示→申请/请求：<em>XX关于申请XX经费的请示</em></li>
+    <li>报告→汇报/报送：<em>XX关于XX工作情况的报告</em></li>
+    <li>通报→表彰/批评/情况：<em>XX关于XX检查情况的通报</em></li>
+    <li>批复→同意/不同意：<em>XX关于同意XX的批复</em></li>
+    <li>函→商请/询问/告知：<em>XX关于商请XX的函</em></li>
+</ul>
+
+<h3>10 种结尾用语速查</h3>
+<table>
+    <tr><th>文种</th><th>标准结尾</th><th>绝对不能用什么</th></tr>
+    <tr><td>通知</td><td>特此通知</td><td>妥否请批复 / 此致敬礼</td></tr>
+    <tr><td>通报</td><td>特此通报</td><td>妥否请批复</td></tr>
+    <tr><td>批复</td><td>此复</td><td>特此通知 / 特此报告</td></tr>
+    <tr><td>决定</td><td>自然收束（不写套话）</td><td>——</td></tr>
+    <tr><td><strong>请示</strong></td><td><strong>妥否，请批复</strong></td><td>请批示 / 特此报告 / 此致敬礼</td></tr>
+    <tr><td><strong>报告</strong></td><td><strong>特此报告</strong></td><td>妥否请批复 / 请审批</td></tr>
+    <tr><td><strong>函</strong></td><td><strong>敬请函复为盼 / 特此函告</strong></td><td>此致敬礼 / 妥否请批复</td></tr>
+    <tr><td>纪要</td><td>自然收束</td><td>特此纪要</td></tr>
+    <tr><td>简报</td><td>自然收束 + 报/发</td><td>——</td></tr>
+    <tr><td>意见</td><td>请结合实际贯彻落实（下行）/ 供参考（上行或平行）</td><td>妥否请批复</td></tr>
+    <tr><td>计划</td><td>自然收束 + 落款</td><td>——</td></tr>
+    <tr><td>总结</td><td>自然收束 + 落款</td><td>——</td></tr>
+    <tr><td>调查报告</td><td>自然收束 + 落款</td><td>——</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚡ 四种结尾互换是作文题的最高频扣分点：</strong>请示=妥否请批复 / 报告=特此报告 / 通知=特此通知 / 函=敬请函复为盼。四个文种的结尾互不通用。在改错题里，只要看到结尾与文种不匹配——直接判错。</p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 总览表 ==================== -->
+<h2>八、13 种文体格式总览一表</h2>
+
+<table>
+    <tr><th>文种</th><th>方向</th><th>标题关键</th><th>正文结构</th><th>结尾</th></tr>
+    <tr><td><strong>通知</strong></td><td>下行</td><td>XX关于召开/开展……的通知</td><td>目的→分条事项</td><td>特此通知</td></tr>
+    <tr><td><strong>通报</strong></td><td>下行</td><td>XX关于……的通报</td><td>总体→问题→要求</td><td>特此通报</td></tr>
+    <tr><td><strong>批复</strong></td><td>下行</td><td>XX关于同意/不同意……的批复</td><td>引用来文→表态→要求</td><td>此复</td></tr>
+    <tr><td><strong>决定</strong></td><td>下行</td><td>XX关于表彰……的决定</td><td>事迹→名单→号召</td><td>自然收束</td></tr>
+    <tr><td><strong>请示</strong></td><td>上行</td><td>XX关于……的请示</td><td>理由→事项→经费</td><td>妥否，请批复</td></tr>
+    <tr><td><strong>报告</strong></td><td>上行</td><td>XX关于……的报告</td><td>情况→做法→问题→措施</td><td>特此报告</td></tr>
+    <tr><td><strong>函</strong></td><td>平行</td><td>XX关于商请……的函</td><td>来意→事项→附件</td><td>敬请函复为盼</td></tr>
+    <tr><td><strong>纪要</strong></td><td>下行</td><td>XX纪要</td><td>听取→讨论→决定</td><td>自然收束</td></tr>
+    <tr><td><strong>简报</strong></td><td>事务</td><td>主题提炼句</td><td>导语→分条（配数据）→下一步</td><td>报/发范围</td></tr>
+    <tr><td><strong>意见</strong></td><td>多向</td><td>XX关于……的意见</td><td>目的→分条见解+办法</td><td>请贯彻落实（下行）/供参考（上行）</td></tr>
+    <tr><td><strong>计划</strong></td><td>事务</td><td>XX单位……工作计划</td><td>目标→步骤→措施</td><td>落款</td></tr>
+    <tr><td><strong>总结</strong></td><td>事务</td><td>XX单位……工作总结</td><td>成绩→问题→经验→打算</td><td>落款</td></tr>
+    <tr><td><strong>调查报告</strong></td><td>事务</td><td>关于……的调查报告</td><td>背景→情况→分析→建议</td><td>落款</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚡ 考前倒计时：</strong>这 10 种文种里，<em>请示、报告、通知、函</em>是出题概率最高的 4 种——它们的结尾千万不能写串。请示=「妥否请批复」、报告=「特此报告」、通知=「特此通知」、函=「敬请函复为盼」。——四种结尾，四种文种，换一个就错。</p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 今日任务 ==================== -->
+<h2>今日任务</h2>
+
+<table>
+    <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+    <tr><td><strong>上午</strong></td><td>下行 4 种 + 上行 2 种 + 事务 3 种</td><td>通知→通报→批复→决定→请示→报告→计划→总结→调查报告。每种遮住正文看骨架能否默写标题/分段/结尾</td><td>1.5h</td></tr>
+    <tr><td><strong>下午</strong></td><td>平行 + 纪要 + 简报 + 意见 + 结尾速查</td><td>函→纪要→简报→意见。重点：结尾速查表——4 种最易混结尾（请示/报告/通知/函）必须滚瓜烂熟。标题万能公式套用 13 种文体自测</td><td>1.5h</td></tr>
+    <tr><td><strong>晚上</strong></td><td>格式默写</td><td>不看书，白纸写 13 种文体：标题格式+分段结构+结尾用语。写不出的红笔圈。睡前对总览表复核</td><td>1h</td></tr>
+</table>
+
+<blockquote><p><strong>明日预告（Day 12）：</strong>时政专题——二十大以来最新政策系统串讲 + 新质生产力/人工智能+/双碳/农业强国/服务业开放/就业政策。把散落在 Day 7 和每天「时政速览」中的时政碎片串联成完整的知识网。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月8日 &nbsp;|&nbsp; Day 11 / 16 &nbsp;|&nbsp; 第二阶段 · 写作专题 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="十·全模块辨析专题.html">← 上一篇</a></span>
+            <span class="next"><a href="十二·时政专题.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

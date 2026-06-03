@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5：民法典与刑法 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+    <style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 5：民法典与刑法</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月2日</span><span>Day 5 / 16</span><span>模块：法律常识</span>
+</div>
+
+<div class="intro">
+    <p><strong>法律第二天，也是最重的一天。</strong>民法典和刑法两座大山压在一天——不是因为它们难，而是因为考点散。民法典从总则到物权到合同到侵权，能考的点太多；刑法从犯罪构成到罪名辨析，每一条都可能出成一道单选题。今天的策略不是「学完」，是<strong>「建框架 + 抓高频」</strong>——把散落的考点串成几条线，每条线只记最能考的部分。</p>
+    <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">核心板块：法律常识 | 推送日：Day 5 | 下次预告：Day 6 经济管理常识 + 国情省情</p>
+</div>
+
+<!-- ==================== 上半场：民法典 ==================== -->
+<h2>上半场：民法典</h2>
+
+<h3>一、民法典的总结构——七编一张图</h3>
+<table>
+    <tr><th>编</th><th>核心内容</th><th>考频</th></tr>
+    <tr><td><strong>总则</strong></td><td>民事主体（自然人/法人）、民事权利能力与行为能力、代理、诉讼时效</td><td>⭐⭐⭐⭐⭐</td></tr>
+    <tr><td><strong>物权</strong></td><td>所有权、用益物权、担保物权</td><td>⭐⭐⭐</td></tr>
+    <tr><td><strong>合同</strong></td><td>合同订立/效力/履行/违约责任</td><td>⭐⭐⭐⭐⭐</td></tr>
+    <tr><td><strong>人格权</strong></td><td>生命权/健康权/姓名权/肖像权/名誉权/隐私权</td><td>⭐⭐</td></tr>
+    <tr><td><strong>婚姻家庭</strong></td><td>结婚/离婚/夫妻财产/收养</td><td>⭐⭐⭐</td></tr>
+    <tr><td><strong>继承</strong></td><td>法定继承/遗嘱/遗赠扶养协议</td><td>⭐⭐⭐</td></tr>
+    <tr><td><strong>侵权责任</strong></td><td>归责原则/特殊侵权/损害赔偿</td><td>⭐⭐⭐⭐</td></tr>
+</table>
+
+<h3>二、总则——民事行为能力（全民法典最常考的一张表）</h3>
+
+<table>
+    <tr><th>类型</th><th>年龄/状态</th><th>可以独立做什么</th></tr>
+    <tr><td><strong>完全民事行为能力人</strong></td><td>① 年满 <strong>18 周岁</strong><br>② <strong>16 周岁以上</strong>不满 18 周岁 + 以自己的劳动收入为主要生活来源 → 视为完全</td><td>一切民事活动</td></tr>
+    <tr><td><strong>限制民事行为能力人</strong></td><td>① <strong>8 周岁以上</strong>不满 18 周岁的未成年人<br>② 不能<strong>完全</strong>辨认自己行为的成年人</td><td>① 纯获利益的行为 ✅<br>② 与其年龄、智力<strong>相适应</strong>的行为 ✅<br>③ 其他行为 → 须法定代理人<strong>同意或追认</strong></td></tr>
+    <tr><td><strong>无民事行为能力人</strong></td><td>① <strong>不满 8 周岁</strong>的未成年人<br>② 不能<strong>辨认</strong>自己行为的成年人</td><td><strong>一切</strong>民事法律行为均由法定代理人代理<br>（自己独立做的 → <strong>无效</strong>）</td></tr>
+</table>
+
+<div class="red-box">
+    <p><strong>⚠️ 考场最容易混淆的数字：</strong><br>
+    ① 完全民事行为能力的分界线 = <strong>18 岁</strong>（特殊：16岁+自食其力 → 视为完全）<br>
+    ② 限制 vs 无民事行为能力的分界线 = <strong>8 岁</strong>（不是 10 岁！《民法总则》2017 年从 10 岁降为 8 岁）<br>
+    ③ 「8 岁到 18 岁」就是限制民事行为能力人——但要注意<strong>纯获利益</strong>和<strong>与年龄相适应</strong>的两个例外</p>
+</div>
+
+<!-- 诉讼时效 -->
+<h4>诉讼时效——另一个高频数字考点</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>普通诉讼时效</strong></td><td><strong>3 年</strong>（自知道权利受损+知道义务人之日起算）</td></tr>
+    <tr><td><strong>最长保护期</strong></td><td>自权利受损之日起 <strong>20 年</strong>（不管知不知道）</td></tr>
+    <tr><td><strong>起算时间</strong></td><td>知道或<strong>应当知道</strong>权利受损 + 义务人之日</td></tr>
+    <tr><td><strong>中断/中止</strong></td><td>中断（重新算3年）：权利人主张权利/义务人同意履行/提起诉讼<br>中止（暂停，障碍消除后再给6个月）：不可抗力/权利人被控制等</td></tr>
+</table>
+<div class="yellow-box"><p><strong>💡 数字对比：</strong>民事诉讼时效 = <strong>3 年</strong>；行政诉讼起诉期限 = <strong>6 个月</strong>；行政复议 = <strong>60 日</strong>。这是法律三大时限，考场上互相混淆。</p></div>
+
+<h3>三、合同效力——四类合同，判断对错全靠这张表</h3>
+<table>
+    <tr><th>效力状态</th><th>适用情形</th><th>法律后果</th></tr>
+    <tr><td><strong>有效</strong></td><td>①主体适格 ②意思表示真实 ③不违法/不违背公序良俗</td><td>受法律保护</td></tr>
+    <tr><td><strong>无效</strong></td><td>①无民事行为能力人订立的 ②虚假意思表示 ③违反强制性规定/公序良俗 ④恶意串通损害他人</td><td><strong>自始无效</strong>——返还财产/赔偿</td></tr>
+    <tr><td><strong>可撤销</strong></td><td>①<strong>重大误解</strong> ②<strong>欺诈</strong> ③<strong>胁迫</strong> ④<strong>显失公平</strong></td><td>撤销前有效，撤销后自始无效。撤销权有<strong>除斥期间</strong>：知道起 1 年（重大误解 90 日），最长 5 年</td></tr>
+    <tr><td><strong>效力待定</strong></td><td>①<strong>限制民事行为能力人</strong>超出能力范围的 ②<strong>无权代理</strong></td><td>法定代理人/被代理人<strong>追认</strong>→有效；不追认→无效</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 合同效力是民法典最常考的选择题考点：</strong>题干给一个场景（如「甲受乙胁迫将房子卖给乙」）→ 问合同效力状态。四个选项：有效/无效/可撤销/效力待定——你只需要对号入座。</p></div>
+
+<h3>四、物权——几个关键概念</h3>
+<table>
+    <tr><th>概念</th><th>核心内容</th><th>考场关键词</th></tr>
+    <tr><td><strong>所有权</strong></td><td>占有、使用、收益、处分——四项全能</td><td>最完整的物权</td></tr>
+    <tr><td><strong>用益物权</strong></td><td>土地承包经营权、建设用地使用权、宅基地使用权、居住权、地役权</td><td>使用别人的东西获取收益（不拥有它）</td></tr>
+    <tr><td><strong>担保物权</strong></td><td>抵押权、质权、留置权</td><td>为债权做担保（不还钱→卖掉抵债）</td></tr>
+    <tr><td><strong>善意取得</strong></td><td>无权处分人将财产转让给善意第三人→第三人可以取得所有权（须满足：善意+合理价格+已交付/登记）</td><td>不知情 + 合理价 + 到手 → 可以取得</td></tr>
+</table>
+
+<h3>五、婚姻家庭与继承——数字型考点集中区</h3>
+
+<h4>婚姻</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>结婚年龄</strong></td><td>男 <strong>22 周岁</strong>，女 <strong>20 周岁</strong></td></tr>
+    <tr><td><strong>无效婚姻</strong></td><td>重婚 / 禁止结婚的亲属关系 / <strong>未到法定婚龄</strong></td></tr>
+    <tr><td><strong>可撤销婚姻</strong></td><td>①<strong>胁迫</strong>结婚 ②一方患有<strong>重大疾病</strong>未如实告知</td></tr>
+    <tr><td><strong>离婚冷静期</strong></td><td>协议离婚——向婚姻登记机关申请后<strong>30 日</strong>内，任何一方可撤回。期满后 30 日内双方须亲自到场领证，逾期视为撤回</td></tr>
+    <tr><td><strong>夫妻共同财产</strong></td><td>婚姻存续期间的工资、奖金、投资收益、知识产权收益、继承或受赠（遗嘱或赠与合同明确只归一方的除外）</td></tr>
+</table>
+
+<h4>继承</h4>
+<table>
+    <tr><th>考点</th><th>内容</th></tr>
+    <tr><td><strong>法定继承顺序</strong></td><td><strong>第一顺序</strong>：配偶、子女、父母（含尽了主要赡养义务的丧偶儿媳/女婿）<br><strong>第二顺序</strong>：兄弟姐妹、祖父母、外祖父母<br>有第一顺序 → 第二顺序不继承</td></tr>
+    <tr><td><strong>遗嘱形式</strong></td><td>自书遗嘱、代书遗嘱、打印遗嘱、录音录像遗嘱、口头遗嘱（危急时）、<strong>公证遗嘱</strong><br>注意：公证遗嘱<strong>不再</strong>具有最高效力——立有数份遗嘱内容相抵触的，以<strong>最后的</strong>遗嘱为准</td></tr>
+    <tr><td><strong>代位继承</strong></td><td>被继承人的子女<strong>先于</strong>被继承人死亡的 → 由该子女的直系晚辈血亲代位继承</td></tr>
+</table>
+
+<div class="red-box"><p><strong>⚠️ 公证遗嘱的效力变化是民法典修订的重要考点：</strong>「公证遗嘱具有最高效力，其他遗嘱不能变更公证遗嘱」→ <strong>❌ 这是旧法的规定！《民法典》取消了公证遗嘱的优先效力。</strong>现在多份遗嘱以<strong>最后一份有效遗嘱</strong>为准。</p></div>
+
+<h3>六、侵权责任——归责原则</h3>
+<table>
+    <tr><th>原则</th><th>含义</th><th>典型例子</th></tr>
+    <tr><td><strong>过错责任</strong>（一般原则）</td><td>有过错才担责</td><td>一般侵权——你撞了人因为你没看路</td></tr>
+    <tr><td><strong>过错推定</strong></td><td>先推定有过错，被告证明自己无过错才能免责</td><td>建筑物搁置物坠落伤人、医疗损害（特定情形）</td></tr>
+    <tr><td><strong>无过错责任</strong></td><td>不管有没有错都要赔</td><td>产品质量致损、环境污染、高度危险作业、饲养动物致损</td></tr>
+    <tr><td><strong>公平责任</strong></td><td>双方都没错，但受害方有损失 → 根据实际情况分担</td><td>见义勇为受伤——受益人适当补偿</td></tr>
+</table>
+
+<!-- ===== 新增：宣告失踪/死亡 + 代理 + 人格权 + 特殊侵权 ===== -->
+<h4>宣告失踪 vs 宣告死亡——两个易混的数字</h4>
+<table>
+    <tr><th></th><th>宣告失踪</th><th>宣告死亡</th></tr>
+    <tr><td><strong>下落不明时间</strong></td><td><strong>2 年</strong></td><td>一般<strong>4 年</strong>；意外事故<strong>2 年</strong>（经有关机关证明不可能生存的→不受 2 年限制）</td></tr>
+    <tr><td><strong>申请人</strong></td><td colspan="2"><strong>利害关系人</strong>（配偶/子女/父母/债权人等）</td></tr>
+    <tr><td><strong>法律效果</strong></td><td>设立<strong>财产代管人</strong>，处理财产事务。婚姻关系不消灭</td><td>婚姻关系<strong>消灭</strong>，财产按<strong>继承</strong>处理。但「死而复生」可撤销</td></tr>
+    <tr><td><strong>撤销后</strong></td><td>代管结束</td><td>婚姻：配偶<strong>未再婚</strong>→自动恢复；配偶<strong>已再婚</strong>→不自动恢复。财产：应当返还（善意第三人已取得的除外）</td></tr>
+</table>
+
+<h4>代理——无权代理与表见代理</h4>
+<table>
+    <tr><th>类型</th><th>核心</th><th>法律效果</th></tr>
+    <tr><td><strong>有权代理</strong></td><td>有授权、在授权范围内</td><td>后果归被代理人</td></tr>
+    <tr><td><strong>无权代理</strong></td><td>没有代理权/超越代理权/代理权终止后</td><td><strong>效力待定</strong>——被代理人追认→有效；不追认→对被代理人不生效，由无权代理人赔偿</td></tr>
+    <tr><td><strong>表见代理</strong></td><td>无权代理人<strong>外表看起来像有代理权</strong> + 相对人<strong>善意</strong>且无过失</td><td><strong>有效</strong>——由被代理人承担责任（保护善意第三人）</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 表见代理的考场判断标准：</strong>「甲曾是乙公司的业务员（代理权已终止），但乙公司未收回甲的空白合同书。甲用合同书与丙签约，丙不知情。」→ 甲构成<strong>表见代理</strong>，合同有效，乙公司要负责。三个关键词：外表有代理权 + 第三人善意 + 第三人无过失。</p></div>
+
+<h4>人格权——几个独立考点</h4>
+<table>
+    <tr><th>权利</th><th>考场考点</th></tr>
+    <tr><td><strong>肖像权</strong></td><td>未经同意<strong>不得制作/使用/公开</strong>他人肖像。合理使用例外：个人学习/新闻报道/依法履行职责等</td></tr>
+    <tr><td><strong>名誉权</strong></td><td>不得以<strong>侮辱/诽谤</strong>等方式损害他人名誉</td></tr>
+    <tr><td><strong>隐私权</strong></td><td>不得刺探/侵扰/泄露/公开他人<strong>私人生活安宁</strong>和不愿为他人知晓的私密空间/活动/信息</td></tr>
+    <tr><td><strong>个人信息保护</strong></td><td>处理个人信息须<strong>征得同意</strong>（法律另有规定除外）——不得过度收集、不得非法买卖</td></tr>
+</table>
+
+<h4>特殊侵权——几个必考场景</h4>
+<table>
+    <tr><th>场景</th><th>责任主体</th><th>归责原则</th></tr>
+    <tr><td><strong>监护人责任</strong></td><td>无/限制民事行为能力人造成他人损害 → <strong>监护人</strong>承担。监护人尽到监护职责→<strong>可以减轻</strong></td><td>无过错责任（但可减轻）</td></tr>
+    <tr><td><strong>用人者责任</strong></td><td>工作人员执行工作任务造成他人损害 → <strong>用人单位</strong>承担</td><td>无过错责任</td></tr>
+    <tr><td><strong>饲养动物损害</strong></td><td>饲养的动物造成他人损害 → <strong>饲养人或管理人</strong>承担。但受害人故意或重大过失→可以减轻/免除</td><td>无过错责任</td></tr>
+    <tr><td><strong>高空抛物</strong></td><td>从建筑物中抛掷/坠落物品造成损害 → <strong>侵权人</strong>承担。难以确定侵权人→<strong>可能加害者</strong>补偿（能证明自己不是的除外）。<strong>物业未采取安保措施→补充责任</strong></td><td>过错推定（对侵权人）</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>1.【单选】限制民事行为能力人的年龄下限是：A.6周岁 B.8周岁 C.10周岁 D.12周岁 → <strong>B</strong><br>2.【判断】16周岁以上不满18周岁、以自己的劳动收入为主要生活来源的，视为完全民事行为能力人。（√）<br>3.【单选】普通诉讼时效为：A.1年 B.2年 C.3年 D.5年 → <strong>C</strong><br>4.【单选】受胁迫签订的合同属于：A.有效 B.无效 C.可撤销 D.效力待定 → <strong>C</strong><br>5.【判断】公证遗嘱具有最高效力，其他遗嘱不能变更。（×——民法典已取消此规定，以最后遗嘱为准）<br>6.【单选】法定继承第一顺序不包括：A.配偶 B.父母 C.兄弟姐妹 D.子女 → <strong>C</strong>（兄弟姐妹是第二顺序）</p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 下半场：刑法 ==================== -->
+<h2>下半场：刑法</h2>
+
+<h3>七、犯罪构成四要件——每道刑法题都从这张表开始</h3>
+<table>
+    <tr><th>要件</th><th>含义</th><th>考场关键问法</th></tr>
+    <tr><td><strong>犯罪客体</strong></td><td>刑法所保护的、被犯罪行为<strong>侵害的社会关系</strong></td><td>盗窃侵犯的是<strong>财产权</strong>；故意杀人侵犯的是<strong>生命权</strong></td></tr>
+    <tr><td><strong>犯罪客观方面</strong></td><td><strong>危害行为 + 危害结果 + 因果关系</strong></td><td>不作为也能构成犯罪（如遗弃罪）</td></tr>
+    <tr><td><strong>犯罪主体</strong></td><td>① 自然人：达到<strong>刑事责任年龄</strong> + 具有<strong>刑事责任能力</strong><br>② 单位：法律明文规定的</td><td>刑事责任年龄是高频考点（见下表）</td></tr>
+    <tr><td><strong>犯罪主观方面</strong></td><td><strong>故意</strong>（希望/放任）或<strong>过失</strong>（疏忽大意/过于自信）</td><td>故意和过失的区别——是「想要」还是「不小心」</td></tr>
+</table>
+
+<h4>刑事责任年龄——刑法最重要的年龄划分</h4>
+<table>
+    <tr><th>年龄区间</th><th>刑事责任</th><th>备注</th></tr>
+    <tr><td><strong>不满 12 周岁</strong></td><td>一律<strong>不负</strong>刑事责任</td><td>——</td></tr>
+    <tr><td><strong>12-14 周岁</strong></td><td>犯故意杀人/故意伤害致人死亡或特别残忍手段致重伤严重残疾 + 情节恶劣 + <strong>最高检核准追诉</strong> → 负刑事责任</td><td>两个条件同时满足——特定罪名 + 最高检核准</td></tr>
+    <tr><td><strong>14-16 周岁</strong></td><td>对<strong>8 种</strong>严重犯罪负刑事责任：故意杀人、故意伤害致人重伤或死亡、强奸、抢劫、贩卖毒品、放火、爆炸、投放危险物质</td><td>常考——14岁犯盗窃不负刑责，14岁犯抢劫要负</td></tr>
+    <tr><td><strong>16 周岁以上</strong></td><td>对<strong>所有犯罪</strong>负刑事责任</td><td>——</td></tr>
+    <tr><td><strong>不满 18 周岁</strong></td><td><strong>应当从轻或减轻</strong>处罚；不适用死刑</td><td>——</td></tr>
+    <tr><td><strong>已满 75 周岁</strong></td><td>故意犯罪→<strong>可以</strong>从轻或减轻；过失犯罪→<strong>应当</strong>从轻或减轻；不适用死刑（特别残忍手段致死除外）</td><td>注意「可以」vs「应当」的区别</td></tr>
+</table>
+
+<div class="mnemonic">刑事责任年龄口诀：12以下全免责、12-14特罪核准、14-16八罪负责、16以上全责、18以下从轻无死刑、75以上从宽限</div>
+
+<h3>八、正当防卫与紧急避险——排除犯罪性的事由</h3>
+<table>
+    <tr><th></th><th>正当防卫</th><th>紧急避险</th></tr>
+    <tr><td><strong>针对对象</strong></td><td><strong>不法侵害人</strong>本人</td><td><strong>无辜第三人</strong>的合法权益</td></tr>
+    <tr><td><strong>危险来源</strong></td><td>人的不法侵害</td><td>人的侵害、自然灾害、动物侵袭等</td></tr>
+    <tr><td><strong>限度条件</strong></td><td>未<strong>明显超过</strong>必要限度造成重大损害<br>（特殊防卫：对正在进行的<strong>行凶/杀人/抢劫/强奸/绑架</strong>等严重危及人身安全的暴力犯罪→造成伤亡<strong>不负</strong>刑事责任）</td><td>必须是<strong>不得已</strong>而为之 + 保护的权益<strong>大于</strong>牺牲的权益</td></tr>
+    <tr><td><strong>过当后果</strong></td><td><strong>应当</strong>负刑事责任，但<strong>应当减轻或免除</strong>处罚</td><td>同</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 特殊防卫（无限防卫）是高频判断题：</strong>「对正在进行的行凶、杀人、抢劫、强奸、绑架以及其他严重危及人身安全的暴力犯罪采取防卫行为，造成不法侵害人伤亡的，<strong>不属于防卫过当</strong>，不负刑事责任。」关键词——必须是<strong>严重危及人身安全</strong>的暴力犯罪。</p></div>
+
+<h3>九、故意犯罪形态——预备/未遂/中止/既遂</h3>
+<table>
+    <tr><th>形态</th><th>关键节点</th><th>处罚</th></tr>
+    <tr><td><strong>犯罪预备</strong></td><td>为了犯罪准备工具、制造条件，但<strong>尚未着手</strong>实行</td><td>可以比照既遂犯<strong>从轻、减轻或免除</strong></td></tr>
+    <tr><td><strong>犯罪未遂</strong></td><td><strong>已经着手</strong>实行犯罪，由于<strong>意志以外</strong>的原因未得逞</td><td>可以比照既遂犯<strong>从轻或减轻</strong>（不能「免除」）</td></tr>
+    <tr><td><strong>犯罪中止</strong></td><td>在犯罪过程中<strong>自动放弃</strong>或<strong>自动有效防止</strong>结果发生</td><td>没有造成损害→<strong>应当免除</strong>；造成损害→<strong>应当减轻</strong></td></tr>
+    <tr><td><strong>犯罪既遂</strong></td><td>犯罪行为<strong>全部完成</strong>，犯罪结果已发生</td><td>按法定刑处罚</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 未遂 vs 中止的核心区分——看原因：</strong>「想干但干不成」= 未遂（意志以外的原因）；「能干但不干了」= 中止（自动放弃）。这是刑法每年必出的一道选择题。题干：「甲深夜潜入乙家盗窃，听到警笛声以为被发现而逃走」→ 未遂（意志以外的警笛声）；「甲正在偷乙手机，想起乙对自己不错，主动放下离开」→ 中止（自动放弃）。</p></div>
+
+<h3>十、共同犯罪</h3>
+<table>
+    <tr><th>类型</th><th>定义</th><th>处罚</th></tr>
+    <tr><td><strong>主犯</strong></td><td>组织、领导犯罪集团的首要分子，或在共同犯罪中起<strong>主要作用</strong></td><td>对集团的全部罪行负责</td></tr>
+    <tr><td><strong>从犯</strong></td><td>起<strong>次要或辅助</strong>作用</td><td>应当<strong>从轻、减轻或免除</strong>处罚</td></tr>
+    <tr><td><strong>胁从犯</strong></td><td><strong>被胁迫</strong>参加犯罪</td><td>应当<strong>减轻或免除</strong>处罚</td></tr>
+    <tr><td><strong>教唆犯</strong></td><td>教唆他人犯罪（故意引起他人犯罪意图）</td><td>按所教唆的罪处罚；教唆不满 18 周岁→<strong>从重</strong>处罚；被教唆者未犯被教唆之罪→<strong>可以从轻或减轻</strong></td></tr>
+</table>
+
+<h3>十一、常见罪名辨析——选择题最常见的一组</h3>
+<table>
+    <tr><th>罪名</th><th>核心构成</th><th>易混淆罪名</th></tr>
+    <tr><td><strong>贪污罪</strong></td><td>国家工作人员 + 利用职务便利 + <strong>侵吞/窃取/骗取</strong>公共财物</td><td>职务侵占罪（非国家工作人员）</td></tr>
+    <tr><td><strong>受贿罪</strong></td><td>国家工作人员 + 利用职务便利 + <strong>索取/非法收受</strong>他人财物 + 为他人谋取利益</td><td>贪污（是直接拿国家的钱，不是别人送的）</td></tr>
+    <tr><td><strong>挪用公款罪</strong></td><td>国家工作人员 + 利用职务便利 + 挪用公款<strong>归个人使用</strong>（三种情形：非法活动/营利活动/超3个月未还）</td><td>贪污（贪污是占有不还，挪用是打算还的）</td></tr>
+    <tr><td><strong>盗窃罪</strong></td><td><strong>秘密窃取</strong>公私财物数额较大（或多次/入户/携带凶器）</td><td>抢劫（使用暴力/胁迫） vs 抢夺（公然夺取但不使用暴力）</td></tr>
+    <tr><td><strong>诈骗罪</strong></td><td><strong>虚构事实/隐瞒真相</strong> → 被害人基于错误认识处分财产</td><td>盗窃（被害人不是「自愿」给的，是被偷的）</td></tr>
+    <tr><td><strong>交通肇事罪</strong></td><td>违反交通法规 → 发生重大事故 → 致人重伤/死亡/重大财产损失（<strong>过失</strong>犯罪）</td><td>危险驾驶罪（追逐竞驶/醉酒驾驶——是<strong>故意</strong>犯罪）</td></tr>
+    <tr><td><strong>故意杀人罪</strong></td><td><strong>故意</strong>非法剥夺他人生命</td><td>过失致人死亡（没有杀人意图）</td></tr>
+</table>
+
+<h3>十二、刑罚种类——主刑与附加刑</h3>
+<table>
+    <tr><th>类别</th><th>内容</th><th>考场关键词</th></tr>
+    <tr><td><strong>主刑</strong>（5 种）</td><td>① 管制 ② 拘役 ③ 有期徒刑 ④ 无期徒刑 ⑤ <strong>死刑</strong></td><td>只能<strong>独立适用</strong>，一个罪只能判一个主刑</td></tr>
+    <tr><td><strong>附加刑</strong>（4 种）</td><td>① 罚金 ② 剥夺政治权利 ③ 没收财产 ④ <strong>驱逐出境</strong>（仅对外国人）</td><td>可以<strong>附加适用</strong>，也可以<strong>独立适用</strong></td></tr>
+</table>
+
+<!-- ===== 新增：自首/立功 + 累犯 + 缓刑/假释 + 更多罪名 ===== -->
+<h3>十三、自首与立功——量刑的两个重要情节</h3>
+<table>
+    <tr><th>制度</th><th>条件</th><th>法律效果</th></tr>
+    <tr><td><strong>自首</strong></td><td>① 犯罪后<strong>自动投案</strong> + <strong>如实供述</strong>自己的罪行<br>② 被采取强制措施的嫌疑人/被告人/罪犯，如实供述司法机关<strong>尚未掌握</strong>的其他罪行 → 以自首论</td><td><strong>可以</strong>从轻或减轻处罚；犯罪较轻的→<strong>可以免除</strong>处罚</td></tr>
+    <tr><td><strong>立功</strong></td><td>揭发他人犯罪行为<strong>查证属实</strong>，或提供重要线索<strong>侦破其他案件</strong></td><td><strong>可以</strong>从轻或减轻处罚；有重大立功表现→<strong>可以减轻或免除</strong>处罚</td></tr>
+</table>
+<div class="red-box"><p><strong>⚠️ 自首的两个关键细节：</strong>①「自动投案」不一定是自己主动去公安局——<strong>被亲友规劝陪同投案、代为投案</strong>也可以认定。② 如实供述后又<strong>翻供</strong>的 → 不能认定自首；但<strong>一审判决前又能如实供述的</strong>→ 仍可认定。</p></div>
+
+<h3>十四、累犯——从重处罚</h3>
+<table>
+    <tr><th></th><th>一般累犯</th><th>特别累犯</th></tr>
+    <tr><td><strong>条件</strong></td><td>① 前后两罪均为<strong>故意</strong>犯罪<br>② 前后两罪均被判处<strong>有期徒刑以上</strong>刑罚<br>③ 后罪发生在<strong>前罪刑罚执行完毕或赦免后 5 年内</strong></td><td>前后两罪均为<strong>危害国家安全犯罪/恐怖活动犯罪/黑社会性质组织犯罪</strong>之一（三类犯罪）。<strong>无时间限制</strong></td></tr>
+    <tr><td><strong>后果</strong></td><td colspan="2"><strong>应当从重处罚</strong>；累犯<strong>不适用缓刑</strong>；累犯<strong>不适用假释</strong></td></tr>
+</table>
+
+<h3>十五、缓刑、减刑与假释——刑罚的执行制度</h3>
+<table>
+    <tr><th>制度</th><th>核心条件</th><th>不适用的对象</th></tr>
+    <tr><td><strong>缓刑</strong></td><td>被判处<strong>拘役、3 年以下有期徒刑</strong> + 犯罪情节较轻 + 悔罪 + 无再犯危险 + 对所居住社区无重大不良影响</td><td><strong>累犯</strong>不适用缓刑</td></tr>
+    <tr><td><strong>减刑</strong></td><td>被判处管制/拘役/有期徒刑/无期徒刑 → 执行期间认真遵守监规、接受教育改造、确有悔改或立功表现</td><td>——</td></tr>
+    <tr><td><strong>假释</strong></td><td>被判处<strong>有期徒刑</strong>→执行原判 1/2 以上；<strong>无期徒刑</strong>→实际执行 13 年以上。认真遵守监规、接受改造、确有悔改、无再犯危险</td><td><strong>累犯</strong>不适用假释；因故意杀人/强奸/抢劫/绑架/放火/爆炸/投放危险物质或有组织的暴力性犯罪被判处 10 年以上有期徒刑/无期徒刑的→不适用假释</td></tr>
+</table>
+<div class="yellow-box"><p><strong>💡 考场上记住两条铁律：</strong>① 累犯→不缓刑、不假释（肯定不适用这两项）。② 缓刑的刑期上限 = <strong>3 年</strong>（被判超过 3 年的一律不能缓）。</p></div>
+
+<h3>十六、补充常见罪名——公务类 + 经济类</h3>
+<table>
+    <tr><th>罪名</th><th>主体</th><th>核心行为</th></tr>
+    <tr><td><strong>职务侵占罪</strong></td><td><strong>非国家工作人员</strong>（公司/企业/其他单位人员）</td><td>利用职务便利 + 将本单位财物<strong>非法占为己有</strong> + 数额较大</td></tr>
+    <tr><td><strong>挪用资金罪</strong></td><td><strong>非国家工作人员</strong></td><td>利用职务便利 + 挪用本单位资金<strong>归个人使用</strong>或借贷给他人</td></tr>
+    <tr><td><strong>行贿罪</strong></td><td>一般主体</td><td>为<strong>谋取不正当利益</strong> + 给予国家工作人员财物</td></tr>
+    <tr><td><strong>巨额财产来源不明罪</strong></td><td>国家工作人员</td><td>财产/支出<strong>明显超过合法收入</strong>，差额巨大 + 不能说明来源</td></tr>
+    <tr><td><strong>滥用职权罪</strong></td><td>国家机关工作人员</td><td><strong>故意</strong>滥用职权 → 致使公共财产/国家/人民利益遭受重大损失</td></tr>
+    <tr><td><strong>玩忽职守罪</strong></td><td>国家机关工作人员</td><td><strong>过失</strong>不履行或不正确履行职责 → 致使公共财产/国家/人民利益遭受重大损失（与滥用职权的核心区别=这个是过失，那个是故意）</td></tr>
+</table>
+
+<h3>十七、民法刑法数字总览——阶段总结</h3>
+<table>
+    <tr><th>数字</th><th>对应考点</th><th>所属法</th></tr>
+    <tr><td><strong>8 岁</strong></td><td>无民事行为能力 vs 限制民事行为能力分界线</td><td>民法典</td></tr>
+    <tr><td><strong>12 岁</strong></td><td>最低刑事责任年龄（特定罪名+最高检核准）</td><td>刑法</td></tr>
+    <tr><td><strong>14 岁</strong></td><td>8 种严重犯罪的刑事责任年龄起点</td><td>刑法</td></tr>
+    <tr><td><strong>16 岁</strong></td><td>全部犯罪负刑事责任；可视为完全民事行为能力人（自食其力）</td><td>刑法 + 民法典</td></tr>
+    <tr><td><strong>18 岁</strong></td><td>完全民事行为能力；从轻/减轻刑事处罚；不适用死刑</td><td>民法典 + 刑法</td></tr>
+    <tr><td><strong>3 年</strong></td><td>普通诉讼时效；缓刑刑期上限</td><td>民法典 + 刑法</td></tr>
+    <tr><td><strong>5 年</strong></td><td>一般累犯时间间隔；撤销权最长除斥期间</td><td>刑法 + 民法典</td></tr>
+    <tr><td><strong>20 年</strong></td><td>最长权利保护期</td><td>民法典</td></tr>
+</table>
+
+<div class="qbox"><p><strong>📝 自测：</strong><br>7.【单选】14周岁的甲盗窃价值5000元的手机，应负刑事责任吗？A.是 B.否 → <strong>B</strong>（14-16周岁只对8种重罪负责，盗窃不在列）<br>8.【判断】犯罪未遂是由于犯罪分子自动放弃犯罪。（×——自动放弃=中止，意志以外原因=未遂）<br>9.【单选】国家工作人员利用职务便利侵吞公共财物的行为构成：A.受贿罪 B.贪污罪 C.挪用公款罪 D.职务侵占罪 → <strong>B</strong><br>10.【判断】对正在进行的强奸行为进行防卫，造成不法侵害人死亡的，属于防卫过当。（×——强奸属于特殊防卫的暴力犯罪，造成伤亡不负刑责）<br>11.【单选】宣告死亡的法律效果不包括：A.婚姻关系消灭 B.财产开始继承 C.婚姻关系必然恢复 D.财产按继承处理 → <strong>C</strong>（被宣告死亡人「死而复生」后，配偶已再婚的，婚姻关系不自动恢复）<br>12.【判断】表见代理的合同对被代理人不发生效力。（×——表见代理有效，由被代理人承担责任）<br>13.【判断】犯罪后自动投案并如实供述的，应当从轻或减轻处罚。（×——是「可以」从轻或减轻，不是「应当」）<br>14.【单选】缓刑不适用于：A.被判处拘役的 B.被判处2年有期徒刑的 C.累犯 D.未成年人 → <strong>C</strong></p></div>
+
+<span class="dot"></span>
+
+<!-- ==================== 应用文 ==================== -->
+<h2>应用文练笔：写一份纪要</h2>
+
+<h3>题目情景</h3>
+<p>2026年6月1日上午，某市发改委主持召开了全市粮食储备安全调度会。市发改委、市财政局、市农业农村局、市粮食和物资储备局、各县（市、区）发改局负责人参加会议。会议听取了各单位关于当前粮食储备情况的汇报，分析了存在的问题（库容紧张、轮换进度滞后），研究部署了下一阶段重点工作（加快夏粮入库准备、推进老旧粮库改造、落实储备粮补贴资金），并就各部门责任分工达成一致。请以<strong>市发改委名义</strong>拟一份纪要。</p>
+
+<h3>纪要的格式要点</h3>
+<table>
+    <tr><th>要素</th><th>写法</th><th>易错点</th></tr>
+    <tr><td><strong>标题</strong></td><td>《XX纪要》——不加「会议」二字</td><td>「会议纪要」→ ❌ 旧名称</td></tr>
+    <tr><td><strong>开头</strong></td><td>时间+地点+主持人/召集人+会议名称+参会单位+会议概况（1句话）</td><td>不是「通知」的开头——纪要开头是会议的基本信息</td></tr>
+    <tr><td><strong>正文</strong></td><td>通常三段式：①听取了什么 ②讨论了/分析了什么 ③ 决定了/部署了什么</td><td>纪要的核心是「议定事项」——不是流水账，是<strong>结论和分工</strong></td></tr>
+    <tr><td><strong>结尾</strong></td><td>可以自然收束（不写「特此纪要」）</td><td>纪要没有固定的结尾套话</td></tr>
+    <tr><td><strong>落款</strong></td><td>发文机关 + 成文日期。一般不盖章</td><td></td></tr>
+</table>
+
+<h3>参考范文</h3>
+<div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+    <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text-title);margin-bottom:24px;">全市粮食储备安全调度会纪要</p>
+    <p style="text-indent:2em;color:var(--text);">2026年6月1日上午，市发改委主任王XX在市政府302会议室主持召开全市粮食储备安全调度会。市发改委、市财政局、市农业农村局、市粮食和物资储备局、各县（市、区）发改局负责同志参加会议。现将会议情况纪要如下：</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>一、会议听取了各单位关于当前粮食储备情况的汇报。</strong></p>
+    <p style="text-indent:2em;color:var(--text);">截至5月底，全市各级储备粮总库存18.2万吨，粮情总体稳定，质量达标。但存在三方面突出问题：一是中心城区粮库库容紧张，部分老旧仓房需加固维修；二是夏粮收购在即，个别县区收购仓容缺口较大；三是储备粮轮换进度偏慢，部分县区仅完成年度任务的55%。</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>二、会议分析了当前工作中存在的突出困难和问题。</strong></p>
+    <p style="text-indent:2em;color:var(--text);">与会单位一致认为，当前最紧迫的任务是确保夏粮收购仓容充足、资金到位。市财政局指出，2026年度储备粮补贴资金已列入预算，将按收购进度及时拨付。各县（市、区）发改局汇报了本地区收购准备工作情况。</p>
+    <p style="color:var(--text);margin-top:16px;"><strong>三、会议研究部署了下一阶段重点工作。</strong></p>
+    <p style="text-indent:2em;color:var(--text);">（一）加快夏粮入库准备。各县（市、区）于6月10日前完成空仓消毒、设备检修、人员培训等工作，确保仓容充足、随时可用。（二）推进老旧粮库改造。市粮食和物资储备局牵头，于6月底前提出中心城区老旧粮库改造方案，报市政府审定。（三）落实储备粮补贴资金。市财政局于6月15日前将首笔补贴资金拨付到位，各县（市、区）同步落实配套资金。（四）加快轮换进度。对轮换任务滞后的县区，市粮食和物资储备局实行周调度，确保8月底前全面完成年度轮换任务。</p>
+    <p style="text-align:right;margin-top:32px;color:var(--text);">市发展和改革委员会</p>
+    <p style="text-align:right;color:var(--text);">2026年6月2日</p>
+</div>
+
+<h3>本篇评分要点</h3>
+<table>
+    <tr><th>维度</th><th>得分关键</th><th>本篇表现</th></tr>
+    <tr><td><strong>标题</strong></td><td>「XX纪要」，不加「会议」二字</td><td>✅ 「全市粮食储备安全调度会纪要」</td></tr>
+    <tr><td><strong>开头</strong></td><td>时间+地点+主持人+会议名称+参会单位——五要素齐</td><td>✅ 6月1日上午 + 302会议室 + 王XX主持 + 会议全称 + 5家单位</td></tr>
+    <tr><td><strong>正文结构</strong></td><td>三段式——听取/讨论/部署，逻辑递进</td><td>✅ 听取→分析→部署</td></tr>
+    <tr><td><strong>议定事项</strong></td><td>具体、可操作、有责任分工和时限。不是流水账</td><td>✅ 四个事项均有责任单位和完成时限</td></tr>
+    <tr><td><strong>数据支撑</strong></td><td>纪要中汇报的内容要有数据</td><td>✅ 18.2万吨/55%</td></tr>
+    <tr><td><strong>落款</strong></td><td>发文机关+成文日期（阿拉伯数字）</td><td>✅</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 今日任务 ==================== -->
+<h2>今日任务</h2>
+
+<table>
+    <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+    <tr><td rowspan="2"><strong>上午</strong></td><td>民法典</td><td>民事行为能力三档→合同效力四类→诉讼时效 3 年→宣告失踪/死亡对比→表见代理→婚姻继承数字→侵权归责四原则+特殊侵权→人格权考点</td><td>1.5h</td></tr>
+    <tr><td>刑法</td><td>犯罪构成四要件→刑事责任年龄表（12-14-16-18四档+75岁）→正当防卫vs紧急避险→犯罪形态四阶段→共同犯罪→罪名辨析 13 组→自首/立功→累犯→缓刑/假释→民法刑法数字总览</td><td>1h</td></tr>
+    <tr><td rowspan="2"><strong>下午</strong></td><td>法律自测</td><td>民法典 6 道 + 刑法 8 道自测独立完成。对答案，每道错题写一句错因</td><td>0.5h</td></tr>
+    <tr><td>应用文练笔</td><td>写纪要——先自己写（20分钟）。对照范文逐项检查：标题「会议」二字去了吗？开头五要素齐吗？正文是按「听取→分析→部署」三段结构吗？议定事项有责任分工和时限吗？</td><td>1.5h</td></tr>
+    <tr><td rowspan="2"><strong>晚上</strong></td><td>回顾 Day 1-5</td><td>① 民事行为能力年龄三档默写 ② 合同效力四类默写 ③ 刑事责任年龄六档默写 ④ 犯罪形态四阶段+区分口诀默写 ⑤ 民法刑法数字总表默写（8 个关键数字）⑥ 今日全部错题过一遍</td><td>0.5h</td></tr>
+    <tr><td>明日预习</td><td>瞄一眼 Day 6：经济管理常识 + 国情省情。明天法律结束，节奏可以松一下。经济只记概念框架，省情靠你的地理文史底子</td><td>0.5h</td></tr>
+</table>
+
+<blockquote><p><strong>下期预告（Day 6）：</strong>经济管理常识 + 国情省情。经济：宏观（GDP/CPI/财政/货币）+ 微观（供需/市场类型）。管理：行政职能/组织结构。国情：地理/人口/经济区划。省情：四川地理历史经济文化。应用文练笔：写一份情况通报。</p><p style="font-size:0.85rem;color:var(--text-dim);">今日新增：宣告失踪/死亡对比、代理与表见代理、人格权考点、特殊侵权 4 场景、自首与立功、累犯制度、缓刑减刑假释、补充罪名 6 组、民法刑法数字总览表（8 个关键数字跨两法对比）、自测题扩至 14 道。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月2日 &nbsp;|&nbsp; Day 5 / 16 &nbsp;|&nbsp; 模块：法律常识 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="四·宪法与行政法.html">← 上一篇</a></span>
+            <span class="next"><a href="六·经济管理与国情省情.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

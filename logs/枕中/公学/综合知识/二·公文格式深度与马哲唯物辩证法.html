@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2：公文格式深度与马哲唯物辩证法 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+    <style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a class="back" href="../index.html">← 公学</a>
+
+        <h1>Day 2：公文格式深度与马哲唯物辩证法</h1>
+
+        <div class="meta">
+            <span>公学 · 每日推送</span><span>2026年5月30日</span><span>Day 2 / 16</span><span>模块：公文写作 + 政治理论</span>
+        </div>
+
+        <div class="intro">
+            <p><strong>Day 2 的任务很明确。</strong>公文从「文种辨析」推进到「格式规范」——昨天你知道了该用什么文种，今天你要知道这份公文长什么样、每个要素放在哪、什么样的标题是错的。政治理论从零开始，今天只攻一个山头：唯物辩证法。三大规律吃透了，马哲的选择题一半不在话下。应用文练笔从第一天的通知切换到函——平行文种，格式和语气都和通知不同，你会看到区别。</p>
+            <p style="margin-top:8px;font-size:0.82rem;color:var(--text-dim);">核心板块：公文写作 + 政治理论 | 推送日：Day 2 | 下次预告：Day 3 公文改错 + 习近平新时代中国特色社会主义思想</p>
+        </div>
+
+        <!-- ==================== 上半场：公文格式深度 ==================== -->
+        <h2>上半场：公文格式深度</h2>
+
+        <h3>一、先看全景——一份标准公文的骨架图</h3>
+
+        <p>如果把一份公文比作一个人：<strong>版头是身份证和通行证</strong>（告诉你是谁发的、什么级别），<strong>主体是说话的内容</strong>（要说什么），<strong>版记是邮寄信息</strong>（还抄送给了谁、什么时候印的）。</p>
+
+        <div class="format-diagram">
+            <div class="label">┌─ 版头 ─────────────────────────────┐</div>
+            <div>│ ① 份号（涉密公文）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⑥ 签发人 │</div>
+            <div>│ ② 密级和保密期限&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│ ③ 紧急程度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>④ 发文机关标志（红头大字）</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⑤ 发文字号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>├──────────────────────────────────────┤</div>
+            <div>│ <span class="label">—— 红色分隔线 ——</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div class="label">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┌─ 主体 ─┐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ <strong>⑦ 标题</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ <strong>⑧ 主送机关</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ <strong>⑨ 正文</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑩ 附件说明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>⑪ 署名 ⑫ 日期 ⑬ 印章</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑭ 附注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑮ 附件（独立材料，另面排版）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>├──────────────────────────────────────┤</div>
+            <div class="label">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┌─ 版记 ─┐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑯ 抄送机关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑰ 印发机关和印发日期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ ⑱ 页码（版心下方）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>└──────────────────────────────────────┘</div>
+        </div>
+
+        <h3>二、版头 6 要素——公文的「身份证」</h3>
+
+        <table>
+            <tr><th>要素</th><th>位置</th><th>什么情况下出现</th><th>易错点</th></tr>
+            <tr><td><strong>① 份号</strong></td><td>左上角第一行</td><td><em>只有涉密公文</em>才标注份号</td><td>非涉密公文标份号 → 错。份号是 6 位数字</td></tr>
+            <tr><td><strong>② 密级和保密期限</strong></td><td>份号下方</td><td><em>只有涉密公文</em>才标注</td><td>密级分三级：绝密/机密/秘密。「绝秘」是错别字。保密期限写法：「机密★10年」</td></tr>
+            <tr><td><strong>③ 紧急程度</strong></td><td>密级下方（无密级则右上角）</td><td>只有<em>紧急公文</em>才标注</td><td>分两级：特急/加急。「紧急」不是法定标注</td></tr>
+            <tr><td><strong>④ 发文机关标志</strong></td><td>居中</td><td><em>每份公文必有</em></td><td>俗称「红头」。格式：全称/规范化简称 + 文件（或只写机关名称）。字体红色大字</td></tr>
+            <tr><td><strong>⑤ 发文字号</strong></td><td>发文机关标志下方居中（下行文）或左空一字（上行文）</td><td><em>每份公文必有</em></td><td>格式：XX发〔2026〕X号。年份用六角括号〔〕，不用方括号[]或圆括号()</td></tr>
+            <tr><td><strong>⑥ 签发人</strong></td><td>右上角</td><td><em>只有上行文</em>才标注签发人姓名</td><td>下行文/平行文标签发人 → 错。联合上行文，所有联署机关负责人都要签</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 考场最高频陷阱——发文字号的括号：</strong></p>
+            <p>发文字号必须用<strong>六角括号〔〕</strong>。判断题里出现方括号[]或圆括号()的发文字号，一律判错。例：</p>
+            <p>国办发[2026]1号 → <strong>❌（方括号错了）</strong></p>
+            <p>国办发(2026)1号 → <strong>❌（圆括号错了）</strong></p>
+            <p>国办发〔2026〕1号 → <strong>✅</strong></p>
+        </div>
+
+        <div class="yellow-box">
+            <p><strong>💡 版头记忆口诀：</strong>「涉密才有份号密级，紧急公文标急字；红头大字机关名，字号六角不方不圆；上行必签签发人，下平不签别多手。」</p>
+        </div>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】所有公文都应当标注份号。（×——只有涉密公文才标）<br>2.【判断】紧急公文的紧急程度分为「特急」「加急」「紧急」三级。（×——只有特急/加急两级）<br>3.【判断】签发人标识出现在所有上行文、下行文、平行文的版头。（×——只有上行文）</p>
+        </div>
+
+        <h3>三、主体 9 要素——公文的「核心内容」</h3>
+
+        <h4>⑦ 标题——考得最多、错得最多的要素</h4>
+
+        <table>
+            <tr><th>规则</th><th>正确示例</th><th>错误示例</th></tr>
+            <tr><td>发文机关 + 关于 + 事由 + 的 + 文种</td><td>国务院关于表彰……的决定</td><td>——</td></tr>
+            <tr><td>「关于」和「的」不可省略</td><td>国务院关于推进……的意见</td><td>国务院推进……意见 ❌</td></tr>
+            <tr><td>除法规/规章加书名号外不用标点</td><td>关于学习贯彻《信访工作条例》的通知</td><td>关于做好防汛、防火工作的通知 ❌（顿号多余）</td></tr>
+            <tr><td>分行不断词</td><td>「关于」在同一行</td><td>关｜于（不能断成两行）</td></tr>
+            <tr><td>三个以上机关联合行文可省发文机关名称</td><td>关于XXX的通知（省略了多家机关）</td><td>——</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 标题最致命的三个错误：</strong><br>
+            ① 少了「关于」→ 扣分（单选题的判断依据往往是这个）<br>
+            ② 多加了标点符号 → 扣分（标题原则上不用标点，除非书名号括法规名）<br>
+            ③ 标题里出现了两个「关于」→ 扣分（如「XX关于转发XX关于XX的通知的通知」）</p>
+        </div>
+
+        <h4>⑧ 主送机关——「谁来办」</h4>
+        <table>
+            <tr><th>规则</th><th>说明</th></tr>
+            <tr><td>位置</td><td>标题下方左侧，顶格，加冒号</td></tr>
+            <tr><td>泛行文</td><td>公报/公告/通告等公开发布的公文<strong>不写主送机关</strong></td></tr>
+            <tr><td>多个主送</td><td>按级别高低排列，同级的按习惯顺序</td></tr>
+            <tr><td>普发性下行文</td><td>可用泛称：「各省、自治区、直辖市人民政府，国务院各部委、各直属机构：」</td></tr>
+            <tr><td>请示</td><td><strong>只能写一个主送机关</strong></td></tr>
+        </table>
+
+        <h4>⑨ 正文——「说什么」</h4>
+        <ul>
+            <li>首页必须显示正文——如果标题和主送太长导致正文被挤到第二页，格式错误</li>
+            <li>结构层次序数：第一层「一、」→ 第二层「（一）」→ 第三层「1.」→ 第四层「（1）」<br>注意：第三层是「1.」后面加<strong>实心圆点</strong>，不是顿号</li>
+            <li>引用公文：先引标题，后引发文字号。例：根据《国务院关于XX的通知》（国发〔2026〕1号）</li>
+        </ul>
+
+        <h4>⑩—⑮ 附件、署名、日期、印章、附注</h4>
+        <table>
+            <tr><th>要素</th><th>核心规则</th></tr>
+            <tr><td><strong>⑩ 附件说明</strong></td><td>正文下方空一行，写「附件：」后列附件名；附件名称后<strong>不加标点</strong>；附件不用书名号</td></tr>
+            <tr><td><strong>⑪ 署名 + ⑫ 日期 + ⑬ 印章</strong></td><td>印章<strong>「骑年盖月」</strong>——上沿压署名、下沿压日期；成文日期用<strong>阿拉伯数字</strong>；联合行文以<strong>最后一个签发人</strong>签发日期为准</td></tr>
+            <tr><td><strong>⑭ 附注</strong></td><td>公文印发传达范围等说明。请示的附注写联系人姓名和电话</td></tr>
+            <tr><td><strong>⑮ 附件</strong></td><td>另面排版，在版记之前。与正文一起装订。附件是独立的材料，不是公文的组成部分</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 成文日期是超级高频考点：</strong><br>
+            ① 以<strong>负责人签发日期</strong>为准（不是拟稿/核稿/印发日期）<br>
+            ② 联合行文：<strong>最后一个签发机关负责人签发日期</strong>（不是第一个）<br>
+            ③ 电报：以<strong>发出日期</strong>为准<br>
+            ④ 用<strong>阿拉伯数字</strong>标注（如 2026年5月30日），不用汉字小写</p>
+        </div>
+
+        <h3>四、版记 3 要素——公文的「邮寄清单」</h3>
+        <table>
+            <tr><th>要素</th><th>说明</th></tr>
+            <tr><td><strong>⑯ 抄送机关</strong></td><td>除主送机关外需要执行或知晓公文内容的机关。请示<strong>未获批复前不得抄送下级</strong></td></tr>
+            <tr><td><strong>⑰ 印发机关和印发日期</strong></td><td>印发日期晚于或等于成文日期（先签后印）。印发日期用阿拉伯数字</td></tr>
+            <tr><td><strong>⑱ 页码</strong></td><td>版心下方。两页以上的公文必须标注页码</td></tr>
+        </table>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】公文标题中一般不用标点符号。（√）<br>2.【单选】公文成文日期以：A.拟稿日期 B.核稿日期 C.签发日期 D.印发日期 → C<br>3.【判断】联合行文的成文日期以第一个签发人签发日期为准。（×——最后一个）<br>4.【判断】印发日期可以早于成文日期。（×——先签后印，印发≥成文）</p>
+        </div>
+
+        <!-- ===== 新增：公文拟制与办理 ===== -->
+        <h3>五、公文拟制与办理——一份公文的一生</h3>
+
+        <p>公文不光是写出来的，还涉及拟制、办理、管理三大流程。考场一般就两道题——一道判断题、一道单选题。</p>
+
+        <h4>公文拟制三步骤</h4>
+        <table>
+            <tr><th>步骤</th><th>干什么</th><th>管理主体</th></tr>
+            <tr><td><strong>起草</strong></td><td>拟稿、调研、征求意见、修改——形成送审稿</td><td>承办部门</td></tr>
+            <tr><td><strong>审核</strong></td><td>发文机关办公厅（室）进行审核——检查内容是否符合法律法规和现行政策、是否符合公文格式规范</td><td>办公厅（室）</td></tr>
+            <tr><td><strong>签发</strong></td><td>负责人签署意见并签名——签发后即成定稿，随后进入印制程序</td><td>机关负责人</td></tr>
+        </table>
+
+        <h4>公文办理——收文和发文两条线</h4>
+        <table>
+            <tr><th>类型</th><th>程序</th></tr>
+            <tr><td><strong>收文办理</strong></td><td>签收 → 登记 → 初审 → 承办 → 传阅 → 催办 → 答复</td></tr>
+            <tr><td><strong>发文办理</strong></td><td>复核 → 登记 → 印制 → 核发</td></tr>
+        </table>
+
+        <div class="yellow-box">
+            <p><strong>💡 考场高频考点：</strong>① 签发是公文拟制的<strong>最后一个环节</strong>（签发了才算定稿，签发日期就是成文日期）<br>② 审核 ≠ 签发——审核是办公厅做，签发是负责人做<br>③ 收文的第一个环节是<strong>签收</strong>，不是登记</p>
+        </div>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】公文拟制的最后一个环节是审核。（×——是签发）<br>2.【判断】公文签发后如需作实质性修改，应当重新履行签发程序。（√）<br>3.【单选】收文办理的第一个环节是：A.登记 B.初审 C.签收 D.承办 → <strong>C</strong></p>
+        </div>
+
+        <!-- ===== 新增：格式改错10例 ===== -->
+        <h3>六、公文格式常见改错 10 例</h3>
+
+        <p>以下 10 例是考场出题概率最高的格式错误。每例先看错误写法，再对照正确写法。</p>
+
+        <table>
+            <tr><th>编号</th><th>错误写法</th><th>正确写法</th><th>错误类型</th></tr>
+            <tr><td>1</td><td>XX发[2026]1号</td><td>XX发〔2026〕1号</td><td>发文字号年份用<strong>六角括号</strong>〔〕，不用方括号</td></tr>
+            <tr><td>2</td><td>XX发(2026)1号</td><td>XX发〔2026〕1号</td><td>同上——圆括号也不行</td></tr>
+            <tr><td>3</td><td>国务院推进乡村振兴的意见</td><td>国务院<strong>关于</strong>推进乡村振兴的意见</td><td>标题缺「关于」</td></tr>
+            <tr><td>4</td><td>关于做好防汛、防火、防暑工作的通知</td><td>关于做好防汛防火防暑工作的通知</td><td>标题不应有<strong>标点符号</strong>（顿号多余）</td></tr>
+            <tr><td>5</td><td>关于学习贯彻《信访工作条例》的通知（无书名号）</td><td>关于学习贯彻<strong>《信访工作条例》</strong>的通知</td><td>法规名称要加书名号（这是例外情况）</td></tr>
+            <tr><td>6</td><td>二〇二六年五月三十日</td><td><strong>2026年5月30日</strong></td><td>成文日期用<strong>阿拉伯数字</strong></td></tr>
+            <tr><td>7</td><td>附件：《2026年计划》</td><td>附件：2026年计划</td><td>附件名称后<strong>不加标点</strong>，附件不用书名号</td></tr>
+            <tr><td>8</td><td>正文第一层用「1、」</td><td>正文第一层用<strong>「一、」</strong></td><td>结构层次序数顺序错了</td></tr>
+            <tr><td>9</td><td>请示的主送机关写了两个上级机关</td><td>请示<strong>只能主送一个</strong>上级机关</td><td>请示的硬性规则：一文一事一主送</td></tr>
+            <tr><td>10</td><td>上行文版头无签发人</td><td>上行文版头<strong>必须标注签发人</strong></td><td>签发人是上行文的必备要素</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 改错题的核心规律：</strong>考场上的格式改错题，错误位置集中在四个地方——<strong>发文字号括号 → 标题格式 → 成文日期数字 → 结构层次序号</strong>。这四个地方的错误概率加起来超过 80%。</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 下半场：马哲唯物辩证法 ==================== -->
+        <h2>下半场：马哲 · 唯物辩证法</h2>
+
+        <div class="intro">
+            <p>马哲在《综合知识》思想政治板块里占大头。而唯物辩证法是马哲里占大头。把唯物辩证法拿下，马哲的客观题至少锁住一半。今天集中攻三个部分：<strong>两大特征 → 三大规律 → 五对范畴</strong>，最后加一个认识论。</p>
+        </div>
+
+        <h3>一、唯物辩证法的总框架——先挂地图</h3>
+
+        <table>
+            <tr><th>层次</th><th>内容</th><th>角色</th></tr>
+            <tr><td><strong>两大特征</strong></td><td>普遍联系 + 永恒发展</td><td>唯物辩证法的「总观点」</td></tr>
+            <tr><td><strong>三大规律</strong></td><td>对立统一 + 量变质变 + 否定之否定</td><td>唯物辩证法的「核心」</td></tr>
+            <tr><td><strong>五对范畴</strong></td><td>原因结果 / 必然偶然 / 可能现实 / 内容形式 / 本质现象</td><td>唯物辩证法的「基本环节」</td></tr>
+            <tr><td><strong>认识论</strong></td><td>实践与认识 / 真理 / 认识的辩证过程</td><td>唯物辩证法的「应用」</td></tr>
+        </table>
+
+        <blockquote><p><strong>整个唯物辩证法就一句话：世界是普遍联系和永恒发展的，这个发展遵循三个规律（对立统一、量变质变、否定之否定），通过五对范畴来展开。</strong></p></blockquote>
+
+        <h3>二、两大特征——唯物辩证法的总观点</h3>
+
+        <table>
+            <tr><th></th><th>普遍联系</th><th>永恒发展</th></tr>
+            <tr><td><strong>核心命题</strong></td><td>一切事物都处在<strong>相互联系</strong>之中，没有孤立存在的事物</td><td>一切事物都处在<strong>运动、变化、发展</strong>之中</td></tr>
+            <tr><td><strong>考场对应成语</strong></td><td>唇亡齿寒、城门失火殃及池鱼、牵一发而动全身</td><td>士别三日刮目相看、长江后浪推前浪、与时俱进</td></tr>
+        </table>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong>【单选】「城门失火，殃及池鱼」体现的哲学原理是：A.量变引起质变 B.事物是普遍联系的 C.内因是变化的根据 D.新事物必然战胜旧事物 → <strong>B</strong></p>
+        </div>
+
+        <h3>三、三大规律——唯物辩证法的核心</h3>
+
+        <h4>规律一：对立统一规律（矛盾规律）——唯物辩证法的<em>实质与核心</em></h4>
+
+        <div class="vocab-card">
+            <h4>1. 矛盾 = 对立统一</h4>
+            <p>矛盾的两种基本属性：<strong>同一性</strong>（相互依存、相互转化）和<strong>斗争性</strong>（相互排斥、相互对立）。<em>两者同时存在，不可分割。</em></p>
+        </div>
+
+        <div class="vocab-card">
+            <h4>2. 矛盾的普遍性与特殊性——共性与个性的关系</h4>
+            <table>
+                <tr><th></th><th>普遍性</th><th>特殊性</th></tr>
+                <tr><td><strong>含义</strong></td><td>事事有矛盾、时时有矛盾</td><td>每个事物的矛盾各有特点</td></tr>
+                <tr><td><strong>关系</strong></td><td colspan="2"><strong>普遍性寓于特殊性之中</strong>，并通过特殊性表现出来。两者是共性与个性的关系，<em>不是整体与部分的关系</em></td></tr>
+            </table>
+            <p><strong>考场最大陷阱：</strong>「矛盾的特殊性寓于普遍性之中」→ <strong>❌错误！</strong>是<em>普遍性寓于特殊性之中</em>。记反就翻车。</p>
+        </div>
+
+        <div class="vocab-card">
+            <h4>3. 主要矛盾与次要矛盾，矛盾的主要方面与次要方面</h4>
+            <table>
+                <tr><th></th><th>主要矛盾 vs 次要矛盾</th><th>矛盾的主要方面 vs 次要方面</th></tr>
+                <tr><td><strong>适用场景</strong></td><td>复杂事物中<strong>多个矛盾</strong>之间的关系</td><td><strong>一个矛盾</strong>内部的两个方面</td></tr>
+                <tr><td><strong>方法论</strong></td><td>抓重点、抓关键、抓中心工作</td><td>看主流、看本质、看大方向</td></tr>
+                <tr><td><strong>成语匹配</strong></td><td>牵牛要牵牛鼻子、好钢用在刀刃上</td><td>金无足赤人无完人、瑕不掩瑜</td></tr>
+            </table>
+        </div>
+
+        <div class="vocab-card">
+            <h4>4. 内因与外因</h4>
+            <p><strong>内因</strong>是事物变化的<strong>根据</strong>（第一位），<strong>外因</strong>是事物变化的<strong>条件</strong>（第二位），<strong>外因通过内因起作用</strong>。考场陷阱：「外因在一定条件下起决定作用」→ <strong>❌错误！</strong>外因永远不决定，只有内因决定。</p>
+        </div>
+
+        <div class="mnemonic">矛盾定律口诀：矛盾 = 对立统一；普遍性寓于特殊性中；主矛抓重点、主方看主流；内因根据外因条件</div>
+
+        <!-- 量变质变 -->
+        <h4>规律二：量变质变规律——发展的两种状态</h4>
+        <table>
+            <tr><th>概念</th><th>定义</th><th>考场关键词</th></tr>
+            <tr><td><strong>量变</strong></td><td>事物<strong>数量</strong>上的增减和构成要素排列组合的变化</td><td>渐进、积累、不显著</td></tr>
+            <tr><td><strong>质变</strong></td><td>事物<strong>根本性质</strong>的变化</td><td>飞跃、突破、显著改变</td></tr>
+            <tr><td><strong>度</strong></td><td>保持事物<strong>质的数量界限</strong></td><td>临界点、分寸、火候</td></tr>
+        </table>
+
+        <p><strong>三句话记住这个规律：</strong></p>
+        <ol>
+            <li>量变是质变的<strong>必要准备</strong>（没有量变就没有质变）</li>
+            <li>质变是量变的<strong>必然结果</strong>（量变到一定程度必然引起质变）</li>
+            <li>质变后<strong>新的量变</strong>开始（质变→新事物→新量变→新质变→循环往复）</li>
+        </ol>
+
+        <p><strong>成语匹配：</strong>不积跬步无以至千里（量变→质变）；水滴石穿（量变→质变）；过犹不及（超过「度」）</p>
+
+        <!-- 否定之否定 -->
+        <h4>规律三：否定之否定规律——发展的方向和道路</h4>
+        <table>
+            <tr><th>阶段</th><th>含义</th><th>关键词</th></tr>
+            <tr><td><strong>肯定</strong></td><td>事物保持其存在的方面</td><td>现状</td></tr>
+            <tr><td><strong>否定</strong></td><td>促使事物灭亡的方面——但不是全盘否定，是<strong>扬弃</strong></td><td>变革、抛弃旧形式</td></tr>
+            <tr><td><strong>否定之否定</strong></td><td>在新阶段「回复」到起点的某些特征，但是更高层次的回复</td><td>螺旋式上升</td></tr>
+        </table>
+
+        <blockquote><p><strong>核心结论：</strong>事物发展的总趋势是<strong>前进的、上升的</strong>（不可逆），但道路是<strong>曲折的、迂回的</strong>（波浪式前进、螺旋式上升）。<em>「直线前进」是错误选项。</em></p></blockquote>
+
+        <!-- ===== 新增：成语俗语→哲学原理全匹配表 ===== -->
+        <h4>三大规律：成语俗语→原理匹配全集</h4>
+        <table>
+            <tr><th>成语/俗语</th><th>体现的哲学原理</th><th>规律归属</th></tr>
+            <tr><td>牵牛要牵牛鼻子</td><td>抓主要矛盾</td><td rowspan="7">对立统一</td></tr>
+            <tr><td>好钢用在刀刃上</td><td>抓主要矛盾</td></tr>
+            <tr><td>一把钥匙开一把锁</td><td>矛盾特殊性（具体问题具体分析）</td></tr>
+            <tr><td>因材施教 / 对症下药 / 因地制宜</td><td>矛盾特殊性</td></tr>
+            <tr><td>金无足赤，人无完人</td><td>矛盾主次方面（看主流、看本质）</td></tr>
+            <tr><td>塞翁失马，焉知非福</td><td>矛盾同一性（矛盾双方相互转化）</td></tr>
+            <tr><td>内因决定论 / 自强不息</td><td>内因是事物变化的根据</td></tr>
+            <tr><td>不积跬步，无以至千里</td><td>量变是质变的必要准备</td><td rowspan="6">量变质变</td></tr>
+            <tr><td>水滴石穿 / 绳锯木断</td><td>量变引起质变</td></tr>
+            <tr><td>千里之堤，溃于蚁穴</td><td>量变引起质变（防微杜渐）</td></tr>
+            <tr><td>过犹不及</td><td>超过「度」，量变引发质变走向反面</td></tr>
+            <tr><td>适可而止 / 掌握火候</td><td>坚持适度原则</td></tr>
+            <tr><td>欲速则不达</td><td>量变不够，质变不会发生（条件不成熟）</td></tr>
+            <tr><td>前途是光明的，道路是曲折的</td><td>螺旋式上升、波浪式前进</td><td rowspan="4">否定之否定</td></tr>
+            <tr><td>长江后浪推前浪 / 推陈出新</td><td>新事物必然战胜旧事物</td></tr>
+            <tr><td>取其精华，去其糟粕</td><td>辩证否定——扬弃</td></tr>
+            <tr><td>青出于蓝而胜于蓝</td><td>辩证否定——在扬弃中实现超越</td></tr>
+        </table>
+
+        <div class="mnemonic">成语快判法：一个成语里包含两个对立面（好/坏、多/少、新/旧、快/慢）→ 对立统一；成语里有「渐」「积」「累」「滴水」→ 量变质变；成语里有「螺旋」「波折」「扬弃」「推陈出新」→ 否定之否定</div>
+
+        <!-- ===== 新增：辩证法 vs 形而上学 ===== -->
+        <h4>辩证法与形而上学的对立——一道不会缺席的判断题</h4>
+        <table>
+            <tr><th>维度</th><th>辩证法</th><th>形而上学</th></tr>
+            <tr><td><strong>世界状态</strong></td><td>联系的、发展的</td><td>孤立的、静止的</td></tr>
+            <tr><td><strong>发展动力</strong></td><td>事物内部矛盾（内因）</td><td>外部力量的推动（外因论）</td></tr>
+            <tr><td><strong>发展路径</strong></td><td>质变、飞跃（承认飞跃）</td><td>只有量变、没有质变（否认飞跃）</td></tr>
+            <tr><td><strong>根本分歧</strong></td><td colspan="2"><strong>是否承认事物内部的矛盾性</strong>（是否承认对立统一规律）</td></tr>
+        </table>
+
+        <blockquote><p><strong>核心结论：</strong>唯物辩证法和形而上学的<strong>根本分歧</strong>在于是否承认<strong>事物内部的矛盾性</strong>（即是否承认对立统一规律）。这道题出在判断/单选题里几乎每次都考。</p></blockquote>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】矛盾的特殊性寓于普遍性之中。（×——普遍性寓于特殊性之中）<br>2.【单选】「牵牛要牵牛鼻子」体现：A.矛盾特殊性 B.抓主要矛盾 C.内因决定论 D.量变质变 → <strong>B</strong><br>3.【判断】外因在一定条件下可以起决定作用。（×——外因永远不起决定作用）<br>4.【单选】「不积跬步，无以至千里」体现：A.对立统一 B.量变引起质变 C.否定之否定 D.内因决定论 → <strong>B</strong><br>5.【单选】事物发展的总趋势是：A.直线前进 B.循环往复 C.螺旋式上升 D.原地踏步 → <strong>C</strong><br>6.【判断】辩证法和形而上学的根本分歧在于是否承认事物是普遍联系的。（×——根本分歧在于是否承认事物内部的矛盾性）<br>7.【单选】「过犹不及」体现的哲学原理是：A.抓主要矛盾 B.量变引发质变，要坚持适度原则 C.新事物取代旧事物 D.内因决定论 → <strong>B</strong></p>
+        </div>
+
+        <h3>四、五对范畴——唯物辩证法的基本环节</h3>
+
+        <p>五对范畴在考场上一般以单选题出现，给你一个具体例子，问「体现了哪对范畴」。记住每一对的<strong>核心意思 + 一个例子</strong>就够了。</p>
+
+        <table>
+            <tr><th>范畴</th><th>核心意思</th><th>经典示例</th></tr>
+            <tr><td><strong>原因与结果</strong></td><td>前后相继、彼此制约。有因必有果</td><td>多行不义必自毙</td></tr>
+            <tr><td><strong>必然与偶然</strong></td><td>必然=规律性的确定趋势；偶然=不确定的个别现象。必然通过偶然表现</td><td>时势造英雄（必然）vs 英雄个人特质（偶然）</td></tr>
+            <tr><td><strong>可能与现实</strong></td><td>可能=潜在的、尚未实现的趋势；现实=已经实现的。可能变为现实需要条件</td><td>梦想需要努力才能变为现实</td></tr>
+            <tr><td><strong>内容与形式</strong></td><td>内容=内在要素的总和；形式=内容的结构和组织方式。内容决定形式，形式反作用于内容</td><td>一部电影的剧情（内容）vs 拍摄手法（形式）</td></tr>
+            <tr><td><strong>本质与现象</strong></td><td>本质=内在的、稳定的联系；现象=外在的、多变的表现。通过现象看本质</td><td>透过现象看本质</td></tr>
+        </table>
+
+        <div class="yellow-box">
+            <p><strong>💡 五对范畴考场策略：</strong>出题人最爱考的是<strong>必然与偶然</strong>和<strong>本质与现象</strong>。记住两句：「必然通过偶然为自己开辟道路」「假象也是本质的一种表现（歪曲的表现）」。这两句是判断/单选题的高频正确选项。</p>
+        </div>
+
+        <h3>五、认识论——实践与认识的辩证关系</h3>
+
+        <table>
+            <tr><th>命题</th><th>含义</th><th>考场正确表述</th></tr>
+            <tr><td><strong>实践决定认识</strong></td><td>实践是认识的<strong>来源、动力、目的、检验标准</strong></td><td>实践是检验真理的<strong>唯一标准</strong>；实践出真知</td></tr>
+            <tr><td><strong>认识反作用于实践</strong></td><td>正确的认识指导实践，错误的认识误导实践</td><td>理论指导实践；科学理论对实践有指导作用</td></tr>
+            <tr><td><strong>认识的辩证过程</strong></td><td>感性认识 → 理性认识 → 实践 → 再认识 → 再实践</td><td>认识过程的两次飞跃：①感性→理性 ②理性→实践。第二次飞跃<strong>更重要</strong></td></tr>
+            <tr><td><strong>真理</strong></td><td>真理是客观的、绝对的、相对的</td><td>真理只有一个（不存在多元真理）；真理是具体的、有条件的</td></tr>
+        </table>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】实践是检验真理的唯一标准。（√）<br>2.【单选】认识过程的第一次飞跃是：A.实践→感性认识 B.感性认识→理性认识 C.理性认识→实践 D.理性认识→再认识 → <strong>B</strong><br>3.【判断】「真理是多元的，不同的人有不同的真理」。（×——真理只有一个，是客观的）</p>
+        </div>
+
+        <!-- ===== 新增：唯物史观精简版 ===== -->
+        <h3>六、唯物史观——社会历史的底层逻辑</h3>
+
+        <p>马哲不光讲自然界和思维的规律，还讲<strong>社会历史的规律</strong>。唯物史观在考场上出现的频率略低于辩证法，但每年至少 2-3 道。</p>
+
+        <h4>社会存在与社会意识</h4>
+        <table>
+            <tr><th>概念</th><th>含义</th><th>关系</th></tr>
+            <tr><td><strong>社会存在</strong></td><td>社会生活的物质方面——地理环境、人口因素、<strong>物质资料生产方式</strong>（最重要）</td><td rowspan="2"><strong>社会存在决定社会意识</strong>，社会意识反作用于社会存在。这是唯物史观最基本的原理</td></tr>
+            <tr><td><strong>社会意识</strong></td><td>社会生活的精神方面——政治法律思想、道德、艺术、宗教、哲学等</td></tr>
+        </table>
+
+        <h4>生产力与生产关系——社会发展的最终决定力量</h4>
+        <table>
+            <tr><th>概念</th><th>含义</th><th>考场关键词</th></tr>
+            <tr><td><strong>生产力</strong></td><td>人类改造自然的能力——<strong>劳动者 + 劳动资料（生产工具是标志）+ 劳动对象</strong></td><td>生产工具是生产力发展水平的<strong>客观标志</strong>；科学技术是<strong>第一生产力</strong></td></tr>
+            <tr><td><strong>生产关系</strong></td><td>人们在生产中形成的社会关系——<strong>生产资料所有制（核心）+ 人的地位关系 + 产品分配方式</strong></td><td>生产资料所有制是生产关系的<strong>基础</strong>和<strong>核心</strong></td></tr>
+        </table>
+
+        <p><strong>核心规律：</strong>生产力<strong>决定</strong>生产关系（有什么样的生产力就有什么样的生产关系）；生产关系对生产力有<strong>反作用</strong>（适应就促进，不适应就阻碍）。<strong>生产力是社会发展的最终决定力量。</strong></p>
+
+        <h4>经济基础与上层建筑</h4>
+        <table>
+            <tr><th>概念</th><th>含义</th><th>关系</th></tr>
+            <tr><td><strong>经济基础</strong></td><td>占统治地位的生产关系各方面的总和</td><td rowspan="2">经济基础<strong>决定</strong>上层建筑；上层建筑<strong>反作用于</strong>经济基础</td></tr>
+            <tr><td><strong>上层建筑</strong></td><td>政治上层建筑（政权/法制/军队）+ 观念上层建筑（意识形态）</td></tr>
+        </table>
+
+        <h4>社会基本矛盾——社会发展的根本动力</h4>
+        <blockquote><p><strong>生产力 ↔ 生产关系的矛盾 + 经济基础 ↔ 上层建筑的矛盾 = 社会基本矛盾。这两对矛盾是社会发展的根本动力。</strong>改革就是通过调整生产关系以适应生产力、调整上层建筑以适应经济基础。</p></blockquote>
+
+        <div class="qbox">
+            <p><strong>📝 自测：</strong><br>1.【判断】社会存在决定社会意识，社会意识反作用于社会存在。（√）<br>2.【单选】生产力的客观标志是：A.劳动者 B.生产工具 C.劳动对象 D.科学技术 → <strong>B</strong><br>3.【单选】生产关系的核心是：A.人的地位关系 B.产品分配方式 C.生产资料所有制 D.生产工具 → <strong>C</strong><br>4.【判断】社会发展的最终决定力量是生产关系。（×——是生产力）</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 应用文练笔 ==================== -->
+        <h2>应用文练笔：写一封函</h2>
+
+        <h3>题目情景</h3>
+        <p>达州市中贸粮油有限公司计划于 2026 年 6 月进行一批储备粮轮换，需要向达州市农业发展银行申请粮食收购专项贷款。请以公司名义拟一封<strong>致达州市农业发展银行的函</strong>，商洽贷款事宜。</p>
+
+        <h3>函的格式拆解（和通知完全不同）</h3>
+        <table>
+            <tr><th>要素</th><th>函的写法</th><th>通知的写法（对比）</th></tr>
+            <tr><td><strong>标题</strong></td><td>XX关于XXX的函</td><td>XX关于XXX的通知</td></tr>
+            <tr><td><strong>主送</strong></td><td>单一、点对点：达州市农业发展银行：</td><td>可多点：各仓储管理组、财务科：</td></tr>
+            <tr><td><strong>开头</strong></td><td>商洽函的开头——说明来意，简明扼要。常用「现就XXX事宜函告如下」或「现函请贵行……」</td><td>会议通知开头——会议目的</td></tr>
+            <tr><td><strong>正文语气</strong></td><td><em>平等、客气、商洽</em>——「拟」「商请」「函请」「敬请函复」</td><td>指令、告知——「现将有关事项通知如下」</td></tr>
+            <tr><td><strong>结尾</strong></td><td>「特此函告，请函复」「敬请函复为盼」<br><em>不写「此致敬礼」</em></td><td>「特此通知」</td></tr>
+            <tr><td><strong>落款</strong></td><td>发文机关署名 + 成文日期 + 公章</td><td>同</td></tr>
+        </table>
+
+        <div class="red-box">
+            <p><strong>⚠️ 函的致命错误清单：</strong><br>① 结尾写了「此致敬礼」→ 函不是私人信件，这是硬伤<br>② 用了上行文的语气（「妥否，请批示」）→ 函是平行文种，不管对方级别，一律平等语气<br>③ 标题写成「关于XXX的请示」→ 银行和企业互不隶属，只能用函</p>
+        </div>
+
+        <h3>参考范文</h3>
+        <div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+            <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text-title);margin-bottom:24px;">达州市中贸粮油有限公司<br>关于商请办理粮食收购专项贷款的函</p>
+            <p style="color:var(--text);">达州市农业发展银行：</p>
+            <p style="text-indent:2em;color:var(--text);">为做好2026年度地方储备粮轮换工作，保障区域粮食安全，我公司拟于2026年6月启动一批储备粮轮换收购，涉及稻谷约5000吨，小麦约3000吨，预计收购资金需求约3200万元。</p>
+            <p style="text-indent:2em;color:var(--text);">根据国家粮食收购信贷政策及贵行相关规定，现函请贵行按照粮食收购专项贷款政策，给予我公司信贷支持。我公司将严格按规定使用贷款资金，确保专款专用，并按期还本付息。</p>
+            <p style="text-indent:2em;color:var(--text);">随函附上《2026年储备粮轮换计划》及《贷款资金需求测算表》，供贵行审核参考。敬请函复为盼。</p>
+            <p style="text-align:right;margin-top:32px;color:var(--text);">达州市中贸粮油有限公司</p>
+            <p style="text-align:right;color:var(--text);">2026年5月30日</p>
+        </div>
+
+        <h3>本篇评分要点</h3>
+        <table>
+            <tr><th>维度</th><th>得分关键</th><th>本篇表现</th></tr>
+            <tr><td><strong>标题格式</strong></td><td>发文机关+关于+事由+的+函。注意「商请」体现商洽意图</td><td>✅</td></tr>
+            <tr><td><strong>主送</strong></td><td>点对点，银行全称准确</td><td>✅</td></tr>
+            <tr><td><strong>正文语气</strong></td><td>平等商洽——「拟」「函请」「敬请函复」，无指令口气</td><td>✅</td></tr>
+            <tr><td><strong>事实依据</strong></td><td>收购品种、数量、金额具体可查</td><td>✅（稻谷5000吨/小麦3000吨/3200万元）</td></tr>
+            <tr><td><strong>政策依据</strong></td><td>引用「国家粮食收购信贷政策」作为请求的依据</td><td>✅</td></tr>
+            <tr><td><strong>附件</strong></td><td>正文中提及附件，文后附上</td><td>✅</td></tr>
+            <tr><td><strong>结尾</strong></td><td>「敬请函复为盼」——平行文标准结尾。不写「此致敬礼」</td><td>✅</td></tr>
+        </table>
+
+        <!-- ===== 新增：函的种类 + 复函范文 ===== -->
+        <h3>函的四种常见类型</h3>
+        <table>
+            <tr><th>类型</th><th>用途</th><th>标题关键词</th><th>例</th></tr>
+            <tr><td><strong>商洽函</strong></td><td>不相隶属机关之间商洽工作</td><td>商请 / 拟</td><td>关于商请联合开展XX工作的函</td></tr>
+            <tr><td><strong>询问函</strong></td><td>向对方询问有关问题</td><td>询问 / 了解</td><td>关于询问XX政策适用范围的函</td></tr>
+            <tr><td><strong>答复函（复函）</strong></td><td>答复对方来函的询问或商洽事项</td><td>复函</td><td>关于同意办理储备粮收购贷款的复函</td></tr>
+            <tr><td><strong>告知函</strong></td><td>告知对方有关情况</td><td>告知</td><td>关于XX项目进展情况的告知函</td></tr>
+        </table>
+
+        <h3>附：复函参考范文</h3>
+        <p>如果农业发展银行收到上文去函后同意贷款，它的复函应该长这样：</p>
+        <div style="background:#fff; border:1px solid #ddd; padding:24px 28px; margin:20px 0; border-radius:6px; font-family: 'KaiTi','STKaiti','Noto Serif SC',serif;">
+            <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text-title);margin-bottom:24px;">达州市农业发展银行<br>关于同意办理储备粮收购专项贷款的复函</p>
+            <p style="color:var(--text);">达州市中贸粮油有限公司：</p>
+            <p style="text-indent:2em;color:var(--text);">贵公司《关于商请办理粮食收购专项贷款的函》收悉。经审核，贵公司报送的2026年储备粮轮换计划符合国家粮食收购信贷政策，贷款资金需求测算合理。</p>
+            <p style="text-indent:2em;color:var(--text);">现函复如下：同意给予贵公司粮食收购专项贷款3200万元，期限一年，利率按中国人民银行同期基准利率执行。请贵公司于贷款发放后定期向我行报送收购进度及资金使用情况，确保专款专用。</p>
+            <p style="text-indent:2em;color:var(--text);">请贵公司经办人员携相关资料于6月5日前到我行信贷管理部办理贷款手续。特此函复。</p>
+            <p style="text-align:right;margin-top:32px;color:var(--text);">达州市农业发展银行</p>
+            <p style="text-align:right;color:var(--text);">2026年6月2日</p>
+        </div>
+
+        <div class="yellow-box">
+            <p><strong>💡 来函 vs 复函的关键区别：</strong><br>① 复函标题文种写「复函」（不是「函」）<br>② 开头第一句必须引用对方来函的标题（表示「我收到了你的函」）<br>③ 复函开头常见句式：「贵公司《关于XXX的函》收悉。经……，现函复如下：」<br>④ 复函结尾：用「特此函复」，不用「敬请函复」</p>
+        </div>
+
+        <span class="dot"></span>
+
+        <!-- ==================== 今日任务 ==================== -->
+        <h2>今日任务</h2>
+
+        <table>
+            <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+            <tr><td rowspan="2"><strong>上午</strong></td><td>公文格式 18 要素 + 拟制办理</td><td>对照格式骨架图，逐个要素理解位置和规则。重点关注标题规则、成文日期规则、发文字号括号规则。读公文拟制与办理流程</td><td>1h</td></tr>
+            <tr><td>马哲唯物辩证法</td><td>读三大规律 + 五对范畴 + 辩证法vs形而上学 + 认识论 + 唯物史观。边读边做成语→哲学原理的匹配练习。18组成语全部过一遍</td><td>1.5h</td></tr>
+            <tr><td rowspan="2"><strong>下午</strong></td><td>公文格式自测 + 改错</td><td>① 默写版头/主体/版记各要素（不看书）② 10 例改错逐题过——盖住正确答案，自己先判断错在哪</td><td>0.5h</td></tr>
+            <tr><td>应用文练笔</td><td>写函。先自己写（15-20分钟），写完后对照范文逐项检查。有余力再写一份复函（15分钟）</td><td>1.5h</td></tr>
+            <tr><td rowspan="2"><strong>晚上</strong></td><td>回顾 Day 1 + Day 2</td><td>① 15 种文种四句口诀完整默写 ② 公文格式骨架图空白纸重画 ③ 马哲三大规律 + 唯物史观核心命题默写 ④ 今日全部错题过一遍</td><td>0.5h</td></tr>
+            <tr><td>明日预习</td><td>瞄一眼 Day 3：公文改错专项（标题/正文/落款30例）+ 习近平新时代中国特色社会主义思想「十个明确」「十四个坚持」+ 应用文：写请示</td><td>0.5h</td></tr>
+        </table>
+
+        <blockquote><p><strong>下期预告（Day 3）：</strong>公文改错专项——标题/主送/正文/落款常见错误 30 例逐题拆解 + 习近平新时代中国特色社会主义思想「十个明确」「十四个坚持」+ 应用文练笔：写一份请示</p><p style="font-size:0.85rem;color:var(--text-dim);">今日新增内容：公文拟制与办理流程、格式改错 10 例、成语→原理匹配全集（18 组）、辩证法与形而上学对立、唯物史观完整版、函的四种类型、复函参考范文。</p></blockquote>
+
+        <hr>
+
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年5月30日 &nbsp;|&nbsp; Day 2 / 16 &nbsp;|&nbsp; 模块：公文写作 + 政治理论 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="一·公文写作：15种法定文种全貌.html">← 上一篇</a></span>
+            <span class="next"><a href="三·公文改错与习近平新时代中国特色社会主义思想.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+    </div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

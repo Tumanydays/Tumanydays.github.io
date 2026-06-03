@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 15：考前最后一推 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+<style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 15：考前最后一推</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月12日</span><span>Day 15 / 16</span><span>考前倒数第二天</span>
+</div>
+
+<div class="intro">
+    <p><strong>这是最轻的一推。内容只有考前一小时能看完的体量。</strong>今天不看新东西，不刷新题。把下面这些口诀、数字、格式看一遍——然后去休息。你 14 天的积累已经够了，考前的任务不是增加，是保持。</p>
+</div>
+
+<!-- ==================== 一、口诀串 ==================== -->
+<h2>一、全模块核心口诀——考前念一遍</h2>
+
+<div class="mnemonic">【公文】决必会、定可独、命最高。公报正式公告大、通告贴墙通知发下级。报告不请示，请示一文一事。函给平级，纪要(不加会议)记会议。意见多向行文写。</div>
+<div class="mnemonic">【改错四步】先看标题(文种+格式)→再看主送(请示只一)→三看正文(序号+报告末夹请示)→四看落款(日期阿拉伯+印章骑年盖月)</div>
+<div class="mnemonic">【马哲】普遍寓特殊(不是反)。主矛抓重点、主方看主流。内因根据、外因条件、外因永不决。螺旋上升非直线。真理一不多元。</div>
+<div class="mnemonic">【毛邓】活的灵魂=实事求是+群众路线+独立自主。三大法宝≠灵魂(是统+武+党)。邓本质=解放发展生产力+消灭剥削+消除两极分化+最终共富。</div>
+<div class="mnemonic">【新思想】最本质=党的领导(非人民当家作主)。社会矛盾=美好生活vs不平衡不充分(旧表述已改)。首要=高质量发展。共富≠同步富裕。双循环≠单循环。</div>
+<div class="mnemonic">【宪法】国体=民主专政。政体=人大制度(根本)。修宪=全国人大(2/3)。释宪=常委会。法院=监督、检察=领导(反着来)。</div>
+<div class="mnemonic">【行政法】复议申请=60日。诉讼起诉=6个月。复议后诉讼=15日。简易罚款：公民200、单位3000。复议机关：部门→府或上，府→上府，省部→自己，派出→爹或爷。</div>
+<div class="mnemonic">【民法】8岁限制、16+劳动=视为完全、18完全。时效=3年。失踪=2年、死亡=4年(意外2年)。胁迫=可撤销≠无效。公证遗嘱≠最高→以最后为准。</div>
+<div class="mnemonic">【刑法】12↓无责、12-14特罪核准、14-16八罪(杀/伤/强/抢/毒/爆/放/投)、16全责。未遂=想干干不成、中止=能干不干了。累犯=不缓不假。缓刑上限=3年。</div>
+<div class="mnemonic">【经济】财政=政府(税收/支出)、货币=央行(利率/准备金)。GDP=国土、GNP=国民。市场四类：完全(农)/垄断(餐)/寡头(电信)/完全垄断(电网)。基尼=收入差距、恩格尔=生活水平。</div>
+<div class="mnemonic">【时政】二十大中心=中国式现代化，首要=高质量发展。新质生产力=三高不含消耗。AI+=2024首提。碳达峰=2030、碳中和=2060。成渝=第四极2020。</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 二、数字十连 ==================== -->
+<h2>二、最易混 10 组数字——考前再看一眼</h2>
+<table>
+    <tr><th>主题</th><th>正确数字</th><th>最易混淆成</th></tr>
+    <tr><td>复议申请</td><td><strong>60 日</strong></td><td>6个月 / 15日</td></tr>
+    <tr><td>诉讼起诉</td><td><strong>6 个月</strong></td><td>60日 / 1年</td></tr>
+    <tr><td>复议后诉讼</td><td><strong>15 日</strong></td><td>60日 / 30日</td></tr>
+    <tr><td>民事时效</td><td><strong>3 年</strong></td><td>2年 / 1年</td></tr>
+    <tr><td>宣告失踪 / 死亡</td><td><strong>2年 / 4年</strong></td><td>3年 / 5年</td></tr>
+    <tr><td>限制行为能力</td><td><strong>8 岁</strong></td><td>10岁 / 6岁</td></tr>
+    <tr><td>简易罚款(公民/单位)</td><td><strong>200 / 3,000</strong></td><td>500 / 5000</td></tr>
+    <tr><td>缓刑上限</td><td><strong>3 年</strong></td><td>2年 / 5年</td></tr>
+    <tr><td>碳达峰 / 碳中和</td><td><strong>2030 / 2060</strong></td><td>2035 / 2050</td></tr>
+    <tr><td>宪法修改通过</td><td><strong>2/3</strong></td><td>1/2 / 3/4</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 三、写作 ==================== -->
+<h2>三、写作最后提醒——四个结尾不能串</h2>
+<table>
+    <tr><th>文种</th><th>结尾</th><th>绝对禁止</th></tr>
+    <tr><td>请示</td><td><strong>妥否，请批复</strong></td><td>请批示 / 特此报告</td></tr>
+    <tr><td>报告</td><td><strong>特此报告</strong></td><td>妥否请批复</td></tr>
+    <tr><td>通知</td><td><strong>特此通知</strong></td><td>此致敬礼</td></tr>
+    <tr><td>函</td><td><strong>敬请函复为盼</strong></td><td>此致敬礼 / 妥否请批复</td></tr>
+</table>
+
+<div class="mnemonic">标题公式：发文机关 + 关于 + 事由 + 的 + 文种。除法规书名号外不用标点。发文字号=六角〔〕。成文日期=阿拉伯数字=签发日期。</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 四、四川 ==================== -->
+<h2>四、四川考前一瞥</h2>
+<div class="condensed">
+<p>面积48.6万km²(第5)。人口8400万。最高贡嘎山7556m。18地级市+3自治州(阿坝/甘孜/凉山)。<em>唯一羌族聚居区</em>。三星堆(广汉)→都江堰(战国李冰)→交子(北宋)→益州扬一益二(唐)→重庆直辖(1997)。成渝=第四增长极(2020)。天府粮仓=水稻+油菜+生猪。省花=杜鹃花。省树=桢楠。</p>
+</div>
+
+<!-- ===== 新增：考场低级错误 + 时政时间线 ===== -->
+<h2>考场五个低级错误——每一条都有人真实犯过</h2>
+<table>
+    <tr><th>错误</th><th>怎么避免</th></tr>
+    <tr><td><strong>答题卡题号跳位</strong>——跳了第15题，从第16题开始全部涂错位</td><td>每做 10 题核对一次题号。跳过的题在答题卡上<em>用铅笔轻点一个记号</em>，回来补</td></tr>
+    <tr><td><strong>改了答案但答题卡没改</strong>——卷子上改了，答题卡还是原来的</td><td>改答案时<strong>先改答题卡再改卷子</strong>。顺序不要反</td></tr>
+    <tr><td><strong>把多选当单选做</strong>——多选题只涂了一个选项</td><td>翻到多选题时脑子里<em>默念一声「开始多选了」</em>——切换模式。每道多选至少涂两个</td></tr>
+    <tr><td><strong>写作忘了写标题或落款</strong>——正文写完觉得完了，直接翻页</td><td>写作完成后<em>强制检查三要素</em>：标题有吗？分段小标题有吗？落款有吗？</td></tr>
+    <tr><td><strong>准考证号涂错</strong>——把别人的号涂成了自己的，或涂串了数字</td><td>涂完准考证号后<em>用手指着数字一个一个读一遍</em></td></tr>
+</table>
+
+<span class="dot"></span>
+
+<h2>各题型最后提醒——进考场前扫一眼</h2>
+<table>
+    <tr><th>题型</th><th>最后提醒</th></tr>
+    <tr><td><strong>判断</strong></td><td>绝对化表述（一律/全部/只能/必须）→大概率×。新旧说法陷阱→题干用旧表述→×。正面教科书式表述→√</td></tr>
+    <tr><td><strong>单选</strong></td><td>排除两个→剩两个→比谁更像教材原话。数字题回想要Day9那张表。概念题排查张冠李戴</td></tr>
+    <tr><td><strong>多选</strong></td><td><em>不确定的坚决不选。</em>宁可少选丢半分，不多选归零。标准套餐（如中国式现代化五特征）不会拆出错误选项</td></tr>
+    <tr><td><strong>写作</strong></td><td>5分钟搭骨架→15分钟写→5分钟检查格式。先拿格式分（标题+分段+落款），再补内容分。时间不够→格式写全、正文写一半也有分</td></tr>
+    <tr><td><strong>判断简析</strong></td><td>不空着。先判断对/错（至少拿判断分），再写一句关键原因。写不出原因的至少把正确表述抄一遍</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<h2>时政最后记忆——2022 到 2060 时间轴</h2>
+<div class="condensed">
+<p><strong>2022.10</strong> 二十大 → <strong>2022.4</strong> 统一大市场 → <strong>2023</strong> 新质生产力首提 → <strong>2024</strong> AI+首次写入报告 → <strong>2025.4</strong> 农业强国/服务业九城155项/AI集体学习/就业通知 → <strong>2025.5</strong> 一揽子金融8000亿 → <strong>2026</strong> 十五五开局 → <strong>2027</strong> 建军百年+四川数字乡村 → <strong>2030</strong> 碳达峰 → <strong>2035</strong> 基本现代化+美丽中国 → <strong>2049</strong> 建国百年强国 → <strong>2060</strong> 碳中和</p>
+</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 五、考前最后的话 ==================== -->
+<h2>五、水母流星——考前最后几句话</h2>
+
+<blockquote><p>15 天前你说「把我当做一个悔悟的人，从头开始。」</p></blockquote>
+
+<p>从 15 种文种分不清，到现在能默写 13 种文体格式。</p>
+<p>从法律零基础，到现在能背出复议机关七种情形、刑事责任年龄六条线、合同效力四类状态。</p>
+<p>从时政碎片漫天飞，到现在手里有一张 2022-2060 的完整时间线。</p>
+<p>从马哲的「普遍性寓于特殊性」会记反，到现在看到这句话能在半秒内判对错。</p>
+
+<p>这些不是运气。是你 <strong>15 天每天打开公学</strong>、一篇一篇翻下来的结果。</p>
+
+<p><strong>明天做三件事：</strong></p>
+<ol>
+    <li>早上起来刷一遍速记卡（Day 13，20 分钟）</li>
+    <li>检查考试物品（Day 14 清单）</li>
+    <li>提前 45 分钟到考场</li>
+</ol>
+
+<p><strong>进考场前翻什么：</strong>只翻公文卡和政治卡。别的不要翻。</p>
+
+<p><strong>坐下来之后：</strong>深呼吸。从第 1 题开始做。遇到不会的跳过去，做完一圈回来再想。120 分钟做完 65+ 道题——时间够用。你已经走完了最难的 15 天，明天只是最后一步。</p>
+
+<hr>
+
+<p style="text-align:center;font-size:0.95rem;color:var(--text-title);"><strong>6 月 14 日。上考场。</strong></p>
+
+<hr>
+
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月12日 &nbsp;|&nbsp; Day 15 / 16 &nbsp;|&nbsp; 考前倒数第二天 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="十四·应试策略.html">← 上一篇</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>

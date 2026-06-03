@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 8：全模块易错点专题 — 公学</title>
+    <link rel="icon" type="image/png" href="../../../../images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../style.css">
+
+<style>
+        /* 公学系列特有样式 */
+        h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-title);
+        }
+        em {
+            color: #c0392b;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .red-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fff5f5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e0a0a0;
+        }
+        .red-box p { margin-bottom: 6px; color: var(--text-soft); }
+        .yellow-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #fffdf0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #e8d070;
+        }
+        .green-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5fff5;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0d0a0;
+        }
+        .blue-box {
+            margin: 20px 0;
+            padding: 14px 18px;
+            background: #f5f8ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            border-left: 3px solid #a0b0d0;
+        }
+        .qbox {
+            margin: 12px 0;
+            padding: 10px 16px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+        }
+        .qbox p { margin-bottom: 4px; color: var(--text-muted); font-size: 0.85rem; }
+        .mnemonic {
+            font-size: 1.05rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--blockquote-bg);
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .section-counter {
+            display: inline-block;
+            background: var(--border-light);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .vocab-card {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .vocab-card h4 { margin-top: 0; color: var(--text-title); }
+        .vocab-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .condensed p { margin-bottom: 6px; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.78rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<a class="back" href="../index.html">← 公学</a>
+
+<h1>Day 8：全模块易错点专题</h1>
+
+<div class="meta">
+    <span>公学 · 每日推送</span><span>2026年6月5日</span><span>Day 8 / 16</span><span>第二阶段 · 易错点专题</span>
+</div>
+
+<div class="intro">
+    <p><strong>第二阶段第一天。</strong>今天不走模块教学，不铺新知识。只做一件事：把 7 天学习中最容易踩的坑，用「错误 vs 正确」的方式一个一个扒开给你看。每一个坑都是考场上可能丢分的点——你现在看到一次，考场上就少踩一次。</p>
+    <p>今天的内容分六组：<strong>公文（19 坑）→ 政治（12 坑）→ 法律（23 坑）→ 经济管理（8 坑）→ 国情省情科技（10 坑）→ 时政（3 坑）= 共 75 坑</strong>。每张表：左列=错误表述（考场干扰项），右列=正确表述，末列=错因。读法：先遮住右列，看左列能不能说出错在哪。</p>
+    <p style="margin-top:8px;font-size:.82rem;color:var(--text-dim);">今日专题：60 个高频易错点全模块扫描 | 明日：Day 9 数字专题</p>
+</div>
+
+<!-- ==================== 一、公文易错 ==================== -->
+<h2>一、公文写作——15 个最高频陷阱 <span class="module-tag tag-gw">公文</span></h2>
+
+<h3>文种陷阱（6 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>对县公安局处罚不服，只能找县政府复议</td><td>找县政府<strong>或</strong>市公安局</td><td>「部门→府或上」是二选一，不是只有一个选择</td></tr>
+    <tr class="trap-row"><td>市教育局向市财政局申请经费用「请示」</td><td>用<strong>函</strong></td><td>平级互不隶属→用函。请示只对有隶属关系的上级</td></tr>
+    <tr class="trap-row"><td>《关于申请增加经费的报告》，结尾「妥否，请批示」</td><td>标题改「请示」——或删结尾的请求语</td><td>报告不夹带请示。标题和结尾打架=必错</td></tr>
+    <tr class="trap-row"><td>小区贴「停水公告」</td><td>「停水通告」</td><td>小范围+约束力=通告，不是公告</td></tr>
+    <tr class="trap-row"><td>「会议纪要」是法定文种</td><td>「纪要」——不加「会议」</td><td>2012年《条例》改的，旧称已废止</td></tr>
+    <tr class="trap-row"><td>意见只能作为下行文</td><td>意见可上行、下行、<strong>平行</strong></td><td>意见是15种中唯一的<strong>多向行文</strong>文种</td></tr>
+</table>
+
+<h3>格式陷阱（5 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>发文字号：国办发[2026]1号 或 国办发(2026)1号</td><td>国办发<strong>〔</strong>2026<strong>〕</strong>1号</td><td>年份必须<strong>六角括号</strong>，方括号和圆括号都错</td></tr>
+    <tr class="trap-row"><td>成文日期：二〇二六年六月五日</td><td><strong>2026年6月5日</strong>（阿拉伯数字）</td><td>旧规用汉字，新规（2012年起）用阿拉伯数字</td></tr>
+    <tr class="trap-row"><td>下行文版头标注了签发人</td><td>签发人<strong>只在上行文</strong>标注</td><td>下行文/平行文不标签发人</td></tr>
+    <tr class="trap-row"><td>正文结构层次：一、 （一） 1、 （1）</td><td>一、 →（一）→ <strong>1.</strong> →（1）</td><td>第三层是「1.」实心圆点，不是顿号「1、」</td></tr>
+    <tr class="trap-row"><td>附件说明：附件：《2026年计划》。</td><td>附件：2026年计划</td><td>附件名称<strong>不加书名号</strong>、末尾<strong>不加标点</strong></td></tr>
+</table>
+
+<h3>行文规则陷阱（4 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>联合行文的成文日期以第一个签发人日期为准</td><td>以<strong>最后一个</strong>签发人签发日期为准</td><td>「第一个」和「最后一个」互换，是考场的经典干扰项</td></tr>
+    <tr class="trap-row"><td>请示未批复前可抄送下级以便提前准备</td><td><strong>不得</strong>抄送下级</td><td>请示事项未生效前，抄送下级会造成混乱</td></tr>
+    <tr class="trap-row"><td>请示可以同时主送两个上级机关</td><td>请示<strong>只能主送一个</strong></td><td>一文一事一主送。多头主送→两个上级答复可能矛盾</td></tr>
+    <tr class="trap-row"><td>不同级别的机关可以联合行文</td><td><strong>同级</strong>机关才能联合行文</td><td>市局和县局不能联合行文</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 二、政治易错 ==================== -->
+<h2>二、政治理论——12 个高频陷阱 <span class="module-tag tag-zz">政治</span></h2>
+
+<h3>马哲陷阱（6 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>矛盾的特殊性寓于普遍性之中</td><td><strong>普遍性</strong>寓于<strong>特殊性</strong>之中</td><td>记反了——特殊=个性，普遍=共性。共性通过个性表现</td></tr>
+    <tr class="trap-row"><td>外因在一定条件下起决定作用</td><td>外因<strong>永远不</strong>起决定作用，只是条件</td><td>内因是变化的根据（第一位），外因是条件（第二位）</td></tr>
+    <tr class="trap-row"><td>事物发展的总趋势是直线前进</td><td>总趋势=前进上升，道路=曲折迂回。整体是<strong>螺旋式上升</strong></td><td>「直线前进」和「循环往复」都是错误选项</td></tr>
+    <tr class="trap-row"><td>辩证法和形而上学的根本分歧在于是否承认事物是普遍联系的</td><td>根本分歧=是否承认<strong>事物内部的矛盾性</strong></td><td>普遍联系是分歧之一但不是「根本分歧」</td></tr>
+    <tr class="trap-row"><td>真理是多元的，不同的人有不同的真理</td><td>真理只有一个，是<strong>客观的</strong></td><td>真理一元论。多元真理=唯心主义</td></tr>
+    <tr class="trap-row"><td>社会发展的最终决定力量是生产关系</td><td>最终决定力量是<strong>生产力</strong></td><td>生产力决定生产关系，生产关系反作用于生产力</td></tr>
+</table>
+
+<h3>中特陷阱（6 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>中国特色社会主义最本质的特征是人民当家作主</td><td>最本质特征=<strong>中国共产党领导</strong></td><td>两个「最」都是党的领导。「人民当家作主」是社会主义民主政治的本质和核心</td></tr>
+    <tr class="trap-row"><td>新时代社会主要矛盾=物质文化需要 vs 落后社会生产</td><td>=<strong>美好生活需要</strong> vs <strong>不平衡不充分</strong>的发展</td><td>旧表述（1981-2017），2017年十九大改的</td></tr>
+    <tr class="trap-row"><td>中国式现代化=全体人民同步富裕</td><td>=全体人民<strong>共同</strong>富裕</td><td>「同步」=错误。共同富裕不是同步富裕，也不是平均主义</td></tr>
+    <tr class="trap-row"><td>新发展格局=以国内单循环为主体</td><td>=国内大循环<strong>为主体</strong>、国内国际<strong>双循环</strong></td><td>「单循环」=必错。一定是「双循环」</td></tr>
+    <tr class="trap-row"><td>四个全面=全面建成小康社会+深化改革+依法治国+从严治党</td><td>=全面建设<strong>社会主义现代化国家</strong>+深化改革+依法治国+从严治党</td><td>「小康社会」是旧版，已更新</td></tr>
+    <tr class="trap-row"><td>毛泽东思想活的灵魂=统一战线+武装斗争+党的建设</td><td>=实事求是+群众路线+独立自主</td><td>前三个是「三大法宝」——《〈共产党人〉发刊词》中提出的，不是活的灵魂</td></tr>
+</table>
+
+    <tr class="trap-row"><td>通知和通报的用途没有区别</td><td>通知=事前（告知/布置）；通报=事后（表彰/批评/传达）</td><td>事前vs事后。会议通知≠情况通报</td></tr>
+    <tr class="trap-row"><td>函的结尾写「此致敬礼」</td><td>「特此函告」「敬请函复」</td><td>函不是私人信件。「此致敬礼」是私信用语</td></tr>
+    <tr class="trap-row"><td>决定和命令在嘉奖方面没有区别</td><td>命令=国家级嘉奖；决定=省部级及以下表彰；通报=一般性表扬</td><td>三级嘉奖对应三种文种</td></tr>
+    <tr class="trap-row"><td>请示的附注不需要特别写什么</td><td>请示的附注应写<strong>联系人姓名和电话</strong></td><td>请示特有要求——方便上级联系</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 三、法律易错 ==================== -->
+<h2>三、法律常识——18 个高频陷阱 <span class="module-tag tag-law">法律</span></h2>
+
+<h3>宪法陷阱（5 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>宪法修正案由国家主席公布</td><td>由<strong>全国人大主席团</strong>公布</td><td>国家主席公布的是法律，不是宪法修正案</td></tr>
+    <tr class="trap-row"><td>全国人大常委会可以修改宪法</td><td>修改宪法=<strong>全国人大</strong>；解释宪法=常委会</td><td>「修改」和「解释」主体不同，考场互换必错</td></tr>
+    <tr class="trap-row"><td>国体=人民代表大会制度</td><td>国体=人民民主专政<strong>；</strong>政体=人民代表大会制度</td><td>国体vs政体是宪法最高频混淆</td></tr>
+    <tr class="trap-row"><td>宪法的修改需要全国人大全体代表的过半数通过</td><td>需要全体代表的<strong>2/3以上多数</strong></td><td>普通法律=过半数；宪法修改=2/3</td></tr>
+    <tr class="trap-row"><td>法院上下级=领导关系；检察院上下级=监督关系</td><td>法院=监督关系<strong>；</strong>检察院=<strong>领导</strong>关系</td><td>正好反了。检察院是领导关系</td></tr>
+</table>
+
+<h3>行政法陷阱（5 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>行政复议申请期限为15日</td><td>复议申请期限=<strong>60日</strong></td><td>15日是复议<strong>后</strong>起诉的期限，不是复议申请期限</td></tr>
+    <tr class="trap-row"><td>行政诉讼起诉期限为60日</td><td>起诉期限=<strong>6个月</strong></td><td>60日是复议期限，6个月是诉讼期限。考场互换</td></tr>
+    <tr class="trap-row"><td>部门规章可以设定行政许可</td><td>部门规章<strong>不得</strong>设定行政许可</td><td>许可设定权：部门规章和市级政府规章绝对不能设</td></tr>
+    <tr class="trap-row"><td>行政处罚简易程序可对个人罚款500元</td><td>简易程序罚款上限：个人<strong>200元</strong>、单位<strong>3000元</strong></td><td>两个数字要记住</td></tr>
+    <tr class="trap-row"><td>对省政府的行政行为不服，找国务院复议</td><td>对省部级单位不服→<strong>原机关自己复议</strong></td><td>省部→自己复议自己，不是直接找国务院</td></tr>
+</table>
+
+<h3>民法典陷阱（4 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>限制民事行为能力人的年龄下限=10岁</td><td>=<strong>8周岁</strong></td><td>2017年从10岁降为8岁，旧题旧教材还在用10岁</td></tr>
+    <tr class="trap-row"><td>受胁迫的合同=无效合同</td><td>=<strong>可撤销</strong>合同</td><td>胁迫/欺诈/重大误解/显失公平→可撤销。违反强制规定/恶意串通→无效</td></tr>
+    <tr class="trap-row"><td>公证遗嘱效力最高，不能以其他遗嘱变更</td><td>民法典已取消此规定——以<strong>最后的</strong>遗嘱为准</td><td>民法典重大修改之一。旧题答案≠现行法律</td></tr>
+    <tr class="trap-row"><td>宣告死亡后只要本人回来，婚姻自动恢复</td><td>配偶<strong>已再婚</strong>的→<strong>不自动恢复</strong>；配偶未再婚→自动恢复</td><td>「自动恢复」是有条件的</td></tr>
+</table>
+
+<h3>刑法陷阱（4 个）</h3>
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>14周岁的甲盗窃5000元手机→负刑事责任</td><td><strong>不负</strong>刑事责任</td><td>14-16岁只对8种重罪负责，盗窃不在8种之列</td></tr>
+    <tr class="trap-row"><td>犯罪未遂是因自动放弃犯罪</td><td>自动放弃=<strong>中止</strong>；意志以外原因未得逞=<strong>未遂</strong></td><td>未遂vs中止是刑法最高频辨析</td></tr>
+    <tr class="trap-row"><td>自首「应当」从轻或减轻处罚</td><td>自首<strong>「可以」</strong>从轻或减轻</td><td>「可以」vs「应当」一字之差。自首=可以，中止（无损害）=应当免除</td></tr>
+    <tr class="trap-row"><td>累犯可以适用缓刑</td><td>累犯<strong>不适用缓刑</strong>，也不适用假释</td><td>累犯=不缓刑、不假释——两条铁律</td></tr>
+</table>
+
+    <tr class="trap-row"><td>正当防卫和紧急避险没有本质区别</td><td>正当防卫针对<strong>不法侵害人</strong>本人；紧急避险针对<strong>无辜第三人</strong></td><td>对象不同——防谁/牺牲谁</td></tr>
+    <tr class="trap-row"><td>对正在行凶/杀人/抢劫/强奸/绑架的防卫造成伤亡=防卫过当</td><td><strong>不负刑事责任</strong>——特殊防卫（无限防卫）</td><td>五类严重暴力犯罪→特殊防卫不追责</td></tr>
+    <tr class="trap-row"><td>宣告失踪=下落不明满4年</td><td>宣告失踪=满<strong>2年</strong>；宣告死亡=满<strong>4年</strong></td><td>两个数字互换是考场常规操作</td></tr>
+    <tr class="trap-row"><td>犯罪预备的处罚和最重的既遂一样</td><td>预备=<strong>可以</strong>从轻/减轻/<strong>免除</strong>；未遂=<strong>可以</strong>从轻/减轻；中止(无损害)=<strong>应当免除</strong></td><td>三个形态处罚三档，从宽力度：中止>预备>未遂</td></tr>
+    <tr class="trap-row"><td>只要犯罪后自首就应当从轻</td><td>自首=<strong>可以</strong>从轻（不是应当）；立功=<strong>可以</strong>从轻</td><td>「可以」vs「应当」——刑法量刑情节的关键区分</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 四、经济管理易错 ==================== -->
+<h2>四、经济管理——8 个高频陷阱 <span class="module-tag tag-eco">经济</span></h2>
+
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>降低利率属于扩张性财政政策</td><td>属于扩张性<strong>货币</strong>政策</td><td>利率=央行管的→货币政策。税收/支出=财政部管的→财政政策</td></tr>
+    <tr class="trap-row"><td>GDP=本国国民生产的最终产品价值</td><td>=<strong>一国境内</strong>生产的最终产品价值</td><td>GDP按国土算、GNP按国民算</td></tr>
+    <tr class="trap-row"><td>恩格尔系数越小说明国家越穷</td><td>越小→越<strong>富有</strong></td><td>恩格尔系数=食品支出占比。占比越低=生活水平越高</td></tr>
+    <tr class="trap-row"><td>基尼系数衡量生活水平</td><td>衡量<strong>收入分配差距</strong></td><td>基尼=收入差距、恩格尔=生活水平——两个不要互换</td></tr>
+    <tr class="trap-row"><td>电信行业属于完全垄断</td><td>属于<strong>寡头垄断</strong></td><td>移动/联通/电信=三家=寡头。只有一家才是完全垄断</td></tr>
+    <tr class="trap-row"><td>西蒙认为管理者决策是完全理性的</td><td>=<strong>有限理性</strong>，满意化而非最优化</td><td>西蒙的核心贡献就是「有限理性」</td></tr>
+    <tr class="trap-row"><td>马斯洛需求层次最高层=尊重</td><td>最高层=<strong>自我实现</strong></td><td>五层：生理→安全→社交→尊重→自我实现</td></tr>
+    <tr class="trap-row"><td>PDCA的C=控制（Control）</td><td>C=<strong>检查（Check）</strong></td><td>Plan→Do→Check→Act。不是Control</td></tr>
+</table>
+
+<span class="dot"></span>
+
+<!-- ==================== 五、国情省情科技易错 ==================== -->
+<h2>五、国情省情科技文化——7 个高频陷阱 <span class="module-tag tag-sq">省情</span><span class="module-tag tag-tech">科技</span></h2>
+
+<table>
+    <tr><th>❌ 错误表述</th><th>✅ 正确表述</th><th>错因</th></tr>
+    <tr class="trap-row"><td>四川盆地是中国四大盆地中最大的</td><td>最大=<strong>塔里木</strong>盆地</td><td>塔里木(最大)→准噶尔(第二)→柴达木(最高)→四川</td></tr>
+    <tr class="trap-row"><td>交子出现于唐代四川</td><td>出现于<strong>宋代</strong>（北宋）四川</td><td>交子=北宋。唐代四川是「扬一益二」的益州</td></tr>
+    <tr class="trap-row"><td>四川最高峰=四姑娘山（或峨眉山）</td><td>=<strong>贡嘎山</strong>（7556m）</td><td>「蜀山之王」=贡嘎山，「蜀山之后」=四姑娘山</td></tr>
+    <tr class="trap-row"><td>李冰修都江堰是秦朝</td><td>=<strong>战国</strong>时期（秦国蜀郡太守李冰）</td><td>战国≠秦朝。都江堰建于战国末期（约公元前256年）</td></tr>
+    <tr class="trap-row"><td>抗生素可以治疗病毒性感冒</td><td>抗生素<strong>只杀细菌不杀病毒</strong></td><td>青霉素=第一个抗生素（弗莱明1928）。感冒是病毒→吃抗生素无效</td></tr>
+    <tr class="trap-row"><td>pH=9是酸性</td><td>pH>7=<strong>碱性</strong></td><td>pH<7=酸、pH=7=中性、pH>7=碱</td></tr>
+    <tr class="trap-row"><td>《资治通鉴》=第一部纪传体通史</td><td>《资治通鉴》=<strong>编年体</strong>通史。纪传体通史=《史记》</td><td>纪传体(人物为中心) vs 编年体(时间为中心)。《史记》=纪传体、《资治通鉴》=编年体</td></tr>
+</table>
+
+    <tr class="trap-row"><td>四川有三个自治州=阿坝/甘孜/凉山，省会是康定</td><td>省会是<strong>成都</strong>（不是康定）。阿坝州府=马尔康，甘孜州府=康定，凉山州府=西昌</td><td>自治州首府≠省会</td></tr>
+    <tr class="trap-row"><td>二十四节气是2012年入选世界非遗</td><td>=<strong>2016年</strong>入选</td><td>2016年，不是2012年</td></tr>
+    <tr class="trap-row"><td>科举「连中三元」=解元+会元+状元——解元=殿试第一、状元=乡试第一</td><td>解元=乡试第一、会元=会试第一、状元=<strong>殿试第一</strong></td><td>解元/会元/状元各自对应哪级考试，顺序不能记串</td></tr>
+    <tr class="trap-row"><td>碳达峰=2060年，碳中和=2030年</td><td>碳达峰=<strong>2030年</strong>，碳中和=<strong>2060年</strong></td><td>达峰在前、中和在后——两个数字反了</td></tr>
+    <tr class="trap-row"><td>新质生产力的核心特征包括高消耗</td><td>=高科技、高效能、高质量——<strong>不含高消耗</strong></td><td>「新质」+「生产力」=三高不含消耗</td></tr>
+    <tr class="trap-row"><td>服务业扩大开放综合试点新增5个城市</td><td>=新增<strong>9个</strong>试点城市，共<strong>155项</strong>试点任务（2025年4月）</td><td>是9个不是5个</td></tr>
+</table>
+
+<div class="mnemonic">易错点核心规律：①记反的（国体vs政体/普遍vs特殊/复议vs诉讼/中止vs未遂/达峰vs中和）②旧说法还在用的（小康社会/会议纪要/10岁/公证遗嘱最高效力/旧社会矛盾）③标点符号的（六角括号/1.不是1、/附件不加书名号）④「可以」vs「应当」一字之差 ⑤数字记串的（60日vs6个月vs15日/2年vs4年/2030vs2060）</div>
+
+<span class="dot"></span>
+
+<!-- ==================== 今日任务 ==================== -->
+<h2>今日任务</h2>
+
+<table>
+    <tr><th>时段</th><th>任务</th><th>具体动作</th><th>预计</th></tr>
+    <tr><td><strong>上午</strong></td><td>逐坑排雷</td><td>75 个坑从左往右扫——先看左列（错误表述），脑子里判断错在哪，再看右列验证。公文 19 坑→政治 12 坑→法律前半（宪法行政法）</td><td>1.5h</td></tr>
+    <tr><td><strong>下午</strong></td><td>逐坑排雷（续）</td><td>法律后半（民法刑法）→经济 8 坑→省情科技 10 坑→时政 3 坑。遮住答案自己说一遍</td><td>1.5h</td></tr>
+    <tr><td><strong>晚上</strong></td><td>回锅</td><td>不看书，白纸默写「❌→✅」对子（目标 40 对以上）。写不出的标注，明天数字专题开始前重看一遍</td><td>1h</td></tr>
+</table>
+
+<blockquote><p><strong>明日预告（Day 9）：</strong>数字专题——全模块所有关键数字/期限/年龄/年限/百分比一张总表打尽。复议60日、诉讼6个月、诉讼时效3年、刑事责任年龄12/14/16/18、简易程序200/3000、宪法修改2/3……所有数字类考点集中碾压。</p></blockquote>
+
+<hr>
+<p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">推送日期：2026年6月5日 &nbsp;|&nbsp; Day 8 / 16 &nbsp;|&nbsp; 第二阶段 · 易错点专题 &nbsp;|&nbsp; 公学</p>
+
+        <div class="series-nav">
+            <span class="prev"><a href="七·科技文化与时事职测.html">← 上一篇</a></span>
+            <span class="next"><a href="九·全模块数字专题.html">下一篇 →</a></span>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="nav-bottom">
+            <a href="../../../index.html">← 返回枕中</a>
+            &nbsp;·&nbsp;
+            <a href="../index.html">← 返回综合知识</a>
+        </div>
+
+</div>
+    <script src="../../../../wander-mode.js"></script>
+</body>
+</html>
