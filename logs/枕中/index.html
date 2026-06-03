@@ -144,24 +144,20 @@
         draw();
     })();
 
-    // ═══ 灯：点击调光 ═══
+    // ═══ 灯：点击后打哈欠 ═══
     (function() {
         var lamp = document.querySelector('.lamp');
         if (!lamp) return;
         lamp.style.cursor = 'pointer';
         lamp.style.pointerEvents = 'auto';
         var glow = lamp.querySelector('.lamp-glow');
-        var colors = ['#f8f5ef', '#f3ede3', '#faf3e8'];
-        var ci = 0;
 
         lamp.addEventListener('click', function() {
-            // 灯闪一下
             if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.35) 0%, rgba(212,197,160,0.12) 50%, transparent 70%)';
-            // 房间暗下
-            document.body.style.transition = 'opacity 0.35s ease';
-            document.body.style.opacity = '0.08';
+            document.body.style.transition = 'opacity 0.3s ease';
+            document.body.style.opacity = '0.1';
             setTimeout(function() {
-                // 整理：打乱列表顺序
+                // 整理
                 var list = document.querySelector('.series-list');
                 if (list) {
                     var items = Array.prototype.slice.call(list.children);
@@ -170,15 +166,29 @@
                         list.appendChild(items[j]);
                     }
                 }
-                // 切换背景色
-                ci = (ci + 1) % colors.length;
-                document.body.style.transition = 'background 0.6s ease';
-                document.body.style.background = colors[ci];
-                // 灯恢复
                 if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%)';
-                // 房间亮起
                 document.body.style.opacity = '1';
-            }, 400);
+
+                // zzz 浮现
+                for (var zi = 0; zi < 3; zi++) {
+                    (function(idx) {
+                        setTimeout(function() {
+                            var z = document.createElement('div');
+                            z.textContent = 'z';
+                            var size = 0.65 + idx * 0.15;
+                            var top = 40 + idx * 18;
+                            var right = 32 + idx * 10;
+                            z.style.cssText = 'position:fixed;top:' + top + 'px;right:' + right + 'px;font-size:' + size + 'rem;color:#ccc;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s ease,transform 0.5s ease;transform:translateY(6px);';
+                            document.body.appendChild(z);
+                            requestAnimationFrame(function() { z.style.opacity = '0.45'; z.style.transform = 'translateY(0)'; });
+                            setTimeout(function() {
+                                z.style.opacity = '0';
+                                setTimeout(function() { if (z.parentNode) z.parentNode.removeChild(z); }, 500);
+                            }, 1500);
+                        }, idx * 350);
+                    })(zi);
+                }
+            }, 350);
         });
     })();
 </script>
