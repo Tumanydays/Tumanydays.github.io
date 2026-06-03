@@ -79,7 +79,7 @@
     </div>
 
     <script>
-        // 如果在迷失域中：显示胡诌句，点击即退出回家
+        // 迷失域中：所有版本均可点击退出回家
         if (sessionStorage.getItem('wander-mode') === 'true') {
             var note = sessionStorage.getItem('wander-note');
             var msg = document.querySelector('.message');
@@ -96,10 +96,8 @@
             if (note) {
                 msg.textContent = note;
                 whs.textContent = '—— Tumanydays，刚刚';
-            } else {
-                msg.textContent = '该往回走了';
-                whs.textContent = '—— 点击离开迷失域';
             }
+            // 无胡诌句时保留默认文本（又是一个没有知识存在的荒原吗 / 迷失域里会有出路：）
             msg.style.cursor = 'pointer';
             whs.style.cursor = 'pointer';
             link.style.display = 'none';
