@@ -31,7 +31,7 @@
             letter-spacing: 3px;
         }
 
-        /* ── 一盏不灭的灯 ── */
+        /* ── 一盏黄铜台灯 ── */
         .lamp {
             position: fixed;
             bottom: 36px;
@@ -39,52 +39,61 @@
             z-index: 1;
             pointer-events: none;
         }
+        .lamp-arm {
+            width: 2px; height: 26px;
+            background: #b8a88a; opacity: 0.55;
+            margin: 0 auto; border-radius: 1px;
+        }
+        .lamp-joint {
+            width: 10px; height: 3px;
+            background: #b8a88a; opacity: 0.45;
+            margin: -1px auto 0; border-radius: 2px;
+        }
         .lamp-shade {
-            width: 22px;
-            height: 11px;
-            background: #d4c5a0;
-            border-radius: 11px 11px 0 0;
-            margin: 0 auto;
-            opacity: 0.6;
+            width: 40px; height: 0;
+            border-bottom: 18px solid #b8a88a;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            opacity: 0.45;
+            margin: 0 auto; position: relative;
         }
         .lamp-glow {
-            width: 36px;
-            height: 36px;
-            background: radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%);
+            width: 44px; height: 28px;
+            background: radial-gradient(ellipse, rgba(184,168,138,0.13) 0%, rgba(184,168,138,0.04) 60%, transparent 80%);
             border-radius: 50%;
-            margin: -28px auto 0;
+            margin: -20px auto 0;
         }
-        .lamp-stem {
-            width: 1px;
-            height: 24px;
-            background: #d4c5a0;
-            margin: -2px auto 0;
-            opacity: 0.5;
+        .lamp-pool {
+            width: 52px; height: 16px;
+            background: radial-gradient(ellipse, rgba(184,168,138,0.08) 0%, transparent 70%);
+            margin: -8px auto 0;
+            transition: opacity 0.6s ease;
         }
         .lamp-base {
-            width: 14px;
-            height: 2px;
-            background: #d4c5a0;
-            margin: 0 auto;
-            border-radius: 1px;
-            opacity: 0.5;
+            width: 28px; height: 4px;
+            background: #b8a88a; opacity: 0.4;
+            margin: 4px auto 0; border-radius: 2px;
         }
 
         @media (max-width: 500px) {
             .container { padding: 48px 20px 64px; }
             .lamp { bottom: 24px; left: 20px; }
-            .lamp-shade { width: 18px; height: 9px; }
-            .lamp-glow { width: 28px; height: 28px; margin-top: -22px; }
-            .lamp-stem { height: 18px; }
+            .lamp-shade { width: 32px; border-bottom-width: 14px; border-left-width: 4px; border-right-width: 4px; }
+            .lamp-glow { width: 36px; height: 22px; margin-top: -16px; }
+            .lamp-pool { width: 40px; }
+            .lamp-arm { height: 20px; }
+        }
         }
     </style>
 </head>
 <body>
 
     <div class="lamp">
+        <div class="lamp-arm"></div>
+        <div class="lamp-joint"></div>
         <div class="lamp-shade"></div>
         <div class="lamp-glow"></div>
-        <div class="lamp-stem"></div>
+        <div class="lamp-pool"></div>
         <div class="lamp-base"></div>
     </div>
 
