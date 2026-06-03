@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS50 — Tumanydays</title>
+    <title>与 Shell 对话 — Tumanydays</title>
     <link rel="icon" type="image/png" href="../../../../images/icon.png">
     <link rel="stylesheet" href="../../../../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
@@ -14,8 +14,7 @@
         .back { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; margin-bottom: 16px; display: inline-block; }
         .back:hover { color: var(--hover); }
         h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin-bottom: 4px; color: var(--text-title); }
-        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 4px; }
-        .meta { font-size: 0.75rem; color: var(--text-faint); margin-bottom: 48px; }
+        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 48px; }
         .series-list { list-style: none; }
         .series-list li { border-bottom: 1px solid #eee; padding: 18px 0; }
         .series-list a { text-decoration: none; display: block; }
@@ -31,38 +30,49 @@
 <body>
     <div class="container">
         <a class="back" href="../index.html">← 完全使用手册</a>
-        <h1>CS50</h1>
-        <p class="subtitle">Harvard University · 2025</p>
-        <p class="meta">David J. Malan</p>
+        <h1>与 Shell 对话</h1>
+        <p class="subtitle">从终端入门到脚本编写的七篇完整教程</p>
         <ul class="series-list">
             <li>
-                <a href="week0-1.html">
-                    <div class="entry-title">Week 0–1</div>
-                    <div class="entry-desc">从 Scratch 到 C——计算思维建立，C 语言入门：变量、条件、循环、printf</div>
+                <a href="终端是你的新桌面.html">
+                    <div class="entry-title">一 · 终端是你的新桌面</div>
+                    <div class="entry-desc">终端是什么、文件系统导航、文件操作命令、通配符、快捷键</div>
                 </a>
             </li>
             <li>
-                <a href="week2-3.html">
-                    <div class="entry-title">Week 2–3</div>
-                    <div class="entry-desc">数组与算法——编译流程、调试、数组底层；搜索排序、大 O 复杂度、递归</div>
+                <a href="看与找——信息的读取与搜索.html">
+                    <div class="entry-title">二 · 看与找——信息的读取与搜索</div>
+                    <div class="entry-desc">cat/less/head/tail 文件查看、grep 搜索、find/mdfind 文件查找、file/du/df/wc</div>
                 </a>
             </li>
             <li>
-                <a href="week4-5.html">
-                    <div class="entry-title">Week 4–5</div>
-                    <div class="entry-desc">指针与数据结构——动态内存分配、malloc/free；手写链表、哈希表、树</div>
+                <a href="流水线与重定向.html">
+                    <div class="entry-title">三 · 流水线与重定向</div>
+                    <div class="entry-desc">标准流、重定向、管道、sort/uniq、tee、xargs</div>
                 </a>
             </li>
             <li>
-                <a href="week6-7.html">
-                    <div class="entry-title">Week 6–7</div>
-                    <div class="entry-desc">Python 与 SQL——C 与 Python 对照、内置数据结构；数据库查询与表关联</div>
+                <a href="面向系统的操作.html">
+                    <div class="entry-title">四 · 面向系统的操作</div>
+                    <div class="entry-desc">进程管理、持久化运行、权限模型、系统信息、macOS 工具箱</div>
                 </a>
             </li>
             <li>
-                <a href="week8-10.html">
-                    <div class="entry-title">Week 8–10</div>
-                    <div class="entry-desc">Web 全栈——HTML/CSS/JS 前端、Flask 后端框架、期末项目</div>
+                <a href="让你的Shell认识你.html">
+                    <div class="entry-title">五 · 让你的 Shell 认识你</div>
+                    <div class="entry-desc">别名、Shell 函数、环境变量、.zshrc 配置、历史记录</div>
+                </a>
+            </li>
+            <li>
+                <a href="从命令到脚本.html">
+                    <div class="entry-title">六 · 从命令到脚本</div>
+                    <div class="entry-desc">脚本基础、变量、条件判断、循环、参数与调试、备份脚本实战</div>
+                </a>
+            </li>
+            <li>
+                <a href="遇到问题怎么办.html">
+                    <div class="entry-title">七 · 遇到问题怎么办</div>
+                    <div class="entry-desc">错误诊断、帮助系统、退出码、故障修复、全系列命令速查总表</div>
                 </a>
             </li>
         </ul>

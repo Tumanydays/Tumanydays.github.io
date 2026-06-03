@@ -19,8 +19,8 @@
         .series-list li { border-bottom: 1px solid #eee; padding: 18px 0; }
         .series-list a { text-decoration: none; display: block; }
         .series-list a:hover .entry-title { color: var(--hover); }
-        .entry-title { font-size: 0.95rem; color: var(--text); margin-bottom: 2px; }
-        .entry-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+        .entry-title { font-size: 1rem; color: var(--text); margin-bottom: 2px; letter-spacing: 1px; }
+        .entry-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
         footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-dim); }
         footer a { color: var(--text-dim); text-decoration: none; }
         footer a:hover { color: var(--hover); }
@@ -31,90 +31,18 @@
     <div class="container">
         <a class="back" href="../index.html">← 棱镜</a>
         <h1>完全使用手册</h1>
-        <p class="subtitle">技术工具的完整操作指南</p>
+        <p class="subtitle">工具的操作指南</p>
         <ul class="series-list">
-            <li style="border-bottom: none; padding-bottom: 4px;">
-                <div style="font-size:1.05rem; font-weight:500; color:var(--text-title); letter-spacing:1px; margin-bottom:4px;">与 Shell 对话</div>
-                <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">
-                    从终端入门到脚本编写的七篇完整教程——文件操作、内容搜索、管道重定向、进程权限、Shell 配置、脚本实战、故障排查。
-                </div>
-            </li>
             <li>
-                <a href="与Shell对话：终端是你的新桌面.html">
-                    <div class="entry-title">一 · 终端是你的新桌面</div>
-                    <div class="entry-desc">终端是什么、文件系统导航、文件操作命令、通配符、快捷键</div>
+                <a href="与Shell对话/">
+                    <div class="entry-title">与 Shell 对话</div>
+                    <div class="entry-desc">从终端入门到脚本编写的七篇完整教程——文件操作、搜索、管道、进程、配置、脚本、故障排查</div>
                 </a>
             </li>
             <li>
-                <a href="与Shell对话：看与找——信息的读取与搜索.html">
-                    <div class="entry-title">二 · 看与找——信息的读取与搜索</div>
-                    <div class="entry-desc">cat/less/head/tail 文件查看、grep 搜索、find/mdfind 文件查找、file/du/df/wc</div>
-                </a>
-            </li>
-            <li>
-                <a href="与Shell对话：流水线与重定向.html">
-                    <div class="entry-title">三 · 流水线与重定向</div>
-                    <div class="entry-desc">标准流、重定向、管道、sort/uniq、tee、xargs</div>
-                </a>
-            </li>
-            <li>
-                <a href="与Shell对话：面向系统的操作.html">
-                    <div class="entry-title">四 · 面向系统的操作</div>
-                    <div class="entry-desc">进程管理、持久化运行、权限模型、系统信息、macOS 工具箱</div>
-                </a>
-            </li>
-            <li>
-                <a href="与Shell对话：让你的Shell认识你.html">
-                    <div class="entry-title">五 · 让你的 Shell 认识你</div>
-                    <div class="entry-desc">别名、Shell 函数、环境变量、.zshrc 配置、历史记录</div>
-                </a>
-            </li>
-            <li>
-                <a href="与Shell对话：从命令到脚本.html">
-                    <div class="entry-title">六 · 从命令到脚本</div>
-                    <div class="entry-desc">脚本基础、变量、条件判断、循环、参数与调试、备份脚本实战</div>
-                </a>
-            </li>
-            <li>
-                <a href="与Shell对话：遇到问题怎么办.html">
-                    <div class="entry-title">七 · 遇到问题怎么办</div>
-                    <div class="entry-desc">错误诊断、帮助系统、退出码、故障修复、全系列命令速查总表</div>
-                </a>
-            </li>
-            <li style="border-bottom: none; padding-bottom: 4px; margin-top: 12px;">
-                <div style="font-size:1.05rem; font-weight:500; color:var(--text-title); letter-spacing:1px; margin-bottom:4px;">CS50</div>
-                <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">
-                    哈佛大学 CS50x 课程笔记——从 Scratch 图形化编程到 C 语言、算法、数据结构，覆盖计算机科学的核心思维。
-                </div>
-            </li>
-            <li>
-                <a href="CS50/week0-1.html">
-                    <div class="entry-title">Week 0–1</div>
-                    <div class="entry-desc">计算思维、二进制、Scratch、C 语言入门、编译、数据类型、条件与循环</div>
-                </a>
-            </li>
-            <li>
-                <a href="CS50/week2-3.html">
-                    <div class="entry-title">Week 2–3</div>
-                    <div class="entry-desc">数组、字符串、命令行参数、调试、搜索与排序算法、大 O 复杂度</div>
-                </a>
-            </li>
-            <li>
-                <a href="CS50/week4-5.html">
-                    <div class="entry-title">Week 4–5</div>
-                    <div class="entry-desc">指针、内存分配、数据结构、链表、哈希表、树</div>
-                </a>
-            </li>
-            <li>
-                <a href="CS50/week6-7.html">
-                    <div class="entry-title">Week 6–7</div>
-                    <div class="entry-desc">Python 入门、面向对象、与 C 的对比、SQL 与数据库</div>
-                </a>
-            </li>
-            <li>
-                <a href="CS50/week8-10.html">
-                    <div class="entry-title">Week 8–10</div>
-                    <div class="entry-desc">HTML/CSS/JavaScript 网页开发、Flask Web 框架、期末考试回顾</div>
+                <a href="CS50/">
+                    <div class="entry-title">CS50</div>
+                    <div class="entry-desc">哈佛大学 CS50x 课程笔记——从计算思维到 C 语言、数据结构、Python、Web 开发</div>
                 </a>
             </li>
         </ul>
