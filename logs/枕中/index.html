@@ -150,25 +150,41 @@
         if (!lamp) return;
         lamp.style.cursor = 'pointer';
         lamp.style.pointerEvents = 'auto';
+        var active = [];
 
         lamp.addEventListener('click', function() {
-            // zzz 浮现
             for (var zi = 0; zi < 3; zi++) {
                 (function(idx) {
                     setTimeout(function() {
                         var z = document.createElement('div');
                         z.textContent = 'z';
-                        var size = 0.7 + idx * 0.2;
-                        var top = 36 + idx * 20;
-                        var right = 28 + idx * 12;
-                        z.style.cssText = 'position:fixed;top:' + top + 'px;right:' + right + 'px;font-size:' + size + 'rem;color:#bbb;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.6s ease,transform 0.6s ease;transform:translateY(8px);';
+                        var size = 0.65 + idx * 0.18;
+                        var zTop = 36 + idx * 18;
+                        var zLeft = 48 + idx * 12;
+                        var phase = Math.random() * 6.28;
+                        z.style.cssText = 'position:fixed;bottom:' + zTop + 'px;left:' + zLeft + 'px;font-size:' + size + 'rem;color:#ccc;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s ease;';
                         document.body.appendChild(z);
-                        requestAnimationFrame(function() { z.style.opacity = '0.5'; z.style.transform = 'translateY(0)'; });
+
+                        var data = { el: z, phase: phase, baseY: zTop, t: 0 };
+                        active.push(data);
+
+                        requestAnimationFrame(function() { z.style.opacity = '0.5'; });
+
+                        var timer = setInterval(function() {
+                            data.t += 0.06;
+                            var floatY = Math.sin(data.t * 1.5 + data.phase) * 3;
+                            z.style.bottom = (data.baseY + floatY) + 'px';
+                        }, 30);
+
                         setTimeout(function() {
                             z.style.opacity = '0';
-                            setTimeout(function() { if (z.parentNode) z.parentNode.removeChild(z); }, 600);
-                        }, 1800);
-                    }, idx * 400);
+                            clearInterval(timer);
+                            setTimeout(function() {
+                                if (z.parentNode) z.parentNode.removeChild(z);
+                                active = active.filter(function(a) { return a.el !== z; });
+                            }, 500);
+                        }, 2000);
+                    }, idx * 350);
                 })(zi);
             }
         });
