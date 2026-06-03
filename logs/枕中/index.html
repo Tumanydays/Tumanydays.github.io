@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #f8f5ef; color: var(--text); line-height: 1.9; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #f5f0e8; color: var(--text); line-height: 1.9; }
         .container { max-width: 680px; margin: 0 auto; padding: 80px 24px; }
         h1 { font-size: 1.4rem; font-weight: 400; letter-spacing: 4px; margin-bottom: 4px; color: var(--text-title); }
         .subtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 56px; }
@@ -111,8 +111,8 @@
         var ctx = c.getContext('2d');
         var drops = [];
         function resize() {
-            c.style.cssText = 'position:fixed;top:0;right:0;width:40%;height:100%;z-index:0;pointer-events:none;';
-            c.width = window.innerWidth * 0.4;
+            c.style.cssText = 'position:fixed;top:0;right:0;width:55%;height:100%;z-index:0;pointer-events:none;';
+            c.width = window.innerWidth * 0.55;
             c.height = window.innerHeight;
         }
         resize();
@@ -143,26 +143,24 @@
                 if (d.y > c.height) { d.y = -d.len; d.x = Math.random() * c.width; }
             }
 
-            // 窗框：从天花板下方开始（约 32% 处为天花板横线）
+            // 窗框：无顶边，左侧+右侧+底边+十字棂
             ctx.globalAlpha = 0.2;
             ctx.strokeStyle = 'rgba(180,180,180,1)';
             ctx.lineWidth = 0.8;
             var ceilY = c.height * 0.32;
-            var m = 16;
+            var m = 20;
             var w = c.width - m * 2;
             var h = c.height - ceilY - m;
-            // 外框（天花板以下）
-            ctx.strokeRect(m, ceilY, w, h);
+            // 左侧边
+            ctx.beginPath(); ctx.moveTo(m, ceilY); ctx.lineTo(m, c.height - m); ctx.stroke();
+            // 右侧边
+            ctx.beginPath(); ctx.moveTo(c.width - m, ceilY); ctx.lineTo(c.width - m, c.height - m); ctx.stroke();
+            // 底边
+            ctx.beginPath(); ctx.moveTo(m, c.height - m); ctx.lineTo(c.width - m, c.height - m); ctx.stroke();
             // 垂直中分
-            ctx.beginPath();
-            ctx.moveTo(c.width / 2, ceilY);
-            ctx.lineTo(c.width / 2, c.height - m);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(c.width / 2, ceilY); ctx.lineTo(c.width / 2, c.height - m); ctx.stroke();
             // 水平横框
-            ctx.beginPath();
-            ctx.moveTo(m, ceilY + h * 0.45);
-            ctx.lineTo(c.width - m, ceilY + h * 0.45);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(m, ceilY + h * 0.45); ctx.lineTo(c.width - m, ceilY + h * 0.45); ctx.stroke();
             requestAnimationFrame(draw);
         }
         draw();
