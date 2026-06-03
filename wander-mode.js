@@ -41,8 +41,21 @@
 
     var isOn = sessionStorage.getItem('wander-mode') === 'true';
 
-    // 迷失域小纸条：50% 概率显示一次胡诌句
+    // 迷失域小纸条：进入时生成，每次翻页 50% 显示一次
     var note = sessionStorage.getItem('wander-note');
+    if (isOn && !note) {
+        var pool = ['此去经年', '良辰好景', '千种风情', '当时明月', '彩云归', '水穷处', '云起时', '倚危楼', '天际识归舟', '暮雨洒江天', '红衰翠减', '无语东流', '苒苒物华休', '争知我', '正恁凝愁', '拟把疏狂', '为伊消得', '人憔悴', '立尽斜阳', '黯黯生天际', '无言谁会', '怕上层楼', '聚散苦匆匆', '今年花胜去年红', '始共春风', '把酒祝东风', '离恨却如春草', '深闭门', '雨打梨花', '行也思君', '晓看天色', '旧游如梦', '断雁叫西风', '青山绿水', '白草红叶', '恨无穷', '伤流景', '往事后期空记省', '送尽黄昏', '灯影桨声', '孤光自照', '短发萧骚', '乾坤虽大', '难着许多愁', '寂寞无人见', '燕子楼空', '古今如梦', '夜茫茫', '重寻无处', '小舟从此逝', '江海寄余生', '烟柳断肠处'];
+        var picked = [];
+        var n = 2 + Math.floor(Math.random() * 2);
+        for (var hi = 0; hi < n; hi++) {
+            var idx = Math.floor(Math.random() * pool.length);
+            var attempts = 0;
+            while (picked.indexOf(pool[idx]) !== -1 && attempts < 20) { idx = Math.floor(Math.random() * pool.length); attempts++; }
+            picked.push(pool[idx]);
+        }
+        sessionStorage.setItem('wander-note', picked.join(' '));
+        note = sessionStorage.getItem('wander-note');
+    }
     if (isOn && note && Math.random() < 0.5) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
