@@ -41,6 +41,14 @@
 
     function inWander() { return sessionStorage.getItem('wander-mode') === 'true'; }
 
+    // 动态加载 ZCOOL XiaoWei 字体（全站统一，不依赖页面头部的 Google Fonts 链接）
+    if (!document.querySelector('link[href*="ZCOOL+XiaoWei"]')) {
+        var fontLink = document.createElement('link');
+        fontLink.rel = 'stylesheet';
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap';
+        document.head.appendChild(fontLink);
+    }
+
     // 迷失域小纸条：进入时生成，首次翻页必定显示
     var note = sessionStorage.getItem('wander-note');
     if (inWander() && !note) {
@@ -59,7 +67,7 @@
     if (inWander() && note) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
-        noteEl.style.cssText = 'position:fixed;bottom:36px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
+        noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
         document.body.appendChild(noteEl);
         sessionStorage.removeItem('wander-note');
     }
