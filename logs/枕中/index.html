@@ -150,45 +150,27 @@
         if (!lamp) return;
         lamp.style.cursor = 'pointer';
         lamp.style.pointerEvents = 'auto';
-        var glow = lamp.querySelector('.lamp-glow');
 
         lamp.addEventListener('click', function() {
-            if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.35) 0%, rgba(212,197,160,0.12) 50%, transparent 70%)';
-            document.body.style.transition = 'opacity 0.3s ease';
-            document.body.style.opacity = '0.1';
-            setTimeout(function() {
-                // 整理
-                var list = document.querySelector('.series-list');
-                if (list) {
-                    var items = Array.prototype.slice.call(list.children);
-                    for (var i = items.length - 1; i > 0; i--) {
-                        var j = Math.floor(Math.random() * (i + 1));
-                        list.appendChild(items[j]);
-                    }
-                }
-                if (glow) glow.style.background = 'radial-gradient(circle, rgba(212,197,160,0.18) 0%, rgba(212,197,160,0.06) 50%, transparent 70%)';
-                document.body.style.opacity = '1';
-
-                // zzz 浮现
-                for (var zi = 0; zi < 3; zi++) {
-                    (function(idx) {
+            // zzz 浮现
+            for (var zi = 0; zi < 3; zi++) {
+                (function(idx) {
+                    setTimeout(function() {
+                        var z = document.createElement('div');
+                        z.textContent = 'z';
+                        var size = 0.7 + idx * 0.2;
+                        var top = 36 + idx * 20;
+                        var right = 28 + idx * 12;
+                        z.style.cssText = 'position:fixed;top:' + top + 'px;right:' + right + 'px;font-size:' + size + 'rem;color:#bbb;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.6s ease,transform 0.6s ease;transform:translateY(8px);';
+                        document.body.appendChild(z);
+                        requestAnimationFrame(function() { z.style.opacity = '0.5'; z.style.transform = 'translateY(0)'; });
                         setTimeout(function() {
-                            var z = document.createElement('div');
-                            z.textContent = 'z';
-                            var size = 0.65 + idx * 0.15;
-                            var top = 40 + idx * 18;
-                            var right = 32 + idx * 10;
-                            z.style.cssText = 'position:fixed;top:' + top + 'px;right:' + right + 'px;font-size:' + size + 'rem;color:#ccc;font-weight:300;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s ease,transform 0.5s ease;transform:translateY(6px);';
-                            document.body.appendChild(z);
-                            requestAnimationFrame(function() { z.style.opacity = '0.45'; z.style.transform = 'translateY(0)'; });
-                            setTimeout(function() {
-                                z.style.opacity = '0';
-                                setTimeout(function() { if (z.parentNode) z.parentNode.removeChild(z); }, 500);
-                            }, 1500);
-                        }, idx * 350);
-                    })(zi);
-                }
-            }, 350);
+                            z.style.opacity = '0';
+                            setTimeout(function() { if (z.parentNode) z.parentNode.removeChild(z); }, 600);
+                        }, 1800);
+                    }, idx * 400);
+                })(zi);
+            }
         });
     })();
 </script>
