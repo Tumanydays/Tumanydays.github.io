@@ -67,6 +67,7 @@
     if (inWander() && note) {
         var noteEl = document.createElement('div');
         noteEl.textContent = note;
+        noteEl.id = 'wander-note';
         noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
         document.body.appendChild(noteEl);
         sessionStorage.removeItem('wander-note');
@@ -79,11 +80,13 @@
     exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;width:260px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
     document.body.appendChild(exitEl);
 
-    // 单击退出
+    // 单击退出（同时移除胡诌句）
     exitEl.addEventListener('click', function(e) {
         e.stopPropagation();
         if (inWander()) {
             sessionStorage.setItem('wander-mode', 'false');
+            var n = document.querySelector('#wander-note');
+            if (n) n.parentNode.removeChild(n);
             if (window._resetWanderTitle) window._resetWanderTitle();
         }
     });
