@@ -9,7 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #f5f0e8; color: var(--text); line-height: 1.9; }
+        body { font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif; background: #2a2520; color: #ccc; line-height: 1.9; }
+        h1 { color: #ddd; }
+        .subtitle { color: #888; }
+        .series-list li { border-bottom-color: #3a3530; }
+        .entry-title { color: #ccc; }
+        .inscription { color: #666; }
+        .series-list a:hover .entry-title { color: #a09888; }
+        .door-entry { color: #bbb; }
         .container { max-width: 680px; margin: 0 auto; padding: 80px 24px; }
         h1 { font-size: 1.4rem; font-weight: 400; letter-spacing: 4px; margin-bottom: 4px; color: var(--text-title); }
         .subtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 56px; }
@@ -47,10 +54,6 @@
             left: calc(50% - 105px);
             z-index: 1;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .lamp.show { opacity: 1; }
         .lamp-cord {
             width: 1px; height: 14px;
             background: #c8bca8; opacity: 0.3;
@@ -121,9 +124,8 @@
             var thirdX = contRect.left + (rect.width / 3);
             lamp.style.top = (lineY - 2) + 'px';
             lamp.style.left = (thirdX) + 'px';
-            lamp.classList.add('show');
             if (light) {
-                light.style.background = 'radial-gradient(ellipse at ' + thirdX + 'px ' + (lineY + 30) + 'px, transparent 0%, transparent 15%, rgba(0,0,0,0.035) 35%, rgba(0,0,0,0.065) 55%, rgba(0,0,0,0.09) 75%, rgba(0,0,0,0.12) 100%)';
+                light.style.background = 'radial-gradient(ellipse at ' + thirdX + 'px ' + (lineY + 30) + 'px, transparent 0%, rgba(255,255,255,0.02) 15%, rgba(0,0,0,0.06) 35%, rgba(0,0,0,0.18) 55%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0.4) 100%)';
             }
         }
         positionLamp();
@@ -166,7 +168,7 @@
             ctx.lineTo(c.width, groundY);
             ctx.stroke();
             // 雨
-            ctx.strokeStyle = 'rgba(120,120,120,1)';
+            ctx.strokeStyle = 'rgba(200,200,200,1)';
             ctx.lineWidth = 0.6;
             for (var i = 0; i < drops.length; i++) {
                 var d = drops[i];
