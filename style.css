@@ -148,8 +148,16 @@ code {
 }
 
 
-/* ── 移动端：表格自适应（防右侧留白）── */
+/* ── 移动端：防溢出 + 表格自适应 ── */
 @media (max-width: 600px) {
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    body .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     table {
         table-layout: fixed;
         width: 100%;
@@ -157,5 +165,6 @@ code {
     th, td {
         word-wrap: break-word;
         overflow-wrap: break-word;
+        word-break: break-all;
     }
 }
