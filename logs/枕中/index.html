@@ -67,12 +67,10 @@
         /* ── 灯下光线 ── */
         .lamp-rays {
             position: absolute;
-            top: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 16px;
-            margin-left: -25px;
+            top: 55px;
+            left: -16px;
+            width: 70px;
+            height: 18px;
             pointer-events: none;
         }
         .lamp-rays i {
@@ -81,24 +79,44 @@
             background: rgba(200,188,168,0.2);
             border-radius: 1px;
             top: 0;
+            transition: opacity 0.5s ease;
         }
+        .lamp-rays.hidden i { opacity: 0; }
         .lamp-rays i:nth-child(1) {
-            left: 3px;
-            height: 12px;
-            transform: rotate(-12deg);
+            left: 8px;
+            height: 16px;
+            transform: rotate(16deg);
             transform-origin: top center;
         }
         .lamp-rays i:nth-child(2) {
             left: 50%;
-            height: 16px;
+            height: 18px;
             margin-left: -0.5px;
         }
         .lamp-rays i:nth-child(3) {
-            right: 3px;
-            height: 12px;
-            transform: rotate(12deg);
+            right: 8px;
+            height: 16px;
+            transform: rotate(-16deg);
             transform-origin: top center;
         }
+
+        /* ── 胡诌句（开灯时右下角显示）── */
+        .nonsense {
+            position: fixed;
+            bottom: 60px;
+            right: 24px;
+            z-index: 5;
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 0.82rem;
+            color: var(--text-faint);
+            text-align: right;
+            line-height: 1.8;
+            max-width: 200px;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+        .nonsense.hidden { opacity: 0; }
 
         @media (max-width: 700px) {
             .lamp { left: calc(50% - 60px); }
@@ -158,6 +176,8 @@
 
     })();
 
+    var raining = true;
+
     // ═══ 窗外下雨（深色雨 + 地面溅落） ═══
     (function() {
         var c = document.getElementById('rain-canvas');
@@ -193,6 +213,8 @@
             ctx.moveTo(0, groundY);
             ctx.lineTo(c.width, groundY);
             ctx.stroke();
+            // 雨（默认停，点击灯开启）
+            if (!raining) { requestAnimationFrame(draw); return; }
             // 雨
             ctx.strokeStyle = 'rgba(120,120,120,1)';
             ctx.lineWidth = 0.6;
@@ -236,10 +258,17 @@
         if (!lamp) return;
         lamp.style.cursor = 'pointer';
         lamp.style.pointerEvents = 'auto';
-        var sleeping = false;
+        var sleeping = true;
         var spawnTimer = null;
 
         var insc = document.querySelector('.inscription');
+        var rays = document.querySelector('.lamp-rays');
+
+        // 初始关灯状态
+        if (insc) insc.textContent = '昼眠听雨';
+        if (rays) rays.classList.add('hidden');
+        spawnZZZ();
+        spawnTimer = setInterval(spawnZZZ, 3200);
 
         function spawnZZZ() {
             for (var zi = 0; zi < 3; zi++) {
@@ -278,12 +307,15 @@
 
         lamp.addEventListener('click', function() {
             sleeping = !sleeping;
+            raining = sleeping;
             if (sleeping) {
                 if (insc) insc.textContent = '昼眠听雨';
+                if (rays) rays.classList.add('hidden');
                 spawnZZZ();
                 spawnTimer = setInterval(spawnZZZ, 3200);
             } else {
                 if (insc) insc.textContent = '夜坐听风';
+                if (rays) rays.classList.remove('hidden');
                 if (spawnTimer) { clearInterval(spawnTimer); spawnTimer = null; }
             }
         });
