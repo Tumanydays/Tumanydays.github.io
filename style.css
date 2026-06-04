@@ -147,3 +147,15 @@ code {
     z-index: 999;
 }
 
+
+/* ── 移动端：表格自适应（防右侧留白）── */
+@media (max-width: 600px) {
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th, td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
