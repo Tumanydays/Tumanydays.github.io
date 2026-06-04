@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>枕中 — Tumanydays</title>
+    <link rel="icon" type="image/png" href="../../images/icon.png">
+    <link rel="stylesheet" href="../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'ZCOOL XiaoWei', "Noto Serif SC", serif;
+            background: #f5f0e8;
+            color: var(--text);
+            line-height: 1.9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .verify-box {
+            max-width: 400px;
+            padding: 48px 32px;
+            text-align: center;
+        }
+        .hint {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 36px;
+            letter-spacing: 2px;
+        }
+        .hint em {
+            color: var(--text-soft);
+            font-style: normal;
+        }
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 6px;
+            color: var(--text);
+            outline: none;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: var(--hover);
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 32px;
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.4);
+            border: 1px solid var(--border-soft);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+        .btn:hover {
+            color: var(--hover);
+            border-color: var(--hover);
+        }
+        .error {
+            margin-top: 16px;
+            font-size: 0.82rem;
+            color: #c0392b;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .error.show { opacity: 1; }
+        .back-link {
+            display: block;
+            margin-top: 36px;
+            font-size: 0.78rem;
+            color: var(--text-faint);
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--hover); }
+    </style>
+</head>
+<body>
+    <div class="verify-box">
+        <p class="hint">显然，<em>tumanydays</em>不想让你找到ta：</p>
+        <input type="text" id="pwd" placeholder="——" autocomplete="off" style="-webkit-text-security:disc;">
+        <button class="btn" id="submit-btn">——</button>
+        <p class="error" id="err">不是正确的入口</p>
+        <a class="back-link" href="../../index.html">← 返回</a>
+    </div>
+    <script>
+        (function() {
+            var pwd = document.getElementById('pwd');
+            var btn = document.getElementById('submit-btn');
+            var err = document.getElementById('err');
+
+            function check() {
+                if (pwd.value.trim().toLowerCase() === 'tumanydays') {
+                    sessionStorage.setItem('verified', 'true');
+                    window.location.href = 'index.html';
+                } else {
+                    err.classList.add('show');
+                    pwd.value = '';
+                    pwd.focus();
+                }
+            }
+
+            btn.addEventListener('click', check);
+            pwd.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') check();
+                err.classList.remove('show');
+            });
+            pwd.focus();
+        })();
+    </script>
+<script src="../../wander-mode.js"></script>
+</body>
+</html>

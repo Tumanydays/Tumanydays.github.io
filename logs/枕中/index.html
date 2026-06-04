@@ -165,6 +165,11 @@
 <canvas id="rain-canvas"></canvas>
 
 <script>
+    // ═══ 密码验证 ═══
+    if (sessionStorage.getItem('verified') !== 'true' && document.referrer.indexOf('verify.html') === -1) {
+        window.location.href = 'verify.html';
+    }
+
     // ═══ 灯位校准：定位到天花板横线左三分之一处 ═══
     (function() {
         var lamp = document.querySelector('.lamp');
