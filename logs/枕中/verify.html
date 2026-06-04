@@ -91,34 +91,34 @@
 <body>
     <div class="verify-box">
         <p class="hint">显然，<em>tumanydays</em>不想让你找到ta：</p>
-        <input type="text" id="pwd" placeholder="——" autocomplete="off" style="-webkit-text-security:disc;">
+        <input type="text" id="_key" placeholder="——" autocomplete="off" autocorrect="off" spellcheck="false">
         <button class="btn" id="submit-btn">——</button>
-        <p class="error" id="err">不是正确的入口</p>
+        <p class="error" id="err">似乎不是正确的钥匙</p>
         <a class="back-link" href="../../index.html">← 返回</a>
     </div>
     <script>
         (function() {
-            var pwd = document.getElementById('pwd');
+            var key = document.getElementById('_key');
             var btn = document.getElementById('submit-btn');
             var err = document.getElementById('err');
 
             function check() {
-                if (pwd.value.trim().toLowerCase() === 'tumanydays') {
+                if (key.value.trim().toLowerCase() === 'tumanydays') {
                     sessionStorage.setItem('verified', 'true');
                     window.location.href = 'index.html';
                 } else {
                     err.classList.add('show');
-                    pwd.value = '';
-                    pwd.focus();
+                    key.value = '';
+                    key.focus();
                 }
             }
 
             btn.addEventListener('click', check);
-            pwd.addEventListener('keydown', function(e) {
+            key.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') check();
                 err.classList.remove('show');
             });
-            pwd.focus();
+            key.focus();
         })();
     </script>
 <script src="../../wander-mode.js"></script>
