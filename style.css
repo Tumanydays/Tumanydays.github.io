@@ -32,6 +32,13 @@ body {
     color: var(--text);
 }
 
+/* ── 通用容器（文章页面后备）── */
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+}
+
 /* ── 引用块 ── */
 blockquote {
     margin: 24px 0;
