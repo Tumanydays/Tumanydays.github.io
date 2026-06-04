@@ -64,11 +64,40 @@
             border-right: 4px solid transparent;
             margin: 0 auto;
         }
-        .lamp-glow {
-            width: 50px; height: 32px;
-            background: radial-gradient(ellipse, rgba(200,188,168,0.1) 0%, rgba(200,188,168,0.03) 60%, transparent 80%);
-            border-radius: 50%;
-            margin: -14px auto 0;
+        /* ── 灯下光线 ── */
+        .lamp-rays {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 16px;
+            margin-left: -25px;
+            pointer-events: none;
+        }
+        .lamp-rays i {
+            position: absolute;
+            width: 1px;
+            background: rgba(200,188,168,0.2);
+            border-radius: 1px;
+            top: 0;
+        }
+        .lamp-rays i:nth-child(1) {
+            left: 3px;
+            height: 12px;
+            transform: rotate(-12deg);
+            transform-origin: top center;
+        }
+        .lamp-rays i:nth-child(2) {
+            left: 50%;
+            height: 16px;
+            margin-left: -0.5px;
+        }
+        .lamp-rays i:nth-child(3) {
+            right: 3px;
+            height: 12px;
+            transform: rotate(12deg);
+            transform-origin: top center;
         }
 
         @media (max-width: 700px) {
@@ -84,7 +113,11 @@
         <div class="lamp-cord"></div>
         <div class="lamp-tip"></div>
         <div class="lamp-hat"></div>
-        <div class="lamp-glow"></div>
+        <div class="lamp-rays">
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
     </div>
 
     <div class="container">
