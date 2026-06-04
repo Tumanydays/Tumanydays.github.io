@@ -100,23 +100,32 @@
             transform-origin: top center;
         }
 
-        /* ── 胡诌句（开灯时右下角显示）── */
-        .nonsense {
-            position: fixed;
-            bottom: 60px;
-            right: 24px;
+        /* ── 胡诌句容器 ── */
+        #nonsense {
+            position: fixed !important;
+            right: calc(3% + 80px) !important;
+            bottom: 10% !important;
+            left: auto !important;
+            top: auto !important;
             z-index: 5;
-            font-family: 'ZCOOL XiaoWei', serif;
-            font-size: 0.82rem;
-            color: var(--text-faint);
-            text-align: right;
-            line-height: 1.8;
-            max-width: 200px;
+            width: 320px;
+            height: 200px;
+            overflow: visible;
             pointer-events: none;
-            opacity: 1;
-            transition: opacity 0.6s ease;
         }
-        .nonsense.hidden { opacity: 0; }
+        #nonsense.hidden { display: none; }
+        .nonsense-item {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: right;
+            line-height: 2;
+            white-space: nowrap;
+            opacity: 0.9; /* JS 驱动动画，CSS 仅定义初始态 */
+        }
 
         @media (max-width: 700px) {
             .lamp { left: calc(50% - 60px); }
@@ -137,6 +146,8 @@
             <i></i>
         </div>
     </div>
+
+    <div class="nonsense hidden" id="nonsense" style="position:fixed;right:calc(3% + 80px);bottom:10%;left:auto;top:auto;"></div>
 
     <div class="container">
         <h1>枕中</h1>
@@ -203,6 +214,13 @@
                 opacity: 0.18 + Math.random() * 0.18
             });
         }
+        window.resetDrops = function() {
+            for (var i = 0; i < drops.length; i++) {
+                drops[i].y = Math.random() * -c.height;
+                drops[i].x = Math.random() * c.width;
+            }
+        }
+
         function draw() {
             ctx.clearRect(0, 0, c.width, c.height);
             // 地面
@@ -213,25 +231,29 @@
             ctx.moveTo(0, groundY);
             ctx.lineTo(c.width, groundY);
             ctx.stroke();
-            // 雨（默认停，点击灯开启）
-            if (!raining) { requestAnimationFrame(draw); return; }
-            // 雨
+            // 雨滴
+            var alive = false;
             ctx.strokeStyle = 'rgba(120,120,120,1)';
             ctx.lineWidth = 0.6;
             for (var i = 0; i < drops.length; i++) {
                 var d = drops[i];
-                ctx.globalAlpha = d.opacity;
-                ctx.beginPath();
-                ctx.moveTo(d.x, d.y);
-                ctx.lineTo(d.x - 0.5, d.y + d.len);
-                ctx.stroke();
-                d.y += d.speed;
-                if (d.y > groundY) {
-                    // 溅落
+                if (d.y < groundY) {
+                    ctx.globalAlpha = d.opacity;
+                    ctx.beginPath();
+                    ctx.moveTo(d.x, d.y);
+                    ctx.lineTo(d.x - 0.5, d.y + d.len);
+                    ctx.stroke();
+                    d.y += d.speed;
+                    if (d.y < groundY) alive = true;
+                }
+                if (d.y >= groundY && raining) {
+                    // 下雨时：溅落 + 重置到顶部
                     splashes.push({ x: d.x, y: groundY - 2, life: 1 });
                     d.y = -d.len;
                     d.x = Math.random() * c.width;
+                    alive = true;
                 }
+                // 停雨时：雨滴落到地面后自然消失，不重置
             }
             // 溅落
             ctx.strokeStyle = 'rgba(120,120,120,1)';
@@ -247,6 +269,7 @@
                 s.life -= 0.035;
                 if (s.life <= 0) splashes.splice(i, 1);
             }
+            // 永远循环（停雨后只画空背景，保证关灯时立刻恢复下雨）
             requestAnimationFrame(draw);
         }
         draw();
@@ -263,6 +286,124 @@
 
         var insc = document.querySelector('.inscription');
         var rays = document.querySelector('.lamp-rays');
+        var nonsense = document.getElementById('nonsense');
+
+        // 胡诌词库
+        var wordPool = [
+            '夜坐', '听风', '昼眠', '听雨', '枕中', '梦', '不知', '春深',
+            '闭门', '深山', '落叶', '空山', '松风', '竹影', '流水', '钟声',
+            '白云', '孤舟', '渔火', '寒江', '独钓', '归鸟', '夕阳', '残月',
+            '一盏', '半卷', '闲窗', '幽径', '青苔', '石阶', '柴扉', '野径',
+            '星垂', '月涌', '风起', '云归', '雾散', '露凝', '霜降', '雪落',
+            '晚钟', '晨鼓', '暮色', '晨光', '岁寒', '日暮', '灯火', '书卷',
+            '一扇', '门', '书桌', '灯下', '纸上', '笔端', '墨痕', '茶烟',
+            '夏夜', '蝉鸣', '蛙声', '稻香', '麦浪', '荷风', '竹林', '石桥',
+            '小径', '篱笆', '庭院', '屋檐', '窗前', '枕边', '梦回', '醒来',
+            // 烟雨江南
+            '画船', '烟雨', '江南', '碧水', '如天', '柳岸', '桥头', '酒旗',
+            '杏花', '春雨', '小楼', '深巷', '纸伞', '青石', '乌篷', '菱歌',
+            '莲叶', '渔歌', '晚唱', '沙鸥', '白鹭', '青山', '绿水', '远帆',
+            '流水', '人家', '古渡', '斜阳', '草色', '近却无', '波上',
+            '寒烟', '翠微', '碧波', '春水', '映月', '画阁', '珠帘',
+            '梅子', '黄时', '家家雨', '处处蛙', '闲梦', '远', '南国', '正采莲',
+            // 古诗词拾遗
+            '波渺渺', '柳依依', '芳草', '杏花飞', '蘋满', '汀洲',
+            '月落', '乌啼', '霜天', '江枫', '渔火', '夜半', '钟声', '客船',
+            '孤帆', '碧空', '烟花', '三月', '暮霭', '沉沉', '楚天',
+            '杨柳岸', '晓风', '残月', '烟柳', '画桥', '帘卷', '西风',
+            '梧桐', '细雨', '黄花', '寻觅', '疏影', '暗香', '月黄昏',
+            '落花', '独立', '微雨', '燕双飞', '飞花', '轻似梦', '丝雨', '细如愁',
+            '明月', '松间照', '清泉', '石上流', '竹喧', '浣女', '莲动', '渔舟',
+            '人闲', '桂花落', '夜静', '春山空', '月出', '鸟鸣',
+            '春江', '潮水', '明月', '潮生', '流霜', '白沙', '江月',
+            '好雨', '随风', '润物', '花重', '锦官',
+            '两个黄鹂', '翠柳', '一行白鹭', '青天', '千秋雪',
+            '野渡', '舟自横', '春潮', '带雨',
+            '早莺', '暖树', '新燕', '春泥', '乱花', '浅草',
+            '山光', '悦鸟性', '潭影', '空人心',
+            '江碧', '鸟逾白', '山青', '花欲燃',
+            '采菊', '东篱下', '南山', '飞鸟',
+            '行到水穷处', '坐看云起时',
+            '空山新雨后', '天气晚来秋',
+            '明月照', '松间', '清泉石上',
+            '渔舟唱晚', '响穷', '彭蠡', '雁阵惊寒',
+            '落霞', '孤鹜', '秋水', '长天'
+        ];
+
+        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+        function generateNonsense() {
+            var count = 2 + Math.floor(Math.random() * 2);
+            var picked = [];
+            var pool = wordPool.slice();
+            for (var i = 0; i < count; i++) {
+                var idx = Math.floor(Math.random() * pool.length);
+                picked.push(pool[idx]);
+                pool.splice(idx, 1);
+            }
+            return picked.join('，') + '。';
+        }
+
+        var nonsenseTimer = null;
+        var activeSentences = [];
+
+        function animateSentences() {
+            var now = Date.now();
+            for (var i = activeSentences.length - 1; i >= 0; i--) {
+                var s = activeSentences[i];
+                var progress = Math.min((now - s.start) / 8000, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var tx = -38 * eased;
+                var ty = -70 * eased;
+                s.el.style.transform = 'translate(' + tx.toFixed(1) + 'px, ' + ty.toFixed(1) + 'px)';
+                var fadeIn = Math.min(progress / 0.15, 1);
+                var opacity = 0.9 * (1 - eased) * fadeIn;
+                s.el.style.opacity = opacity.toFixed(3);
+                if (progress >= 1) {
+                    if (s.el.parentNode) s.el.parentNode.removeChild(s.el);
+                    activeSentences.splice(i, 1);
+                }
+            }
+            if (activeSentences.length > 0) {
+                requestAnimationFrame(animateSentences);
+            }
+        }
+
+        function spawnNonsense() {
+            if (!nonsense) return;
+            var el = document.createElement('div');
+            el.textContent = generateNonsense();
+            el.style.cssText = 'position:absolute;right:0;bottom:0;white-space:nowrap;font-family:ZCOOL XiaoWei,serif;font-size:0.85rem;color:var(--text-muted);text-align:right;line-height:2;opacity:0.9;';
+            nonsense.appendChild(el);
+            activeSentences.push({ el: el, start: Date.now() });
+            if (activeSentences.length === 1) {
+                requestAnimationFrame(animateSentences);
+            }
+        }
+
+        function startNonsense() {
+            if (nonsenseTimer) return;
+            if (nonsense) {
+                nonsense.innerHTML = '';
+                nonsense.style.visibility = 'visible';
+                nonsense.classList.remove('hidden');
+            }
+            activeSentences = [];
+            spawnNonsense();
+            nonsenseTimer = setInterval(spawnNonsense, 3000);
+        }
+
+        function stopNonsense() {
+            if (nonsenseTimer) {
+                clearInterval(nonsenseTimer);
+                nonsenseTimer = null;
+            }
+            if (nonsense) {
+                nonsense.classList.add('hidden');
+                nonsense.innerHTML = '';
+            }
+            activeSentences = [];
+        }
 
         // 初始关灯状态
         if (insc) insc.textContent = '昼眠听雨';
@@ -308,6 +449,7 @@
         lamp.addEventListener('click', function() {
             sleeping = !sleeping;
             raining = sleeping;
+            if (sleeping && window.resetDrops) window.resetDrops();
             if (sleeping) {
                 if (insc) insc.textContent = '昼眠听雨';
                 if (rays) rays.classList.add('hidden');
@@ -316,6 +458,10 @@
             } else {
                 if (insc) insc.textContent = '夜坐听风';
                 if (rays) rays.classList.remove('hidden');
+                if (!window._nonsenseStarted) {
+                    window._nonsenseStarted = true;
+                    startNonsense();
+                }
                 if (spawnTimer) { clearInterval(spawnTimer); spawnTimer = null; }
             }
         });
