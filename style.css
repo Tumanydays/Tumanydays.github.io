@@ -100,6 +100,45 @@ code {
     color: var(--code-text);
 }
 
+/* ── 返回链接（顶部 back + 底部 nav-bottom）── */
+.back {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-bottom: 48px;
+    display: inline-block;
+}
+.back:hover { color: var(--hover); }
+
+.nav-bottom {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+.nav-bottom a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+.nav-bottom a:hover { color: var(--hover); }
+
+/* ── 系列导航（上下篇链接）── */
+.series-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.85rem;
+}
+.series-nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+}
+.series-nav a:hover { color: var(--hover); }
+.series-nav .prev { float: left; }
+.series-nav .next { float: right; }
+
 /* ── 阅读进度条（长文专用）── */
 #progress-bar {
     position: fixed; top: 0; left: 0;
