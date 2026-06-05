@@ -19,6 +19,9 @@
         footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-dim); }
         footer a { color: var(--text-dim); text-decoration: none; }
         footer a:hover { color: var(--hover); }
+        .entry a { color: var(--text-title); text-decoration: none; display: block; padding: 16px 0; border-bottom: 1px solid var(--border-light); }
+        .entry a:hover { color: var(--hover); }
+        .entry .date { font-size: 0.78rem; color: var(--text-dim); }
         @media (max-width: 500px) { .container { padding: 32px 16px 64px; } }
     </style>
 </head>
@@ -29,15 +32,15 @@
         <p class="subtitle">给传世经典的一间单人房</p>
 
         <div style="margin: 48px 0;">
-            <div style="border-bottom:1px solid var(--border);padding-bottom:48px;margin-bottom:48px;">
+            <div class="entry" style="border-bottom:1px solid var(--border);padding-bottom:48px;margin-bottom:48px;">
                 <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;">共 2 篇</p>
-                <a href="从深渊升起：拉赫玛尼诺夫C小调第二钢琴协奏曲聆听指南.html" style="display:block;text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border-light);">
-                    <div style="font-size:1rem;color:var(--text-title);font-weight:400;margin-bottom:4px;">从深渊升起：拉赫玛尼诺夫C小调第二钢琴协奏曲聆听指南</div>
-                    <div style="font-size:0.78rem;color:var(--text-dim);">2026年6月4日 · 完全聆听指南</div>
+                <a href="从深渊升起：拉赫玛尼诺夫C小调第二钢琴协奏曲聆听指南.html">
+                    <div style="font-size:1rem;font-weight:400;margin-bottom:4px;">从深渊升起：拉赫玛尼诺夫C小调第二钢琴协奏曲聆听指南</div>
+                    <div class="date">2026年6月4日 · 完全聆听指南</div>
                 </a>
-                <a href="彼岸的故乡：德沃夏克E小调第九交响曲「自新大陆」聆听指南.html" style="display:block;text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border-light);">
-                    <div style="font-size:1rem;color:var(--text-title);font-weight:400;margin-bottom:4px;">彼岸的故乡：德沃夏克E小调第九交响曲「自新大陆」聆听指南</div>
-                    <div style="font-size:0.78rem;color:var(--text-dim);">2026年6月4日 · 聆听指南</div>
+                <a href="彼岸的故乡：德沃夏克E小调第九交响曲「自新大陆」聆听指南.html">
+                    <div style="font-size:1rem;font-weight:400;margin-bottom:4px;">彼岸的故乡：德沃夏克E小调第九交响曲「自新大陆」聆听指南</div>
+                    <div class="date">2026年6月4日 · 聆听指南</div>
                 </a>
             </div>
         </div>
