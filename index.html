@@ -339,7 +339,7 @@
         ================================================================ -->
     <script>
     // ── 指针／触摸追踪（仅桌面端）──
-    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    var isTouch = window.matchMedia('(pointer:coarse)').matches || 'ontouchstart' in window;
     var gMouseX = 0, gMouseY = 0, gLastMouseX = 0, gLastMouseY = 0;
     if (!isTouch) {
         document.addEventListener('mousemove', function(e) {
