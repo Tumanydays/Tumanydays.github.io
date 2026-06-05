@@ -335,23 +335,16 @@
 
     <!-- ================================================================
         第二部分：鼠标位置追踪
-        供后续 p5.js 动画（惊动 flutter）和标题拖拽使用
+        供后续 p5.js 动画和标题拖拽使用
         ================================================================ -->
     <script>
-    // ── 指针／触摸追踪（仅桌面端）──
+    // ── 指针／触摸追踪 ──
     var isTouch = window.matchMedia('(pointer:coarse)').matches || 'ontouchstart' in window;
-    var gMouseX = 0, gMouseY = 0, gLastMouseX = 0, gLastMouseY = 0;
-    if (!isTouch) {
-        document.addEventListener('mousemove', function(e) {
-            gMouseX = e.clientX;
-            gMouseY = e.clientY;
-        });
-    }
     </script>
 
     <!-- ================================================================
         第三部分：p5.js 背景几何动画
-        3-10 边同心多边形，灰色调，鼠标靠近时圆点轻微加速（flutter）
+        3-10 边同心多边形，灰色调
         ================================================================ -->
     <script>
     // ═══ 背景几何动画 ═══
@@ -360,7 +353,6 @@
         var t, speed = 2e-5;
         var l = 80;
         var rads = [];
-        var flutter = 0;
         var dream = 0;        // 0=无, 1=边在抖, 2=点走神
         var dreamN = 3;       // 做梦的多边形
         var dreamE = 0;       // 做梦的边（仅 dream=1）
@@ -375,29 +367,9 @@
             for (var i = 3; i < 11; i++) {
                 rads[i] = l / (2 * p.tan(p.PI / i));
             }
-            if (!isTouch) {
-                gLastMouseX = gMouseX;
-                gLastMouseY = gMouseY;
-            }
         };
         p.draw = function() {
             var s = p.min(p.width, p.height) / 500;
-            // 极轻惊动：仅桌面端，移动端圆点匀速运动；触发区域限于多边形内部
-            var speedMod = 1;
-            if (!isTouch) {
-                var mv = p.dist(gMouseX, gMouseY, gLastMouseX, gLastMouseY);
-                gLastMouseX = gMouseX;
-                gLastMouseY = gMouseY;
-                var distFromCenter = p.dist(gMouseX, gMouseY, p.width / 2, p.height / 2);
-                var polyRadius = rads[7] * s;
-                var triggerRadius = polyRadius;
-                var atten = 1 - p.max(0, distFromCenter - triggerRadius) / triggerRadius;
-                atten = p.constrain(atten, 0, 1);
-                flutter += mv * 0.0005 * atten;
-                flutter = p.lerp(flutter, 0, 0.25);
-                flutter = p.constrain(flutter, 0, 0.02);
-                speedMod = 1 + flutter;
-            }
 
             t = speed * p.millis();
             p.background(250 / 255);
@@ -411,7 +383,7 @@
             }
             for (var i = 3; i < 11; i++) {
                 p.fill(0, 0, 0.35);
-                dott(i, (11 - i) * t * speedMod, dream === 2 && dreamN === i);
+                dott(i, (11 - i) * t, dream === 2 && dreamN === i);
             }
             p.pop();
 
