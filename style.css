@@ -47,7 +47,7 @@ blockquote {
     border-radius: 6px;
     font-size: 0.9rem;
     color: var(--text-soft);
-    border-left: 3px solid #ccc;
+    border-left: 3px solid var(--border-soft);
 }
 blockquote p { margin-bottom: 0; color: var(--text-soft); }
 
