@@ -147,11 +147,7 @@
         </div>
     </div>
 
-    <div id="curtain" style="position:fixed;right:150px;bottom:30px;width:200px;height:300px;z-index:999;pointer-events:none;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:rgba(160,140,120,0.5);z-index:3;"></div>
-    </div>
-
-    <div class="nonsense hidden" id="nonsense" style="position:fixed;right:120px;bottom:40px;left:auto;top:auto;"></div>
+    <div class="nonsense hidden" id="nonsense" style="position:fixed;right:calc(3% + 80px);bottom:10%;left:auto;top:auto;"></div>
 
     <div class="container">
         <h1>枕中</h1>
@@ -474,75 +470,6 @@
                 if (spawnTimer) { clearInterval(spawnTimer); spawnTimer = null; }
             }
         });
-    })();
-
-    // ═══ 纸帘：宣纸质感 ═══
-    (function() {
-        var curtain = document.getElementById('curtain');
-        if (!curtain) return;
-        var CW = 200, CH = 300;
-
-        // 帘顶与灯齐平
-        (function() {
-            var lamp = document.querySelector('.lamp');
-            if (lamp) {
-                var lampRect = lamp.getBoundingClientRect();
-                curtain.style.top = lampRect.top + 'px';
-                curtain.style.bottom = 'auto';
-            }
-        })();
-
-        // 纸帘体 — 暖白底
-        var paper = document.createElement('div');
-        paper.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:rgba(245,238,228,0.25);';
-        // 宣纸纤维纹理
-        var tex = [];
-        for (var x = 0; x < CW; x += 3) {
-            var fOp = 0.02 + Math.random() * 0.03;
-            tex.push('transparent ' + x + 'px, rgba(190,178,155,' + fOp + ') ' + x + 'px, rgba(190,178,155,' + fOp + ') ' + (x + 1) + 'px, transparent ' + (x + 1) + 'px');
-        }
-        paper.style.background = tex.join(', ');
-        curtain.appendChild(paper);
-
-        // 四角纸钉
-        var pins = [
-            { x: 4, y: 4 }, { x: CW - 6, y: 4 },
-            { x: 4, y: CH - 6 }, { x: CW - 6, y: CH - 6 }
-        ];
-        for (var i = 0; i < pins.length; i++) {
-            var pin = document.createElement('div');
-            var p = pins[i];
-            pin.style.cssText = 'position:absolute;top:' + p.y + 'px;left:' + p.x + 'px;width:5px;height:5px;background:rgba(150,138,120,0.35);z-index:3;border-radius:50%;';
-            curtain.appendChild(pin);
-        }
-
-        // 纸面微起伏（透光不均）
-        for (var i = 0; i < 10; i++) {
-            var spot = document.createElement('div');
-            var sx = Math.random() * CW, sy = Math.random() * CH;
-            var sr = 8 + Math.random() * 16;
-            spot.style.cssText = 'position:absolute;top:' + (sy - sr/2) + 'px;left:' + (sx - sr/2) + 'px;width:' + sr + 'px;height:' + sr + 'px;background:radial-gradient(rgba(255,255,255,0.06), transparent 70%);z-index:2;border-radius:50%;';
-            curtain.appendChild(spot);
-        }
-
-        // 边缘极淡墨色晕染
-        var inks = [
-            { t: 30, l: 8, w: 50, h: 1 }, { t: 80, l: CW-25, w: 18, h: 1 },
-            { t: 180, l: 4, w: 35, h: 1 }, { t: 250, l: CW-35, w: 25, h: 1 }
-        ];
-        for (var i = 0; i < inks.length; i++) {
-            var ink = document.createElement('div');
-            var e = inks[i];
-            ink.style.cssText = 'position:absolute;top:' + e.t + 'px;left:' + e.l + 'px;width:' + e.w + 'px;height:' + e.h + 'px;background:rgba(130,120,105,0.08);z-index:2;border-radius:50%;filter:blur(2px);';
-            curtain.appendChild(ink);
-        }
-
-        // 挂绳（极细，穿过纸钉之间）
-        for (var i = 0; i < 1; i++) {
-            var str = document.createElement('div');
-            str.style.cssText = 'position:absolute;top:3.5px;left:4px;width:' + (CW - 10) + 'px;height:1px;background:rgba(180,168,140,0.10);z-index:3;';
-            curtain.appendChild(str);
-        }
     })();
 </script>
 <script src="../../wander-mode.js"></script>
