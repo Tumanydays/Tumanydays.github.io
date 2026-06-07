@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../../../images/icon.png">
     <link rel="stylesheet" href="../../../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-    <style>
+    
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
@@ -79,42 +79,6 @@
             color: var(--text);
         }
 
-        /* 引用 */
-        blockquote {
-            margin: 24px 0;
-            padding: 16px 20px;
-            background: var(--blockquote-bg);
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--text-soft);
-            border-left: 3px solid #ccc;
-        }
-        blockquote p { margin-bottom: 0; color: var(--text-soft); }
-
-        /* 加粗强调 */
-
-        /* 表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0 28px;
-            font-size: 0.85rem;
-        }
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-            line-height: 1.6;
-        }
-        th {
-            background: #f9f9f9;
-            font-weight: 500;
-            color: var(--text-soft);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-        tr:hover td { background: #fcfcfc; }
 
         /* 代码块 */
         code {
@@ -151,9 +115,6 @@
             margin: 0 4px;
             border: 1px solid #ddd;
         }
-
-        /* 分隔线 */
-
         /* 小圆点分隔符 */
         .dot {
             display: block;
@@ -182,8 +143,6 @@
         @media (max-width: 600px) {
             .container { padding: 32px 16px 64px; }
             h1 { font-size: 1.4rem; }
-            table { font-size: 0.78rem; }
-            th, td { padding: 8px; }
             pre { font-size: 0.75rem; padding: 12px 14px; }
         }
 
@@ -215,7 +174,7 @@
             border: 1px solid var(--border);
         }
 
-    </style>
+    
 </head>
 <body>
         <div class="container">
@@ -593,15 +552,12 @@ L = 0.2126 × 0.259 + 0.7152 × 0.298 + 0.0722 × 0.348
         <pre><code>/* 用 CSS 自定义属性定义色彩系统 */
 :root {
   /* 冷灰色阶 */
-  --gray-cool-400: #8a939e;  /* 主体冷灰 */
-
+  --gray-cool-400: #8a939e;
   /* 暖灰色阶 */
-  --gray-warm-400: #8a7e72;  /* 主体暖灰 */
-
+  --gray-warm-400: #8a7e72;
   /* 在令牌层级验证对比度 */
   --text-body:      #333;
-  --text-muted:     #6f7a86;  /* 确保 ≥ 4.5:1 on white */
-
+  --text-muted:     #6f7a86;
   /* 语义色 */
   --color-primary:  #3b82f6;
   --color-accent:   #e67e22;

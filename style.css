@@ -2,6 +2,65 @@
    Tumanydays — 全站共享样式
    所有页面通过 <link> 引用此文件
    ═══════════════════════════════════════════ */
+
+/* ── 自托管字体后备（CDN 不可用时生效）── */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(fonts/NotoSerifSC-300.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/NotoSerifSC-400.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(fonts/NotoSerifSC-500.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(fonts/NotoSerifSC-600.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(fonts/CormorantGaramond-300.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/CormorantGaramond-400.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(fonts/CormorantGaramond-300i.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'ZCOOL XiaoWei';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/ZCOOLXiaoWei-400.woff2) format('woff2');
+}
+
 /* ── 色彩变量 ── */
 :root {
     --bg: #fafafa;
