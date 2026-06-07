@@ -48,96 +48,7 @@
         <a class="back" href="../index.html">← 诗笺</a>
         <h1>文</h1>
         <p class="subtitle">岁岁年年人不同。</p>
-        <ul class="article-list">
-            <li>
-                <a href="吊古战场文.html">吊古战场文</a>
-                <div class="article-date">唐 · 李华</div>
-            </li>
-            <li>
-                <a href="离骚（节选）.html">离骚（节选）</a>
-                <div class="article-date">战国 · 屈原</div>
-            </li>
-            <li>
-                <a href="楚辞·九歌·其十·国殇.html">楚辞·九歌·其十·国殇</a>
-                <div class="article-date">战国 · 屈原</div>
-            </li>
-            <li>
-                <a href="楚辞·九章·其三·哀郢（节选）.html">楚辞·九章·其三·哀郢（节选）</a>
-                <div class="article-date">战国 · 屈原</div>
-            </li>
-            <li>
-                <a href="庄子·内篇·逍遥游（节选）.html">庄子·内篇·逍遥游（节选）</a>
-                <div class="article-date">战国 · 庄周</div>
-            </li>
-            <li>
-                <a href="孟子·告子下·第十五节.html">孟子·告子下·第十五节</a>
-                <div class="article-date">战国 · 孟子</div>
-            </li>
-            <li>
-                <a href="鱼我所欲也.html">鱼我所欲也</a>
-                <div class="article-date">战国 · 孟子</div>
-            </li>
-            <li>
-                <a href="桃花源记.html">桃花源记</a>
-                <div class="article-date">晋 · 陶渊明</div>
-            </li>
-            <li>
-                <a href="归去来兮辞.html">归去来兮辞</a>
-                <div class="article-date">晋 · 陶渊明</div>
-            </li>
-            <li>
-                <a href="闲情赋.html">闲情赋</a>
-                <div class="article-date">晋 · 陶渊明</div>
-            </li>
-            <li>
-                <a href="兰亭集序.html">兰亭集序</a>
-                <div class="article-date">晋 · 王羲之</div>
-            </li>
-            <li>
-                <a href="陈情表.html">陈情表</a>
-                <div class="article-date">晋 · 李密</div>
-            </li>
-            <li>
-                <a href="别赋.html">别赋</a>
-                <div class="article-date">南北朝 · 江淹</div>
-            </li>
-            <li>
-                <a href="恨赋.html">恨赋</a>
-                <div class="article-date">南北朝 · 江淹</div>
-            </li>
-            <li>
-                <a href="西洲曲.html">西洲曲</a>
-                <div class="article-date">南北朝 · 无名氏</div>
-            </li>
-            <li>
-                <a href="梦游天姥吟留别.html">梦游天姥吟留别</a>
-                <div class="article-date">唐 · 李白</div>
-            </li>
-            <li>
-                <a href="蜀道难.html">蜀道难</a>
-                <div class="article-date">唐 · 李白</div>
-            </li>
-            <li>
-                <a href="春夜宴从弟桃花园序.html">春夜宴从弟桃花园序</a>
-                <div class="article-date">唐 · 李白</div>
-            </li>
-            <li>
-                <a href="琵琶行.html">琵琶行</a>
-                <div class="article-date">唐 · 白居易</div>
-            </li>
-            <li>
-                <a href="楚辞·招隐士.html">楚辞·招隐士</a>
-                <div class="article-date">汉 · 淮南小山</div>
-            </li>
-            <li>
-                <a href="庐山谣寄卢侍御虚舟.html">庐山谣寄卢侍御虚舟</a>
-                <div class="article-date">唐 · 李白</div>
-            </li>
-            <li>
-                <a href="前赤壁赋.html">前赤壁赋</a>
-                <div class="article-date">宋 · 苏轼</div>
-            </li>
-        </ul>
+        <ul class="article-list"></ul>
         <footer>
             <a href="../index.html">← 返回诗笺</a>
             &nbsp;·&nbsp;
@@ -201,6 +112,57 @@
     };
     new p5(sketch);
     </script>
+
+<script>
+// 文章数据
+var articles = [
+    { title: "吊古战场文", author: "唐 · 李华", file: "吊古战场文.html" },
+    { title: "离骚（节选）", author: "战国 · 屈原", file: "离骚（节选）.html" },
+    { title: "楚辞·九歌·其十·国殇", author: "战国 · 屈原", file: "楚辞·九歌·其十·国殇.html" },
+    { title: "楚辞·九章·其三·哀郢（节选）", author: "战国 · 屈原", file: "楚辞·九章·其三·哀郢（节选）.html" },
+    { title: "庄子·内篇·逍遥游（节选）", author: "战国 · 庄周", file: "庄子·内篇·逍遥游（节选）.html" },
+    { title: "孟子·告子下·第十五节", author: "战国 · 孟子", file: "孟子·告子下·第十五节.html" },
+    { title: "鱼我所欲也", author: "战国 · 孟子", file: "鱼我所欲也.html" },
+    { title: "桃花源记", author: "晋 · 陶渊明", file: "桃花源记.html" },
+    { title: "归去来兮辞", author: "晋 · 陶渊明", file: "归去来兮辞.html" },
+    { title: "闲情赋", author: "晋 · 陶渊明", file: "闲情赋.html" },
+    { title: "兰亭集序", author: "晋 · 王羲之", file: "兰亭集序.html" },
+    { title: "陈情表", author: "晋 · 李密", file: "陈情表.html" },
+    { title: "别赋", author: "南北朝 · 江淹", file: "别赋.html" },
+    { title: "恨赋", author: "南北朝 · 江淹", file: "恨赋.html" },
+    { title: "西洲曲", author: "南北朝 · 无名氏", file: "西洲曲.html" },
+    { title: "梦游天姥吟留别", author: "唐 · 李白", file: "梦游天姥吟留别.html" },
+    { title: "蜀道难", author: "唐 · 李白", file: "蜀道难.html" },
+    { title: "春夜宴从弟桃花园序", author: "唐 · 李白", file: "春夜宴从弟桃花园序.html" },
+    { title: "琵琶行", author: "唐 · 白居易", file: "琵琶行.html" },
+    { title: "楚辞·招隐士", author: "汉 · 淮南小山", file: "楚辞·招隐士.html" },
+    { title: "庐山谣寄卢侍御虚舟", author: "唐 · 李白", file: "庐山谣寄卢侍御虚舟.html" },
+    { title: "前赤壁赋", author: "宋 · 苏轼", file: "前赤壁赋.html" }
+];
+
+// Fisher-Yates 洗牌：每次刷新顺序不同
+for (var i = articles.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = articles[i];
+    articles[i] = articles[j];
+    articles[j] = tmp;
+}
+
+// 渲染文章列表
+var list = document.querySelector('.article-list');
+articles.forEach(function(a) {
+    var li = document.createElement('li');
+    var link = document.createElement('a');
+    link.href = a.file;
+    link.textContent = a.title;
+    li.appendChild(link);
+    var date = document.createElement('div');
+    date.className = 'article-date';
+    date.textContent = a.author;
+    li.appendChild(date);
+    list.appendChild(li);
+});
+</script>
 
 <script src="../../wander-mode.js"></script>
 </body>
