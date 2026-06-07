@@ -169,8 +169,6 @@
 
     // 渲染——以诗为单位分组展示
     var wall = document.getElementById("snippet-wall");
-    var globalIdx = 0;
-
     groups.forEach(function(g) {
         var groupDiv = document.createElement("div");
         groupDiv.className = "snippet-group";
@@ -181,14 +179,13 @@
         title.textContent = g.author + " · " + g.title;
         groupDiv.appendChild(title);
 
-        // 组内每一句摘录
-        g.lines.forEach(function(line) {
+        // 组内每一句摘录（延迟按组内索引算，不跨组累加）
+        g.lines.forEach(function(line, i) {
             var link = document.createElement("a");
             link.className = "snippet-text";
             link.href = "../index.html#" + g.id;
             link.textContent = line;
-            link.style.setProperty('--reveal-delay', (globalIdx * 0.12) + 's');
-            globalIdx++;
+            link.style.setProperty('--reveal-delay', (i * 0.12) + 's');
             groupDiv.appendChild(link);
         });
 
