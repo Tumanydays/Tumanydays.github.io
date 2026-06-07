@@ -82,9 +82,12 @@
     var fragments = [];
 
     poems.forEach(function(p, i) {
-        // 把整首诗的所有行拼在一起，按标点拆成词组
-        var allText = p.lines.join("，");
-        var phrases = allText.split(/[，。、；：！？\s]+/).filter(function(s) {
+        // 只从有 verse/verses 的诗取词（与摘句墙、首页池共享白名单）
+        var sourceText = p.verse || (p.verses ? p.verses.join("，") : "");
+        if (!sourceText) return;
+
+        // 按标点拆成自然词组
+        var phrases = sourceText.split(/[，。、；：！？\s]+/).filter(function(s) {
             return s.length >= 2 && s.length <= 8;
         });
 
@@ -99,10 +102,22 @@
                 text: txt,
                 link: "index.html#" + p.id,
                 weight: weights[fragments.length % weights.length],
-                special: p.id === "p1"
+                special: false
             });
         });
     });
+
+    // ── 随机抽取一部分展示（缓解密集），每次刷新不同组合 ──
+    // 每次展示约 60 片（接近原始 20 首时的密度），8 次左右可完整覆盖
+    var DISPLAY_COUNT = Math.min(fragments.length, 60);
+    var displayed = fragments.slice();
+    for (var si = displayed.length - 1; si > 0; si--) {
+        var sj = Math.floor(Math.random() * (si + 1));
+        var stmp = displayed[si];
+        displayed[si] = displayed[sj];
+        displayed[sj] = stmp;
+    }
+    displayed = displayed.slice(0, DISPLAY_COUNT);
 
     // ── 把碎片排成环形 ──
     var stage = document.getElementById("stage");
@@ -116,18 +131,18 @@
     }
 
     // 把碎片打散到各层
-    var perRing = Math.ceil(fragments.length / rings.length);
+    var perRing = Math.ceil(displayed.length / rings.length);
 
     // 存储词片数据用于浮动动画
     var floatData = [];
 
-    fragments.forEach(function(f, i) {
+    displayed.forEach(function(f, i) {
         var ringIdx = Math.floor(i / perRing);
         if (ringIdx >= rings.length) ringIdx = rings.length - 1;
         var r = rings[ringIdx];
 
         // 每层碎片均匀分布，但加一点随机偏移，避免太机械
-        var countInRing = fragments.filter(function(_, j) {
+        var countInRing = displayed.filter(function(_, j) {
             var ri = Math.floor(j / perRing);
             if (ri >= rings.length) ri = rings.length - 1;
             return ri === ringIdx;
