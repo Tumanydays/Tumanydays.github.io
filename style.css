@@ -3,7 +3,7 @@
    所有页面通过 <link> 引用此文件
    ═══════════════════════════════════════════ */
 
-/* ── 自托管字体（子集优先，全量回退）── */
+/* ── 自托管字体后备（CDN 不可用时生效）── */
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
@@ -16,8 +16,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/NotoSerifSC-400-subset.woff2) format('woff2'),
-         url(fonts/NotoSerifSC-400.woff2) format('woff2');
+    src: url(fonts/NotoSerifSC-400.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Noto Serif SC';
@@ -45,8 +44,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/CormorantGaramond-400-subset.woff2) format('woff2'),
-         url(fonts/CormorantGaramond-400.woff2) format('woff2');
+    src: url(fonts/CormorantGaramond-400.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Cormorant Garamond';
@@ -60,8 +58,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/ZCOOLXiaoWei-400-subset.woff2) format('woff2'),
-         url(fonts/ZCOOLXiaoWei-400.woff2) format('woff2');
+    src: url(fonts/ZCOOLXiaoWei-400.woff2) format('woff2');
 }
 
 /* ── 色彩变量 ── */

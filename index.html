@@ -8,9 +8,12 @@
     <meta property="og:description" content="一个在数字世界里散步的人。八间小屋，一首诗，一些句子。">
     <meta property="og:image" content="https://www.tumanydays.com/images/cover_web.jpg">
     <meta property="og:url" content="https://www.tumanydays.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet"></noscript>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
-    <script defer src="js/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -365,10 +368,11 @@
     </script>
 
     <!-- ================================================================
-        第三部分：p5.js 背景几何动画（defer 加载，DOM 就绪后初始化）
+        第三部分：p5.js 背景几何动画
+        3-10 边同心多边形，灰色调
         ================================================================ -->
+    <script src="js/p5.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
     // ═══ 背景几何动画 ═══
     // 极简灰调，Dave Whyte / beesandbombs.com 灵感
     var sketch = function(p) {
@@ -464,7 +468,6 @@
         }
     };
     new p5(sketch);
-    });
     </script>
 
     <!-- ================================================================
