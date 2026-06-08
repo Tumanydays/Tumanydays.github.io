@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://www.tumanydays.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap"></noscript>
     <link rel="icon" type="image/png" href="images/icon.png">
@@ -17,7 +18,6 @@
     <link rel="preload" href="fonts/NotoSerifSC-400-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ZCOOLXiaoWei-400-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/CormorantGaramond-400-subset.woff2" as="font" type="font/woff2" crossorigin>
-    <script defer src="https://cdn.jsdelivr.net/npm/p5@0.7.2/lib/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -372,14 +372,13 @@
     </script>
 
     <!-- ================================================================
-        第三部分：p5.js 背景几何动画（defer 加载，DOM 就绪后初始化）
+        第三部分：p5.js 背景几何动画（CDN 优先 → 本地回退）
         3-10 边同心多边形，灰色调
         ================================================================ -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
     // ═══ 背景几何动画 ═══
     // 极简灰调，Dave Whyte / beesandbombs.com 灵感
-    var sketch = function(p) {
+    var _p5sketch = function(p) {
         var t, speed = 2e-5;
         var l = 80;
         var rads = [];
@@ -471,8 +470,22 @@
             p.pop();
         }
     };
-    new p5(sketch);
-    });
+
+    // ── 动态加载 p5.js（CDN 优先 → 本地回退）──
+    var _p5s = document.createElement('script');
+    _p5s.src = 'https://cdn.jsdelivr.net/npm/p5@0.7.2/lib/p5.min.js';
+    _p5s.onload = function() {
+        if (typeof p5 !== 'undefined') new p5(_p5sketch);
+    };
+    _p5s.onerror = function() {
+        var _p5local = document.createElement('script');
+        _p5local.src = 'js/p5.min.js';
+        _p5local.onload = function() {
+            if (typeof p5 !== 'undefined') new p5(_p5sketch);
+        };
+        document.body.appendChild(_p5local);
+    };
+    document.body.appendChild(_p5s);
     </script>
 
     <!-- ================================================================
