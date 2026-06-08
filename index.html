@@ -10,11 +10,14 @@
     <meta property="og:url" content="https://www.tumanydays.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap"></noscript>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
-    <script defer src="js/p5.min.js"></script>
+    <link rel="preload" href="fonts/NotoSerifSC-400-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/ZCOOLXiaoWei-400-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/CormorantGaramond-400-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <script defer src="https://cdn.jsdelivr.net/npm/p5@0.7.2/lib/p5.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
