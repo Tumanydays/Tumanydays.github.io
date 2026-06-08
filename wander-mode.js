@@ -42,15 +42,7 @@
     // ═══ 工具函数 ═══
     function inWander() { return sessionStorage.getItem('wander-mode') === 'true'; }
 
-    // ═══ 动态加载 ZCOOL XiaoWei 字体 ═══（全站统一，不依赖页面头部的 Google Fonts 链接）
-    if (!document.querySelector('link[href*="ZCOOL+XiaoWei"]')) {
-        var fontLink = document.createElement('link');
-        fontLink.rel = 'stylesheet';
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap';
-        document.head.appendChild(fontLink);
-    }
-
-    // ═══ 胡诌句小纸条：生成与显示 ═══
+// ═══ 胡诌句小纸条：生成与显示 ═══
     // 30% 概率出现，第三次翻页必定出现
     var note = sessionStorage.getItem('wander-note');
     if (inWander() && !note) {
