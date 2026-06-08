@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap" media="print" onload="this.onload=null;this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=ZCOOL+XiaoWei&amp;display=swap"></noscript>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="style.css">
@@ -471,21 +471,34 @@
         }
     };
 
-    // ── 动态加载 p5.js（CDN 优先 → 本地回退）──
-    var _p5s = document.createElement('script');
-    _p5s.src = 'https://cdn.jsdelivr.net/npm/p5@0.7.2/lib/p5.min.js';
-    _p5s.onload = function() {
-        if (typeof p5 !== 'undefined') new p5(_p5sketch);
-    };
-    _p5s.onerror = function() {
+    // ── 动态加载 p5.js（CDN 优先，3s 超时 → 本地回退）──
+    var _p5Loaded = false;
+    function _p5Fallback() {
+        if (_p5Loaded) return;
         var _p5local = document.createElement('script');
         _p5local.src = 'js/p5.min.js';
         _p5local.onload = function() {
-            if (typeof p5 !== 'undefined') new p5(_p5sketch);
+            if (typeof p5 !== 'undefined' && !_p5Loaded) {
+                _p5Loaded = true;
+                new p5(_p5sketch);
+            }
         };
         document.body.appendChild(_p5local);
+    }
+    var _p5s = document.createElement('script');
+    _p5s.src = 'https://cdn.jsdelivr.net/npm/p5@0.7.2/lib/p5.min.js';
+    _p5s.onload = function() {
+        if (typeof p5 !== 'undefined' && !_p5Loaded) {
+            _p5Loaded = true;
+            new p5(_p5sketch);
+        }
     };
+    _p5s.onerror = _p5Fallback;
     document.body.appendChild(_p5s);
+    // CDN 超时 3s → 强制回退本地（CDN 慢而不报错时生效）
+    setTimeout(function() {
+        if (!_p5Loaded) _p5Fallback();
+    }, 3000);
     </script>
 
     <!-- ================================================================
