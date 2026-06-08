@@ -1,0 +1,2 @@
+# Cloudflare 缓存清理脚本（含 API 凭证，不提交）
+purge-cf.sh
