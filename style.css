@@ -3,34 +3,38 @@
    所有页面通过 <link> 引用此文件
    ═══════════════════════════════════════════ */
 
-/* ── 自托管字体 ── */
+/* ── 自托管字体（子集优先，全量回退）── */
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url(fonts/NotoSerifSC-300.woff2) format('woff2');
+    src: url(fonts/NotoSerifSC-300-subset.woff2) format('woff2'),
+         url(fonts/NotoSerifSC-300.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/NotoSerifSC-400.woff2) format('woff2');
+    src: url(fonts/NotoSerifSC-400-subset.woff2) format('woff2'),
+         url(fonts/NotoSerifSC-400.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url(fonts/NotoSerifSC-500.woff2) format('woff2');
+    src: url(fonts/NotoSerifSC-500-subset.woff2) format('woff2'),
+         url(fonts/NotoSerifSC-500.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Noto Serif SC';
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url(fonts/NotoSerifSC-600.woff2) format('woff2');
+    src: url(fonts/NotoSerifSC-600-subset.woff2) format('woff2'),
+         url(fonts/NotoSerifSC-600.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Cormorant Garamond';
@@ -44,7 +48,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/CormorantGaramond-400.woff2) format('woff2');
+    src: url(fonts/CormorantGaramond-400-subset.woff2) format('woff2'),
+         url(fonts/CormorantGaramond-400.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Cormorant Garamond';
@@ -58,7 +63,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(fonts/ZCOOLXiaoWei-400.woff2) format('woff2');
+    src: url(fonts/ZCOOLXiaoWei-400-subset.woff2) format('woff2'),
+         url(fonts/ZCOOLXiaoWei-400.woff2) format('woff2');
 }
 
 /* ── 色彩变量 ── */
