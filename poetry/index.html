@@ -157,17 +157,31 @@
 
     <script src="poems.js"></script>
     <script>
-    // 从诗词库渲染每一首诗（打乱顺序，每次刷新排列不同）
+    // 从诗词库渲染每一首诗
     var wall = document.getElementById("poem-wall");
 
-    // Fisher-Yates 洗牌
+    // 读取 URL 参数：首页跳转时携带 ?poem=p3，将目标诗排至首位
+    var params = new URLSearchParams(window.location.search);
+    var targetId = params.get('poem');
+
+    // Fisher-Yates 洗牌（目标诗排第一位）
     var shuffled = poems.slice();
+    var target = null;
+    if (targetId) {
+        for (var ti = 0; ti < shuffled.length; ti++) {
+            if (shuffled[ti].id === targetId) {
+                target = shuffled.splice(ti, 1)[0];
+                break;
+            }
+        }
+    }
     for (var i = shuffled.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var tmp = shuffled[i];
         shuffled[i] = shuffled[j];
         shuffled[j] = tmp;
     }
+    if (target) shuffled.unshift(target);
 
     shuffled.forEach(function(p) {
         if (p.hide) return;

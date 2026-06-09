@@ -293,11 +293,14 @@
         }
     ];
 
-    // 诗句池：从 poems.js 动态收集（支持 verse 单句和 verses 数组）
-    var verses = [];
+    // 诗句池：从 poems.js 动态收集（支持 verse 单句和 verses 数组），跳过隐藏诗
+    var verseEntries = [];
     poems.forEach(function(p) {
-        if (p.verse) verses.push(p.verse);
-        if (p.verses) verses = verses.concat(p.verses);
+        if (p.hide) return;
+        if (p.verse) verseEntries.push({ text: p.verse, poemId: p.id });
+        if (p.verses) p.verses.forEach(function(v) {
+            verseEntries.push({ text: v, poemId: p.id });
+        });
     });
 
     // ── 第二步：抽牌 ──
@@ -308,16 +311,17 @@
     // ── 第三步：挂上去 ──
     var article = pick(articles);
     var image   = pick(images);
-    var verse   = pick(verses);
+    var chosen  = pick(verseEntries);
     var fragment = pick(fragments);
 
     // 填 tagline：从碎片库随机抽取（优先用 brief 短版）
     var t = document.getElementById("tagline-spot");
     t.innerHTML = fragment.brief || fragment.text.join("<br>");
 
-    // 填诗句
+    // 填诗句：链接指向诗笺页并传入对应诗 ID
     var v = document.getElementById("verse-spot");
-    v.textContent = verse;
+    v.textContent = chosen.text;
+    v.href = "poetry/?poem=" + chosen.poemId;
 
     // 填文章
     var a = document.getElementById("article-spot");
