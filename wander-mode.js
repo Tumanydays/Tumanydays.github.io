@@ -112,26 +112,21 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：点击 footer 两次 —— 第一次退出迷失域，第二次进入游戏目录 ═══
+    // ═══ 迷失域入口：迷失域状态下点击 footer → 退出迷失域 + 进入游戏目录 ═══
+    // 正常页面下 footer 无任何作用
     document.addEventListener('click', function(e) {
         var footer = e.target.closest('footer');
         if (!footer || e.target.closest('a')) return;
+        if (!inWander()) return;
 
-        if (inWander()) {
-            // 第一次点击：退出迷失域
-            e.preventDefault();
-            e.stopPropagation();
-            sessionStorage.setItem('wander-mode', 'false');
-            sessionStorage.setItem('wander_exit_intent', 'true');
-            var n = document.querySelector('#wander-note');
-            if (n) n.parentNode.removeChild(n);
-            if (window._resetWanderTitle) window._resetWanderTitle();
-        } else if (sessionStorage.getItem('wander_exit_intent') === 'true') {
-            // 第二次点击：进入游戏目录
-            e.preventDefault();
-            e.stopPropagation();
-            sessionStorage.removeItem('wander_exit_intent');
-            window.location.href = '/logs/游戏/';
-        }
+        // 退出迷失域
+        e.preventDefault();
+        e.stopPropagation();
+        sessionStorage.setItem('wander-mode', 'false');
+        var n = document.querySelector('#wander-note');
+        if (n) n.parentNode.removeChild(n);
+        if (window._resetWanderTitle) window._resetWanderTitle();
+        // 进入游戏目录
+        window.location.href = '/logs/游戏/';
     });
 })();
