@@ -106,6 +106,17 @@
         if (link) {
             var href = link.getAttribute('href');
             if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+            // 入口特赦：点击通往游戏目录的链接 → 退出迷失域，放行自然导航
+            if (href === '/logs/游戏/') {
+                e.stopPropagation();
+                sessionStorage.setItem('wander-mode', 'false');
+                var n = document.querySelector('#wander-note');
+                if (n) n.parentNode.removeChild(n);
+                if (window._resetWanderTitle) window._resetWanderTitle();
+                return;  // 不 preventDefault，让浏览器正常跳转
+            }
+
             e.preventDefault();
             e.stopPropagation();
             var available = pages.filter(function(p) { return p !== window.location.pathname; });
@@ -114,32 +125,22 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：点击 footer → 退出迷失域 → 导航到游戏目录 ═══
-    document.addEventListener('click', function(e) {
-        if (!inWander()) return;
-        var f = document.querySelector('footer');
-        if (!f) return;
-        var r = f.getBoundingClientRect();
-        if (e.clientX >= r.left && e.clientX <= r.right &&
-            e.clientY >= r.top && e.clientY <= r.bottom &&
-            !e.target.closest('a')) {
-            sessionStorage.setItem('wander-mode', 'false');
-            var n = document.querySelector('#wander-note');
-            if (n) n.parentNode.removeChild(n);
-            if (window._resetWanderTitle) window._resetWanderTitle();
-            f.style.cursor = '';
-            f.style.color = '';
-            setTimeout(function() { document.location.href = '/logs/游戏/'; }, 10);
-        }
-    });
-
-    // 每 1 秒同步 footer 风格与迷失域状态（拖拽激活后实时显示可点击反馈）
+    // ═══ 迷失域入口：把 footer 文字包裹为 <a> 标签 ═══
+    // 利用浏览器原生的 <a> 导航，不依赖 JavaScript 跳转
     var footer = document.querySelector('footer');
-    if (footer) {
+    if (footer && !footer.querySelector('a')) {
+        var txt = footer.textContent;
+        footer.innerHTML = '<a href="/logs/游戏/" style="color:inherit;text-decoration:none;display:inline-block;">' + txt + '</a>';
         footer.style.transition = 'color 0.3s';
+    }
+    // 每 1 秒同步 footer 风格与迷失域状态（拖拽激活后实时显示可点击反馈）
+    if (footer) {
         (function syncFooter() {
-            footer.style.cursor = inWander() ? 'pointer' : '';
-            footer.style.color = inWander() ? '#8a7e72' : '';
+            if (inWander()) {
+                footer.style.color = '#8a7e72';
+            } else {
+                footer.style.color = '';
+            }
             setTimeout(syncFooter, 1000);
         })();
     }
