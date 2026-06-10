@@ -36,7 +36,10 @@
         '/logs/棱镜/一些知识/从000000到FFFFFF：十六进制颜色码完全手册.html',
         '/logs/棱镜/一些知识/RSS完全了解指南：信息自主权的最后堡垒.html',
         '/logs/棱镜/一些知识/古旧铁轨与万国文字的车厢：ASCII与UTF-8编码的传承、困境与全球方案.html',
-        '/images/'                    // 图片画廊
+        '/images/',                  // 图片画廊
+        '/logs/游戏/',               // 文字游戏目录
+        '/logs/游戏/七夜敞廊/',      // 七夜敞廊
+        '/logs/游戏/风景如旧/'       // 风景如旧
     ];
 
     // ═══ 工具函数 ═══
@@ -108,4 +111,27 @@
             window.location.href = available[Math.floor(Math.random() * available.length)];
         }
     }, true);
+
+    // ═══ 迷失域入口：点击 footer 两次 —— 第一次退出迷失域，第二次进入游戏目录 ═══
+    document.addEventListener('click', function(e) {
+        var footer = e.target.closest('footer');
+        if (!footer || e.target.closest('a')) return;
+
+        if (inWander()) {
+            // 第一次点击：退出迷失域
+            e.preventDefault();
+            e.stopPropagation();
+            sessionStorage.setItem('wander-mode', 'false');
+            sessionStorage.setItem('wander_exit_intent', 'true');
+            var n = document.querySelector('#wander-note');
+            if (n) n.parentNode.removeChild(n);
+            if (window._resetWanderTitle) window._resetWanderTitle();
+        } else if (sessionStorage.getItem('wander_exit_intent') === 'true') {
+            // 第二次点击：进入游戏目录
+            e.preventDefault();
+            e.stopPropagation();
+            sessionStorage.removeItem('wander_exit_intent');
+            window.location.href = '/logs/游戏/';
+        }
+    });
 })();

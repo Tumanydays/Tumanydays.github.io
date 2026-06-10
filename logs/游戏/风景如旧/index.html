@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风景如旧 · 西塞罗的七封信 — Tumanydays</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet"></noscript>
+    <link rel="icon" type="image/png" href="../../../images/icon.png">
+    <link rel="stylesheet" href="../../../style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Noto Serif SC", "Songti SC", serif;
+            background: #ece6dc;
+            color: #4a4440;
+            line-height: 1.9;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+        .back {
+            font-size: 0.8rem;
+            color: #a09888;
+            text-decoration: none;
+            margin-bottom: 32px;
+            display: inline-block;
+        }
+        .back:hover { color: #4a6b80; }
+
+        #game-title {
+            font-size: 1.0rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #8a7e72;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        #game-desc {
+            font-size: 0.9rem;
+            line-height: 2.0;
+            color: #4a4440;
+            margin-bottom: 24px;
+            min-height: 120px;
+            text-align: center;
+        }
+        #game-desc br { content: ""; display: block; margin: 2px 0; }
+        #game-note {
+            font-size: 0.85rem;
+            color: #8a939e;
+            margin-bottom: 24px;
+            padding: 8px 12px;
+            border-left: 2px solid #d5cdc0;
+        }
+        #game-choices {
+            margin-top: 24px;
+            text-align: center;
+        }
+        .choice-line {
+            display: block;
+            width: 100%;
+            padding: 4px 0;
+            background: transparent;
+            border: none;
+            color: #4a4440;
+            font-family: "Noto Serif SC", serif;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            text-align: center;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .choice-line:hover { color: #8a7e72; }
+        .choice-line:active { color: #4a6b80; }
+        .choice-numeral {
+            color: #b0a898;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            margin-right: 6px;
+        }
+        .choice-line:hover .choice-numeral { color: #8a7e72; }
+
+        .separator {
+            border: none;
+            text-align: center;
+            margin: 32px 0 24px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d5cdc0 10%, #d5cdc0 90%, transparent);
+        }
+        .separator::before {
+            content: "·";
+            display: block;
+            font-size: 0.6rem;
+            color: #d5cdc0;
+            line-height: 0;
+            position: relative;
+            top: -3px;
+            left: -50%;
+        }
+        .separator::after {
+            content: "·";
+            display: block;
+            font-size: 0.6rem;
+            color: #d5cdc0;
+            line-height: 0;
+            position: relative;
+            top: -6px;
+            left: 50%;
+        }
+        .status-bar {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #b0a898;
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #d5cdc0;
+        }
+        .is-ending #game-choices {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #d5cdc0;
+        }
+        .is-ending .choice-line {
+            color: #b0a898;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+        .is-ending .choice-line:hover { color: #8a7e72; }
+
+        .mood-night #game-desc { color: #5a5650; }
+        .mood-night #game-title { color: #8a8a98; }
+        .mood-indoor #game-desc { color: #3a3530; }
+
+        @media (max-width: 500px) {
+            .container { padding: 32px 16px 64px; }
+            #game-title { font-size: 0.9rem; margin-bottom: 24px; }
+            #game-desc { font-size: 0.85rem; }
+            .choice-line { font-size: 0.82rem; }
+        }
+
+        .start-screen {
+            text-align: center;
+            padding-top: 80px;
+        }
+        .start-screen .title-main {
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: #8a7e72;
+            margin-bottom: 12px;
+        }
+        .start-screen .title-sub {
+            font-size: 0.75rem;
+            color: #b0a898;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .start-screen .title-date {
+            font-size: 0.7rem;
+            color: #c0b8a8;
+            letter-spacing: 2px;
+        }
+        .start-screen hr {
+            border: none;
+            border-top: 1px solid #d5cdc0;
+            width: 60px;
+            margin: 32px auto;
+        }
+        .start-screen .intro-text {
+            font-size: 0.85rem;
+            color: #8a7e72;
+            line-height: 2.0;
+            margin-bottom: 40px;
+        }
+        .start-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: transparent;
+            border: 1px solid #d5cdc0;
+            color: #4a4440;
+            font-family: "Noto Serif SC", serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .start-btn:hover {
+            border-color: #8a7e72;
+            color: #8a7e72;
+        }
+        .letter-quote {
+            color: #6a6058;
+            font-style: italic;
+            font-size: 0.88rem;
+        }
+        .latin {
+            font-family: "Cormorant Garamond", serif;
+            font-style: italic;
+            color: #7a7068;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="game-container">
+
+    <a class="back" href="../index.html">← 游戏目录</a>
+
+    <div id="start-screen" class="start-screen">
+        <div class="title-main">风 景 如 旧</div>
+        <div class="title-sub">M·TVLLIVS·CICERO</div>
+        <div class="title-date">EX · VRBE · PROFICISCITVR</div>
+        <hr>
+        <div class="intro-text">
+            公元前四十九年，一月。<br>
+            凯撒跨过了卢比孔河。<br><br>
+            消息在黎明前到达罗马。<br>
+            你被叫醒。你读了信。你走到窗前。<br><br>
+            今天，你会在罗马城中七个地方停留。<br>
+            到第七次的时候，你会在城外的一辆马车上，<br>
+            回头看一眼。<br><br>
+            然后离开。
+        </div>
+        <button class="start-btn" onclick="startGame()">第一封信</button>
+    </div>
+
+    <div id="game-ui" style="display:none;">
+        <div id="game-title"></div>
+        <div id="game-desc"></div>
+        <div id="game-note" style="display:none;"></div>
+        <hr class="separator">
+        <div id="game-choices"></div>
+        <div class="status-bar">
+            <span id="game-status"></span>
+        </div>
+    </div>
+
+</div>
+
+<script src="cicero.js"></script>
+<script>
+function validScene(id) {
+    return scenes.hasOwnProperty(id);
+}
+function startGame() {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("game-ui").style.display = "block";
+    if (state.steps === 0 || !validScene(state.currentScene)) {
+        state.currentScene = "ch1-dawn";
+        state.flags = {};
+        state.inventory = [];
+        state.steps = 0;
+        state.path = [];
+        saveState();
+        renderScene("ch1-dawn");
+    } else {
+        renderScene(state.currentScene);
+    }
+}
+if (state.steps > 0 && validScene(state.currentScene)) {
+    startGame();
+}
+</script>
+<script src="../../../wander-mode.js"></script>
+</body>
+</html>
