@@ -70,7 +70,7 @@
             var noteEl = document.createElement('div');
             noteEl.textContent = note;
             noteEl.id = 'wander-note';
-            noteEl.style.cssText = 'position:fixed;bottom:12px;right:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:right;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
+            noteEl.style.cssText = 'position:fixed;bottom:12px;left:16px;font-size:0.75rem;color:#bbb;z-index:9998;text-align:left;font-weight:300;letter-spacing:2px;line-height:1.7;pointer-events:none;font-family:ZCOOL XiaoWei,serif;';
             document.body.appendChild(noteEl);
             sessionStorage.removeItem('wander-note');
             sessionStorage.removeItem('wander-page');
@@ -79,10 +79,10 @@
     if (!inWander()) { sessionStorage.removeItem('wander-note'); sessionStorage.removeItem('wander-page'); }
 
     // ═══ 隐形退出区域 ═══
-    // 260×44px 固定透明区域，覆盖胡诌句位置，点击即退出
+    // 44×44px 最小触摸目标，放在最左下角，避免与居中 footer 重叠
     var exitEl = document.createElement('div');
     exitEl.id = 'wander-exit';
-    exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;width:260px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
+    exitEl.style.cssText = 'position:fixed;bottom:0;left:0;width:44px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
     document.body.appendChild(exitEl);
 
     // 单击退出（同时移除胡诌句、恢复 footer 样式）
@@ -115,33 +115,36 @@
     }, true);
 
     // ═══ 迷失域入口：capture 阶段检测 footer 区域点击 ═══
-    // 用 getBoundingClientRect 而非 e.target.closest，避免被遮罩层拦截
-    function handleFooterClick(e) {
+    // 用 getBoundingClientRect 检查物理坐标，不受任何遮罩层拦截影响
+    function footerCapture(e) {
         if (!inWander()) return;
-        var footer = document.querySelector('footer');
-        if (!footer) return;
-        // 排除 footer 内部的 <a> 标签点击
+        var f = document.querySelector('footer');
+        if (!f) return;
         if (e.target.closest('a')) return;
-        // 用物理位置判断是否点击了 footer 区域，不受重叠元素影响
-        var r = footer.getBoundingClientRect();
+        var r = f.getBoundingClientRect();
         if (e.clientX >= r.left && e.clientX <= r.right &&
             e.clientY >= r.top && e.clientY <= r.bottom) {
             e.preventDefault();
             e.stopPropagation();
-            // 退出迷失域
             sessionStorage.setItem('wander-mode', 'false');
             var n = document.querySelector('#wander-note');
             if (n) n.parentNode.removeChild(n);
             if (window._resetWanderTitle) window._resetWanderTitle();
-            // 进入游戏目录
+            f.style.cursor = '';
+            f.style.color = '';
             window.location.href = '/logs/游戏/';
         }
     }
-    document.addEventListener('click', handleFooterClick, true);
+    document.addEventListener('click', footerCapture, true);
 
-    // 进入迷失域时给 footer 加 cursor pointer 作为视觉暗示
-    if (inWander()) {
-        var f = document.querySelector('footer');
-        if (f) { f.style.cursor = 'pointer'; f.style.color = '#8a7e72'; }
+    // 每 1 秒同步 footer 风格与迷失域状态（拖拽激活后实时显示可点击反馈）
+    var footer = document.querySelector('footer');
+    if (footer) {
+        footer.style.transition = 'color 0.3s';
+        (function syncFooter() {
+            footer.style.cursor = inWander() ? 'pointer' : '';
+            footer.style.color = inWander() ? '#8a7e72' : '';
+            setTimeout(syncFooter, 1000);
+        })();
     }
 })();
