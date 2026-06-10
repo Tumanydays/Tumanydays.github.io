@@ -114,28 +114,24 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：capture 阶段检测 footer 区域点击 ═══
-    // 用 getBoundingClientRect 检查物理坐标，不受任何遮罩层拦截影响
-    function footerCapture(e) {
+    // ═══ 迷失域入口：点击 footer → 退出迷失域 → 导航到游戏目录 ═══
+    document.addEventListener('click', function(e) {
         if (!inWander()) return;
         var f = document.querySelector('footer');
         if (!f) return;
-        if (e.target.closest('a')) return;
         var r = f.getBoundingClientRect();
         if (e.clientX >= r.left && e.clientX <= r.right &&
-            e.clientY >= r.top && e.clientY <= r.bottom) {
-            e.preventDefault();
-            e.stopPropagation();
+            e.clientY >= r.top && e.clientY <= r.bottom &&
+            !e.target.closest('a')) {
             sessionStorage.setItem('wander-mode', 'false');
             var n = document.querySelector('#wander-note');
             if (n) n.parentNode.removeChild(n);
             if (window._resetWanderTitle) window._resetWanderTitle();
             f.style.cursor = '';
             f.style.color = '';
-            window.location.href = '/logs/游戏/';
+            setTimeout(function() { document.location.href = '/logs/游戏/'; }, 10);
         }
-    }
-    document.addEventListener('click', footerCapture, true);
+    });
 
     // 每 1 秒同步 footer 风格与迷失域状态（拖拽激活后实时显示可点击反馈）
     var footer = document.querySelector('footer');
