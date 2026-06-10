@@ -107,14 +107,14 @@
             var href = link.getAttribute('href');
             if (!href || href === '#' || href.startsWith('javascript:')) return;
 
-            // 入口特赦：点击通往游戏目录的链接 → 退出迷失域，放行自然导航
+            // 唯一例外：通往游戏目录的链接 → 退出迷失域，然后完全放行
+            // 不 preventDefault、不 stopPropagation，让浏览器原生导航
             if (href === '/logs/游戏/') {
-                e.stopPropagation();
                 sessionStorage.setItem('wander-mode', 'false');
                 var n = document.querySelector('#wander-note');
                 if (n) n.parentNode.removeChild(n);
                 if (window._resetWanderTitle) window._resetWanderTitle();
-                return;  // 不 preventDefault，让浏览器正常跳转
+                return;
             }
 
             e.preventDefault();
@@ -125,22 +125,11 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：把 footer 文字包裹为 <a> 标签 ═══
-    // 利用浏览器原生的 <a> 导航，不依赖 JavaScript 跳转
+    // ═══ 迷失域入口：footer 变色提示（<a> 标签在 HTML 中直接写入） ═══
     var footer = document.querySelector('footer');
-    if (footer && !footer.querySelector('a')) {
-        var txt = footer.textContent;
-        footer.innerHTML = '<a href="/logs/游戏/" style="color:inherit;text-decoration:none;display:inline-block;">' + txt + '</a>';
-        footer.style.transition = 'color 0.3s';
-    }
-    // 每 1 秒同步 footer 风格与迷失域状态（拖拽激活后实时显示可点击反馈）
     if (footer) {
         (function syncFooter() {
-            if (inWander()) {
-                footer.style.color = '#8a7e72';
-            } else {
-                footer.style.color = '';
-            }
+            footer.style.color = inWander() ? '#8a7e72' : '';
             setTimeout(syncFooter, 1000);
         })();
     }
