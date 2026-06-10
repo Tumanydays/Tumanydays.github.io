@@ -85,7 +85,7 @@
     exitEl.style.cssText = 'position:fixed;bottom:12px;right:16px;width:260px;height:44px;z-index:9999;cursor:default;user-select:none;background:transparent;border:none;';
     document.body.appendChild(exitEl);
 
-    // 单击退出（同时移除胡诌句）
+    // 单击退出（同时移除胡诌句、恢复 footer 样式）
     exitEl.addEventListener('click', function(e) {
         e.stopPropagation();
         if (inWander()) {
@@ -93,6 +93,8 @@
             var n = document.querySelector('#wander-note');
             if (n) n.parentNode.removeChild(n);
             if (window._resetWanderTitle) window._resetWanderTitle();
+            var f = document.querySelector('footer');
+            if (f) { f.style.cursor = ''; f.style.color = ''; }
         }
     });
 
@@ -112,21 +114,34 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：迷失域状态下点击 footer → 退出迷失域 + 进入游戏目录 ═══
-    // 正常页面下 footer 无任何作用
-    document.addEventListener('click', function(e) {
-        var footer = e.target.closest('footer');
-        if (!footer || e.target.closest('a')) return;
+    // ═══ 迷失域入口：capture 阶段检测 footer 区域点击 ═══
+    // 用 getBoundingClientRect 而非 e.target.closest，避免被遮罩层拦截
+    function handleFooterClick(e) {
         if (!inWander()) return;
+        var footer = document.querySelector('footer');
+        if (!footer) return;
+        // 排除 footer 内部的 <a> 标签点击
+        if (e.target.closest('a')) return;
+        // 用物理位置判断是否点击了 footer 区域，不受重叠元素影响
+        var r = footer.getBoundingClientRect();
+        if (e.clientX >= r.left && e.clientX <= r.right &&
+            e.clientY >= r.top && e.clientY <= r.bottom) {
+            e.preventDefault();
+            e.stopPropagation();
+            // 退出迷失域
+            sessionStorage.setItem('wander-mode', 'false');
+            var n = document.querySelector('#wander-note');
+            if (n) n.parentNode.removeChild(n);
+            if (window._resetWanderTitle) window._resetWanderTitle();
+            // 进入游戏目录
+            window.location.href = '/logs/游戏/';
+        }
+    }
+    document.addEventListener('click', handleFooterClick, true);
 
-        // 退出迷失域
-        e.preventDefault();
-        e.stopPropagation();
-        sessionStorage.setItem('wander-mode', 'false');
-        var n = document.querySelector('#wander-note');
-        if (n) n.parentNode.removeChild(n);
-        if (window._resetWanderTitle) window._resetWanderTitle();
-        // 进入游戏目录
-        window.location.href = '/logs/游戏/';
-    });
+    // 进入迷失域时给 footer 加 cursor pointer 作为视觉暗示
+    if (inWander()) {
+        var f = document.querySelector('footer');
+        if (f) { f.style.cursor = 'pointer'; f.style.color = '#8a7e72'; }
+    }
 })();
