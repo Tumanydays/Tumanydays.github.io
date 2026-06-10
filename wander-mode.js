@@ -107,15 +107,8 @@
             var href = link.getAttribute('href');
             if (!href || href === '#' || href.startsWith('javascript:')) return;
 
-            // 唯一例外：通往游戏目录的链接 → 退出迷失域，然后完全放行
-            // 不 preventDefault、不 stopPropagation，让浏览器原生导航
-            if (href === '/logs/游戏/') {
-                sessionStorage.setItem('wander-mode', 'false');
-                var n = document.querySelector('#wander-note');
-                if (n) n.parentNode.removeChild(n);
-                if (window._resetWanderTitle) window._resetWanderTitle();
-                return;
-            }
+            // 特赦：游戏目录链接 → capture 阶段完全跳过，交由 target 阶段处理
+            if (href === '/logs/游戏/') return;
 
             e.preventDefault();
             e.stopPropagation();
@@ -125,7 +118,24 @@
         }
     }, true);
 
-    // ═══ 迷失域入口：footer 变色提示（<a> 标签在 HTML 中直接写入） ═══
+    // ═══ 迷失域入口：正常时点不动，迷失域时退出 + 放行导航 ═══
+    var gate = document.getElementById('wander-gate');
+    if (gate) {
+        gate.addEventListener('click', function(e) {
+            if (!inWander()) {
+                // 正常页面：阻止导航，footer 点不动
+                e.preventDefault();
+                return;
+            }
+            // 迷失域：退出模式，然后让浏览器自然导航（不 preventDefault）
+            sessionStorage.setItem('wander-mode', 'false');
+            var n = document.querySelector('#wander-note');
+            if (n) n.parentNode.removeChild(n);
+            if (window._resetWanderTitle) window._resetWanderTitle();
+        });
+    }
+
+    // ═══ footer 迷失域变色同步 ═══
     var footer = document.querySelector('footer');
     if (footer) {
         (function syncFooter() {
